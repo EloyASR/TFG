@@ -1,0 +1,48 @@
+@keyframes shadow-red {
+    0% {box-shadow: 0px 0px 40px 0px rgb(212, 75, 75);}
+}
+
+@keyframes shadow-gold {
+    0% {box-shadow: 0px 0px 40px 0px rgb(212, 164, 75);}
+}
+
+@keyframes shadow-blue {
+    0% {box-shadow: 0px 0px 40px 0px rgb(75, 100, 212);}
+}
+
+.BotonJuego{
+    margin: 2vw;
+    padding:0px;
+    display:inline-block;
+    border-radius: 10px;
+    border:0px;
+    background-color: transparent;
+}
+
+.ImagenJuego:hover{
+    padding: 4px;    
+}
+
+.valorant:hover{
+    outline: 4px solid #795b5b;
+    animation: shadow-red 1s 1;
+}
+
+.leagueoflegends:hover{
+    outline: 4px solid #6b6955;
+    animation: shadow-gold 1s 1;
+}
+
+.clashroyale:hover{
+    outline: 4px solid #5b5d79;
+    animation: shadow-blue 1s 1;
+}
+
+.ImagenJuego{
+    margin:0px;
+    padding:0px;
+    min-width: 20em;
+    flex-wrap: wrap;
+    width:20vw;
+    border-radius: 10px;
+}
