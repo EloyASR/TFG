@@ -1,0 +1,5 @@
+<section>
+              <Route path="/" component={InitPage}/>
+              <Route path="/tournaments" component={TournamentPage}/>
+              <Route path="/login" component={LoginPage}/>
+            </section>
