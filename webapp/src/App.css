@@ -1,30 +1,83 @@
 body{
-  background-color: #201c1c;
+  background-color: #303C40;
+  overflow-x:hidden;
 }
 
 .App {
   text-align: center;
 }
 
+.rellenar{
+  width: 100vw;
+  height: 100vh;
+}
 
-.App-header {
-  background-color: #201c1c;
-  min-height: 10vh;
+.auto{
+  height:auto;
+}
+
+.flex{
+  align-self: stretch;
+}
+
+.fullsize{
+  background-color: #303C40;
+  height: 100vh;
+}
+
+.divNav{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 1vmin);
+  min-height: 100vh
+}
+
+
+
+.nowrap{
+  flex-wrap: nowrap;
+}
+
+.ulNav{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    flex-direction: column
+}
+
+.nav-pills .nav-link {
+  background: 0 0;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
   color: white;
 }
 
-.SectionP{
-  background-color: #201c1c;
-  min-width: 10vw;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 1vmin);
+.align-middle {
+  vertical-align: middle;
 }
+
+.nav{
+  --bs-nav-link-color: white;
+  --bs-nav-link-disabled-color: #a5a5a5;
+  --bs-nav-link-hover-color: white;
+}
+
+.a:focus{
+  color: white !important;
+}
+
+a:hover{
+  color: grey !important;
+}
+
+
+
+

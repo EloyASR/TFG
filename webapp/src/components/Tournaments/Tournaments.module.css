@@ -38,11 +38,28 @@
     animation: shadow-blue 1s 1;
 }
 
-.ImagenJuego{
+.ImagenJuegoNormal{
     margin:0px;
-    padding:0px;
-    min-width: 20em;
-    flex-wrap: wrap;
-    width:20vw;
+    padding:4px;
+    width:80vw!important;
     border-radius: 10px;
+}
+
+
+@media (min-width: 768px){
+    .ImagenJuegomd{
+        margin:0px;
+        padding:4px;
+        width:60vw!important;
+        border-radius: 10px;
+    }
+}
+
+@media (min-width: 960px){
+    .ImagenJuegolg{
+        margin:0px;
+        padding:4px;
+        width:50vw!important;
+        border-radius: 10px;
+    }
 }
