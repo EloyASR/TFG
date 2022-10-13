@@ -50,16 +50,7 @@
     .ImagenJuegomd{
         margin:0px;
         padding:4px;
-        width:60vw!important;
-        border-radius: 10px;
-    }
-}
-
-@media (min-width: 960px){
-    .ImagenJuegolg{
-        margin:0px;
-        padding:4px;
-        width:50vw!important;
+        width:55vw!important;
         border-radius: 10px;
     }
 }

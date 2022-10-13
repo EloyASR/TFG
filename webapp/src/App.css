@@ -7,10 +7,6 @@ body{
   text-align: center;
 }
 
-.rellenar{
-  width: 100vw;
-  height: 100vh;
-}
 
 .auto{
   height:auto;
@@ -62,6 +58,12 @@ body{
 
 .align-middle {
   vertical-align: middle;
+}
+
+.breadcrumb{
+  display:flex;
+  color:white;
+  background-color: #212529;
 }
 
 .nav{
