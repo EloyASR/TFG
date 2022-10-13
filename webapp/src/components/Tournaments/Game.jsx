@@ -25,7 +25,7 @@ class Game extends React.Component{
                 <Link to={"/tournaments/" + this.game} >
                     <picture>
                         <source media="(min-width:1000px)" srcset={this.src2}/>
-                        <img className={cx(styles.ImagenJuegoNormal,styles.ImagenJuegomd,styles.ImagenJuegolg)} src={this.src1}/>
+                        <img className={cx(styles.ImagenJuegoNormal,styles.ImagenJuegomd)} src={this.src1}/>
                     </picture>
                 </Link>
             </div>

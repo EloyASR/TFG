@@ -24,11 +24,20 @@ class TournamentsPage extends React.Component{
 
     render(){
         return(
-            <Container fluid className="d-flex align-items-start justify-content-center flex-row">
-                <div className="flex-row">
-                    <Col><Game src1={lol} src2={lol1300} game={'leagueoflegends'}/></Col>
-                    <Col><Game src1={val} src2={val1300} game={'valorant'}/></Col>
-                </div>
+            <Container fluid className="d-flex align-items-start justify-content-center flex-row flex-wrap">
+                <Col xs={12}> 
+                    <Row className="breadcrumb p-3">
+                        <span className="my-3"><b>TORNEOS</b></span>
+                    </Row>
+                </Col>
+                <Col xs={12} className="pt-3">
+                    <Row>
+                        <Col><Game src1={lol} src2={lol1300} game={'leagueoflegends'}/></Col>
+                    </Row>
+                    <Row>
+                        <Col><Game src1={val} src2={val1300} game={'valorant'}/></Col>
+                    </Row>
+                </Col>
             </Container>
         )
     }
