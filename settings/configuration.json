@@ -1,0 +1,11 @@
+{
+
+    "api": "http://localhost:8081",
+    "imgs": {
+        "headers": {
+            "lol": "/headers/lol.jpg",
+            "val": "/headers/val.jpg",
+            "torneos": "/headers/torneos.jpeg"
+        }
+    }
+}

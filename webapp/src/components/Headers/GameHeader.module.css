@@ -1,0 +1,63 @@
+.header {
+    background-size: cover;
+    background-position: center center;
+    background-blend-mode: multiply;
+}
+
+.header-lol {
+    background-image: url('../../assets/img/league.jpeg');
+}
+
+.header-val {
+    background-image: url('../../assets/img/split.jpg');
+}
+
+.header-normal {
+    background-color: #212529;
+}
+
+.header-torneos {
+    background-image: url('http://localhost:8081/img/headers/fondo3.jpeg')
+}
+
+.header-border {
+    border-bottom: 1px solid #5E6A75;
+}
+
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.header-gradient {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.header-title-container {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.header-title-img {
+    width: 48px;
+    margin-right: 0.5em;
+}
+
+.header-title-text {
+    margin: 0px;
+}
+
+.text-white {
+    color: white;
+}
+
+
+
+
