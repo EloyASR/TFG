@@ -15,30 +15,32 @@ import lol1300 from '../../assets/img/lol-1300-350.png';
 import val1300 from '../../assets/img/val-1300-350.png';
 import cr from '../../assets/img/clashroyale.png';
 
+import Header from '../Headers/Header';
 
-class TournamentsPage extends React.Component{
 
-    constructor(props){
+class TournamentsPage extends React.Component {
+
+    constructor(props) {
         super(props)
     }
 
-    render(){
-        return(
-            <Container fluid className="d-flex align-items-start justify-content-center flex-row flex-wrap">
-                <Col xs={12}> 
-                    <Row className="breadcrumb p-3">
-                        <span className="my-3"><b>TORNEOS</b></span>
-                    </Row>
-                </Col>
-                <Col xs={12} className="pt-3">
-                    <Row>
-                        <Col><Game src1={lol} src2={lol1300} game={'leagueoflegends'}/></Col>
-                    </Row>
-                    <Row>
-                        <Col><Game src1={val} src2={val1300} game={'valorant'}/></Col>
-                    </Row>
-                </Col>
-            </Container>
+    render() {
+        return (
+            <div>
+                <Header title="Torneos" />
+                <div className="layout-content">
+                    <section className="layout-block content">
+                        <div className="grid-flex vertical spacing-huge">
+                            <div className="size-content">
+                                <div className="grid-flex">
+                                    <Game src1={lol} src2={lol1300} game={'leagueoflegends'} />
+                                    <Game src1={val} src2={val1300} game={'valorant'} />
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         )
     }
 }

@@ -1,6 +1,7 @@
-body{
-  background-color: #303C40;
-  overflow-x:hidden;
+body {
+  background-color: #213242;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 .App {
@@ -8,20 +9,20 @@ body{
 }
 
 
-.auto{
-  height:auto;
+.auto {
+  height: auto;
 }
 
-.flex{
+.flex {
   align-self: stretch;
 }
 
-.fullsize{
-  background-color: #303C40;
+.fullsize {
+  background-color: #213242;
   height: 100vh;
 }
 
-.divNav{
+.divNav {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,17 +31,17 @@ body{
 
 
 
-.nowrap{
+.nowrap {
   flex-wrap: nowrap;
 }
 
-.ulNav{
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
-    flex-direction: column
+.ulNav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  flex-direction: column
 }
 
 .nav-pills .nav-link {
@@ -60,26 +61,62 @@ body{
   vertical-align: middle;
 }
 
-.breadcrumb{
-  display:flex;
-  color:white;
+.breadcrumb {
+  color: white;
   background-color: #212529;
+
 }
 
-.nav{
+.nav {
   --bs-nav-link-color: white;
   --bs-nav-link-disabled-color: #a5a5a5;
   --bs-nav-link-hover-color: white;
 }
 
-.a:focus{
+.a:focus {
   color: white !important;
 }
 
-a:hover{
+a:hover {
   color: grey !important;
 }
 
+.bordeNav {
+  border-bottom: 1px solid #5E6A75;
+  border-right: 0px;
+}
 
+@media(min-width:768px) {
+  .bordeNav {
 
+    border-bottom: 0px;
+    border-right: 1px solid #5E6A75;
 
+  }
+}
+
+.layout-content{
+  min-width: initial;
+  min-height: 30rem;
+}
+
+.grid-flex{
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.vertical{
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.spacing-huge{
+  margin: 0;
+}
+
+.size-content{
+  flex: 0 0 auto;
+  min-width: 0;
+}
