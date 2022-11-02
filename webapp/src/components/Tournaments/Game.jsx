@@ -2,6 +2,7 @@ import React from 'react'
 
 
 import styles from './Tournaments.module.css';
+import Col from 'react-bootstrap/Col';
 
 import lol from '../../assets/img/lol.png';
 import lol1300 from '../../assets/img/lol-1300-350.png';
@@ -15,26 +16,25 @@ class Game extends React.Component {
     constructor(props) {
         super(props)
         this.game = props.game;
+        this.titulo = props.titulo;
         this.src1 = props.src1 ?? lol;
         this.src2 = props.src2 ?? lol1300;
     }
 
     render() {
         return (
-            <div>
-                <div className={cx(styles.BotonJuego, styles[this.game])}>
-                    <Link to={"/tournaments/" + this.game} >
-                        <picture>
-                            <source media="(min-width:1000px)" srcSet={this.src2} />
-                            <img className={cx(styles.ImagenJuegoNormal, styles.ImagenJuegomd)} src={this.src1} />
+            <Col xs={12} md={12} lg={9} >
+                <Link to={"/tournaments/" + this.game} >
+                    <div className={cx(styles.BotonJuego, styles[this.game])}>
+                        <picture className={styles.pictureNormal}>
+                            <img className={cx(styles.ImagenJuegoNormal, styles.ImagenJuegomd)} src={this.src2} />
                         </picture>
-                    </Link>
-                </div>
-            </div>
+                        <div className={styles.divTit}>{this.titulo}</div>
+                    </div>
+                </Link>
+            </Col>
         )
     }
-
-
 }
 
 export default Game

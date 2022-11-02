@@ -1,13 +1,34 @@
+@font-face {
+  font-family: 'FF Mark';
+  src: url('assets/fonts/Mark-Light.ttf') format('truetype');
+  font-style: light;
+  font-weight: light;
+}
+
+@font-face {
+  font-family: 'FF Mark';
+  src: url('assets/fonts/Mark-Bold.ttf') format('truetype');
+  font-style: bold;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'FF Mark SmallCaps';
+  src: url('assets/fonts/Mark-SmallCaps-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
 body {
   background-color: #213242;
   overflow-x: hidden;
   overflow-wrap: break-word;
+  font-family: 'FF Mark SmallCaps';
 }
 
 .App {
   text-align: center;
 }
-
 
 .auto {
   height: auto;
@@ -51,10 +72,11 @@ body {
 }
 
 .nav-link {
-  display: block;
+  display: flex;
   padding: 0.5rem 1rem;
   text-decoration: none;
   color: white;
+  font-size: 20px;
 }
 
 .align-middle {
@@ -88,16 +110,15 @@ a:hover {
 
 @media(min-width:768px) {
   .bordeNav {
-
     border-bottom: 0px;
     border-right: 1px solid #5E6A75;
-
   }
 }
 
 .layout-content{
   min-width: initial;
   min-height: 30rem;
+  margin-top: 1vw;
 }
 
 .grid-flex{
