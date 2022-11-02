@@ -34,7 +34,7 @@ class GamePage extends React.Component{
         }
         
         return(
-            <Container fluid className="d-flex align-items-start justify-content-center flex-row flex-wrap">
+            <Container fluid className="d-flex align-items-start justify-content-center flex-row flex-wrap p-0">
                 {header}
                 <Col xs={12} className="pt-3">
                     

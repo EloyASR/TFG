@@ -11,12 +11,22 @@
 }
 
 .BotonJuego{
-    margin: 2vw;
+    margin: 1vw 2vw 1vw 2vw;
     padding: 0px;
-    display: inline-block;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
     border: 0px;
     background-color: transparent;
+}
+
+.divTit{
+    border-radius: 0px 0px 20px 20px;
+    border:  1px solid #5E6A75;
+    margin: 0px 4px 4px 4px;
+    padding: 10px 0px;
+    background-color: #212529;
+    color: white;
 }
 
 .ImagenJuego:hover{
@@ -38,19 +48,25 @@
     animation: shadow-blue 1s 1;
 }
 
+.pictureNormal{
+    padding:4px 4px 0px 4px;    
+}
+
 .ImagenJuegoNormal{
-    margin:0px;
-    padding:4px;
-    width:80vw!important;
-    border-radius: 20px;
+    width:100%;
+    border-radius: 20px 20px 0px 0px;
+    border-top:  1px solid #5E6A75;
+    border-left: 1px solid #5E6A75;
+    border-right: 1px solid #5E6A75;
 }
 
 
 @media (min-width: 768px){
     .ImagenJuegomd{
-        margin:0px;
-        padding:4px;
-        width:55vw!important;
-        border-radius: 20px;
+        border-radius: 20px 20px 0px 0px;
+        border-top:  1px solid #5E6A75;
+        border-left: 1px solid #5E6A75;
+        border-right: 1px solid #5E6A75;
+        width:100%;
     }
 }

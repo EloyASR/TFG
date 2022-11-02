@@ -12,7 +12,6 @@ class Header extends React.Component {
     }
 
     render() {
-
         return (
             <div className="layout-header">
                 <Row className= {cx(styles["header"], styles["header-torneos"], styles["text-white"], styles["header-border"],"my-0")}>

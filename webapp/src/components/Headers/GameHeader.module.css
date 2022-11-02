@@ -2,6 +2,7 @@
     background-size: cover;
     background-position: center center;
     background-blend-mode: multiply;
+    margin: 0px;
 }
 
 .header-lol {
@@ -17,7 +18,8 @@
 }
 
 .header-torneos {
-    background-image: url('http://localhost:8081/img/headers/fondo3.jpeg')
+    background-image: url('http://192.168.1.95:8081/img/headers/fondo3.jpeg')
+
 }
 
 .header-border {

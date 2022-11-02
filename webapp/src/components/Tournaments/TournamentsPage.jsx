@@ -32,10 +32,10 @@ class TournamentsPage extends React.Component {
                     <section className="layout-block content">
                         <div className="grid-flex vertical spacing-huge">
                             <div className="size-content">
-                                <div className="grid-flex">
-                                    <Game src1={lol} src2={lol1300} game={'leagueoflegends'} />
-                                    <Game src1={val} src2={val1300} game={'valorant'} />
-                                </div>
+                                <Row className="justify-content-center m-0">
+                                    <Game src1={lol} src2={lol1300} titulo={'League of Legends'} game={'leagueoflegends'} />
+                                    <Game src1={val} src2={val1300} titulo={'Valorant'} game={'valorant'} />
+                                </Row>
                             </div>
                         </div>
                     </section>
