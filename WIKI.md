@@ -7,15 +7,17 @@
     <p>Funcionalidades de la aplicación:<p>
     <ul>
         <ol>
-            <b>Gestion de Torneos<b>
+            <b>Gestion de Torneos</b>
             <ul>
                 <ol></ol>
             </ul>
         </ol>
         <ol>Sistema de Reporting</ol>
-        <ol>Gestion de Cuentas</ol>
+        <ol>Gestión de Cuentas</ol>
         <ol>Equilibrio de Partidas</ol>
-        <ol>Gestion de Premios</ol>
-        <ol>Gestion de Logros</ol>
+        <ol>Gestión de Premios</ol>
+        <ol>Gestión de Logros</ol>
     </ul>
+    <p>Realizar GLOSARIO con términos de la aplicación<p>
+    <p>Estado del arte / Competencia: Buscar papers y aplicaciones similares</p>
 <section>
