@@ -3,7 +3,7 @@
     <h2>Reunión (2022-11-04)</h2>
     <p>Inicio: 12:00 m</p>
     <p>Finalización: 01:30 pm</p>
-    <h3>Aspectos tratados en la reunión<h3>
+    <h3>Aspectos tratados en la reunión</h3>
     <p>Funcionalidades de la aplicación:<p>
     <ul>
         <ol>
