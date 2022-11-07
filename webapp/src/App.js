@@ -1,16 +1,12 @@
 import './App.css';
 
 import NavBar from './components/NavBar/NavBar';
-import InitPage from './components/Init/InitPage';
 import TournamentPage from './components/Tournaments/TournamentsPage'
-import LoginPage from './components/Login/LoginPage';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import GamePage from './components/Tournaments/GamePage';
 
 
 import {Route} from "wouter";
-import Container from 'react-bootstrap/esm/Container';
 
 function App() {
   return (

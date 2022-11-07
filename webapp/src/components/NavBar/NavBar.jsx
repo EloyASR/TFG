@@ -1,21 +1,11 @@
 import React from 'react'
 import NavBarItem from './NavBarItem'
-import Container from 'react-bootstrap/esm/Container';
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import Navbar from 'react-bootstrap/Navbar';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './NavBar.module.css';
-
 class NavBar extends React.Component{
-
-    constructor(props){
-        super(props)
-    }
 
     render(){
         return (

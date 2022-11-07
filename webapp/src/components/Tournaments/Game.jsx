@@ -27,7 +27,7 @@ class Game extends React.Component {
                 <Link to={"/tournaments/" + this.game} >
                     <div className={cx(styles.BotonJuego, styles[this.game])}>
                         <picture className={styles.pictureNormal}>
-                            <img className={cx(styles.ImagenJuegoNormal, styles.ImagenJuegomd)} src={this.src2} />
+                            <img className={cx(styles.ImagenJuegoNormal, styles.ImagenJuegomd)} src={this.src2} alt={"img"}/>
                         </picture>
                         <div className={styles.divTit}>{this.titulo}</div>
                     </div>
