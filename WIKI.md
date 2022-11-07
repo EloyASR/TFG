@@ -24,4 +24,6 @@
         <ul>Gestion de torneos universitarios</ul>
         <ul>API de RIOT</ul>
     </ol>
+    <p>Mirar METRICA 3</p>
+    <p>UML: Empezar a mirar CASOS DE USO</p>
 <section>
