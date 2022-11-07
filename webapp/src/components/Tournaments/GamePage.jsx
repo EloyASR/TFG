@@ -1,14 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import GameHeader from '../Headers/GameHeader';
-
-
-import Game from './Game';
-
-
-import styles from './Tournaments.module.css';
 
 import lolicon from '../../assets/img/lolicon1.png';
 import valicon from '../../assets/img/valicon2.png';
@@ -25,9 +18,9 @@ class GamePage extends React.Component{
 
         var header
         
-        if(this.game=='leagueoflegends'){
+        if(this.game === 'leagueoflegends'){
             header = <GameHeader title= {"League of Legends"} game= {"lol"} icon={lolicon}/>;
-        }else if(this.game=='valorant'){
+        }else if(this.game === 'valorant'){
             header = <GameHeader title= {"Valorant"} game= {"val"} icon={valicon}/>
         }else{
             header = <GameHeader title= {"Default"} game= {"normal"}/>

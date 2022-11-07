@@ -20,7 +20,7 @@ class TournamentHeader extends React.Component {
                 <Row className= {cx(styles["header"], styles["header-" + this.game], styles["text-white"], styles["header-border"],"my-0")}>
                     <div className={cx(styles["header-center"], styles["header-gradient"], "p-4")}>
                         <div className={styles["header-title-container"]}>
-                            <img src={this.icon} className={cx("d-none", "d-md-inline", styles["header-title-img"])}/>
+                            <img src={this.icon} alt={"img"} className={cx("d-none", "d-md-inline", styles["header-title-img"])}/>
                             <h1 className={styles["header-title-text"]}>{this.title}</h1>
                         </div>
                     </div>
