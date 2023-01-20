@@ -1,0 +1,23 @@
+table{
+    background-color: var(--black200);
+    border-radius: 4px;
+}
+
+table > thead th{
+    height: 32px;
+    color: var(--grey100);
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+}
+
+table > thead th:nth-of-type(1){
+    padding-left: 15px;
+    text-align: left;
+}
+
+table > tbody tr > td {
+    background-color: var(--black300);
+    padding: 4px 0px 3px;
+    vertical-align: middle;
+}

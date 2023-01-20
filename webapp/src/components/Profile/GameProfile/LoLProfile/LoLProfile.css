@@ -1,0 +1,29 @@
+.lol-profile{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    margin-top:10px;
+    width:100%;
+}
+
+.lol-profile > .header{
+    display: block;
+}
+
+.lol-profile > .body{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.lol-profile > .body > .left{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.lol-profile > .body > .center{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}

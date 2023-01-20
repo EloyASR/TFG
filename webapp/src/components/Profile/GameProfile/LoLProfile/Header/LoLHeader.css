@@ -1,0 +1,98 @@
+.lol-header{
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: var(--blue200);
+}
+
+.lol-header > .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding: 0px 12px;
+    line-height: 35px;
+    font-size: 14px;
+    color: var(--grey100);
+}
+
+.lol-header > .body{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    padding: 5px;
+    background-color: var(--black300);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.lol-header > .body > .info{
+    flex:1;
+    display: flex;
+    flex-direction: row;
+}
+
+.lol-header > .body > .info > .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.lol-header > .body > .info > .icon > img{
+    background-color: black;
+    border-radius: 50%;
+    width: 120px;
+    border: 3px solid var(--blue100);
+}
+
+.lol-header > .body > .info > .data{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.lol-header > .body > .info > .data > .nickname{
+    line-height: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--grey100);
+}
+
+.lol-header > .body > .info > .data > .lvl{
+    line-height: 16px;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--grey200);
+}
+
+.lol-header > .body > .info > .data > .button{
+    margin-top: 8px;
+}
+
+.lol-header > .body > .info > .data > .button > .update{
+    padding: 0px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 8px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--blue100);
+    background-color: var(--blue100);
+    color: var(--grey100);
+}
+
+.lol-header > .body > .masteries{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,143 +1,61 @@
-@font-face {
-  font-family: 'FF Mark';
-  src: url('assets/fonts/Mark-Light.ttf') format('truetype');
-  font-style: light;
-  font-weight: light;
+:root {
+  --black100: #7f8082;
+  --black200: #626363;
+  --black300: #343434;
+
+  --blue100: #5383E8;
+  --blue200: #3b66c3;
+  --blue300: #28344E;
+
+  --red100: #E84057;
+  --red200: #c23749;
+  --red300: #59343B;
+
+  --green100:#50d73b;
+  --green200:#37c245;
+  --green300:#365934;
+
+  --yellow100: #e8c940;
+  --yellow200: #c3aa3b;
+  --yellow300: #595234;
+
+  --orange100:#e88c53;
+  --orange200:#c3713b;
+  --orange300:#4e3928;
+
+  --purple100:#b953e8;
+  --purple200:#a13bc3;
+  --purple300:#45284e;
+
+  --grey100: #ffffff;
+  --grey200: #b8b8cf;
 }
 
-@font-face {
-  font-family: 'FF Mark';
-  src: url('assets/fonts/Mark-Bold.ttf') format('truetype');
-  font-style: bold;
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: 'FF Mark SmallCaps';
-  src: url('assets/fonts/Mark-SmallCaps-Black.ttf') format('truetype');
-  font-style: normal;
-  font-weight: normal;
-}
-
-body {
-  background-color: #213242;
-  overflow-x: hidden;
-  overflow-wrap: break-word;
-  font-family: 'FF Mark SmallCaps';
-}
-
-.App {
-  text-align: center;
-}
-
-.auto {
-  height: auto;
-}
-
-.flex {
-  align-self: stretch;
-}
-
-.fullsize {
-  background-color: #213242;
-  height: 100vh;
-}
-
-.divNav {
+body{
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  min-height: 100vh
+  font-family: "Roboto", sans-serif;
+  background-color: #201c1c;
 }
 
-
-
-.nowrap {
-  flex-wrap: nowrap;
-}
-
-.ulNav {
+body > .root{
   display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  flex-direction: column
-}
-
-.nav-pills .nav-link {
-  background: 0 0;
-  border: 0;
-  border-radius: 0.25rem;
-}
-
-.nav-link {
-  display: flex;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
-}
-
-.align-middle {
-  vertical-align: middle;
-}
-
-.breadcrumb {
-  color: white;
-  background-color: #212529;
-
-}
-
-.nav {
-  --bs-nav-link-color: white;
-  --bs-nav-link-disabled-color: #a5a5a5;
-  --bs-nav-link-hover-color: white;
-}
-
-.a:focus {
-  color: white !important;
-}
-
-a:hover {
-  color: grey !important;
-}
-
-.bordeNav {
-  border-bottom: 1px solid #5E6A75;
-  border-right: 0px;
-}
-
-@media(min-width:768px) {
-  .bordeNav {
-    border-bottom: 0px;
-    border-right: 1px solid #5E6A75;
-  }
-}
-
-.layout-content{
-  min-width: initial;
-  min-height: 30rem;
-  margin-top: 1vw;
-}
-
-.grid-flex{
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.vertical{
+body > .root > .App{
+  display: flex;
   flex-direction: column;
+  gap:10px;
+}
+
+body > .root > .App > .perfiles > .cuerpo{
+  display: flex;
+  flex-direction: row;
   flex-wrap: nowrap;
-}
-
-.spacing-huge{
-  margin: 0;
-}
-
-.size-content{
-  flex: 0 0 auto;
-  min-width: 0;
+  gap: 10px;
 }

@@ -1,0 +1,31 @@
+.table-summoner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex:1;
+}
+
+.table-summoner > .nick{
+    width:100%;
+    line-height: 16px;
+    color: var(--grey100);
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.table-summoner > .tier{
+    width:100%;
+    color: var(--grey200);
+    font-size: 11px;
+    line-height: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
