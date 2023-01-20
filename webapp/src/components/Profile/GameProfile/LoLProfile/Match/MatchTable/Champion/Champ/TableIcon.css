@@ -1,0 +1,40 @@
+.table-icon{
+    display: grid;
+    justify-items: start;
+    align-content: start;
+    align-items:end;
+}
+
+.table-icon > img{
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 5px;
+    width: 32px;
+    height: 32px;
+    background-color: black;
+    border-radius: 25px;
+    border: 1px solid var(--black200);
+}
+
+.table-icon > .lvl{
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 3px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: var(--grey100);
+    background-color: black;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid var(--grey100);
+    line-height: 15px;
+    font-size:10px;
+}
+
+.table-icon > .lvl > p{
+    margin:0px;
+}
