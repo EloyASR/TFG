@@ -14,6 +14,6 @@ All the information, statistics is storage in a MongoDB database in the cloud, b
 
 ## Documentation
 The documentation of the whole App its writen like documentation as code:  
-- Web APP Documentation
-- API REST Documentation
+- [Web APP Documentation](docs/webapp/README.md)
+- [API REST Documentation](docs/api-rest/README.md)
 - Reporting Documentation
