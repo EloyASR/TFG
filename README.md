@@ -1,3 +1,5 @@
+<img src="docs/images/icon.png" width="300" style="display: block; self-align: center;" />
+
 # TFG - University Tournaments
 
 ## Author
