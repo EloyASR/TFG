@@ -1,5 +1,5 @@
 # REST API
 
-<img src="docs/images/node-icon.png">
+<img src="../images/node-icon.png">
 
 # Deployment
