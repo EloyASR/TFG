@@ -15,7 +15,7 @@ jobs:
       env:
         API_URI: http://${{ secrets.DEPLOY_HOST }}:5000/api
       with:
-          name: EloyASR/TFG/webapp
+          name: eloyasr/tfg/webapp
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
@@ -29,7 +29,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
-          name: EloyASR/TFG/restapi
+          name: eloyasr/tfg/restapi
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
@@ -46,8 +46,8 @@ jobs:
         user: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         command: |
-          wget https://raw.githubusercontent.com/EloyASR/TFG/master/docker-compose-deploy.yml -O docker-compose.yml
-          docker-compose stop
-          docker-compose rm -f
-          docker-compose pull   
-          docker-compose up -d
+          wget https://raw.githubusercontent.com/eloyasr/tfg/master/docker-compose-deploy.yml -O docker-compose.yml
+          sudo docker-compose stop
+          sudo docker-compose rm -f
+          sudo docker-compose pull   
+          sudo docker-compose up -d
