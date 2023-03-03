@@ -36,7 +36,7 @@ dbConnection()
 app.use('/api/login', require('./routes/auth.js'))
 
 //Puerto del servidor
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 5000);
 
 //Lanzar el servidor
 app.listen(app.get('port'), function () {
