@@ -1,0 +1,53 @@
+name: CI for TFG
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  docker-push-webapp:
+    name: Push webapp Docker Image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      env:
+        API_URI: http://${{ secrets.DEPLOY_HOST }}:5000/api
+      with:
+          name: EloyASR/TFG/webapp
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_PUSH_TOKEN }}
+          registry: ghcr.io
+          workdir: webapp
+          buildargs: API_URI
+  docker-push-restapi:
+    name: Push restapi Docker Image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      with:
+          name: EloyASR/TFG/restapi
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_PUSH_TOKEN }}
+          registry: ghcr.io
+          workdir: restapi
+  deploy:
+    name: Deploy over SSH
+    runs-on: ubuntu-latest
+    needs: [docker-push-restapi,docker-push-webapp]
+    steps:
+    - name: Deploy over SSH
+      uses: fifsky/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        user: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        command: |
+          wget https://raw.githubusercontent.com/EloyASR/TFG/master/docker-compose-deploy.yml -O docker-compose.yml
+          docker-compose stop
+          docker-compose rm -f
+          docker-compose pull   
+          docker-compose up -d
