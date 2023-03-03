@@ -1,8 +1,8 @@
 name: CI for TFG
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: 'master'
 
 jobs:
   docker-push-webapp:
