@@ -1,4 +1,4 @@
-import TableIcon from "./Icon/TableIcon";
+import TableIcon from "./Champ/TableIcon";
 import TableRunes from "./Runes/TableRunes";
 import TableSpells from "./Spells/TableSpells";
 import TableSummoner from "./Summoner/TableSummoner";
