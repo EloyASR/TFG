@@ -1,16 +1,15 @@
 import React from "react";
 import { Form, useForm } from '../../hooks/useForm'
-import loginService from '../../services/loginService'
+import signupService from '../../services/signupService'
 import Input from "./components/Input";
-import './Login.css';
+import './Signup.css';
 
 const defaultData = {
     name: "",
     password: ""
 }
 
-const Login = (props) => {
-
+const Signup = (props) => {
     const validate = (fieldValues = values) => {
         const temp = { ...errors }
         if ('name' in fieldValues) {
@@ -37,15 +36,13 @@ const Login = (props) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const { user } = await loginService.login(values)
+        await signupService.signup(values)
         resetForm()
-        console.log(user)
-        //console.log(result)
     }
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h2> Inicio de sesión </h2>
+            <h2> Registrarse </h2>
             <div className="inputs">
                 <Input
                     type="text"
@@ -55,7 +52,6 @@ const Login = (props) => {
                     error={errors.name}
                     onChange={handleInputChange}
                 />
-
                 <Input
                     type="password"
                     name="password"
@@ -70,4 +66,4 @@ const Login = (props) => {
     )
 }
 
-export default Login
+export default Signup

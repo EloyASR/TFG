@@ -34,6 +34,7 @@ app.set('logger', logger);
 dbConnection()
 
 app.use('/api/login', require('./routes/auth.js'))
+app.use('/api/signup', require('./routes/signup.js'))
 
 //Puerto del servidor
 app.set('port', process.env.PORT || 5000);
