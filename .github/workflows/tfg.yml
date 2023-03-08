@@ -47,7 +47,7 @@ jobs:
         key: ${{ secrets.DEPLOY_KEY }}
         command: |
           wget https://raw.githubusercontent.com/eloyasr/tfg/master/docker-compose-deploy.yml -O docker-compose.yml
-          sudo docker-compose stop
-          sudo docker-compose rm -f
-          sudo docker-compose pull   
-          sudo docker-compose up -d
+          docker-compose stop
+          docker-compose rm -f
+          docker-compose pull   
+          docker-compose up -d
