@@ -17,12 +17,12 @@ const login = async (req, res) => {
 
     console.log(user)
 
-    //const isPasswordCorrect = user === null ? false : checkPassword(password, user.password)
-    const isPasswordCorrect = true;
+    const isPasswordCorrect = user === null ? false : checkPassword(password, user.password)
     console.log(isPasswordCorrect)
 
     if (!(user && isPasswordCorrect)) {
-        return (res.status(400).json({ msg: 'Wrong user or password' }))
+        return res.status(400).json({ msg: 'Wrong user or password' })
+        
     }
 
     console.log(user.id)
@@ -32,4 +32,4 @@ const login = async (req, res) => {
     res.json({ user, token })
 }
 
-module.exports = login
+module.exports = {login}
