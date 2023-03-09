@@ -38,8 +38,15 @@ const Login = (props) => {
     const handleSubmit = async e => {
         e.preventDefault()
         const { user } = await loginService.login(values)
+        if(!user){
+            console.log("usuario no valido")
+        }else{
+            console.log("usuario valido")
+        }
         resetForm()
         console.log(user)
+        
+        
         //console.log(result)
     }
 

@@ -19,7 +19,6 @@ const dbConnection = async () => {
             useCreateIndex: true,
             useFindAndModify: false
         }
-
         console.log('database online')
     } catch (err) {
         console.log(err)

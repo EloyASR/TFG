@@ -16,12 +16,12 @@
 .lol-mastery > .icon > img{
     border-radius: 5px;
     background-color: black;
-    width: 80px;
-    height: 80px;
+    width: min(25px + 6vw, 80px);
+    height: auto;
 }
 
 .lol-mastery > .data{
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
@@ -47,4 +47,10 @@
     padding: 0px 8px;
     border-radius: 5px;
     background-color: var(--blue300);
+}
+
+@media(max-width: 580px){
+    .lol-mastery{
+        display: none;
+    }
 }

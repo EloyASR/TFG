@@ -1,6 +1,7 @@
 table{
     background-color: var(--black200);
     border-radius: 4px;
+    width:100%;
 }
 
 table > thead th{
