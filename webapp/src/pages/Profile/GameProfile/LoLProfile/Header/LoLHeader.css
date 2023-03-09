@@ -3,6 +3,7 @@
     flex-direction: column;
     border-radius: 8px;
     background-color: var(--blue200);
+    width: 100%;
 }
 
 .lol-header > .header{
@@ -20,8 +21,9 @@
 .lol-header > .body{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-content: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 5px;
     background-color: var(--black300);
     border-bottom-left-radius: 8px;
@@ -44,7 +46,7 @@
 .lol-header > .body > .info > .icon > img{
     background-color: black;
     border-radius: 50%;
-    width: 120px;
+    width:120px;
     border: 3px solid var(--blue100);
 }
 
@@ -95,4 +97,23 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+@media(max-width: 700px){
+    .lol-header > .body > .info > .icon {
+        min-width: 70px;
+    }
+    .lol-header > .body > .info > .icon > img{
+        width: min(70px + 8vw,120px);
+    }
+
+    .lol-header > .body > .info > .data > .nickname {
+        line-height: min(10px + 3vw,30px);
+        font-size: min(8px + 3vw,24px);
+    }
+}
+@media(max-width: 380px){
+    .lol-header > .body > .masteries{
+        display: none;
+    }
 }

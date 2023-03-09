@@ -40,22 +40,18 @@ body{
   background-color: #201c1c;
 }
 
-body > .root{
+body > #root{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-body > .root > .App{
-  display: flex;
-  flex-direction: column;
-  gap:10px;
-}
-
-body > .root > .App > .perfiles > .cuerpo{
+body > #root > .App{
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 10px;
+  gap:10px;
+  width: 100%;
+  justify-content: center;
 }

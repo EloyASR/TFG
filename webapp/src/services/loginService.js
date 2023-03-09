@@ -14,9 +14,9 @@ const loginService = {
             console.log(values)
             console.log(url)
             const {data} = await axios.post(url, values)
-            console.log(data)
             return data
         } catch (error) {
+            console.log("Error")
             console.log(error.response.status)
             console.log(error.response.data)
         }
