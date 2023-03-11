@@ -5,7 +5,7 @@ import TableSummoner from "./TableSummoner";
 
 function TableChampion(props) {
     return <>
-        <td colspan="4" className="table-champion">
+        <td colSpan="4" className="table-champion">
             <div>
                 <TableIcon/>
                 <TableSpells/>

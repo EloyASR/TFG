@@ -16,8 +16,8 @@ function MatchTable(props) {
             </colgroup>
             <thead>
                 <tr>
-                    <th colspan="4">
-                        <span class="result">Victoria</span>(Equipo Azul)
+                    <th colSpan="4">
+                        <span className="result">Victoria</span>(Equipo Azul)
                     </th>
                     <th>KDA</th>
                     <th>Daño</th>

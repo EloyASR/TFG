@@ -1,7 +1,11 @@
 import "./ProfileHeader.css"
 
 function ProfileHeader(props){
-    return <></>;
+    return <>
+        <div className="">
+
+        </div>
+    </>;
 }
 
 export default ProfileHeader
