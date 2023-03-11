@@ -1,5 +1,4 @@
-import "./TableRunes.css";
-import defaultIcon from '../../../../../../../../assets/multimedia/icon_01.png';
+import defaultIcon from '../../../../assets/multimedia/icon_01.png';
 
 function TableRunes(props) {
     return <>

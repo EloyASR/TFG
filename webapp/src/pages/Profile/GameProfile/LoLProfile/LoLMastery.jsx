@@ -1,5 +1,4 @@
-import defaultIcon from '../../../../../../assets/multimedia/icon_01.png';
-import "./LoLMastery.css";
+import defaultIcon from '../../../../assets/multimedia/icon_01.png';
 
 function LoLMastery(props) {
     return <>

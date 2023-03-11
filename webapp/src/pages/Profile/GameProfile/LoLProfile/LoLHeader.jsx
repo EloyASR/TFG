@@ -1,6 +1,5 @@
-import defaultIcon from '../../../../../assets/multimedia/icon_01.png';
-import LoLMastery from './Mastery/LoLMastery';
-import "./LoLHeader.css";
+import defaultIcon from '../../../../assets/multimedia/icon_01.png';
+import LoLMastery from './LoLMastery';
 
 function LoLHeader(props) {
     return <>

@@ -1,5 +1,3 @@
-import "./TableKda.css"
-
 function TableKda(props) {
     return <>
         <td className="table-kda">

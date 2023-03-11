@@ -1,7 +1,7 @@
 import "./LoLProfile.css"
-import LoLHeader from "./Header/LoLHeader";
-import LoLMatch from "./Match/LoLMatch";
-import LoLQueue from "./Queue/LoLQueue";
+import LoLHeader from "./LoLHeader";
+import LoLMatch from "./LoLMatch";
+import LoLQueue from "./LoLQueue";
 
 function LoLProfile(props) {
 
