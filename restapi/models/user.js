@@ -12,7 +12,7 @@ const UserSchema = Schema(
         }
     },
     {
-        timestamps:true
+        timestamps: true
     }
 )
 

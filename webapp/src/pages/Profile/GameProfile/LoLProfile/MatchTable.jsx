@@ -1,5 +1,4 @@
-import "./MatchTable.css";
-import TableRow from "./TableRow/TableRow"
+import TableRow from "./TableRow"
 
 function MatchTable(props) {
     return <>

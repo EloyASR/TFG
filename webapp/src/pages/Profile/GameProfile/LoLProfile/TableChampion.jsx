@@ -1,9 +1,7 @@
-import TableIcon from "./Champ/TableIcon";
-import TableRunes from "./Runes/TableRunes";
-import TableSpells from "./Spells/TableSpells";
-import TableSummoner from "./Summoner/TableSummoner";
-
-import "./TableChampion.css";
+import TableIcon from "./TableIcon";
+import TableRunes from "./TableRunes";
+import TableSpells from "./TableSpells";
+import TableSummoner from "./TableSummoner";
 
 function TableChampion(props) {
     return <>

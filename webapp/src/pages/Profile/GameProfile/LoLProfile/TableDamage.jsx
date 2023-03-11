@@ -1,5 +1,3 @@
-import "./TableDamage.css"
-
 function TableDamage({percentage}) {
     /* IMPORTANTE: CAMBIAR PROGRESS POR UN ELEMENTO PROGRESS DE HTML */
 

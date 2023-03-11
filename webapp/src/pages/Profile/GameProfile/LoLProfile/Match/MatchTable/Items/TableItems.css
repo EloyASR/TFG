@@ -1,9 +1,0 @@
-td.table-items{
-    font-size: 0px;
-}
-
-td.table-items > div{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-}

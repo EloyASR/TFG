@@ -1,5 +1,3 @@
-import "./TableSummoner.css";
-
 function TableSummoner(props) {
     return <>
         <div className="table-summoner">

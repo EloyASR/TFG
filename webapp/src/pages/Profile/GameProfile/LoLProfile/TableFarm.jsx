@@ -1,5 +1,3 @@
-import "./TableFarm.css"
-
 function TableFarm(props) {
     return <>
         <td className="table-farm">

@@ -1,5 +1,4 @@
-import "./LoLMatch.css"
-import MatchTable from "./MatchTable/MatchTable"
+import MatchTable from "./MatchTable"
 
 function LoLMatch(props) {
     return <>

@@ -1,5 +1,3 @@
-import "./TableWards.css"
-
 function TableWards(props) {
     return <>
         <td className="table-wards">

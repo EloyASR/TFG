@@ -1,5 +1,4 @@
-import "./TableSpells.css";
-import defaultIcon from '../../../../../../../../assets/multimedia/icon_01.png';
+import defaultIcon from '../../../../assets/multimedia/icon_01.png';
 
 function TableSpells(props) {
     return <>

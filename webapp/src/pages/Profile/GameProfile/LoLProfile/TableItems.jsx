@@ -1,6 +1,5 @@
-import "./TableItems.css";
-import TableItemsItem from "./Item/TableItemsItem";
-import TableItemsWard from "./Ward/TableItemsWard";
+import TableItemsItem from "./TableItemsItem";
+import TableItemsWard from "./TableItemsWard";
 
 function TableItems(props){
     return <>
