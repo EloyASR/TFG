@@ -45,8 +45,6 @@ const Login = (props) => {
         }
         resetForm()
         console.log(user)
-        
-        
         //console.log(result)
     }
 

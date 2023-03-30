@@ -332,34 +332,445 @@
     width:100%; /*MODIFICABLE*/
 }
 
-.partida-lol-detalle > div{
+/* --------------------------------------------------- CSS MATCHES - HEADER --------------------------------------------- */
+
+.partida-lol-detalle > .match-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.partida-lol-detalle > .match-header > div{
+    max-width: 100%; /*MODIFICABLE*/
+    height: 110px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display:flex;
+    flex-direction:row;
+    border-left: 8px solid var(--black100);
+}
+
+.partida-lol-detalle > .match-header > .win{
+    border-left: 8px solid var(--blue200);
+}
+
+.partida-lol-detalle > .match-header > .lose{
+    border-left: 8px solid var(--red200);
+}
+
+/* ------------------------------------------------ CSS MATCHES - HEADER - DATA ----------------------------------------- */
+
+.partida-lol-detalle > .match-header > div > .data{
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--black300);
+}
+
+.partida-lol-detalle > .match-header > .win > .data{
+    background-color: var(--blue300);
+}
+
+.partida-lol-detalle > .match-header > .lose > .data{
+    background-color: var(--red300);
+}
+
+/* --------------------------------------------- CSS MATCHES - HEADER - DATA - GAME ------------------------------------- */
+
+.partida-lol-detalle > .match-header > div > .data > .game_info{
+    margin: 5px 20px 5px 5px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content:space-evenly;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .game_info > .type{
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--grey100);
+    margin: 3px;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .game_info > .separator{
+    width: 100%;
+    height: 1px;
+    background-color: var(--grey200);
+    margin: 3px;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .game_info > .result{
+    color: var(--grey200);
+    font-size: 0.85rem;
+    margin: 3px;
+    font-weight: bold;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .game_info > .duration{
+    color: var(--grey200);
+    font-size: 0.85rem;
+    margin: 3px;
+}
+
+.partida-lol-detalle > .match-header > .win > .data > .game_info > .separator{
+    background-color: var(--blue200);
+}
+
+.partida-lol-detalle > .match-header > .lose > .data > .game_info > .separator{
+    background-color: var(--red200);
+}
+
+/* ------------------------------------------- CSS MATCHES - HEADER - DATA - SUMMONER ----------------------------------- */
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info{
+    margin: 5px auto 5px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner{
+    display:flex;
+    flex-direction: row;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion {
+    display: grid;
+    justify-items: end;
+    align-content: end;
+    align-items:end;
+}
+
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > div{
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    border: 1px solid var(--black200);
+    overflow:hidden;
+    align-items: center;
+    justify-content: center;
+    display:flex;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > div > img{
+    width: 55px;
+    height: 55px;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > .lvl{
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin: 3px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: var(--grey100);
+    background-color: black;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border: 1px solid var(--grey100);
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > .lvl > p{
+    font-size: 0.70rem;
+    margin:0;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .spells{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .spells > img{
+    width: 25px;
+    height: 25px;
+    margin: 3px;
+    background-color: black;
+    border: 1px solid var(--black200);
+    border-radius: 5px;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .runes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .runes > img{
+    width: 25px;
+    height: 25px;
+    margin: 3px;
+    background-color: black;
+    border: 1px solid var(--black200);
+    border-radius: 50%;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--grey200);
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a > .k{
+    margin:5px;
+    font-weight: bold;
+    color: var(--grey100);
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a > .d{
+    margin:5px;
+    font-weight: bold;
+    color: var(--black100);
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a > .a{
+    margin:5px;
+    font-weight: bold;
+    color: var(--grey100);
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .ratiokda{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--grey200);
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .ratiokda > span{
+    margin-right: 5px;
+}
+
+.partida-lol-detalle > .match-header > .win > .data > .summoner_info > .summoner > .kda > .k-d-a > .d{
+    color: var(--blue100);
+}
+
+.partida-lol-detalle > .match-header > .lose > .data > .summoner_info > .summoner > .kda > .k-d-a > .d{
+    color: var(--red100);
+}
+
+/**/
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    align-content: center;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .item{
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    background-color: var(--black300);
+    border: 1px solid var(--black200);
+    border-radius: 5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .item > img{
+    width: 25px;
+    height: 25px;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .ward{
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    background-color: var(--black300);
+    border: 1px solid var(--black200);
+    border-radius: 50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .ward > img{
+    width: 25px;
+    height: 25px;
+}
+
+/* ------------------------------------------- CSS MATCHES - HEADER - DATA - PLAYERS ------------------------------------ */
+
+.partida-lol-detalle > .match-header > div > .data > .players_info{
+    border-left: 1px solid var(--black100);
+    padding:8px 0px 8px 8px;
+    margin:5px 0px 5px 5px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .players_info > .team{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.partida-lol-detalle > .match-header > .win > .data > .players_info{
+    border-left: 1px solid var(--blue200);
+}
+
+.partida-lol-detalle > .match-header > .lose > .data > .players_info{
+    border-left: 1px solid var(--red200);
+}
+
+/* -------------------------------------- CSS MATCHES - HEADER - DATA - PLAYERS - PLAYER -------------------------------- */
+
+.partida-lol-detalle > .match-header > div > .data > .players_info > .team > .player{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2px; 
+}
+
+.partida-lol-detalle > .match-header > div > .data > .players_info > .team > .player > img{
+    width: 16px;
+    height: 16px;
+}
+
+.partida-lol-detalle > .match-header > div > .data > .players_info > .team > .player > p{
+    margin: 0px 5px 0px 5px;
+    font-size: 0.75rem;
+    color: var(--grey200);
+    width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ----------------------------------------------- CSS MATCHES - HEADER - ACTION ---------------------------------------- */
+
+.partida-lol-detalle > .match-header > div > .action{
+    background-color: var(--black100);
+    border-radius: 0px 8px 8px 0px;
+    width: 40px;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border:none;
+}
+
+.partida-lol-detalle > .match-header > div > .action:hover{
+    background-color: var(--black200);
+}
+
+.partida-lol-detalle > .match-header > div > .action > svg{
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+.partida-lol-detalle > .match-header > div > .action > svg > path{
+    fill: var(--black300);
+}
+
+.partida-lol-detalle > .match-header > .win > .action{
+    background-color: var(--blue200);
+}
+
+.partida-lol-detalle > .match-header > .win > .action:hover{
+    background-color: var(--blue100);
+}
+
+.partida-lol-detalle > .match-header > .win > .action > svg > path{
+    fill: var(--blue300);
+}
+
+.partida-lol-detalle > .match-header > .lose > .action{
+    background-color: var(--red200);
+}
+
+.partida-lol-detalle > .match-header > .lose > .action:hover{
+    background-color: var(--red100);
+}
+
+.partida-lol-detalle > .match-header > .lose > .action > svg > path{
+    fill: var(--red300);
+}
+
+
+/* -------------------------------------------------- CSS MATCHES - EXTENDED -------------------------------------------- */
+
+.partida-lol-detalle > .match-extended {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0px 8px 0px;
+}
+
+.partida-lol-detalle > .match-extended > div{
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom: 17px solid var(--black200);
     width: 100%
 }
 
-.partida-lol-detalle > .equipo-azul{
-    border-bottom-color: var(--blue200);
+.partida-lol-detalle > .match-extended > .equipo-azul{
+    border-bottom-color: var(--black300);
 }
 
-.partida-lol-detalle > .equipo-rojo{
-    border-bottom-color: var(--red200);
+.partida-lol-detalle > .match-extended > .equipo-rojo{
+    border-bottom-color: var(--black300);
 }
 
-.partida-lol-detalle > .equipo-azul > table{
+.partida-lol-detalle > .match-extended > .equipo-azul > table{
     background-color: var(--blue200);
 }
 
-.partida-lol-detalle > .equipo-rojo > table{
+.partida-lol-detalle > .match-extended > .equipo-rojo > table{
     background-color: var(--red200);
 }
 
-.partida-lol-detalle > div > .equipo-azul > tbody tr > td{
+.partida-lol-detalle > .match-extended > div > .equipo-azul > tbody tr > td{
     background-color: var(--black300);
 }
 
-.partida-lol-detalle > div > .equipo-rojo > tbody tr > td{
+.partida-lol-detalle > .match-extended > div > .equipo-rojo > tbody tr > td{
     background-color: var(--black300);
 }
 
@@ -596,7 +1007,7 @@ td.table-items > div{
     display: inline-block;
     width: 22px;
     height: 22px;
-    margin-left: 1px;
+    margin:2px;
     border: 1px solid var(--black100);
     vertical-align: middle;
     border-radius: 5px;
@@ -620,10 +1031,10 @@ td.table-items > div{
     display: inline-block;
     width: 22px;
     height: 22px;
-    margin-left: 1px;
+    margin:2px;
     border: 1px solid var(--black100);
     vertical-align: middle;
-    border-radius: 5px;
+    border-radius: 50%;
     background-color: black;
 }
 
