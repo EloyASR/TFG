@@ -1,29 +1,34 @@
 import defaultIcon from '../../../../assets/multimedia/icon_01.png';
 import LoLMastery from './LoLMastery';
 
-function LoLHeader(props) {
+
+function LoLHeader({handleClick,data}) {
     return <>
         <div className="lol-header">
             <div className="header">
-                Profile
+                LoL - Profile
             </div>
             <div className="body content">
                 <div className="info">
                     <div className="icon">
-                        <img src={defaultIcon} alt="" />
+                        {data.profileIconId ? <img src={"http://ddragon.leagueoflegends.com/cdn/13.6.1/img/profileicon/" + data.profileIconId + ".png"} alt="icono" />
+                        : <img src={defaultIcon} alt="icono por defecto" />}
                     </div>
                     <div className="data">
-                        <div className="nickname">Nickname</div>
-                        <div className="lvl">LvL 0</div>
+                        <div className="nickname">{data.name ? data.name: "Nickname"}</div>
+                        <div className="lvl">{data.summonerLevel ? "Lvl " + data.summonerLevel: "Lvl 0"}</div>
                         <div className="button">
-                            <button className="update">Update</button>
+                            <button onClick={handleClick} className="update">Update</button>
                         </div>
                     </div>
                 </div>
                 <div className="masteries">
-                    <LoLMastery/>
-                    <LoLMastery/>
-                    <LoLMastery/>
+                    {data.masteries ? data.masteries.map((maestria)=> <LoLMastery key={maestria.name} data={maestria}/>)
+                    :<>
+                        <LoLMastery/>
+                        <LoLMastery/>
+                        <LoLMastery/>
+                    </>}
                 </div>
             </div>
         </div>

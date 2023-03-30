@@ -35,6 +35,7 @@ dbConnection()
 
 app.use('/api/login', require('./routes/auth.js'))
 app.use('/api/signup', require('./routes/signup.js'))
+app.use('/api/info', require('./routes/info.js'))
 
 //Puerto del servidor
 app.set('port', process.env.PORT || 5000);
