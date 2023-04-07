@@ -1,8 +1,8 @@
-import defaultIcon from '../../../../assets/multimedia/icon_01.png';
-import LoLMastery from './LoLMastery';
+import defaultIcon from '../../../../../assets/multimedia/icon_01.png';
+import Mastery from './Mastery';
 
 
-function LoLHeader({handleClick,data}) {
+function Header({handleClick,data}) {
     return <>
         <div className="lol-header">
             <div className="header">
@@ -23,11 +23,11 @@ function LoLHeader({handleClick,data}) {
                     </div>
                 </div>
                 <div className="masteries">
-                    {data.masteries ? data.masteries.map((maestria)=> <LoLMastery key={maestria.name} data={maestria}/>)
+                    {data.masteries ? data.masteries.map((maestria)=> <Mastery key={maestria.name} data={maestria}/>)
                     :<>
-                        <LoLMastery/>
-                        <LoLMastery/>
-                        <LoLMastery/>
+                        <Mastery/>
+                        <Mastery/>
+                        <Mastery/>
                     </>}
                 </div>
             </div>
@@ -35,4 +35,4 @@ function LoLHeader({handleClick,data}) {
     </>;
 }
 
-export default LoLHeader
+export default Header
