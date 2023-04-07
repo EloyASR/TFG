@@ -1,6 +1,6 @@
-import defaultIcon from '../../../../assets/multimedia/icon_01.png';
+import defaultIcon from '../../../../../assets/multimedia/icon_01.png';
 
-function LoLMastery({ data }) {
+function Mastery({ data }) {
     if (data) {
         return <>
             <div className="lol-mastery">
@@ -28,4 +28,4 @@ function LoLMastery({ data }) {
     }
 }
 
-export default LoLMastery;
+export default Mastery;

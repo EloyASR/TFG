@@ -1,61 +1,57 @@
 /* ------------------------------------------------------ CSS ESTRUCTURA GENERAL ------------------------------------*/
 
-.lol-profile{
+.lol-profile {
     display: flex;
     flex-direction: column;
-    gap:10px;
-    margin-top:10px;
+    gap: 10px;
+    margin-top: 10px;
     max-width: none;
     width: 100%;
 }
 
-.lol-profile > .header{
+.lol-profile>.header {
     display: block;
-    width:100%;
+    width: 100%;
 }
 
-.lol-profile > .body{
+.lol-profile>.body {
     display: flex;
     flex-direction: row;
-    flex-wrap:nowrap;
+    flex-wrap: nowrap;
     gap: 10px;
-    width:100%;
-    
+    width: 100%;
+
 }
 
-.lol-profile > .body > .left{
+.lol-profile>.body>.left {
     grid-row-start: 1;
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
     width: 330px;
 }
 
-.lol-profile > .body > .center{
+.lol-profile>.body>.center {
     grid-row-start: 1;
     display: flex;
     flex-direction: column;
-    gap:10px;
-    width:100%;
+    gap: 10px;
+    width: 100%;
 }
 
-@media(max-width: 1000px){
-    .lol-profile{
-        max-width: 748px;
+@media(max-width: 1000px) {
+    .lol-profile>.body {
+        flex-wrap: wrap;
     }
 
-    .lol-profile > .body{
-        flex-wrap:wrap;
-    }
-
-    .lol-profile > .body > .left{
+    .lol-profile>.body>.left {
         width: 100%;
     }
 }
 
 /* ------------------------------------------------------ CSS HEADER --------------------------------------------------*/
 
-.lol-header{
+.lol-header {
     display: flex;
     flex-direction: column;
     border-radius: 8px;
@@ -63,7 +59,7 @@
     width: 100%;
 }
 
-.lol-header > .header{
+.lol-header>.header {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -75,7 +71,7 @@
     color: var(--grey100);
 }
 
-.lol-header > .body{
+.lol-header>.body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -87,27 +83,27 @@
     border-bottom-right-radius: 8px;
 }
 
-.lol-header > .body > .info{
-    flex:1;
+.lol-header>.body>.info {
+    flex: 1;
     display: flex;
     flex-direction: row;
 }
 
-.lol-header > .body > .info > .icon{
+.lol-header>.body>.info>.icon {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
 }
 
-.lol-header > .body > .info > .icon > img{
+.lol-header>.body>.info>.icon>img {
     background-color: black;
     border-radius: 50%;
-    width:120px;
+    width: 120px;
     border: 3px solid var(--blue100);
 }
 
-.lol-header > .body > .info > .data{
+.lol-header>.body>.info>.data {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -115,7 +111,7 @@
     justify-content: center;
 }
 
-.lol-header > .body > .info > .data > .nickname{
+.lol-header>.body>.info>.data>.nickname {
     line-height: 30px;
     font-size: 24px;
     font-weight: bold;
@@ -123,18 +119,18 @@
     color: var(--grey100);
 }
 
-.lol-header > .body > .info > .data > .lvl{
+.lol-header>.body>.info>.data>.lvl {
     line-height: 16px;
     margin-top: 2px;
     font-size: 12px;
     color: var(--grey200);
 }
 
-.lol-header > .body > .info > .data > .button{
+.lol-header>.body>.info>.data>.button {
     margin-top: 8px;
 }
 
-.lol-header > .body > .info > .data > .button > .update{
+.lol-header>.body>.info>.data>.button>.update {
     padding: 0px 14px;
     border-radius: 4px;
     font-size: 14px;
@@ -149,66 +145,68 @@
     color: var(--grey100);
 }
 
-.lol-header > .body > .masteries{
+.lol-header>.body>.masteries {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-@media(max-width: 700px){
-    .lol-header > .body > .info > .icon {
+@media(max-width: 700px) {
+    .lol-header>.body>.info>.icon {
         min-width: 70px;
     }
-    .lol-header > .body > .info > .icon > img{
-        width: min(70px + 8vw,120px);
+
+    .lol-header>.body>.info>.icon>img {
+        width: min(70px + 8vw, 120px);
     }
 
-    .lol-header > .body > .info > .data > .nickname {
-        line-height: min(10px + 3vw,30px);
-        font-size: min(8px + 3vw,24px);
+    .lol-header>.body>.info>.data>.nickname {
+        line-height: min(10px + 3vw, 30px);
+        font-size: min(8px + 3vw, 24px);
     }
 }
-@media(max-width: 380px){
-    .lol-header > .body > .masteries{
+
+@media(max-width: 380px) {
+    .lol-header>.body>.masteries {
         display: none;
     }
 }
 
 /* -------------------------------------------------- CSS HEADER - MASTERY -------------------------------------------- */
 
-.lol-mastery{ 
-    display:flex;
+.lol-mastery {
+    display: flex;
     flex-direction: column;
     margin: 12px;
     background-color: var(--blue100);
-    border-radius:5px;
+    border-radius: 5px;
     padding: 4px;
 }
 
-.lol-mastery > .icon{
+.lol-mastery>.icon {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.lol-mastery > .icon > img{
+.lol-mastery>.icon>img {
     border-radius: 5px;
     background-color: black;
     width: min(25px + 6vw, 80px);
     height: auto;
 }
 
-.lol-mastery > .data{
+.lol-mastery>.data {
     display: none;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    margin-top:4px;
-    gap:4px;
+    margin-top: 4px;
+    gap: 4px;
 }
 
-.lol-mastery > .data > .lvl{
+.lol-mastery>.data>.lvl {
     margin-right: auto;
     color: var(--grey100);
     font-weight: bold;
@@ -219,7 +217,7 @@
     background-color: var(--blue300);
 }
 
-.lol-mastery > .data > .points{
+.lol-mastery>.data>.points {
     color: var(--grey200);
     line-height: 35px;
     font-size: 12px;
@@ -228,8 +226,8 @@
     background-color: var(--blue300);
 }
 
-@media(max-width: 580px){
-    .lol-mastery{
+@media(max-width: 580px) {
+    .lol-mastery {
         display: none;
     }
 }
@@ -237,63 +235,63 @@
 
 /* ------------------------------------------------------- CSS QUEUES -------------------------------------------------- */
 
-.lol-queue{
+.lol-queue {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width:300px;
+    min-width: 300px;
     background-color: var(--blue200);
-    gap:1px;
+    gap: 1px;
     border-radius: 8px;
 }
 
-.lol-queue > .header{
+.lol-queue>.header {
     display: flex;
     flex-direction: row;
-    justify-content:flex-start;
+    justify-content: flex-start;
     align-items: center;
-    align-content:center;
+    align-content: center;
     padding: 0px 12px;
     line-height: 35px;
     font-size: 14px;
     color: var(--grey100);
 }
 
-.lol-queue > .header > .unranked{
-    margin-left:auto;
+.lol-queue>.header>.unranked {
+    margin-left: auto;
     color: var(--blue300);
     font-weight: bold;
 }
 
-.lol-queue > .body {
-    padding:12px;
-    display:flex;
+.lol-queue>.body {
+    padding: 12px;
+    display: flex;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
     /*border-top: 1px solid var(--black100);*/
     background-color: var(--black300);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
 }
 
-.lol-queue > .body > .icon{
+.lol-queue>.body>.icon {
     position: relative;
 }
 
-.lol-queue > .body > .icon > img{
-    width:72px;
-    height:72px;
+.lol-queue>.body>.icon>img {
+    width: 72px;
+    height: 72px;
     background-color: black;
     border-radius: 50%;
 }
 
-.lol-queue > .body > .info{
-    flex:1 1 0%;
+.lol-queue>.body>.info {
+    flex: 1 1 0%;
     position: relative;
     margin-left: 16px;
 }
 
-.lol-queue > .body > .info > .tier{
+.lol-queue>.body>.info>.tier {
     line-height: 26px;
     font-size: 20px;
     font-weight: bold;
@@ -301,157 +299,218 @@
     color: var(--grey100);
 }
 
-.lol-queue > .body > .info > .lp{
+.lol-queue>.body>.info>.lp {
     line-height: 16px;
     margin-top: 2px;
     font-size: 12px;
     color: var(--grey200);
 }
 
-.lol-queue > .body > .rate{
-    font-size:12px;
+.lol-queue>.body>.rate {
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    color:var(--grey200);
+    color: var(--grey200);
 }
 
-.lol-queue > .body > .rate > .w-l{
+.lol-queue>.body>.rate>.w-l {
     line-height: 26px;
     white-space: nowrap;
 }
 
-.lol-queue > .body > .rate > .winrate{
+.lol-queue>.body>.rate>.winrate {
     margin-top: 2px;
     line-height: 16px;
 }
 
 /* ------------------------------------------------------- CSS MATCHES -------------------------------------------------- */
 
-.partida-lol-detalle{
-    width:100%; /*MODIFICABLE*/
+.partida-lol-detalle {
+    width: 100%;
+    /*MODIFICABLE*/
 }
 
 /* --------------------------------------------------- CSS MATCHES - HEADER --------------------------------------------- */
 
-.partida-lol-detalle > .match-header {
+.partida-lol-detalle>.match-header {
     display: flex;
     flex-direction: column;
 }
 
-.partida-lol-detalle > .match-header > div{
-    max-width: 100%; /*MODIFICABLE*/
+.partida-lol-detalle>.match-header>div {
+    max-width: 100%;
+    /*MODIFICABLE*/
     height: 110px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    display:flex;
-    flex-direction:row;
+    display: flex;
+    flex-direction: row;
     border-left: 8px solid var(--black100);
 }
 
-.partida-lol-detalle > .match-header > .win{
+.partida-lol-detalle>.match-header>.win {
     border-left: 8px solid var(--blue200);
 }
 
-.partida-lol-detalle > .match-header > .lose{
+.partida-lol-detalle>.match-header>.lose {
     border-left: 8px solid var(--red200);
 }
 
 /* ------------------------------------------------ CSS MATCHES - HEADER - DATA ----------------------------------------- */
 
-.partida-lol-detalle > .match-header > div > .data{
-    flex:1;
+.partida-lol-detalle>.match-header>div>.data {
+    flex: 1;
     display: flex;
     flex-direction: row;
     background-color: var(--black300);
 }
 
-.partida-lol-detalle > .match-header > .win > .data{
+@media(max-width:600px) {
+    .partida-lol-detalle>.match-header>div>.data {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--black300);
+    }
+}
+
+.partida-lol-detalle>.match-header>.win>.data {
     background-color: var(--blue300);
 }
 
-.partida-lol-detalle > .match-header > .lose > .data{
+.partida-lol-detalle>.match-header>.lose>.data {
     background-color: var(--red300);
 }
 
 /* --------------------------------------------- CSS MATCHES - HEADER - DATA - GAME ------------------------------------- */
 
-.partida-lol-detalle > .match-header > div > .data > .game_info{
+.partida-lol-detalle>.match-header>div>.data>.game_info {
     margin: 5px 20px 5px 5px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .game_info > .type{
+.partida-lol-detalle>.match-header>div>.data>.game_info>.type {
     font-weight: bold;
     font-size: 0.9rem;
     color: var(--grey100);
     margin: 3px;
+    width: 90px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .game_info > .separator{
+.partida-lol-detalle>.match-header>div>.data>.game_info>.separator {
     width: 100%;
     height: 1px;
     background-color: var(--grey200);
     margin: 3px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .game_info > .result{
+.partida-lol-detalle>.match-header>div>.data>.game_info>.result {
     color: var(--grey200);
     font-size: 0.85rem;
     margin: 3px;
     font-weight: bold;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .game_info > .duration{
+.partida-lol-detalle>.match-header>div>.data>.game_info>.duration {
     color: var(--grey200);
     font-size: 0.85rem;
     margin: 3px;
 }
 
-.partida-lol-detalle > .match-header > .win > .data > .game_info > .separator{
+@media(max-width:600px) {
+    .partida-lol-detalle>.match-header>div>.data>.game_info {
+        margin: 5px 5px 5px 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .partida-lol-detalle>.match-header>div>.data>.game_info>.type {
+        justify-self: flex-start;
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: var(--grey100);
+        margin: 3px;
+    }
+
+    .partida-lol-detalle>.match-header>div>.data>.game_info>.separator {
+        width: 1px;
+        height: 100%;
+        background-color: var(--grey200);
+        margin: 5px;
+    }
+
+    .partida-lol-detalle>.match-header>div>.data>.game_info>.duration {
+        color: var(--grey200);
+        font-size: 0.85rem;
+        margin: 3px;
+        margin-left: auto;
+    }
+}
+
+.partida-lol-detalle>.match-header>.win>.data>.game_info>.separator {
     background-color: var(--blue200);
 }
 
-.partida-lol-detalle > .match-header > .lose > .data > .game_info > .separator{
+.partida-lol-detalle>.match-header>.lose>.data>.game_info>.separator {
     background-color: var(--red200);
 }
 
 /* ------------------------------------------- CSS MATCHES - HEADER - DATA - SUMMONER ----------------------------------- */
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info {
     margin: 5px auto 5px 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
-    
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner{
-    display:flex;
+@media(max-width:600px) {
+    .partida-lol-detalle>.match-header>div>.data>.summoner_info {
+        margin: 5px 5px 5px 5px;
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner {
+    display: flex;
     flex-direction: row;
+    justify-content: flex-start;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons {
-    display:flex;
+@media(max-width:450px) {
+    .partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
     align-items: center;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion {
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.champion {
     display: grid;
     justify-items: end;
     align-content: end;
-    align-items:end;
+    align-items: end;
 }
 
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > div{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.champion>div {
     grid-column-start: 1;
     grid-row-start: 1;
     margin: 5px;
@@ -460,22 +519,22 @@
     background-color: black;
     border-radius: 50%;
     border: 1px solid var(--black200);
-    overflow:hidden;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
-    display:flex;
+    display: flex;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > div > img{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.champion>div>img {
     width: 55px;
     height: 55px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > .lvl{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.champion>.lvl {
     grid-column-start: 1;
     grid-row-start: 1;
     margin: 3px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -488,21 +547,21 @@
     border: 1px solid var(--grey100);
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .champion > .lvl > p{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.champion>.lvl>p {
     font-size: 0.70rem;
-    margin:0;
+    margin: 0;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .spells{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.spells {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     align-content: center;
-    
+
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .spells > img{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.spells>img {
     width: 25px;
     height: 25px;
     margin: 3px;
@@ -511,16 +570,16 @@
     border-radius: 5px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .runes{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.runes {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     align-content: center;
-    
+
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .icons > .runes > img{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.icons>.runes>img {
     width: 25px;
     height: 25px;
     margin: 3px;
@@ -529,40 +588,41 @@
     border-radius: 50%;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda {
     margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 95px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a{
-    display:flex;
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda>.k-d-a {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     color: var(--grey200);
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a > .k{
-    margin:5px;
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda>.k-d-a>.k {
+    margin: 5px;
     font-weight: bold;
     color: var(--grey100);
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a > .d{
-    margin:5px;
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda>.k-d-a>.d {
+    margin: 5px;
     font-weight: bold;
     color: var(--black100);
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .k-d-a > .a{
-    margin:5px;
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda>.k-d-a>.a {
+    margin: 5px;
     font-weight: bold;
     color: var(--grey100);
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .ratiokda{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda>.ratiokda {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -571,108 +631,144 @@
     color: var(--grey200);
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .summoner > .kda > .ratiokda > span{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.summoner>.kda>.ratiokda>span {
     margin-right: 5px;
 }
 
-.partida-lol-detalle > .match-header > .win > .data > .summoner_info > .summoner > .kda > .k-d-a > .d{
+.partida-lol-detalle>.match-header>.win>.data>.summoner_info>.summoner>.kda>.k-d-a>.d {
     color: var(--blue100);
 }
 
-.partida-lol-detalle > .match-header > .lose > .data > .summoner_info > .summoner > .kda > .k-d-a > .d{
+.partida-lol-detalle>.match-header>.lose>.data>.summoner_info>.summoner>.kda>.k-d-a>.d {
     color: var(--red100);
 }
 
 /**/
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items {
     display: flex;
     flex-direction: row;
-    justify-content:center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    margin-inline: auto;
+}
+
+@media(max-width:450px) {
+    .partida-lol-detalle>.match-header>div>.data>.summoner_info>.items {
+        display: none;
+    }
+}
+
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     align-content: center;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .item{
+@media(max-width: 530px) {
+    .partida-lol-detalle>.match-header>div>.data>.summoner_info>.items>div {
+        width: 87px;
+    }
+}
+
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items>div>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+}
+
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items .item {
     width: 25px;
     height: 25px;
     margin: 2px;
     background-color: var(--black300);
     border: 1px solid var(--black200);
     border-radius: 5px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .item > img{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items .item>img {
     width: 25px;
     height: 25px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .ward{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items>.ward {
     width: 25px;
     height: 25px;
+    min-width: 25px;
+    min-height: 25px;
     margin: 2px;
     background-color: var(--black300);
     border: 1px solid var(--black200);
     border-radius: 50%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .summoner_info > .items > .ward > img{
+.partida-lol-detalle>.match-header>div>.data>.summoner_info>.items>.ward>img {
     width: 25px;
+    min-width: 25px;
     height: 25px;
+    min-height: 25px;
 }
 
 /* ------------------------------------------- CSS MATCHES - HEADER - DATA - PLAYERS ------------------------------------ */
 
-.partida-lol-detalle > .match-header > div > .data > .players_info{
+.partida-lol-detalle>.match-header>div>.data>.players_info {
     border-left: 1px solid var(--black100);
-    padding:8px 0px 8px 8px;
-    margin:5px 0px 5px 5px;
-    display:flex;
+    padding: 4px 0px 8px 4px;
+    margin: 5px 0px 5px 0px;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .players_info > .team{
-    display:flex;
+.partida-lol-detalle>.match-header>div>.data>.players_info>.team {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     align-content: center;
 }
 
-.partida-lol-detalle > .match-header > .win > .data > .players_info{
+.partida-lol-detalle>.match-header>.win>.data>.players_info {
     border-left: 1px solid var(--blue200);
 }
 
-.partida-lol-detalle > .match-header > .lose > .data > .players_info{
+.partida-lol-detalle>.match-header>.lose>.data>.players_info {
     border-left: 1px solid var(--red200);
 }
 
 /* -------------------------------------- CSS MATCHES - HEADER - DATA - PLAYERS - PLAYER -------------------------------- */
 
-.partida-lol-detalle > .match-header > div > .data > .players_info > .team > .player{
-    display:flex;
+.partida-lol-detalle>.match-header>div>.data>.players_info>.team>.player {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 2px; 
+    margin: 2px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .players_info > .team > .player > img{
+.partida-lol-detalle>.match-header>div>.data>.players_info>.team>.player>img {
     width: 16px;
     height: 16px;
 }
 
-.partida-lol-detalle > .match-header > div > .data > .players_info > .team > .player > p{
+.partida-lol-detalle>.match-header>div>.data>.players_info>.team>.player>p {
     margin: 0px 5px 0px 5px;
     font-size: 0.75rem;
     color: var(--grey200);
@@ -684,93 +780,93 @@
 
 /* ----------------------------------------------- CSS MATCHES - HEADER - ACTION ---------------------------------------- */
 
-.partida-lol-detalle > .match-header > div > .action{
+.partida-lol-detalle>.match-header>div>.action {
     background-color: var(--black100);
     border-radius: 0px 8px 8px 0px;
     width: 40px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    border:none;
+    border: none;
 }
 
-.partida-lol-detalle > .match-header > div > .action:hover{
+.partida-lol-detalle>.match-header>div>.action:hover {
     background-color: var(--black200);
 }
 
-.partida-lol-detalle > .match-header > div > .action > svg{
+.partida-lol-detalle>.match-header>div>.action>svg {
     width: 20px;
     height: 20px;
     margin: 5px;
 }
 
-.partida-lol-detalle > .match-header > div > .action > svg > path{
+.partida-lol-detalle>.match-header>div>.action>svg>path {
     fill: var(--black300);
 }
 
-.partida-lol-detalle > .match-header > .win > .action{
+.partida-lol-detalle>.match-header>.win>.action {
     background-color: var(--blue200);
 }
 
-.partida-lol-detalle > .match-header > .win > .action:hover{
+.partida-lol-detalle>.match-header>.win>.action:hover {
     background-color: var(--blue100);
 }
 
-.partida-lol-detalle > .match-header > .win > .action > svg > path{
+.partida-lol-detalle>.match-header>.win>.action>svg>path {
     fill: var(--blue300);
 }
 
-.partida-lol-detalle > .match-header > .lose > .action{
+.partida-lol-detalle>.match-header>.lose>.action {
     background-color: var(--red200);
 }
 
-.partida-lol-detalle > .match-header > .lose > .action:hover{
+.partida-lol-detalle>.match-header>.lose>.action:hover {
     background-color: var(--red100);
 }
 
-.partida-lol-detalle > .match-header > .lose > .action > svg > path{
+.partida-lol-detalle>.match-header>.lose>.action>svg>path {
     fill: var(--red300);
 }
 
 
 /* -------------------------------------------------- CSS MATCHES - EXTENDED -------------------------------------------- */
 
-.partida-lol-detalle > .match-extended {
+.partida-lol-detalle>.match-extended {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin: 8px 0px 8px 0px;
 }
 
-.partida-lol-detalle > .match-extended > div{
+.partida-lol-detalle>.match-extended>div {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom: 17px solid var(--black200);
     width: 100%
 }
 
-.partida-lol-detalle > .match-extended > .equipo-azul{
+.partida-lol-detalle>.match-extended>.win {
     border-bottom-color: var(--black300);
 }
 
-.partida-lol-detalle > .match-extended > .equipo-rojo{
+.partida-lol-detalle>.match-extended>.lose {
     border-bottom-color: var(--black300);
 }
 
-.partida-lol-detalle > .match-extended > .equipo-azul > table{
+.partida-lol-detalle>.match-extended>.win>table {
     background-color: var(--blue200);
 }
 
-.partida-lol-detalle > .match-extended > .equipo-rojo > table{
+.partida-lol-detalle>.match-extended>.lose>table {
     background-color: var(--red200);
 }
 
-.partida-lol-detalle > .match-extended > div > .equipo-azul > tbody tr > td{
+.partida-lol-detalle>.match-extended>div>.win>tbody tr>td {
     background-color: var(--black300);
 }
 
-.partida-lol-detalle > .match-extended > div > .equipo-rojo > tbody tr > td{
+.partida-lol-detalle>.match-extended>div>.lose>tbody tr>td {
     background-color: var(--black300);
 }
 
@@ -778,13 +874,13 @@
 /* --------------------------------------------------- CSS MATCHES - TABLE ---------------------------------------------- */
 
 
-table{
+table {
     background-color: var(--black200);
     border-radius: 4px;
-    width:100%;
+    width: 100%;
 }
 
-table > thead th{
+table>thead th {
     height: 32px;
     color: var(--grey100);
     font-size: 12px;
@@ -792,12 +888,12 @@ table > thead th{
     text-align: center;
 }
 
-table > thead th:nth-of-type(1){
+table>thead th:nth-of-type(1) {
     padding-left: 15px;
     text-align: left;
 }
 
-table > tbody tr > td {
+table>tbody tr>td {
     background-color: var(--black300);
     padding: 4px 0px 3px;
     vertical-align: middle;
@@ -807,7 +903,7 @@ table > tbody tr > td {
 
 /* ----------------------------------------- CSS MATCHES - TABLE - ROW - CHAMPION --------------------------------------- */
 
-.table-champion > div{
+.table-champion>div {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -817,14 +913,14 @@ table > tbody tr > td {
 
 /* ------------------------------------- CSS MATCHES - TABLE - ROW - CHAMPION - ICON ------------------------------------ */
 
-.table-icon{
+.table-icon {
     display: grid;
     justify-items: start;
     align-content: start;
-    align-items:end;
+    align-items: end;
 }
 
-.table-icon > img{
+.table-icon>img {
     grid-column-start: 1;
     grid-row-start: 1;
     margin: 5px;
@@ -835,11 +931,11 @@ table > tbody tr > td {
     border: 1px solid var(--black200);
 }
 
-.table-icon > .lvl{
+.table-icon>.lvl {
     grid-column-start: 1;
     grid-row-start: 1;
     margin: 3px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -851,23 +947,23 @@ table > tbody tr > td {
     border-radius: 50%;
     border: 1px solid var(--grey100);
     line-height: 15px;
-    font-size:10px;
+    font-size: 10px;
 }
 
-.table-icon > .lvl > p{
-    margin:0px;
+.table-icon>.lvl>p {
+    margin: 0px;
 }
 
 /* ------------------------------------ CSS MATCHES - TABLE - ROW - CHAMPION - SPELLS ----------------------------------- */
 
-.table-spells{
+.table-spells {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.table-spells > img{
+.table-spells>img {
     width: 16px;
     height: 16px;
     background-color: black;
@@ -877,14 +973,14 @@ table > tbody tr > td {
 
 /* ------------------------------------- CSS MATCHES - TABLE - ROW - CHAMPION - RUNES ----------------------------------- */
 
-.table-runes{
+.table-runes {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.table-runes > img{
+.table-runes>img {
     width: 16px;
     height: 16px;
     background-color: black;
@@ -894,7 +990,7 @@ table > tbody tr > td {
 
 /* ----------------------------------- CSS MATCHES - TABLE - ROW - CHAMPION - SUMMONER ---------------------------------- */
 
-.table-summoner{
+.table-summoner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -903,11 +999,11 @@ table > tbody tr > td {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    flex:1;
+    flex: 1;
 }
 
-.table-summoner > .nick{
-    width:100%;
+.table-summoner>.nick {
+    width: 80px;
     line-height: 16px;
     color: var(--grey100);
     font-size: 12px;
@@ -916,8 +1012,14 @@ table > tbody tr > td {
     overflow: hidden;
 }
 
-.table-summoner > .tier{
-    width:100%;
+@media(max-width:375px){
+    .table-summoner>.nick {
+        width: 60px;
+    }
+}
+
+.table-summoner>.tier {
+    width: 100%;
     color: var(--grey200);
     font-size: 11px;
     line-height: 14px;
@@ -928,117 +1030,227 @@ table > tbody tr > td {
 
 /* --------------------------------------------- CSS MATCHES - TABLE - ROW - KDA ---------------------------------------- */
 
-.table-kda{
+.table-kda {
     text-align: center;
     white-space: nowrap;
 }
 
-.table-kda > .k-d-a{
+.table-kda>.k-d-a {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     line-height: 14px;
     font-size: 11px;
-    color:var(--grey200);
+    color: var(--grey100);
 }
 
-.table-kda > .rate{
+.table-kda>.rate {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     line-height: 14px;
     font-size: 11px;
     font-weight: bold;
-    color:var(--grey200);
+    color: var(--grey200);
 }
 
 /* ----------------------------------------- CSS MATCHES - TABLE - ROW - DAMAGE --------------------------------------- */
 
-.table-damage > .damage > .dealt{
+.table-damage>.damage>.dealt {
     text-align: center;
-    color: var(--grey200);
+    color: var(--grey100);
     font-size: 11px;
     line-height: 14px;
 }
 
-.table-damage > .damage > .progress{
+.table-damage>.damage>.progress {
+    display: flex;
+    justify-content: flex-start;
     width: 50px;
     height: 6px;
     margin: 4px auto 0px;
     background-color: var(--black200);
 }
 
-.table-damage > .damage > .progress > .fill{
+.table-damage>.damage>.progress>.fill {
     height: 100%;
+    background-color: var(--red100);
+}
+
+.win .table-damage>.damage>.progress>.fill {
+    background-color: var(--blue100);
+}
+
+.lose .table-damage>.damage>.progress>.fill {
     background-color: var(--red100);
 }
 
 /* ----------------------------------------- CSS MATCHES - TABLE - ROW - WARDS ---------------------------------------- */
 
-.table-wards{
+.table-wards {
     text-align: center;
     color: var(--grey200);
     font-size: 11px;
+}
+
+.table-wards > div:first-child{
+    color: var(--grey100);
 }
 
 /* ----------------------------------------- CSS MATCHES - TABLE - ROW - FARM ----------------------------------------- */
 
-.table-farm{
+.table-farm {
     text-align: center;
     color: var(--grey200);
     font-size: 11px;
 }
 
+.table-farm > div:first-child{
+    color: var(--grey100);
+}
+
 /* ----------------------------------------- CSS MATCHES - TABLE - ROW - ITEMS ----------------------------------------- */
 
-td.table-items{
+td.table-items {
     font-size: 0px;
 }
 
-td.table-items > div{
+
+
+td.table-items>div {
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media(max-width:740px) {
+    td.table-items>div>div {
+        width: 78px;
+    }
+}
+
+@media(max-width:440px) {
+    td.table-items>div>div {
+        width: 60px;
+    }
+}
+
+td.table-items>div>div {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 /* ------------------------------------- CSS MATCHES - TABLE - ROW - ITEMS - ITEM -------------------------------------- */
 
-.table-items-item{
+.table-items-item {
     display: inline-block;
     width: 22px;
     height: 22px;
-    margin:2px;
-    border: 1px solid var(--black100);
+    min-width: 22px;
+    max-width: 22px;
+    min-height: 22px;
+    max-height: 22px;
+    margin: 2px;
+    background-color: var(--black300);
+    border: 1px solid var(--black200);
     vertical-align: middle;
     border-radius: 5px;
-    background-color: black;
 }
 
-.table-items-item > img{
-    width: 100%;
-    height: 100%;
+.win .table-items-item{
+    background-color: var(--blue300);
 }
 
-.table-items-item > div.no-item{
-    background-color: var(--black200);
+.lose .table-items-item{
+    background-color: var(--red300);
+}
+
+@media (min-width:1000px) and (max-width:1060px) {
+    .table-items-item {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        max-width: 20px;
+        min-height: 20px;
+        max-height: 20px;
+        margin: 1px;
+    }
+}
+
+@media(max-width: 440px) {
+    .table-items-item {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        max-width: 18px;
+        min-height: 18px;
+        max-height: 18px;
+        margin: 1px;
+    }
+}
+
+.table-items-item>img {
+    border-radius: 5px;
     width: 100%;
     height: 100%;
 }
 
 /* ------------------------------------- CSS MATCHES - TABLE - ROW - ITEMS - WARD -------------------------------------- */
 
-.table-items-ward{
+.table-items-ward {
     display: inline-block;
     width: 22px;
     height: 22px;
-    margin:2px;
-    border: 1px solid var(--black100);
+    min-width: 22px;
+    max-width: 22px;
+    min-height: 22px;
+    max-height: 22px;
+    margin: 2px;
+    background-color: var(--black300);
+    border: 1px solid var(--black200);
     vertical-align: middle;
     border-radius: 50%;
-    background-color: black;
 }
 
-.table-items-ward > img{
+.win .table-items-ward{
+    background-color: var(--blue300);
+}
+
+.lose .table-items-ward{
+    background-color: var(--red300);
+}
+
+@media (min-width:1000px) and (max-width:1060px) {
+    .table-items-ward {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        max-width: 20px;
+        min-height: 20px;
+        max-height: 20px;
+        margin: 1px;
+    }
+}
+
+@media(max-width: 440px) {
+    .table-items-ward {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        max-width: 18px;
+        min-height: 18px;
+        max-height: 18px;
+        margin: 1px;
+    }
+}
+
+.table-items-ward>img {
+    border-radius: 50%;
     width: 100%;
     height: 100%;
 }

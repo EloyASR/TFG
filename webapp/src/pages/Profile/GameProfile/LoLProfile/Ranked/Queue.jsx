@@ -1,15 +1,15 @@
-import defaultIcon from '../../../../assets/multimedia/icon_01.png';
-import iron from '../../../../assets/multimedia/ranked/Iron.png';
-import bronze from '../../../../assets/multimedia/ranked/Bronze.png';
-import silver from '../../../../assets/multimedia/ranked/Silver.png';
-import gold from '../../../../assets/multimedia/ranked/Gold.png';
-import platinum from '../../../../assets/multimedia/ranked/Platinum.png';
-import diamond from '../../../../assets/multimedia/ranked/Diamond.png';
-import master from '../../../../assets/multimedia/ranked/Master.png';
-import grandmaster from '../../../../assets/multimedia/ranked/Grandmaster.png';
-import challenger from '../../../../assets/multimedia/ranked/Challenger.png';
+import defaultIcon from '../../../../../assets/multimedia/icon_01.png';
+import iron from '../../../../../assets/multimedia/ranked/Iron.png';
+import bronze from '../../../../../assets/multimedia/ranked/Bronze.png';
+import silver from '../../../../../assets/multimedia/ranked/Silver.png';
+import gold from '../../../../../assets/multimedia/ranked/Gold.png';
+import platinum from '../../../../../assets/multimedia/ranked/Platinum.png';
+import diamond from '../../../../../assets/multimedia/ranked/Diamond.png';
+import master from '../../../../../assets/multimedia/ranked/Master.png';
+import grandmaster from '../../../../../assets/multimedia/ranked/Grandmaster.png';
+import challenger from '../../../../../assets/multimedia/ranked/Challenger.png';
 
-function LoLQueue({ data }) {
+function Queue({ data }) {
 
     var ranked_icons = {
         "IRON": iron,
@@ -60,4 +60,4 @@ function LoLQueue({ data }) {
     }
 }
 
-export default LoLQueue
+export default Queue
