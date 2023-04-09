@@ -1,0 +1,139 @@
+.navsuperior{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--black300);
+    height: 50px;
+}
+
+.navsuperior > .icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue200);
+    width: 100px;
+}
+
+.navsuperior > .icon > img{
+    width: 40px;
+    height: auto;
+    margin-inline: 10px;
+}
+
+.navsuperior > .buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.navsuperior > .buscador-fixed{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%);
+    width: min(100% - 200px, 1100px);
+}
+
+.navsuperior > .buscador > input{
+    border-radius: 8px;
+    padding-inline: 15px;
+    font-size: 14px;
+    line-height: 35px;
+    height: 35px;
+    border:none;
+    width: min(100% - 20px, 1100px);
+}
+
+.navsuperior > .account{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100px;
+}
+
+.navsuperior > .account > .log-sign{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-items: center;
+    margin-left: auto;
+    height: 100%;
+    background-color: var(--blue200);
+}
+
+.navsuperior > .account > .log-sign > img{
+    width: 35px;
+    height: 35px;
+    margin-inline: 10px;
+}
+
+.navsuperior > .account > .button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 35px;
+    margin-inline: 10px;
+}
+
+.navsuperior > .account > .button > button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    border:none;
+    width: 80px;
+    font-size: 14px;
+}
+
+.navinferior{
+    height: 50px;
+}
+
+.navinferior > .menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    height: 100%;
+}
+
+.navitem{
+    color:white;
+    border-bottom: 4px solid var(--blue200);
+    padding-inline: 8px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.selected > a{
+    font-weight: bold;
+}
+
+.selected{
+    border-bottom: 4px solid var(--grey100);
+}
+
+.navitem:hover{
+    border-bottom: 4px solid var(--grey100);
+}
+
+.navitem > a{
+    color:white;
+    line-height: 40px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.navitem:hover > a{
+    font-weight: bold;
+}

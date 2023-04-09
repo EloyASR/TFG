@@ -50,6 +50,20 @@ body > #root{
 
 body > #root > .App{
   display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+body > #root > .App > .nav {
+  background-color:var(--blue200);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body > #root > .App > .main{
+  display: flex;
   flex-direction: row;
   gap:10px;
   width: 100%;
