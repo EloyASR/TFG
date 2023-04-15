@@ -56,7 +56,7 @@ async function obtenerDatosLoL(criterio) {
 
         ranked_data = await obtenerRankedValues(init_data.id);
 
-        rankeds = [{},{}];
+        rankeds = [{}, {}];
         rankeds[0].queueType = "RANKED_SOLO_5x5";
         rankeds[0].ranked = false;
         rankeds[1].queueType = "RANKED_FLEX_SR";
@@ -89,13 +89,32 @@ async function obtenerDatosLoL(criterio) {
 
         response_data.rankeds = rankeds;
 
-        game_ids = await obtenerPartidasPorJugador(init_data.puuid,0,10);
+        game_ids = await obtenerPartidasPorJugador(init_data.puuid, 0, 10);
+
+        
+        var partidas = [];
+
+        var partidasPromises = await game_ids.map((src) => {
+            return new Promise(function (resolve, reject) {
+                obtenerDatosDePartida(src)
+                    .then(
+                        (value) => {
+                            partidas.push(value);
+                            resolve(200);
+                        })
+                    .catch((error)=>reject(400));
+            });
+        });
+
         
         response_data.games = [];
 
-        for(var i=0; i < game_ids.length; i++){
-            game_data = await obtenerDatosDePartida(game_ids[i]);
-            response_data.games.push(game_data);
+        for (var i = 0; i < game_ids.length; i++) {
+            for(var j = 0; j < partidas.length; j++){
+                if(partidas[j].info.matchId === game_ids[i]){
+                    response_data.games.push(partidas[j]);
+                }
+            }
         }
 
         return response_data;
@@ -155,9 +174,9 @@ async function obtenerRankedValues(criterio) {
     }
 }
 
-async function obtenerPartidasPorJugador(puuid,numeroPartidaInit,numeroPartidaEnd){
+async function obtenerPartidasPorJugador(puuid, numeroPartidaInit, numeroPartidaEnd) {
     try {
-        const res = await fetch('https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids?start='+ numeroPartidaInit +'&count='+ numeroPartidaEnd + '&api_key=' + APIKEY);
+        const res = await fetch('https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids?start=' + numeroPartidaInit + '&count=' + numeroPartidaEnd + '&api_key=' + APIKEY);
 
         if (res.status >= 400) {
             throw new Error("Bad response from server");
@@ -172,7 +191,7 @@ async function obtenerPartidasPorJugador(puuid,numeroPartidaInit,numeroPartidaEn
     }
 }
 
-async function obtenerDatosDePartida(matchId){
+async function obtenerDatosDePartida(matchId) {
     try {
         const res = await fetch('https://europe.api.riotgames.com/lol/match/v5/matches/' + matchId + '?api_key=' + APIKEY);
 
