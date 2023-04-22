@@ -2,7 +2,6 @@ import React from "react";
 import { Form, useForm } from '../../hooks/useForm'
 import signupService from '../../services/signupService'
 import Input from "./components/Input";
-import './Signup.css';
 
 const defaultData = {
     name: "",
@@ -41,28 +40,29 @@ const Signup = (props) => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <h2> Registrarse </h2>
-            <div className="inputs">
-                <Input
-                    type="text"
-                    name="name"
-                    label="Username"
-                    value={values.name}
-                    error={errors.name}
-                    onChange={handleInputChange}
-                />
-                <Input
-                    type="password"
-                    name="password"
-                    label="Password"
-                    value={values.password}
-                    error={errors.password}
-                    onChange={handleInputChange}
-                />
-            </div>
-            <button type="submit">Submit</button>
-        </Form>
+        <>
+            <Form onSubmit={handleSubmit}>
+                <div className="inputs">
+                    <Input
+                        type="text"
+                        name="name"
+                        label="Username"
+                        value={values.name}
+                        error={errors.name}
+                        onChange={handleInputChange}
+                    />
+                    <Input
+                        type="password"
+                        name="password"
+                        label="Password"
+                        value={values.password}
+                        error={errors.password}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <button type="submit">Submit</button>
+            </Form>
+        </>
     )
 }
 

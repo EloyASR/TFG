@@ -2,7 +2,6 @@ import React from "react";
 import { Form, useForm } from '../../hooks/useForm'
 import loginService from '../../services/loginService'
 import Input from "./components/Input";
-import './Login.css';
 
 const defaultData = {
     name: "",
@@ -50,7 +49,6 @@ const Login = (props) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h2> Inicio de sesión </h2>
             <div className="inputs">
                 <Input
                     type="text"

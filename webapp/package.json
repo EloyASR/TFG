@@ -26,7 +26,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack7bin/webpack.js --no-progress --hide-modules --config=node-modules/laravel-mix/setup/webpack.config.js"
   },
   "eslintConfig": {
     "extends": [

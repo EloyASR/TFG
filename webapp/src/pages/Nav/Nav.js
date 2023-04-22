@@ -2,6 +2,7 @@ import NavItem from "./NavItem";
 import defaultIcon from "../../assets/multimedia/icon_01.png"
 import appIcon from "../../assets/multimedia/iconApp.png"
 import "./Nav.css";
+import { Link } from "wouter";
 
 function  Nav({ tab,setTab}) {
 
@@ -34,7 +35,9 @@ function  Nav({ tab,setTab}) {
                 </div>
                 <div className="account">
                     <div className="log-sign">
-                        <img src={defaultIcon} />
+                        <Link href="/login">
+                            <img src={defaultIcon} />
+                        </Link>
                     </div>
 
                     {/*
