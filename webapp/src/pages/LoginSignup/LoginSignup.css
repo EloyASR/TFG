@@ -1,9 +1,43 @@
+.loginsignup{
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.loginsignup >.header {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--blue300);
+    min-height: 36px;
+    color: white;
+    align-items: center;
+    border-radius: 8px 8px 0px 0px;
+    overflow: hidden;
+}
+
+.loginsignup > .header > .headerItem{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.loginsignup > .header > .headerItem.selected{
+    background-color: var(--blue200);
+    border-radius: 8px 8px 0px 0px;
+}
+
+/* LOGIN Y SIGNUP */
+
 form{
     padding: 20px;
-    border-radius: 20px;
     display:flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--black300);
+    border-radius: 0px 0px 8px 8px;
 }
 
 h2{
@@ -43,7 +77,8 @@ label{
 
 input{
     outline: none;
-    line-height: 40px;
+    line-height: 36px;
+    font-size: 14px;
     padding-inline: 10px;
     border:0;
     border-radius: 5px;
@@ -67,3 +102,5 @@ button{
 .input > .input-component > button > img{
     width: 24px;
 }
+
+

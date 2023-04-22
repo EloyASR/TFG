@@ -115,11 +115,11 @@
     flex-direction: row;
 }
 
-.selected > a{
+.navitem.selected > a{
     font-weight: bold;
 }
 
-.selected{
+.navitem.selected{
     border-bottom: 4px solid var(--grey100);
 }
 
