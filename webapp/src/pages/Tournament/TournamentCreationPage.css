@@ -1,0 +1,480 @@
+.tournament-creation-page {
+    width: min(800px, 100% - 10px);
+    align-self: center;
+    margin-top: 8px;
+}
+
+h1 {
+    color: white;
+}
+
+.creacion-datos-basicos-container {
+    border-radius: 8px;
+    margin-top:8px;
+}
+
+.creacion-datos-basicos-form {
+    background-color: var(--black300);
+    border-radius: 8px;
+}
+
+.steps-bar{
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:calc(50% - 3px);
+    width: 100%;
+    z-index: 1;
+}
+
+.steps-bar-progress{
+    margin-inline: 3px;;
+    width:100%;
+    height: 10px;
+    background-color: var(--blue300);
+}
+
+.progress-fill{
+    width: 0%;
+    height: 100%;
+    background-color: var(--blue200);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+.card .card-header{
+    color: white;
+    background-color: var(--blue200);
+    padding: 0px 12px;
+    line-height: 35px;
+    font-size: 14px;
+}
+
+.card .card-content {
+    flex: 1;
+    word-wrap: break-word;
+    padding: 1.25rem;
+}
+
+.card .card-footer {
+    color: white;
+    background-color: transparent;
+    border-top: none;
+    padding: 1.25rem;
+}
+
+.card-content button,
+.card-footer button {
+    color: white;
+    background-color: var(--blue200);
+    border: none;
+    padding: 8px 20px;
+    line-height: 24px;
+}
+
+.add button svg,
+.delete button svg,
+.back button svg{
+    margin-right: 10px;
+}   
+
+.next button svg {
+    margin-left: 10px;
+}
+
+.delete button{
+    background-color: var(--red200);
+}
+
+.form-steps {
+    position:relative;
+    width:100%;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-steps img {
+    width:55px;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.form-label {
+    position: relative;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.2em;
+}
+
+.form-row>.form-label>label {
+    display: inline-block;
+    cursor: pointer;
+    color: white;
+}
+
+.form-row>.form-label>label .constraint {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1.2em;
+    margin-left: 0.25rem;
+    color: #afb1b6;
+}
+
+.form-row>.own-form-select {
+    position: relative;
+    clear: both;
+    width: 100%;
+}
+
+.form-row>.own-form-select-onlyread {
+    position: relative;
+}
+
+.form-row>.own-form-select-onlyread >.select-widget-header{
+    position: relative;
+    clear: both;
+    width: 100%;
+    overflow: hidden;
+    min-height: 30px;
+    background-color: #fff;
+    border: 1px solid var(--blue300);
+    border-radius: 4px;
+    outline: 0;
+}
+
+.form-row>.own-form-select-onlyread>.select-widget-header input{
+    margin: 0;
+    touch-action: manipulation;
+    outline: 0;
+    color: #495057;
+    background-color: #fff;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background-clip: padding-box;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.form-row>.own-form-select-onlyread>.select-widget-header button{
+    padding: 0;
+    margin: 0;
+    border: none;
+    color: inherit;
+    background: padding-box none;
+    line-height: inherit;
+    touch-action: manipulation;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-left: 1px solid var(--grey200);
+    border-radius: 0px;
+    width: 1.9em;
+}
+
+.form-row .own-form-radio {
+    display: flex;
+    gap: 0.5rem;
+    align-items: start;
+    user-select: none;
+    padding: 0.5rem 0;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5em;
+}
+
+.form-row .own-form-radio input+label {
+    display: inline-block;
+    position: relative;
+    flex: 1;
+    cursor: pointer;
+    margin: 0;
+    padding: 1px;
+    color: white;
+}
+
+.form-row>.form-field>input[type=search] {
+    display: inline-block;
+    border: 1px solid var(--blue300);
+    border-radius: 0.25rem;
+    background: white;
+    padding: 0.5rem;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    outline: none;
+    vertical-align: middle;
+    box-shadow: none;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5em;
+    appearance: none;
+}
+
+.form-row>.form-field input[type="number"]
+.form-row>.form-field input[type="text"] {
+    border-color: var(--blue300);
+}
+
+.form-row>.form-field input{
+    font-size: 1rem;
+}
+
+.form-row .own-form-radio input[type=radio] {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    place-content: center;
+    font: inherit;
+    color: currentColor;
+    width: 1.5em;
+    height: 1.5em;
+    box-sizing: content-box;
+    border: 1px solid var(--blue300);
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    accent-color: var(--blue300);
+}
+
+.form-row .form-field.inline-layout>.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(-0.75rem/2);
+}
+
+.form-row .form-field.inline-layout>.form-container>.form-row {
+    margin: calc(0.75rem/2);
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-row>.form-field>input[type=hidden] {
+    display: none;
+}
+
+.form-row>.form-field>.select-widget-container {
+    position: absolute;
+    z-index: 999;
+    left: -1em;
+    right: -1em;
+    padding: 0 1em;
+}
+
+.form-row>.form-field>.select-widget-container>.select-widget {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 2px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.form-row>.form-field>.select-widget-container>.select-widget>.select-list {
+    font-size: 1em;
+    overflow-x: visible;
+    overflow-y: auto;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    max-height: 250px;
+}
+
+.form-row>.form-field>.simple {
+    display: inline-block;
+    border: 1px solid var(--blue300);
+    border-radius: 0.25rem;
+    background: white;
+    padding: 0.5rem;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    outline: none;
+    vertical-align: middle;
+    box-shadow: none;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5em;
+}
+
+.discipline.format-icon {
+    display: block;
+    position: relative;
+    line-height: 0;
+    border-radius: 0;
+}
+
+.discipline.format-icon.size-tiny {
+    width: 1rem;
+    height: 1rem;
+}
+
+.discipline.format-icon.size-tiny>img {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+.size-content {
+    flex: 0 0 auto;
+    min-width: 0;
+}
+
+.game-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.flex.vertical {
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.flex.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.flex.align-bottom {
+    align-items: flex-end;
+}
+
+.flex.align-middle {
+    align-items: center;
+}
+
+.flex.align-top {
+    align-items: flex-start;
+}
+
+.flex.align-start {
+    justify-content: flex-start;
+}
+
+.flex.align-center {
+    justify-content: center;
+}
+
+.flex.align-end {
+    justify-content: flex-end;
+}
+
+.flex.align-spread {
+    justify-content: space-between;
+}
+
+.flex.spacing-small {
+    margin: -0.5rem 0 0 -0.5rem;
+}
+
+.flex.spacing-small>* {
+    padding: 0.5rem 0 0 0.5rem;
+}
+
+.flex.spacing-medium {
+    margin: -0.75rem 0 0 -0.75rem;
+}
+
+.flex.spacing-medium>* {
+    padding: 0.75rem 0 0 0.75rem;
+}
+
+.flex.spacing-large {
+    margin: -1.25rem 0 0 -1.25rem;
+}
+
+.flex.spacing-large>* {
+    padding: 1.25rem 0 0 1.25rem;
+}
+
+.size-1-1 {
+    flex: 0 0 100%;
+    min-width: 100%;
+}
+
+.size-1-2 {
+    flex: 0 0 50%;
+    min-width: 50%;
+}
+
+.size-1-3 {
+    flex: 0 0 33.333333%;
+    min-width: 33.333333%;
+}
+
+.size-1-4 {
+    flex: 0 0 25%;
+    min-width: 25%;
+}
+
+.size-4-5 {
+    flex: 0 0 80%;
+    min-width: 80%;
+}
+
+.size-1-5{
+    flex: 0 0 20%;
+    min-width: 20%;
+}
+
+.size-5-6{
+    flex: 0 0 83.33333%;
+    min-width: 83.33333%;
+}
+
+.size-1-6 {
+    flex: 0 0 16.66667%;
+    min-width: 16.66667%;
+}
+
+.img-container {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+.img-container>img:hover {
+    outline: 4px solid var(--blue200);
+}
+
+.img-container>img {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.horizontal-spliter{
+    background-color: var(--blue200);
+    width: 100%;
+    height: 2px;
+}

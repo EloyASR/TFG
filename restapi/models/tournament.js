@@ -1,10 +1,64 @@
-const {Schema, model} = require("mongoose");
+//Esquema que define el modelo de un torneo
 
-const TournamentSchema = Schema(
+const mongoose = require("mongoose");
+
+
+const LeagueSchema = mongoose.Schema({
+    rounds:[]
+})
+
+mongoose.Schema.Types.LeagueSchema = LeagueSchema;
+
+const GroupsSchema = mongoose.Schema({
+
+})
+
+mongoose.Schema.Types.GroupsSchema = GroupsSchema;
+
+const BracketsSchema = mongoose.Schema({
+
+})
+
+mongoose.Schema.Types.BracketsSchema = BracketsSchema;
+
+const PhaseSchema = mongoose.Schema(
+    {
+        phaseOrder: {
+            type: Number,
+            min: 0,
+            required: true,
+        },
+        formatId: {
+            type: String,
+            enum: ['LEAGUE_PHASE', 'GROUPS_PHASE', 'BRACKETS_PHASE'],
+            required: true
+        },
+        leagueData: {
+            type: LeagueSchema,
+            required: false
+        },
+        groupsData: {
+            type: GroupsSchema,
+            required: false
+        },
+        bracketsData:{
+            type: BracketsSchema,
+            required: false
+        },
+    }
+)
+
+const TournamentSchema = mongoose.Schema(
     {
         name: {
             type: String,
             required: true
+        },
+
+        inscriptionDate: {
+            type: Date,
+            min: '2000-01-01',
+            required: false
         },
         initDate: {
             type: Date,
@@ -14,10 +68,10 @@ const TournamentSchema = Schema(
         endDate: {
             type: Date,
             min: '2000-01-01',
-            required: true
+            required: false
         },
         game: {
-            type:String,
+            type: String,
             required: true
         },
         online: {
@@ -25,19 +79,22 @@ const TournamentSchema = Schema(
             required: true
         },
         location: {
-            type: String
+            type: String,
+            required: false
         },
-        participants:{
+        participants: {
             type: Number,
-            required:true,
-            min: 0,
+            required: true,
+            min: 2,
             max: 32
         },
-        img256x256:{
-            type: String
+        img256x256: {
+            type: String,
+            required: false
         },
-        img1100x150:{
-            type: String
+        img1100x150: {
+            type: String,
+            required: false
         }
     },
     {
@@ -51,4 +108,4 @@ TournamentSchema.methods.toJSON = function () {
     return tournament;
 }
 
-module.exports = model('Tournament', TournamentSchema)
+module.exports = mongoose.model('Tournament', TournamentSchema)

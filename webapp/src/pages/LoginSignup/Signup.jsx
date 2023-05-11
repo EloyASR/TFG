@@ -41,7 +41,7 @@ const Signup = (props) => {
 
     return (
         <>
-            <Form onSubmit={handleSubmit}>
+            <Form className="signup-form" onSubmit={handleSubmit}>
                 <div className="inputs">
                     <Input
                         type="text"

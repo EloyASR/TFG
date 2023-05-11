@@ -11,7 +11,7 @@ function Header({handleClick,data}) {
             <div className="body content">
                 <div className="info">
                     <div className="icon">
-                        {data.profileIconId ? <img src={"http://ddragon.leagueoflegends.com/cdn/13.6.1/img/profileicon/" + data.profileIconId + ".png"} alt="icono" />
+                        {data.profileIconId ? <img src={"http://ddragon.leagueoflegends.com/cdn/13.9.1/img/profileicon/" + data.profileIconId + ".png"} alt="icono" />
                         : <img src={defaultIcon} alt="icono por defecto" />}
                     </div>
                     <div className="data">

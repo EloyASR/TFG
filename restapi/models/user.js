@@ -1,3 +1,5 @@
+//Esquema que define el mmodelo de un usuario
+
 const { Schema, model } = require('mongoose')
 
 const UserSchema = Schema(

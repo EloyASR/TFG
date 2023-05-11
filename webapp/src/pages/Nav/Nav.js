@@ -28,7 +28,7 @@ function  Nav({ tab,setTab}) {
         <>
             <div className="navsuperior">
                 <div className="icon">
-                    <img src={appIcon} />
+                    <img src={appIcon} alt=""/>
                 </div>
                 <div className="buscador">
                     <input type="text" placeholder="&#128269; Search..."></input>
@@ -36,7 +36,7 @@ function  Nav({ tab,setTab}) {
                 <div className="account">
                     <div className="log-sign">
                         <Link href="/login">
-                            <img src={defaultIcon} />
+                            <img src={defaultIcon} alt=""/>
                         </Link>
                     </div>
 
@@ -51,7 +51,7 @@ function  Nav({ tab,setTab}) {
                 <div className="menu">
                     {
                         tabs.map((item) =>
-                            item.id == tab ?
+                            item.id === tab ?
                                 <NavItem key={item.id} href={item.href} text={item.text} selected={true} onClick={()=>setTab(item.id)}/>
                                 :
                                 <NavItem key={item.id} href={item.href} text={item.text} selected={false} onClick={()=>setTab(item.id)}/>
