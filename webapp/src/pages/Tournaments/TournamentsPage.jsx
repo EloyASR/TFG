@@ -1,8 +1,10 @@
 import "./TournamentsPage.css"
+import "../Tournament/TournamentCreationPage.css";
 import Combobox from "./Combobox";
 import TournamentItem from "./TournamentItem";
 import { useEffect, useState } from "react";
 import tournamentsService from "../../services/tournamentsService";
+import { Link } from "wouter";
 
 function TournamentsPage(props) {
 
@@ -17,7 +19,7 @@ function TournamentsPage(props) {
         getTournaments();
     }, []);
 
-    const juegos = ["Juego", "League of Legends", "Valorant"]
+    const juegos = ["All", "League of Legends", "Valorant"]
 
     return (
         <>
@@ -27,7 +29,11 @@ function TournamentsPage(props) {
                     <button className="filter-button">Open</button>
                     <button className="filter-button">Closed</button>
                     <div className="separador-flex"></div>
-                    <Combobox itemsList={juegos} />
+
+                    <Combobox itemsList={juegos}/>
+                    <Link href="/tournament/create">
+                        <button className="filter-button">Crear Torneo</button>
+                    </Link>
                 </div>
                 <div className="tournaments">
                     <div className="body">

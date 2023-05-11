@@ -2,12 +2,12 @@ import React from 'react'
 //import hide from "../../../assets/multimedia/icons/icon-eye-hide.png"
 
 const Input = (props) => {
-    const { name, label, value, type, error = null, onChange} = props
+    const { name, label, value, type, displayLabel, error = null, onChange} = props
 
     return (
         <div className="input">
             <div className="input-component">
-                <label htmlFor={name}>{label}</label>
+                <label htmlFor={name} style={!displayLabel?{display:"none"}:{}} >{label}</label>
                 {type === "text"
                     ? <input aria-invalid="false" id={name} value={value} name={name} type="text" placeholder={label} onChange={onChange} />
                     : <>

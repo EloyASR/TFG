@@ -1,4 +1,3 @@
-import { Route } from "wouter";
 import Login from "./Login";
 import Signup from "./Signup";
 

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 8px;
+    width: min(300px, 100% - 10px);
 }
 
 .loginsignup >.header {
@@ -31,7 +32,7 @@
 
 /* LOGIN Y SIGNUP */
 
-form{
+.login-form, .signup-form{
     padding: 20px;
     display:flex;
     flex-direction: column;
@@ -71,19 +72,14 @@ h2{
     width: 100%;
 }
 
-label{
-    display: none;
-}
-
 input{
     outline: none;
     line-height: 36px;
-    font-size: 14px;
     padding-inline: 10px;
     border:0;
     border-radius: 5px;
     background-color: var(--grey100);
-    border: 3px solid var(--blue100);
+    width:100%;
 }
 
 button{

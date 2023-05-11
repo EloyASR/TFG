@@ -60,6 +60,9 @@ body > #root > .App > .nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position:sticky;
+  top: 0px;
+  z-index: 3000;
 }
 
 body > #root > .App > .main{

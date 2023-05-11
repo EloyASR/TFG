@@ -6,4 +6,9 @@ const getTournament = async (req,res) => {
     res.json(tournaments)
 }
 
+const createTournament = async (req,res) => {
+    var torneo = req.body;
+    
+}
+
 module.exports = { getTournament };

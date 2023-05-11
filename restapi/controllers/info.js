@@ -107,11 +107,14 @@ async function obtenerDatosLoL(criterio) {
         });
 
         
+
+        await Promise.all(partidasPromises);
+
         response_data.games = [];
 
         for (var i = 0; i < game_ids.length; i++) {
             for(var j = 0; j < partidas.length; j++){
-                if(partidas[j].info.matchId === game_ids[i]){
+                if(partidas[j].metadata.matchId === game_ids[i]){
                     response_data.games.push(partidas[j]);
                 }
             }

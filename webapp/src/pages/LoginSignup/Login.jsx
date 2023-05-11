@@ -48,12 +48,13 @@ const Login = (props) => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form className="login-form" onSubmit={handleSubmit}>
             <div className="inputs">
                 <Input
                     type="text"
                     name="name"
                     label="Username"
+                    displayLabel={false}
                     value={values.name}
                     error={errors.name}
                     onChange={handleInputChange}
@@ -63,6 +64,7 @@ const Login = (props) => {
                     type="password"
                     name="password"
                     label="Password"
+                    displayLabel={false}
                     value={values.password}
                     error={errors.password}
                     onChange={handleInputChange}
