@@ -4,18 +4,44 @@ import Step2Form from "./Step2Form.jsx";
 import Step3Form from "./Step3Form.jsx";
 import { useState } from "react";
 import StepBar from "./StepBar";
+import tournamentService from "../../services/tournamentService";
 
 function TournamentCreationPage() {
 
     const [step, setStep] = useState(1);
+
+    const [baseInfo, setBaseInfo] = useState(
+        {
+            name: "",
+            game: "",
+            size: undefined,
+            playersType: "Jugadores"
+        }
+    );
+
     const [phases, setPhases] = useState([
         {
             phaseOrder: 1,
             phaseName: "",
             phaseType: "",
-            phaseData:{}
+            phaseData: {},
         }
     ]);
+
+
+    const [register, setRegister] = useState(
+        {
+            value: false,
+            startDateAndTime: {
+                date: undefined,
+                time: undefined
+            },
+            endDateAndTime: {
+                date: undefined,
+                time: undefined
+            }
+        }
+    );
 
     const addPhase = () => {
         var copiaFases = [];
@@ -26,10 +52,10 @@ function TournamentCreationPage() {
 
         copiaFases.push(
             {
-                phaseOrder: copiaFases.length+1,
+                phaseOrder: copiaFases.length + 1,
                 phaseName: "",
                 phaseType: "",
-                phaseData:{}
+                phaseData: {}
             }
         );
         setPhases(copiaFases);
@@ -44,8 +70,8 @@ function TournamentCreationPage() {
             }
         });
 
-        copiaFases.forEach((item, indice)=>{
-            item.phaseOrder = indice+1;
+        copiaFases.forEach((item, indice) => {
+            item.phaseOrder = indice + 1;
         })
 
         setPhases(copiaFases);
@@ -81,8 +107,7 @@ function TournamentCreationPage() {
         setPhases(copiaFases);
     }
 
-
-    const handleStep1 = function (name, game, size, type) {
+    const handleStep1 = function () {
         setStep(2);
         console.log("Pasamos al paso 2");
     }
@@ -99,6 +124,11 @@ function TournamentCreationPage() {
 
     const handleStep3Continue = function () {
         setStep(3);
+        tournamentService.createTournament({
+            baseInfo: baseInfo,
+            phases: phases,
+            register: register,
+        })
         console.log("Creamos el torneo");
     }
 
@@ -107,7 +137,9 @@ function TournamentCreationPage() {
         console.log("Volvemos al paso 2");
     }
 
+    console.log(baseInfo);
     console.log(phases);
+    console.log(register);
 
     return (
         <>
@@ -115,25 +147,28 @@ function TournamentCreationPage() {
                 <StepBar step={step} />
                 {
                     step === 1 ?
-                        <Step1Form actionContinue={(name, game, size, type) => handleStep1(name, game, size, type)} />
+                        <Step1Form 
+                            actionContinue={() => handleStep1()}
+                            baseInfo={baseInfo}
+                            setBaseInfo={(baseInfo)=>setBaseInfo(baseInfo)}/>
                         : <></>
                 }
                 {
                     step === 2 ?
-                        <Step2Form 
-                            actionBack={() => handleStep2Back()} 
+                        <Step2Form
+                            actionBack={() => handleStep2Back()}
                             actionContinue={() => handleStep2Continue()}
                             phases={phases}
-                            addPhase={()=>addPhase()}
-                            deletePhase={(index)=>deletePhase(index)}
-                            setPhaseType={(type,index)=>setPhaseType(type,index)}
-                            setPhaseData={(data,index)=>setPhaseData(data,index)}
+                            addPhase={() => addPhase()}
+                            deletePhase={(index) => deletePhase(index)}
+                            setPhaseType={(type, index) => setPhaseType(type, index)}
+                            setPhaseData={(data, index) => setPhaseData(data, index)}
                         />
                         : <></>
                 }
                 {
                     step === 3 ?
-                        <Step3Form actionBack={() => handleStep3Back()} actionContinue={() => handleStep3Continue()} />
+                        <Step3Form actionBack={() => handleStep3Back()} actionContinue={() => handleStep3Continue()} register={register} setRegister={(registro)=>setRegister(registro)}/>
                         : <></>
                 }
 

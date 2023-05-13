@@ -26,7 +26,7 @@ function Combobox({ itemsList, label, placeholder, onChange, id, selection }) {
                 {
                     label ?
                         <div className="form-label">
-                            <label id={id + "-label"} for={id + "-combobox"}>{label}</label>
+                            <label id={id + "-label"} htmlFor={id + "-combobox"}>{label}</label>
                         </div>
                         :
                         <></>

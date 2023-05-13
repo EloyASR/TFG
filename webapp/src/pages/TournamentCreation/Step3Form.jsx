@@ -2,8 +2,59 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import InputRadio from '../components/InputRadio';
 import InputDate from '../components/InputDate';
+import { useEffect, useState } from 'react';
 
-function Step3Form({ actionBack, actionContinue }) {
+function Step3Form({ actionBack, actionContinue, setRegister, register}) {
+
+    const [registro, setRegistro] = useState({});
+
+    useEffect(()=>{
+        setRegistro(register);
+    },[register])
+
+
+    const setRegistroValue = (value)=>{
+
+        var copiaRegistro = {
+            value: false,
+            startDateAndTime: registro.startDateAndTime,
+            endDateAndTime: registro.endDateAndTime
+        }
+
+        if(value === "Si"){
+            copiaRegistro.value = true;
+        }else{
+            copiaRegistro.value = false;
+        }
+
+        setRegister(copiaRegistro);
+    }
+
+    const setStartDateAndTime = (startDateAndTime)=>{
+
+        var copiaRegistro = {
+            value: registro.value,
+            startDateAndTime: startDateAndTime,
+            endDateAndTime: registro.endDateAndTime
+        }
+
+        setRegister(copiaRegistro);
+
+    }
+
+
+    const setEndDateAndTime = (endDateAndTime)=>{
+
+        var copiaRegistro = {
+            value: registro.value,
+            startDateAndTime: registro.startDateAndTime,
+            endDateAndTime: endDateAndTime
+        }
+
+        setRegister(copiaRegistro);
+    }
+
+    console.log(registro);
 
     return (<>
         <div className="creacion-datos-basicos-container">
@@ -15,13 +66,13 @@ function Step3Form({ actionBack, actionContinue }) {
                     <div className="card-content">
                         <div className="flex vertical spacing-medium">
                             <div className="size-content">
-                                <InputRadio label={"¿Activar registro?"} itemsList={["Si", "No"]} checked={"No"} defaultChecked={"No"} />
+                                <InputRadio label={"¿Activar registro?"} id={"registro"} name={"registro"} itemsList={["Si", "No"]} checked={registro.value?"Si":"No"} defaultChecked={registro.value?"Si":"No"} onChange={(value)=>setRegistroValue(value)}/>
                             </div>
                             <div className="size-content">
-                                <InputDate label={"Fecha y hora de inicio del registro"} />
+                                <InputDate label={"Fecha y hora de inicio del registro"} onChange={(startDate)=>setStartDateAndTime(startDate)} dateAndTime={registro.startDateAndTime}/>
                             </div>
                             <div className="size-content">
-                                <InputDate label={"Fecha y hora de fin del registro"} />
+                                <InputDate label={"Fecha y hora de fin del registro"} onChange={(endDate)=>setEndDateAndTime(endDate)} dateAndTime={registro.endDateAndTime}/>
                             </div>
                         </div>
 

@@ -41,10 +41,11 @@ const Login = (props) => {
             console.log("usuario no valido")
         }else{
             console.log("usuario valido")
+            localStorage.setItem("cookie", user);
         }
         resetForm()
-        console.log(user)
-        //console.log(result)
+        console.log(user);
+        console.log(localStorage.getItem("cookie"));
     }
 
     return (

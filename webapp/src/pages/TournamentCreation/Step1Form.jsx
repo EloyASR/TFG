@@ -1,42 +1,49 @@
 import { images } from "../../helpers/images";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import InputRadio from "../components/InputRadio";
 import InputNumber from "../components/InputNumber";
 
-function Step1Form({ actionContinue }) {
+function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
 
     const gameInput = useRef(null);
 
-    const [nombreTorneo, setNombreTorneo] = useState("");
-    const [numeroParticipantes, setNumeroParticipantes] = useState(2);
-    const [selectedGame, setSelectedGame] = useState(undefined);
-    const [selectedType, setSelectedType] = useState("JUGADORES");
+    const [informacionBasica, setInformacionBasica] = useState({});
+
     const [showSearchInput, setShowSearchInput] = useState(true);
     const [showSelectedGame, setShowSelectedGame] = useState(false);
     const [showSearchOptions, setShowSearchOptions] = useState(false);
     const [writtingGame, setWrittingGame] = useState(false);
     const [writtingGameValue, setWrittingGameValue] = useState();
 
+
     const gamesList = [
         {
-            gameId: 0,
-            gameName: "League Of Legends",
+            gameId: "LEAGUE_OF_LEGENDS",
+            gameName: "League of Legends",
             icon: "./lolicon1.png"
         },
         {
-            gameId: 1,
+            gameId: "VALORANT",
             gameName: "Valorant",
             icon: "./valicon2.png"
         },
         {
-            gameId: 2,
+            gameId: "POKEMONVGC",
             gameName: "PokemonVGC",
             icon: "./pokemonicon.png"
         }
-
     ];
+
+
+    useEffect(() => {
+        setInformacionBasica(baseInfo);
+        if(baseInfo.game){
+            setShowSelectedGame(true);
+            setShowSearchInput(false);
+        }
+    }, [baseInfo])
 
     useEffect(() => {
         if (writtingGame) {
@@ -44,19 +51,66 @@ function Step1Form({ actionContinue }) {
         }
     }, [writtingGame])
 
+    const getGame = function(game) {
+        console.log(game);
+        return gamesList.find((element) => element.gameId === game)
+    }
+
+    const setName = (name) => {
+        var copiaInformacionBasica = {
+            name: name,
+            game: informacionBasica.game,
+            size: informacionBasica.size,
+            playersType: informacionBasica.playersType
+        }
+
+        setBaseInfo(copiaInformacionBasica);
+    }
+
+    const setGame = (game) => {
+        var copiaInformacionBasica = {
+            name: informacionBasica.name,
+            game: game.gameId,
+            size: informacionBasica.size,
+            playersType: informacionBasica.playersType
+        }
+
+        setBaseInfo(copiaInformacionBasica);
+    }
+
+    const setSize = (size) => {
+        var copiaInformacionBasica = {
+            name: informacionBasica.name,
+            game: informacionBasica.game,
+            size: size,
+            playersType: informacionBasica.playersType
+        }
+
+        setBaseInfo(copiaInformacionBasica);
+    }
+
+    const setPlayersType = (playersType) => {
+        var copiaInformacionBasica = {
+            name: informacionBasica.name,
+            game: informacionBasica.game,
+            size: informacionBasica.size,
+            playersType: playersType
+        }
+
+        setBaseInfo(copiaInformacionBasica);
+    }
+
     const handleGameChange = (e) => {
         setWrittingGame(true);
         setWrittingGameValue(e.target.value);
         setShowSearchOptions(true);
     }
 
-    console.log(numeroParticipantes);
-
     return (<>
         <div className="creacion-datos-basicos-container">
             <form className="creacion-datos-basicos-form" onSubmit={(e) => {
                 e.preventDefault();
-                actionContinue(nombreTorneo, selectedGame, numeroParticipantes, selectedType)
+                actionContinue();
             }}>
                 <div className="card">
                     <div className="card-header">
@@ -75,7 +129,7 @@ function Step1Form({ actionContinue }) {
                                                 </label>
                                             </div>
                                             <div className="own-form-text">
-                                                <input id="tournament-name" type="text" name="tournament-name" maxLength="30" onChange={(e) => { setNombreTorneo(e.target.value) }} />
+                                                <input id="tournament-name" type="text" name="tournament-name" maxLength="30" onChange={(e) => { setName(e.target.value) }} />
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +145,7 @@ function Step1Form({ actionContinue }) {
                                             <div className="flex spacing-medium">
                                                 <div className="size-1-6">
                                                     <div className="img-container" onClick={() => {
-                                                        setSelectedGame(gamesList[0])
+                                                        setGame(gamesList[0])
                                                         setShowSelectedGame(true);
                                                         setShowSearchInput(false);
                                                         setShowSearchOptions(false);
@@ -101,7 +155,7 @@ function Step1Form({ actionContinue }) {
                                                 </div>
                                                 <div className="size-1-6">
                                                     <div className="img-container" onClick={() => {
-                                                        setSelectedGame(gamesList[1])
+                                                        setGame(gamesList[1])
                                                         setShowSelectedGame(true);
                                                         setShowSearchInput(false);
                                                         setShowSearchOptions(false);
@@ -111,7 +165,7 @@ function Step1Form({ actionContinue }) {
                                                 </div>
                                                 <div className="size-1-6">
                                                     <div className="img-container" onClick={() => {
-                                                        setSelectedGame(gamesList[2])
+                                                        setGame(gamesList[2])
                                                         setShowSelectedGame(true);
                                                         setShowSearchInput(false);
                                                         setShowSearchOptions(false);
@@ -126,7 +180,7 @@ function Step1Form({ actionContinue }) {
                                                 <div className="form-field own-form-select own-form-search">
                                                     <input type={showSearchInput ? "search" : "hidden"} name="tournament-game" placeholder="Seleccionar un juego" autoComplete="off" onChange={(e) => handleGameChange(e)} onFocus={() => { setShowSearchOptions(true) }} onBlur={() => { setShowSearchOptions(false) }} ref={e => { gameInput.current = e }} />
                                                     {
-                                                        showSelectedGame && selectedGame ?
+                                                        showSelectedGame && informacionBasica.game ?
                                                             <>
                                                                 <div className="simple" onClick={() => {
                                                                     setWrittingGame(true);
@@ -139,11 +193,11 @@ function Step1Form({ actionContinue }) {
                                                                     <div className="flex align-middle spacing-small">
                                                                         <div className="size-content">
                                                                             <div className="discipline format-icon size-tiny">
-                                                                                <img src={images(selectedGame?.icon)} alt="" />
+                                                                                <img src={images(getGame(informacionBasica.game).icon)} alt="" />
                                                                             </div>
                                                                         </div>
                                                                         <div className="size-content">
-                                                                            <span>{selectedGame?.gameName}</span>
+                                                                            <span>{getGame(informacionBasica.game).gameName}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -157,12 +211,12 @@ function Step1Form({ actionContinue }) {
                                                                     <div className="select-widget">
                                                                         <div className="select-list">
                                                                             {
-                                                                                gamesList.map((game) => {
+                                                                                gamesList.map((game, index) => {
                                                                                     if (game.gameName.toLowerCase().includes(writtingGameValue?.toLowerCase())) {
                                                                                         return (
                                                                                             <>
-                                                                                                <div key={game.gameId} role="option" data-rw-option="" data-rw-focusable="" aria-selected="false" className="widget-list-option" onMouseDown={(e) => { e.preventDefault() }} onClick={() => {
-                                                                                                    setSelectedGame(game)
+                                                                                                <div key={index} role="option" data-rw-option="" data-rw-focusable="" aria-selected="false" className="widget-list-option" onMouseDown={(e) => { e.preventDefault() }} onClick={() => {
+                                                                                                    setGame(game)
                                                                                                     setShowSelectedGame(true);
                                                                                                     setShowSearchInput(false);
                                                                                                     setShowSearchOptions(false);
@@ -199,9 +253,9 @@ function Step1Form({ actionContinue }) {
                             <div className="size-content">
                                 <div className="flex spacing-large">
                                     <div className="size-1-4">
-                                        <InputNumber label={"Tamaño"} placeholder={"Tamaño (2 - 32)"} min={"2"} max={"32"} onChange={(e) => setNumeroParticipantes(parseInt(e.target.value))} />
+                                        <InputNumber defaultValue={informacionBasica.size} label={"Tamaño"} placeholder={"Tamaño (2 - 32)"} min={"2"} max={"32"} onChange={(e) => setSize(e.target.valueAsNumber)} />
                                     </div>
-                                    <InputRadio label={"Tipo de participantes"} id={"participantes"} name={"participantes"} itemsList={["Jugadores", "Equipos"]} checked={"Jugadores"} />
+                                    <InputRadio label={"Tipo de participantes"} id={"participantes"} name={"participantes"} itemsList={["Jugadores", "Equipos"]} defaultChecked={informacionBasica.playersType} checked={informacionBasica.playersType} onChange={(value)=>setPlayersType(value)}/>
                                 </div>
                             </div>
                         </div>

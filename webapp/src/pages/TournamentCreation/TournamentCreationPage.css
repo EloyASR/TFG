@@ -41,34 +41,6 @@ h1 {
     background-color: var(--blue200);
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    border-radius: 8px;
-}
-
-.card .card-header{
-    color: white;
-    background-color: var(--blue200);
-    padding: 0px 12px;
-    line-height: 35px;
-    font-size: 14px;
-}
-
-.card .card-content {
-    flex: 1;
-    word-wrap: break-word;
-    padding: 1.25rem;
-}
-
-.card .card-footer {
-    color: white;
-    background-color: transparent;
-    border-top: none;
-    padding: 1.25rem;
-}
-
 .card-content button,
 .card-footer button {
     color: white;

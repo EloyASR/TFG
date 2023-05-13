@@ -1,9 +1,9 @@
 import "./TournamentsPage.css"
-import "../Tournament/TournamentCreationPage.css";
+import "../TournamentCreation/TournamentCreationPage.css";
 import Combobox from "./Combobox";
 import TournamentItem from "./TournamentItem";
 import { useEffect, useState } from "react";
-import tournamentsService from "../../services/tournamentsService";
+import tournamentService from "../../services/tournamentService";
 import { Link } from "wouter";
 
 function TournamentsPage(props) {
@@ -12,7 +12,7 @@ function TournamentsPage(props) {
     const [data, setData] = useState();
 
     const getTournaments = async () => {
-        setData(await tournamentsService.getAllTournaments());
+        setData(await tournamentService.getAllTournaments());
     }
 
     useEffect(() => {
