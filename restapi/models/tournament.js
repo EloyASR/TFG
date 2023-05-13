@@ -54,8 +54,16 @@ const TournamentSchema = mongoose.Schema(
             type: String,
             required: true
         },
-
-        inscriptionDate: {
+        inscription: {
+            type:Boolean,
+            required:true
+        },
+        inscriptionDateInit: {
+            type: Date,
+            min: '2000-01-01',
+            required: false
+        },
+        inscriptionDateEnd:{
             type: Date,
             min: '2000-01-01',
             required: false
@@ -63,7 +71,7 @@ const TournamentSchema = mongoose.Schema(
         initDate: {
             type: Date,
             min: '2000-01-01',
-            required: true
+            required: false
         },
         endDate: {
             type: Date,
@@ -76,7 +84,7 @@ const TournamentSchema = mongoose.Schema(
         },
         online: {
             type: Boolean,
-            required: true
+            required: false
         },
         location: {
             type: String,

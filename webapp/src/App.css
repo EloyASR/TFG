@@ -72,3 +72,33 @@ body > #root > .App > .main{
   width: 100%;
   justify-content: center;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card .card-header{
+  color: white;
+  background-color: var(--blue200);
+  padding: 0px 12px;
+  line-height: 35px;
+  font-size: 14px;
+}
+
+.card .card-content {
+  flex: 1;
+  word-wrap: break-word;
+  background-color: var(--black300);
+  padding: 1.25rem;
+}
+
+.card .card-footer {
+  color: white;
+  background-color: var(--black300);
+  border-top: none;
+  padding: 1.25rem;
+}

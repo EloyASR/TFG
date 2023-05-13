@@ -7,8 +7,18 @@ const getTournament = async (req,res) => {
 }
 
 const createTournament = async (req,res) => {
-    var torneo = req.body;
-    
+    var tournamentData = req.body;
+
+    torneo = {
+        name: tournamentData.baseInfo.name,
+        inscription: tournamentData.register.value,
+        game: tournamentData.baseInfo.game,
+        participants: tournamentData.baseInfo.size,
+    }
+
+    Tournament.collection.insertOne(torneo);
+
+    console.log(torneo);
 }
 
-module.exports = { getTournament };
+module.exports = { getTournament, createTournament };

@@ -1,0 +1,5 @@
+.tournament-view-page{
+    width: min(1100px,100% - 10px);
+    align-self: center;
+    margin-top: 8px;
+}

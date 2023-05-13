@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import HorizontalSpliter from '../components/HorizontalSpliter';
 import PhaseConfiguration from './PhaseConfiguration';
+import { Fragment } from 'react';
 
 function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseType, setPhaseData}) {
 
@@ -19,7 +20,7 @@ function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                         <div className="flex vertical spacing-medium">
                             {
                                 phases.map((item, index) =>
-                                    <>
+                                    <Fragment key={index}>
                                         {
                                             index === 0 ?
                                                 <>
@@ -34,7 +35,7 @@ function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                                                 :
                                                 <></>
                                         }
-                                        <PhaseConfiguration index={index} phase={phases[index]} deletePhase={()=>deletePhase(index)} setPhaseType={(type)=>setPhaseType(type, index)} setPhaseData={(data)=>setPhaseData(data,index)}/>
+                                        <PhaseConfiguration index={index} phase={item} deletePhase={()=>deletePhase(index)} setPhaseType={(type)=>setPhaseType(type, index)} setPhaseData={(data)=>setPhaseData(data,index)}/>
                                         <div className="size-content">
                                             <div className='flex'>
                                                 <div className="size-1-1">
@@ -42,7 +43,7 @@ function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                                                 </div>
                                             </div>
                                         </div>
-                                    </>
+                                    </Fragment>
                                 )
                             }
                             <div className="size-content">

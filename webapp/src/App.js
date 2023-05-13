@@ -6,8 +6,8 @@ import Profile from './pages/Profile/Profile';
 import Nav from './pages/Nav/Nav';
 import { useState } from 'react';
 import TournamentsPage from './pages/Tournaments/TournamentsPage';
-import TournamentPage from './pages/Tournaments/TournamentPage';
-import TournamentCreationPage from './pages/Tournament/TournamentCreationPage';
+import TournamentCreationPage from './pages/TournamentCreation/TournamentCreationPage';
+import TournamentView from './pages/TournamentView/TournamentView';
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Switch>
           <Route path="/tournament/create" component={TournamentCreationPage} />
-          <Route path="/tournament/:tournamentId" component={TournamentPage} />
+          <Route path="/tournament/:tournamentId" component={TournamentView} />
         </Switch>
 
         <Route path="/tournaments" component={TournamentsPage} />

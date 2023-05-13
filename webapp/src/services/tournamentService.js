@@ -23,6 +23,7 @@ const tournamentsService = {
             console.log(error.response.data)
         }
     },
+
     getTournament: async (tournamentId) => {
         try {
             console.log(tournamentId)
@@ -34,6 +35,25 @@ const tournamentsService = {
             return data
         } catch (error) {
             console.log("Error no se ha podido encontrar el torneo")
+            console.log(error.response.status)
+            console.log(error.response.data)
+        }
+    },
+
+    createTournament: async (tournamentData) => {
+        try{
+            
+            console.log(tournamentData)
+            let url = baseurl + '/tournament/create' 
+            
+            const {data} = await axios.post(url, tournamentData)
+
+            console.log(data)
+
+            return data;
+
+        }catch(error){
+            console.log("No se ha podido crear el torneo")
             console.log(error.response.status)
             console.log(error.response.data)
         }
