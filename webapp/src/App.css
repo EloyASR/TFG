@@ -11,27 +11,27 @@
   --red200: #c23749;
   --red300: #59343B;
 
-  --green100:#50d73b;
-  --green200:#37c245;
-  --green300:#365934;
+  --green100: #50d73b;
+  --green200: #37c245;
+  --green300: #365934;
 
   --yellow100: #e8c940;
   --yellow200: #c3aa3b;
   --yellow300: #595234;
 
-  --orange100:#e88c53;
-  --orange200:#c3713b;
-  --orange300:#4e3928;
+  --orange100: #e88c53;
+  --orange200: #c3713b;
+  --orange300: #4e3928;
 
-  --purple100:#b953e8;
-  --purple200:#a13bc3;
-  --purple300:#45284e;
+  --purple100: #b953e8;
+  --purple200: #a13bc3;
+  --purple300: #45284e;
 
   --grey100: #ffffff;
   --grey200: #b8b8cf;
 }
 
-body{
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +40,7 @@ body{
   background-color: #201c1c;
 }
 
-body > #root{
+body>#root {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,27 +48,27 @@ body > #root{
   width: 100%;
 }
 
-body > #root > .App{
+body>#root>.App {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-body > #root > .App > .nav {
-  background-color:var(--blue200);
+body>#root>.App>.nav {
+  background-color: var(--blue200);
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position:sticky;
+  position: sticky;
   top: 0px;
   z-index: 3000;
 }
 
-body > #root > .App > .main{
+body>#root>.App>.main {
   display: flex;
   flex-direction: row;
-  gap:10px;
+  gap: 10px;
   width: 100%;
   justify-content: center;
 }
@@ -81,7 +81,13 @@ body > #root > .App > .main{
   overflow: hidden;
 }
 
-.card .card-header{
+.vertical-spliter{
+  width:2px;
+  background-color: var(--blue200);
+  height: auto;
+}
+
+.card .card-header {
   color: white;
   background-color: var(--blue200);
   padding: 0px 12px;
@@ -94,6 +100,7 @@ body > #root > .App > .main{
   word-wrap: break-word;
   background-color: var(--black300);
   padding: 1.25rem;
+  color: white;
 }
 
 .card .card-footer {
@@ -101,4 +108,82 @@ body > #root > .App > .main{
   background-color: var(--black300);
   border-top: none;
   padding: 1.25rem;
+}
+
+button {
+  color: white;
+  background-color: var(--blue200);
+  border: none;
+  padding: 8px 20px;
+  line-height: 24px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.size-1-1 {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+.size-1-2 {
+  flex: 0 0 50%;
+  min-width: 50%;
+}
+
+.size-1-3 {
+  flex: 0 0 33.333333%;
+  min-width: 33.333333%;
+}
+
+.size-1-4 {
+  flex: 0 0 25%;
+  min-width: 25%;
+}
+
+.size-4-5 {
+  flex: 0 0 80%;
+  min-width: 80%;
+}
+
+.size-1-5{
+  flex: 0 0 20%;
+  min-width: 20%;
+}
+
+.size-5-6{
+  flex: 0 0 83.33333%;
+  min-width: 83.33333%;
+}
+
+.size-1-6 {
+  flex: 0 0 16.66667%;
+  min-width: 16.66667%;
+}
+
+.flex.spacing-small {
+  margin: -0.5rem 0 0 -0.5rem;
+}
+
+.flex.spacing-small>* {
+  padding: 0.5rem 0 0 0.5rem;
+}
+
+.flex.spacing-medium {
+  margin: -0.75rem 0 0 -0.75rem;
+}
+
+.flex.spacing-medium>* {
+  padding: 0.75rem 0 0 0.75rem;
+}
+
+.flex.spacing-large {
+  margin: -1.25rem 0 0 -1.25rem;
+}
+
+.flex.spacing-large>* {
+  padding: 1.25rem 0 0 1.25rem;
+}
+
+.flex.gap-medium{
+  gap: 0.75rem;
 }

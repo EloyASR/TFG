@@ -2,4 +2,25 @@
     width: min(1100px,100% - 10px);
     align-self: center;
     margin-top: 8px;
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.background-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: -1.25rem;
+}
+
+.background-img > img{
+    width:100%;
+}
+
+.game-card > span {
+    color: white;
+    font-weight: bold;
 }
