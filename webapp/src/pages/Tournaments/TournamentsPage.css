@@ -20,11 +20,8 @@
 
 .filter-button{
     border:none;
-    max-width: 125px;
+    max-width: 150px;
     background-color: var(--blue300);
-    height: 100%;
-    line-height: 35px;
-    font-size: 14px;
 }
 
 .filter-button.selected {
