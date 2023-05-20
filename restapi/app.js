@@ -38,6 +38,9 @@ app.use('/api/signup', require('./routes/signup.js'))
 app.use('/api/info', require('./routes/info.js'))
 app.use('/api/search',require('./routes/search.js'))
 app.use('/api/tournament',require('./routes/tournament.js'))
+app.use('/api/match',require('./routes/match.js'))
+app.use('/api/serie',require('./routes/serie.js'))
+app.use('/api/user',require('./routes/user.js'))
 
 //Puerto del servidor
 app.set('port', process.env.PORT || 5000);

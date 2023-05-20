@@ -5,9 +5,7 @@ const { hashPassword } = require('../helpers/password')
 const User = require('../models/user')
 
 const signup = async (req,res) => {
-    let { name, password } = req.body
-
-    name = name.toUpperCase()
+    let { name, password, email, icon } = req.body;
 
     const queryStatements = {name}
 
@@ -17,14 +15,16 @@ const signup = async (req,res) => {
         
         user = {
             name: name,
-            password: hashPassword(password)
+            password: hashPassword(password),
+            email: email,
+            role: "USER",
+            icon: icon
         }
 
         User.collection.insertOne(user)
 
         res.status(200)
         res.send()
-        
     }else{
         console.error("Error 400: El usuario ya existe")
         res.status(400);

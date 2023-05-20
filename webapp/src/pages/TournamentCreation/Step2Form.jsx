@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import HorizontalSpliter from '../components/HorizontalSpliter';
 import PhaseConfiguration from './PhaseConfiguration';
 import { Fragment } from 'react';
+import InputTextarea from '../components/InputTextarea';
 
-function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseType, setPhaseData}) {
+function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseType, setPhaseData }) {
 
     return (<>
         <div className="creacion-datos-basicos-container">
@@ -14,51 +15,17 @@ function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
             }}>
                 <div className="card">
                     <div className="card-header">
-                        Configuración de fases
+                        Descripción y reglas
                     </div>
                     <div className="card-content">
                         <div className="flex vertical spacing-medium">
-                            {
-                                phases.map((item, index) =>
-                                    <Fragment key={index}>
-                                        {
-                                            index === 0 ?
-                                                <>
-                                                    <div className="size-content">
-                                                        <div className='flex'>
-                                                            <div className="size-1-1">
-                                                                <HorizontalSpliter />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </>
-                                                :
-                                                <></>
-                                        }
-                                        <PhaseConfiguration index={index} phase={item} deletePhase={()=>deletePhase(index)} setPhaseType={(type)=>setPhaseType(type, index)} setPhaseData={(data)=>setPhaseData(data,index)}/>
-                                        <div className="size-content">
-                                            <div className='flex'>
-                                                <div className="size-1-1">
-                                                    <HorizontalSpliter />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Fragment>
-                                )
-                            }
                             <div className="size-content">
-                                <div className="flex align-end">
-                                    <div className="size-content add">
-                                        <button onClick={(e) => {
-                                            e.preventDefault();
-                                            console.log("prueba")
-                                            addPhase();
-                                        }}>
-                                            <FontAwesomeIcon icon={faPlus} />
-                                            Añadir Fase
-                                        </button>
-                                    </div>
-                                </div>
+
+                                <InputTextarea label={"Descripción"}/>
+                            </div>
+                            <div className="size-content">
+
+                                <InputTextarea label={"Reglas"}/>
                             </div>
                         </div>
                     </div>
@@ -88,4 +55,4 @@ function Step2Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
     );
 }
 
-export default Step2Form;
+export default Step3Form;

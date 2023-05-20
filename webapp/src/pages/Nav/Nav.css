@@ -69,7 +69,7 @@
     background-color: var(--blue200);
 }
 
-.navsuperior > .account > .log-sign > img{
+.navsuperior > .account > .log-sign  img{
     width: 35px;
     height: 35px;
     margin-inline: 10px;

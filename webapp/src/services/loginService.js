@@ -11,14 +11,10 @@ const loginService = {
 
     login: async (values) => {
         try {
-            console.log(values)
-            console.log(url)
             const {data} = await axios.post(url, values)
             return data
         } catch (error) {
-            console.log("Error")
-            console.log(error.response.status)
-            console.log(error.response.data)
+            console.log("Error");
         }
     }
 }

@@ -19,8 +19,6 @@ function MenuOptions({ options }) {
      * 
      */
 
-    console.log(options);
-
     return (
         <>
             <div className="flex spacing-medium">

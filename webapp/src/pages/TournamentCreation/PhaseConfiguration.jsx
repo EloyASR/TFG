@@ -6,7 +6,7 @@ import PhaseConfigurationBrackets from "./PhaseConfigurationBrackets";
 import PhaseConfigurationGroups from "./PhaseConfigurationGroups";
 import PhaseConfigurationLeague from "./PhaseConfigurationLeague";
 
-function PhaseConfiguration({ index, phase, setPhaseType, setPhaseData, deletePhase }) {
+function PhaseConfiguration({ index, phase, setPhaseName, setPhaseType, setPhaseData, deletePhase }) {
 
 
     const configureType = (type) => {
@@ -21,15 +21,6 @@ function PhaseConfiguration({ index, phase, setPhaseType, setPhaseData, deletePh
                     }
                 );
                 break;
-            case "Bracket":
-                setPhaseData(
-                    {
-                        numberOfPlayers: undefined,
-                        tieBreaker34Place:"No",
-                        bestOf: undefined,
-                    }
-                );
-                break;
             case "League":
                 setPhaseData(
                     {
@@ -41,7 +32,6 @@ function PhaseConfiguration({ index, phase, setPhaseType, setPhaseData, deletePh
                 );
                 break;
             default:
-                setPhaseData({});
         }
         setPhaseType(type);
     }
@@ -52,10 +42,21 @@ function PhaseConfiguration({ index, phase, setPhaseType, setPhaseData, deletePh
                 <div className="flex spacing-large align-spread">
                     <div className="flex spacing-large">
                         <div className="size-1-2">
-                            <InputText id={"phasename-" + index} label={"Nombre de fase"} placeholder={"Nombre de fase"} />
+                            <InputText id={"phasename-" + index} label={"Nombre de fase"} placeholder={"Nombre de fase"} defaultValue={phase.phaseName} onChange={(e)=>setPhaseName(e.target.value)}/>
                         </div>
                         <div className="size-1-2">
-                            <Combobox id={"phasetype-" + index} itemsList={["Groups", "League", "Bracket"]} label={"Tipo de fase"} placeholder={"Tipo de fase"} onChange={(type) => configureType(type)} selection={phase.phaseType} />
+                            <Combobox id={"phasetype-" + index} itemsList={["Groups", "League", "Bracket"]} label={"Tipo de fase"} placeholder={"Tipo de fase"} onChange={(type) => configureType(type)} selection={() => {
+                                switch (phase.formatType) {
+                                    case "LEAGUE_PHASE":
+                                        return "League";
+                                    case "GROUPS_PHASE":
+                                        return "Groups";
+                                    case "BRACKET_PHASE":
+                                        return "Bracket";
+                                    default:
+                                        return "";
+                                }
+                            }} />
                         </div>
                     </div>
                     <div className="flex align-bottom size-1-5 delete">
@@ -69,13 +70,13 @@ function PhaseConfiguration({ index, phase, setPhaseType, setPhaseData, deletePh
                     </div>
                     <div className="size-1-1">
                         {
-                            phase.phaseType === "Groups" ? <PhaseConfigurationGroups phaseId={index} groupData={phase.phaseData} setPhaseData={(data) => setPhaseData(data, index)} /> : <></>
+                            phase.formatType === "GROUPS_PHASE" ? <PhaseConfigurationGroups phaseId={index} groupData={phase.groupsData} setPhaseData={(data) => setPhaseData(data, index)} /> : <></>
                         }
                         {
-                            phase.phaseType === "League" ? <PhaseConfigurationLeague phaseId={index} leagueData={phase.phaseData} setPhaseData={(data) => setPhaseData(data, index)} /> : <></>
+                            phase.formatType === "LEAGUE_PHASE" ? <PhaseConfigurationLeague phaseId={index} leagueData={phase.leagueData} setPhaseData={(data) => setPhaseData(data, index)} /> : <></>
                         }
                         {
-                            phase.phaseType === "Bracket" ? <PhaseConfigurationBrackets phaseId={index} bracketsData={phase.phaseData} setPhaseData={(data) => setPhaseData(data, index)} /> : <></>
+                            phase.formatType === "BRACKET_PHASE" ? <PhaseConfigurationBrackets phaseId={index} bracketsData={phase.bracketData} setPhaseData={(data) => setPhaseData(data, index)} /> : <></>
                         }
                     </div>
                 </div>

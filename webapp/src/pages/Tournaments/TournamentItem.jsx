@@ -1,5 +1,5 @@
 import iconoTorneo from "../../assets/multimedia/icono-torneo.jpg";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import moment from 'moment';
 
 function TournamentItem({ tournamentData }) {
@@ -9,7 +9,7 @@ function TournamentItem({ tournamentData }) {
 
     return (
         <>
-            <Link href={"/tournament/" + tournamentData.uid}>
+            <Link to={"/tournament/" + tournamentData.uid}>
                 <div className="tournament" >
                     <div className="tournament-img">
                         <img src={iconoTorneo} alt="" />
