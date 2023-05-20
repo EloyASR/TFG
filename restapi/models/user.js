@@ -11,6 +11,18 @@ const UserSchema = Schema(
         password: {
             type: String,
             required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        role: {
+            type: String,
+            enum: ["USER", "ADMINISTRATOR"]
+        },
+        icon: {
+            type: String,
+            required: false
         }
     },
     {

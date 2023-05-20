@@ -1,81 +1,66 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import InputRadio from '../components/InputRadio';
-import InputDate from '../components/InputDate';
-import { useEffect, useState } from 'react';
+import { faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import HorizontalSpliter from '../components/HorizontalSpliter';
+import PhaseConfiguration from './PhaseConfiguration';
+import { Fragment } from 'react';
 
-function Step3Form({ actionBack, actionContinue, setRegister, register}) {
-
-    const [registro, setRegistro] = useState({});
-
-    useEffect(()=>{
-        setRegistro(register);
-    },[register])
-
-
-    const setRegistroValue = (value)=>{
-
-        var copiaRegistro = {
-            value: false,
-            startDateAndTime: registro.startDateAndTime,
-            endDateAndTime: registro.endDateAndTime
-        }
-
-        if(value === "Si"){
-            copiaRegistro.value = true;
-        }else{
-            copiaRegistro.value = false;
-        }
-
-        setRegister(copiaRegistro);
-    }
-
-    const setStartDateAndTime = (startDateAndTime)=>{
-
-        var copiaRegistro = {
-            value: registro.value,
-            startDateAndTime: startDateAndTime,
-            endDateAndTime: registro.endDateAndTime
-        }
-
-        setRegister(copiaRegistro);
-
-    }
-
-
-    const setEndDateAndTime = (endDateAndTime)=>{
-
-        var copiaRegistro = {
-            value: registro.value,
-            startDateAndTime: registro.startDateAndTime,
-            endDateAndTime: endDateAndTime
-        }
-
-        setRegister(copiaRegistro);
-    }
-
-    console.log(registro);
+function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseName, setPhaseType, setPhaseData}) {
 
     return (<>
         <div className="creacion-datos-basicos-container">
-            <form className="creacion-datos-basicos-form">
+            <form className="creacion-datos-basicos-form" onSubmit={(e) => {
+                e.preventDefault();
+                actionContinue();
+            }}>
                 <div className="card">
                     <div className="card-header">
-                        Configuración de registro
+                        Configuración de fases
                     </div>
                     <div className="card-content">
                         <div className="flex vertical spacing-medium">
+                            {
+                                phases.map((item, index) =>
+                                    <Fragment key={index}>
+                                        {
+                                            index === 0 ?
+                                                <>
+                                                    <div className="size-content">
+                                                        <div className='flex'>
+                                                            <div className="size-1-1">
+                                                                <HorizontalSpliter />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                                :
+                                                <></>
+                                        }
+                                        <PhaseConfiguration index={index} phase={item} deletePhase={()=>deletePhase(index)} setPhaseName={(name)=> setPhaseName(name,index)} setPhaseType={(type)=>setPhaseType(type, index)} setPhaseData={(data)=>setPhaseData(data,index)}/>
+                                        <div className="size-content">
+                                            <div className='flex'>
+                                                <div className="size-1-1">
+                                                    <HorizontalSpliter />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Fragment>
+                                )
+                            }
                             <div className="size-content">
-                                <InputRadio label={"¿Activar registro?"} id={"registro"} name={"registro"} itemsList={["Si", "No"]} checked={registro.value?"Si":"No"} defaultChecked={registro.value?"Si":"No"} onChange={(value)=>setRegistroValue(value)}/>
-                            </div>
-                            <div className="size-content">
-                                <InputDate label={"Fecha y hora de inicio del registro"} onChange={(startDate)=>setStartDateAndTime(startDate)} dateAndTime={registro.startDateAndTime}/>
-                            </div>
-                            <div className="size-content">
-                                <InputDate label={"Fecha y hora de fin del registro"} onChange={(endDate)=>setEndDateAndTime(endDate)} dateAndTime={registro.endDateAndTime}/>
+                                <div className="flex align-end">
+                                    <div className="size-content add">
+                                        <button onClick={(e) => {
+                                            e.preventDefault();
+                                            console.log("prueba")
+                                            addPhase();
+                                        }}>
+                                            <FontAwesomeIcon icon={faPlus} />
+                                            Añadir Fase
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                     <div className="card-footer">
                         <div className="flex align-spread">
@@ -88,20 +73,17 @@ function Step3Form({ actionBack, actionContinue, setRegister, register}) {
                                     Back
                                 </button>
                             </div>
-                            <div className="size-content add">
-                                <button onClick={(e) => {
-                                    e.preventDefault();
-                                    actionContinue();
-                                }}>
-                                    <FontAwesomeIcon icon={faPlus} />
-                                    Crear
+                            <div className="size-content next">
+                                <button type="submit">
+                                    Continue
+                                    <FontAwesomeIcon icon={faArrowRight} />
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div >
-            </form >
-        </div >
+                </div>
+            </form>
+        </div>
     </>
     );
 }

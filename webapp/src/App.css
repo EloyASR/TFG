@@ -81,10 +81,11 @@ body>#root>.App>.main {
   overflow: hidden;
 }
 
-.vertical-spliter{
-  width:2px;
+.vertical-spliter {
+  width: 2px;
   background-color: var(--blue200);
   height: auto;
+  margin-inline: 1.25rem;
 }
 
 .card .card-header {
@@ -101,6 +102,14 @@ body>#root>.App>.main {
   background-color: var(--black300);
   padding: 1.25rem;
   color: white;
+}
+
+.card .card-content.spacing-medium {
+  padding: 2rem;
+}
+
+.card .card-content.spacing-large {
+  padding: 3rem;
 }
 
 .card .card-footer {
@@ -145,12 +154,12 @@ button {
   min-width: 80%;
 }
 
-.size-1-5{
+.size-1-5 {
   flex: 0 0 20%;
   min-width: 20%;
 }
 
-.size-5-6{
+.size-5-6 {
   flex: 0 0 83.33333%;
   min-width: 83.33333%;
 }
@@ -158,6 +167,202 @@ button {
 .size-1-6 {
   flex: 0 0 16.66667%;
   min-width: 16.66667%;
+}
+
+.height-300{
+  height: 300px;
+}
+
+.height-400{
+  height: 400px;
+}
+
+.height-500{
+  height: 500px;
+}
+
+.height-600{
+  height: 600px;
+}
+
+.height-700{
+  height: 700px;
+}
+
+.height-800{
+  height: 800px;
+}
+
+.height-900{
+  height: 900px;
+}
+
+.height-1000{
+  height: 1000px;
+}
+
+.height-1100{
+  height: 1100px;
+}
+
+.height-1200{
+  height: 1200px;
+}
+
+.height-1300{
+  height: 1300px;
+}
+
+.height-1400{
+  height: 1400px;
+}
+
+.height-1500{
+  height: 1500px;
+}
+
+.height-1600{
+  height: 1600px;
+}
+
+.height-1700{
+  height: 1700px;
+}
+
+.height-1800{
+  height: 1800px;
+}
+
+.height-1900{
+  height: 1900px;
+}
+
+.height-2000{
+  height: 2000px;
+}
+
+.width-300{
+  width: 300px;
+}
+
+.width-400{
+  width: 400px;
+}
+
+.width-500{
+  width: 500px;
+}
+
+.width-600{
+  width: 600px;
+}
+
+.width-700{
+  width: 700px;
+}
+
+.width-800{
+  width: 800px;
+}
+
+.width-900{
+  width: 900px;
+}
+
+.width-1000{
+  width: 1000px;
+}
+
+.width-1100{
+  width: 1100px;
+}
+
+.width-1200{
+  width: 1200px;
+}
+
+.width-1300{
+  width: 1300px;
+}
+
+.width-1400{
+  width: 1400px;
+}
+
+.width-1500{
+  width: 1500px;
+}
+
+.width-1600{
+  width: 1600px;
+}
+
+.width-1700{
+  width: 1700px;
+}
+
+.width-1800{
+  width: 1800px;
+}
+
+.width-1900{
+  width: 1900px;
+}
+
+.width-2000{
+  width: 2000px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.flex.vertical {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.flex.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.flex.align-bottom {
+  align-items: flex-end;
+}
+
+.flex.align-middle {
+  align-items: center;
+}
+
+.flex.align-top {
+  align-items: flex-start;
+}
+
+.flex.align-start {
+  justify-content: flex-start;
+}
+
+.flex.align-center {
+  justify-content: center;
+}
+
+.flex.align-end {
+  justify-content: flex-end;
+}
+
+.flex.align-spread {
+  justify-content: space-between;
+}
+
+.flex.align-around{
+  justify-content: space-around;
 }
 
 .flex.spacing-small {
@@ -184,6 +389,359 @@ button {
   padding: 1.25rem 0 0 1.25rem;
 }
 
-.flex.gap-medium{
+.flex.gap-medium {
   gap: 0.75rem;
+}
+
+.spacing-top-large{
+  margin-top:1.5rem;
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.overflow-scroll{
+  overflow-y: scroll;
+}
+
+.overflow-auto{
+  overflow-y: auto;
+}
+
+.overflow-y-hidden{
+  overflow-y: hidden;
+}
+
+.overflow-y-scroll{
+  overflow-y: scroll;
+}
+
+.overflow-y-auto{
+  overflow-y: auto;
+}
+
+.overflow-x-hidden{
+  overflow-x: hidden;
+}
+
+.overflow-x-scroll{
+  overflow-x: scroll;
+}
+
+.overflow-x-auto{
+  overflow-x: auto;
+}
+
+
+.tournament-info-element {
+  display: flex;
+  flex-direction: row;
+  line-height: 24px;
+  font-size: 12px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+input {
+  outline: none;
+  line-height: 36px;
+  padding-inline: 10px;
+  border: 0;
+  border-radius: 5px;
+  background-color: var(--grey100);
+  width: 100%;
+}
+
+.form-label {
+  position: relative;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.2em;
+}
+
+.form-row>.form-label>label {
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+}
+
+.form-row>.form-label>label .constraint {
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.2em;
+  margin-left: 0.25rem;
+  color: #afb1b6;
+}
+
+.form-row>.own-form-select {
+  position: relative;
+  clear: both;
+  width: 100%;
+}
+
+.form-row>.own-form-select-onlyread {
+  position: relative;
+}
+
+.form-row>.own-form-select-onlyread>.select-widget-header {
+  position: relative;
+  clear: both;
+  width: 100%;
+  overflow: hidden;
+  min-height: 30px;
+  background-color: #fff;
+  border: 1px solid var(--blue300);
+  border-radius: 4px;
+  outline: 0;
+}
+
+.form-row>.own-form-select-onlyread>.select-widget-header input {
+  margin: 0;
+  touch-action: manipulation;
+  outline: 0;
+  color: #495057;
+  background-color: #fff;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0px;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.form-row>.own-form-select-onlyread>.select-widget-header button {
+  padding: 0 1rem;
+  margin: 0;
+  border: none;
+  color: inherit;
+  background: padding-box none;
+  line-height: inherit;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-left: 1px solid var(--grey200);
+  border-radius: 0px;
+  width: 1.9em;
+}
+
+.form-row .own-form-radio {
+  display: flex;
+  gap: 0.5rem;
+  align-items: start;
+  user-select: none;
+  padding: 0.5rem 0;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
+
+.form-row .own-form-radio input+label {
+  display: inline-block;
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+  margin: 0;
+  padding: 1px;
+  color: white;
+}
+
+.form-row>.form-field>input[type=search] {
+  display: inline-block;
+  border-radius: 0.25rem;
+  background: white;
+  padding: 0.5rem;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  outline: none;
+  vertical-align: middle;
+  box-shadow: none;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+  appearance: none;
+}
+
+.form-row>.form-field input {
+  font-size: 1rem;
+}
+
+.form-row .own-form-radio input[type=radio] {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-content: center;
+  font: inherit;
+  color: currentColor;
+  width: 1.5em;
+  height: 1.5em;
+  box-sizing: content-box;
+  border: 1px solid var(--blue300);
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  accent-color: var(--blue300);
+}
+
+.form-row .form-field.inline-layout>.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(-0.75rem/2);
+}
+
+.form-row .form-field.inline-layout>.form-container>.form-row {
+  margin: calc(0.75rem/2);
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-row>.form-field>input[type=hidden] {
+  display: none;
+}
+
+.form-row>.form-field>.select-widget-container {
+  position: absolute;
+  z-index: 999;
+  left: -1em;
+  right: -1em;
+  padding: 0 1em;
+}
+
+.form-row>.form-field>.select-widget-container>.select-widget {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 2px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.form-row>.form-field>.select-widget-container>.select-widget>.select-list {
+  font-size: 1em;
+  overflow-x: visible;
+  overflow-y: auto;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  max-height: 250px;
+}
+
+.form-row>.form-field>.simple {
+  display: inline-block;
+  border: 1px solid var(--blue300);
+  border-radius: 0.25rem;
+  background: white;
+  padding: 0.5rem;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  outline: none;
+  vertical-align: middle;
+  box-shadow: none;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
+
+.form-row>.form-error{
+  margin-top: 8px;
+  color: var(--red100)
+}
+
+.form-row>.own-form-password {
+  position: relative;
+  clear: both;
+  width: 100%;
+}
+
+.form-row>.own-form-password>div{
+  position: relative;
+  clear: both;
+  width: 100%;
+  overflow: hidden;
+  min-height: 30px;
+  background-color: #fff;
+  border: 1px solid var(--blue300);
+  border-radius: 4px;
+  outline: 0;
+}
+
+.form-row>.own-form-password>div input {
+  margin: 0;
+  touch-action: manipulation;
+  outline: 0;
+  color: #495057;
+  background-color: #fff;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0px;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.form-row>.own-form-password>div>button {
+  padding: 0 1rem;
+  margin: 0;
+  border: none;
+  color: inherit;
+  background: padding-box none;
+  line-height: inherit;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-left: 1px solid var(--grey200);
+  border-radius: 0px;
+  width: 1.9em;
+}
+
+textarea{
+  width: 100%;
+  height: 20vh;
+
+  border-radius: 5px;
+  resize:none;
+}
+
+.scrollbar::-webkit-scrollbar{
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track{
+  background-color: var(--black300);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--blue200);
+  border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-corner {
+  background-color: var(--black300);
+}
+
+.relative{
+  position: relative;
 }

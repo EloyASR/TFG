@@ -15,14 +15,18 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.3",
     "bootstrap": "^5.2.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
+    "react-jwt": "^1.1.8",
+    "react-router": "^6.11.2",
     "react-scripts": "5.0.1",
     "react-step-progress-bar": "^1.0.3",
-    "web-vitals": "^2.1.4",
-    "wouter": "^2.8.0-alpha.2"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^6.11.2"
   }
 }

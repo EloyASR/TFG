@@ -150,7 +150,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                                                         setShowSearchInput(false);
                                                         setShowSearchOptions(false);
                                                     }}>
-                                                        <img src={images("./leagueoflegendstorneo.jpg")} alt="League Of Legends Img" />
+                                                        <img src={images("./league_of_legends_torneo.jpg")} alt="League Of Legends Img" />
                                                     </div>
                                                 </div>
                                                 <div className="size-1-6">
@@ -160,7 +160,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                                                         setShowSearchInput(false);
                                                         setShowSearchOptions(false);
                                                     }}>
-                                                        <img src={images("./valoranttorneo.jpg")} alt="Valorant Img" />
+                                                        <img src={images("./valorant_torneo.jpg")} alt="Valorant Img" />
                                                     </div>
                                                 </div>
                                                 <div className="size-1-6">
@@ -170,7 +170,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                                                         setShowSearchInput(false);
                                                         setShowSearchOptions(false);
                                                     }}>
-                                                        <img src={images("./pokemontorneo.jpg")} alt="Pokemon Img" />
+                                                        <img src={images("./pokemon_torneo.jpg")} alt="Pokemon Img" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -190,7 +190,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                                                                     setShowSelectedGame(false);
                                                                     setShowSearchInput(true);
                                                                 }}>
-                                                                    <div className="flex align-middle spacing-small">
+                                                                    <div className="flex align-middle spacing-small selectedGame">
                                                                         <div className="size-content">
                                                                             <div className="discipline format-icon size-tiny">
                                                                                 <img src={images(getGame(informacionBasica.game).icon)} alt="" />

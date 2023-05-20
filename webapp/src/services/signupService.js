@@ -17,8 +17,7 @@ const signupService = {
             console.log(data)
             return data
         } catch (error) {
-            console.log(error.response.status)
-            console.log(error.response.data)
+            throw error;
         }
     }
 }

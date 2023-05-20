@@ -1,7 +1,11 @@
 import React from "react";
-import { Form, useForm } from '../../hooks/useForm'
-import loginService from '../../services/loginService'
-import Input from "./components/Input";
+import { useForm } from '../../hooks/loginForm';
+import loginService from '../../services/loginService';
+import InputPassword from "../components/InputPassword";
+import InputText from "../components/InputText";
+import { images } from "../../helpers/images";
+import { Navigate } from "react-router-dom";
+import { isExpired, decodeToken } from "react-jwt";
 
 const defaultData = {
     name: "",
@@ -36,43 +40,50 @@ const Login = (props) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const { user } = await loginService.login(values)
-        if(!user){
+        const { user, token } = await loginService.login(values)
+        if (!user) {
             console.log("usuario no valido")
-        }else{
+        } else {
             console.log("usuario valido")
-            localStorage.setItem("cookie", user);
+            localStorage.setItem("session", token);
+            localStorage.setItem("user", JSON.stringify(user));
         }
         resetForm()
-        console.log(user);
-        console.log(localStorage.getItem("cookie"));
+    }
+
+    if (localStorage.getItem("session") !== null) {
+        if (decodeToken(localStorage.getItem("session")) !== null) {
+            if (!isExpired(localStorage.getItem("session"))) {
+                return <Navigate to="/" />
+            };
+        }
     }
 
     return (
-        <Form className="login-form" onSubmit={handleSubmit}>
-            <div className="inputs">
-                <Input
-                    type="text"
-                    name="name"
-                    label="Username"
-                    displayLabel={false}
-                    value={values.name}
-                    error={errors.name}
-                    onChange={handleInputChange}
-                />
-
-                <Input
-                    type="password"
-                    name="password"
-                    label="Password"
-                    displayLabel={false}
-                    value={values.password}
-                    error={errors.password}
-                    onChange={handleInputChange}
-                />
-            </div>
-            <button type="submit">Submit</button>
-        </Form>
+        <>
+            <form onSubmit={handleSubmit}>
+                <div className="flex vertical spacing-large">
+                    <div className="size-content">
+                        <div className="login-img">
+                            <img src={images("./profile-default.jpg")} alt="" />
+                        </div>
+                    </div>
+                    <div className="inputs">
+                        <div className="flex vertical spacing-medium">
+                            <div className="size-content">
+                                <InputText label={"Username"} id={"name"} name={"name"} placeholder={"Username or Email"} defaultValue={values.name} error={errors.name} onChange={handleInputChange} />
+                            </div>
+                            <div className="size-content">
+                                <InputPassword label={"Password"} id={"password"} name={"password"} placeholder={"Password"} defaultValue={values.password} error={errors.password} onChange={handleInputChange} />
+                            </div>
+                            <div className="size-content flex spacing-top-large">
+                                <button type="submit">Log In</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </>
     )
 }
 

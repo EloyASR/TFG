@@ -1,4 +1,4 @@
-function InputText({label, onChange, placeholder, id, defaultValue}) {
+function InputText({ label, onChange, placeholder, id, name, defaultValue, error }) {
     return (
         <>
             <div className="form-row">
@@ -6,8 +6,16 @@ function InputText({label, onChange, placeholder, id, defaultValue}) {
                     <label id={id + "-label"} htmlFor={id + "-input"}> {label} </label>
                 </div>
                 <div className="form-field form-text">
-                    <input id={id + "-input"} type="text" onChange={(e)=>onChange(e)} placeholder={placeholder} defaultValue={defaultValue}/>
+                    <input id={id + "-input"} name={name} type="text" onChange={(e) => onChange(e)} placeholder={placeholder} defaultValue={defaultValue} />
                 </div>
+                {
+                    error ?
+                        <div className="form-error">
+                            <small>{error}</small>
+                        </div>
+                        : 
+                        <></>
+                }
             </div>
         </>
     );

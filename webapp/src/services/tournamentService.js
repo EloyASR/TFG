@@ -57,6 +57,22 @@ const tournamentsService = {
             console.log(error.response.status)
             console.log(error.response.data)
         }
+    },
+
+    getSerie: async (serieId) => {
+        try {
+            console.log(serieId)
+            let url = baseurl + '/serie/' + serieId
+            
+            const {data} = await axios.get(url)
+            console.log(data);
+
+            return data
+        } catch (error) {
+            console.log("Error no se ha podido encontrar la serie")
+            console.log(error.response.status)
+            console.log(error.response.data)
+        }
     }
 }
 

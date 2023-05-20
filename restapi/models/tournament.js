@@ -3,23 +3,68 @@
 const mongoose = require("mongoose");
 
 
-const LeagueSchema = mongoose.Schema({
-    rounds:[]
-})
+const ParticipantSchema = mongoose.Schema(
+    {
+        identifier: {
+            type: mongoose.Types.ObjectId,
+            required: true
+        },
+        type: {
+            type: String,
+            enum: ["SINGLE","TEAM"],
+            required: true
+        }
+    }
+)
 
-mongoose.Schema.Types.LeagueSchema = LeagueSchema;
+const LeagueSchema = mongoose.Schema(
+    {
+        size: {
+            type: Number,
+            required: true
+        }
+    }
+)
 
 const GroupsSchema = mongoose.Schema({
 
 })
 
-mongoose.Schema.Types.GroupsSchema = GroupsSchema;
 
-const BracketsSchema = mongoose.Schema({
 
-})
+const BracketRoundSchema = mongoose.Schema(
+    {
+        roundNumber: {
+            type: Number,
+            required: true
+        },
+        series: {
+            type: [mongoose.Types.ObjectId]
+        }
+    }
+)
 
-mongoose.Schema.Types.BracketsSchema = BracketsSchema;
+const BracketsSchema = mongoose.Schema(
+    {
+        size: {
+            type: Number,
+            enum: [2, 4, 8, 16, 32],
+            required: true
+        },
+        tieBreaker: {
+            type: Boolean,
+            required: true
+        },
+        bestOf: {
+            type: Number,
+            enum: [1, 3, 5],
+            required: true
+        },
+        rounds: {
+            type: [BracketRoundSchema]
+        }
+    }
+)
 
 const PhaseSchema = mongoose.Schema(
     {
@@ -28,9 +73,13 @@ const PhaseSchema = mongoose.Schema(
             min: 0,
             required: true,
         },
-        formatId: {
+        formatType: {
             type: String,
-            enum: ['LEAGUE_PHASE', 'GROUPS_PHASE', 'BRACKETS_PHASE'],
+            enum: ['LEAGUE_PHASE', 'GROUPS_PHASE', 'BRACKET_PHASE'],
+            required: true
+        },
+        phaseName: {
+            type: String,
             required: true
         },
         leagueData: {
@@ -41,7 +90,7 @@ const PhaseSchema = mongoose.Schema(
             type: GroupsSchema,
             required: false
         },
-        bracketsData:{
+        bracketData: {
             type: BracketsSchema,
             required: false
         },
@@ -54,16 +103,52 @@ const TournamentSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        game: {
+            type: String,
+            required: true
+        },
+        size: {
+            type: Number,
+            required: true,
+            min: 2,
+            max: 32
+        },
+        participants: {
+            type: [ParticipantSchema]                                        //HAY QUE CAMBIAR ESTE CAMPO PARA QUE SEA UN ARRAY
+        },
+        description: {
+            type: String,
+            required: false
+        },
+        rules: {
+            type: String,
+            required: false
+        },
+        playersType: {
+            type: String,
+            enum: ["Jugadores", "Equipos"]
+        },
+        phases: {
+            type: [PhaseSchema]
+        },
+        online: {
+            type: Boolean,
+            required: false
+        },
+        location: {
+            type: String,
+            required: false
+        },
         inscription: {
-            type:Boolean,
-            required:true
+            type: Boolean,
+            required: true
         },
         inscriptionDateInit: {
             type: Date,
             min: '2000-01-01',
             required: false
         },
-        inscriptionDateEnd:{
+        inscriptionDateEnd: {
             type: Date,
             min: '2000-01-01',
             required: false
@@ -78,29 +163,11 @@ const TournamentSchema = mongoose.Schema(
             min: '2000-01-01',
             required: false
         },
-        game: {
-            type: String,
-            required: true
-        },
-        online: {
-            type: Boolean,
-            required: false
-        },
-        location: {
-            type: String,
-            required: false
-        },
-        participants: {
-            type: Number,
-            required: true,
-            min: 2,
-            max: 32
-        },
         img256x256: {
             type: String,
             required: false
         },
-        img1100x150: {
+        img1300x150: {
             type: String,
             required: false
         }

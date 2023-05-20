@@ -3,7 +3,7 @@ import { images } from "../../helpers/images";
 
 function StepBar({ step }) {
 
-    var porcentaje = (step-1)*100/2;
+    var porcentaje = (step-1)*100/3;
 
     return (
         <>
@@ -36,6 +36,16 @@ function StepBar({ step }) {
                                     <img alt="" src={images("./form3step.png")} />
                                     :
                                     <img alt="" src={images("./form3step-dark.png")} />
+                            }
+                        </div>
+                    </div>
+                    <div className="size-content">
+                        <div className="flex align-end">
+                            {
+                                step >= 4 ?
+                                    <img alt="" src={images("./form4step.png")} />
+                                    :
+                                    <img alt="" src={images("./form4step-dark.png")} />
                             }
                         </div>
                     </div>

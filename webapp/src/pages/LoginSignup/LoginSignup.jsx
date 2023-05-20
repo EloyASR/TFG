@@ -7,14 +7,23 @@ import Header from "./components/Header";
 const LoginSignup = ({ selected }) => {
     return (
         <>
-            <div className="loginsignup">
-                {
-                    <Header selected={selected} />
-                }
-                <div className="body">
-                    {
-                        selected === "login" ? <Login /> : <Signup />
-                    }
+            <div className="main">
+                <div className="loginsignup">
+                    <div className="card">
+                        <div className="card-header">
+                            {
+                                <Header selected={selected} />
+                            }
+                        </div>
+                        <div className="card-content spacing-medium">
+                            <div className="flex vertical align-middle align-center">
+                                {
+                                    selected === "login" ? <Login /> : <Signup />
+                                }
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </>
