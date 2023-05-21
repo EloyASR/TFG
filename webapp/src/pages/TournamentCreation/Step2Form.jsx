@@ -5,7 +5,26 @@ import PhaseConfiguration from './PhaseConfiguration';
 import { Fragment } from 'react';
 import InputTextarea from '../components/InputTextarea';
 
-function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseType, setPhaseData }) {
+function Step3Form({ actionBack, actionContinue, descriptionAndRules, setDescAndRules }) {
+
+    const setDescription = (description) => {
+
+        var copiaDescriptionAndRules = {
+            description: description,
+            rules: descriptionAndRules.rules
+        }
+
+        setDescAndRules(copiaDescriptionAndRules);
+    }
+
+    const setRules = (rules) => {
+        var copiaDescriptionAndRules = {
+            description: descriptionAndRules.description,
+            rules: rules
+        }
+
+        setDescAndRules(copiaDescriptionAndRules);
+    }
 
     return (<>
         <div className="creacion-datos-basicos-container">
@@ -20,12 +39,10 @@ function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                     <div className="card-content">
                         <div className="flex vertical spacing-medium">
                             <div className="size-content">
-
-                                <InputTextarea label={"Descripción"}/>
+                                <InputTextarea label={"Descripción"} onChange={(e) => setDescription(e.target.value)}/>
                             </div>
                             <div className="size-content">
-
-                                <InputTextarea label={"Reglas"}/>
+                                <InputTextarea label={"Reglas"} onChange={(e) => setRules(e.target.value)}/>
                             </div>
                         </div>
                     </div>

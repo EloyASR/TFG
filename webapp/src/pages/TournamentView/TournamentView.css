@@ -1,11 +1,10 @@
 .tournament-view-page {
-    width: min(1100px, 100% - 10px);
-    align-self: center;
-    margin-top: 8px;
+    width: 1100px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     height: 100%;
+    margin-bottom: 8px;
 }
 
 .background-img {
@@ -15,10 +14,12 @@
     align-items: center;
     align-content: center;
     margin: -1.25rem;
+    filter: blur(1px) brightness(45%);
 }
 
 .background-img>img {
     width: 100%;
+    background-blend-mode: darken;
 }
 
 .nombre-torneo {
@@ -57,7 +58,7 @@
     font-weight: 400;
 }
 
-.bracket{
+.bracket {
     height: 500px;
 }
 
@@ -99,7 +100,7 @@
     position: relative;
 }
 
-.brackets-rounds-match-modify{
+.brackets-rounds-match-modify {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -111,20 +112,56 @@
     opacity: 0;
 }
 
-.brackets-rounds-match-modify:hover{
+.brackets-rounds-match-modify:hover {
     background-color: var(--blue200) !important;
     opacity: 1;
 }
 
-.brackets-rounds-match-team{
+.brackets-rounds-match-team {
     padding-left: 10px;
     line-height: 40px;
     background-color: var(--grey100);
     color: black;
 }
 
-.brackets-rounds-match-team-result{
+.brackets-rounds-match-team-result {
     font-weight: bold;
     padding-inline: 15px;
     background-color: rgb(202, 202, 202);
+}
+
+.patro-lateral-izquierdo,
+.patro-lateral-derecho {
+    position:sticky;
+    align-self: flex-start;
+    top: 110px;
+    background-color: var(--black300);
+    border-radius: 5px;
+}
+
+.patro-lateral-izquierdo>.anuncio,
+.patro-lateral-derecho>.anuncio {
+    width: min(300px, 100% - 20px);
+    margin: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+@media(max-width:1600px) {
+    .patro-lateral-izquierdo,
+    .patro-lateral-derecho {
+        display: none;
+    }
+
+    .tournament-view-page {
+        width: min(1100px, 100% - 10px);
+    }
+}
+
+.anuncio>img {
+    width: 100%;
 }

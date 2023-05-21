@@ -146,7 +146,7 @@ async function obtenerDatosLoLMaestrias(criterio) {
 
 async function obtenerCampeones() {
     try {
-        const res = await fetch('http://ddragon.leagueoflegends.com/cdn/13.6.1/data/en_US/champion.json');
+        const res = await fetch('http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion.json');
 
         if (res.status >= 400) {
             throw new Error("Bad response from server");

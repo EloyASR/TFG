@@ -42,6 +42,7 @@ function TournamentParticipants({ participantsList }) {
                 <div className="card-content">
                     <div className="flex spacing-large">
                         {
+                            participants.length > 0?
                             participants.map((participant, index) => {
                                 console.log(participant);
                                 return (
@@ -50,6 +51,8 @@ function TournamentParticipants({ participantsList }) {
                                     </Fragment>
                                 );
                             })
+                            :
+                            <div>Este torneo todavía no tiene participantes registrados</div>
                         }
                     </div>
                 </div>

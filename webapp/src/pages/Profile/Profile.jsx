@@ -7,6 +7,8 @@ function Profile(props) {
     
     var profileInfo = JSON.parse(localStorage.getItem("user"));
 
+    console.log(profileInfo.accounts[0].ids[0]);
+
     return <>
         <div className="main">
             <div className="profile">
@@ -17,7 +19,7 @@ function Profile(props) {
                     <ProfileNav />
                 </div>
                 <div className="body">
-                    <LoLProfile />
+                    <LoLProfile profileName={profileInfo.accounts[0].ids[0]}/>
                 </div>
             </div>
         </div>

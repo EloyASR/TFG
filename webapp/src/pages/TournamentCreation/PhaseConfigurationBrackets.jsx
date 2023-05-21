@@ -4,21 +4,21 @@ import InputNumber from "../components/InputNumber";
 import InputRadio from "../components/InputRadio";
 import Combobox from "../Tournaments/Combobox";
 
-function CreateRoundsAndMatches(size){
+function CreateRoundsAndMatches(size) {
     let power = 0;
     let result = 1;
-    let roundNumberOfParticipants = size/2;
+    let roundNumberOfParticipants = size / 2;
     let rounds = [];
 
-    while(result <= size/2){
+    while (result <= size / 2) {
         result *= 2;
         power += 1;
         let round = {
             roundNumber: power,
-            series:[]
+            series: []
         }
 
-        for(let i=0; i<roundNumberOfParticipants; i++){
+        for (let i = 0; i < roundNumberOfParticipants; i++) {
             round.series.push({});
         }
         roundNumberOfParticipants /= 2;
@@ -28,16 +28,66 @@ function CreateRoundsAndMatches(size){
     return rounds
 }
 
-function PhaseConfigurationBrackets({phaseId, bracketsData, setPhaseData}) {
+function getBracketSize(size, previousPhase) {
+    if (previousPhase !== undefined) {
+        switch (previousPhase.formatType) {
+            case "GROUPS_PHASE":
+                switch (size) {
+                    case 6:
+                        return [2, 4];
+                    case 8:
+                        return [2, 4];
+                    case 10:
+                        return [2, 4, 8];
+                    case 12:
+                        return [2, 4, 8];
+                    default:
+                        return [2];
+                }
+            case "LEAGUE_PHASE":
+                switch (size) {
+                    case 3:
+                        return [2];
+                    case 4:
+                        return [2];
+                    case 5:
+                        return [2, 4];
+                    case 6:
+                        return [2, 4];
+                    case 7:
+                        return [2, 4];
+                    case 8:
+                        return [2, 4];
+                    case 9:
+                        return [2, 4, 8];
+                    case 10:
+                        return [2, 4, 8];
+                    case 11:
+                        return [2, 4, 8];
+                    case 12:
+                        return [2, 4, 8];
+                    default:
+                        return [2];
+                }
+            default:
+                return [2]
+        }
+    } else {
+        return [size];
+    }
+
+}
+
+function PhaseConfigurationBrackets({ size, phaseId, bracketsData, setPhaseData, previousPhase }) {
 
     const [data, setData] = useState({});
 
-    useEffect(()=>{
+    useEffect(() => {
         setData(bracketsData);
-    },[bracketsData])
+    }, [bracketsData])
 
     const setSize = (size) => {
-        
+
         var newData = {
             size: size,
             tieBreaker: data.tieBreaker,
@@ -49,10 +99,10 @@ function PhaseConfigurationBrackets({phaseId, bracketsData, setPhaseData}) {
     }
 
     const setTieBreaker = (tieBreaker) => {
-        
+
         var newData = {
             size: data.size,
-            tieBreaker: tieBreaker === "Si"?true:false,
+            tieBreaker: tieBreaker === "Si" ? true : false,
             bestOf: data.bestOf,
             rounds: data.rounds
         }
@@ -61,7 +111,7 @@ function PhaseConfigurationBrackets({phaseId, bracketsData, setPhaseData}) {
     }
 
     const setBestOf = (bestOf) => {
-        
+
         var newData = {
             size: data.size,
             tieBreaker: data.tieBreaker,
@@ -77,13 +127,13 @@ function PhaseConfigurationBrackets({phaseId, bracketsData, setPhaseData}) {
             <div className="size-content">
                 <div className="flex spacing-large">
                     <div className="size-1-2">
-                        <InputNumber placeholder={"Número de jugadores"} label={"Número de jugadores"} min={"2"} id={"numerojugadores-" + phaseId} onChange={(e)=>setSize(e.target.valueAsNumber)} defaultValue={bracketsData.size}/>
+                        <Combobox placeholder={"Número de jugadores"} label={"Número de jugadores"} itemsList={getBracketSize(size, previousPhase)} id={"numerojugadores-" + phaseId} onChange={(value) => setSize(value)} selection={bracketsData.size} />
                     </div>
                     <div className="size-1-2">
-                        <InputRadio label={"¿Encuentro decisorio de 3ª y 4ª plaza?"} itemsList={["Si", "No"]} id={"emparejamientocuartotercero-" + phaseId} name={"emparejamientocuartotercero-" + phaseId} checked={bracketsData.tieBreaker?"Si":"No"} defaultChecked={bracketsData.tieBreaker?"Si":"No"} onChange={(value)=>setTieBreaker(value)}/>
+                        <InputRadio label={"¿Encuentro decisorio de 3ª y 4ª plaza?"} itemsList={["Si", "No"]} id={"emparejamientocuartotercero-" + phaseId} name={"emparejamientocuartotercero-" + phaseId} checked={bracketsData.tieBreaker ? "Si" : "No"} defaultChecked={bracketsData.tieBreaker ? "Si" : "No"} onChange={(value) => setTieBreaker(value)} />
                     </div>
                     <div className="size-1-2">
-                        <Combobox label={"Encuentro al mejor de"} placeholder={"Numero de partidas por enfrentamiento"} itemsList={[1,3,5]} id={"encuentromejorde-" + phaseId} name={"encuentromejorde-" + phaseId} selection={bracketsData.bestOf} onChange={(value)=>setBestOf(value)}/>
+                        <Combobox label={"Encuentro al mejor de"} placeholder={"Numero de partidas por enfrentamiento"} itemsList={[1, 3, 5]} id={"encuentromejorde-" + phaseId} name={"encuentromejorde-" + phaseId} selection={bracketsData.bestOf} onChange={(value) => setBestOf(value)} />
                     </div>
                 </div>
             </div>

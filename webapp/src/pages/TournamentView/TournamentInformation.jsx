@@ -12,27 +12,31 @@ function TournamentInformation({ tournamentInfo }) {
     const [game, setGame] = useState("valorant");
     const [size, setSize] = useState(0);
     const [numParticipants, setNumParticipants] = useState(0);
+    const [descriptionSplited, setDescriptionSplited] = useState([]);
+    const [rulesSplited, setRulesSplited] = useState([]);
 
     useEffect(() => {
         console.log(tournamentInfo);
         if (tournamentInfo) {
-            if(tournamentInfo.description !== undefined){
+            if (tournamentInfo.description !== undefined) {
                 setDescription(tournamentInfo.description);
+                setDescriptionSplited(tournamentInfo.description.split("\n"));
             }
-            if(tournamentInfo.rules !== undefined){
+            if (tournamentInfo.rules !== undefined) {
                 setRules(tournamentInfo.rules);
+                setRulesSplited(tournamentInfo.rules.split("\n"));
             }
-            if(tournamentInfo.game !== undefined){
+            if (tournamentInfo.game !== undefined) {
                 setGame(tournamentInfo.game.toLowerCase());
             }
-            if(tournamentInfo.size !== undefined){
+            if (tournamentInfo.size !== undefined) {
                 setSize(tournamentInfo.size);
             }
-            if(tournamentInfo.participants !== undefined){
+            if (tournamentInfo.participants !== undefined) {
                 setNumParticipants(tournamentInfo.participants.length);
             }
         }
-    },[tournamentInfo])
+    }, [tournamentInfo])
 
     return (
         <>
@@ -46,17 +50,20 @@ function TournamentInformation({ tournamentInfo }) {
                             <div className="flex vertical spacing-large">
                                 <div className="size-content">
                                     <h2>Descripción</h2>
-                                    <p>
-                                        {
-                                            description === "" ? "Este torneo no dispone de descripción" : description
-                                        }
-                                    </p>
+                                    {
+                                        description === "" ? "Este torneo no dispone de descripción"
+                                            :
+                                            descriptionSplited.map(element => <p>{element}</p>)
+
+                                    }
                                 </div>
                                 <div className="size-content">
                                     <h2>Reglas</h2>
                                     <p>
                                         {
-                                            rules === "" ? "Este torneo no dispone de reglas" : rules
+                                            rules === "" ? "Este torneo no dispone de reglas" 
+                                            :
+                                            rulesSplited.map(rule => <p>{rule}</p>)
                                         }
                                     </p>
                                 </div>

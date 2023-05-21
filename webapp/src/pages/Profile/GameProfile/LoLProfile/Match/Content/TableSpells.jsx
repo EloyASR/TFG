@@ -3,8 +3,8 @@ import defaultIcon from '../../../../../../assets/multimedia/icon_01.png';
 function TableSpells({ data }) {
     return <>
         <div className="table-spells">
-            <img src={"http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/" + getSummonerId(data.summoner1Id) + ".png"} alt="Spell icon" />
-            <img src={"http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/" + getSummonerId(data.summoner2Id) + ".png"} alt="Spell icon" />
+            <img src={"http://ddragon.leagueoflegends.com/cdn/13.10.1/img/spell/" + getSummonerId(data.summoner1Id) + ".png"} alt="Spell icon" />
+            <img src={"http://ddragon.leagueoflegends.com/cdn/13.10.1/img/spell/" + getSummonerId(data.summoner2Id) + ".png"} alt="Spell icon" />
         </div>
     </>;
 }

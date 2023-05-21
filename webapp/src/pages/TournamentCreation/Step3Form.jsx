@@ -1,10 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import HorizontalSpliter from '../components/HorizontalSpliter';
 import PhaseConfiguration from './PhaseConfiguration';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
-function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseName, setPhaseType, setPhaseData}) {
+function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, setPhaseName, setPhaseType, setPhaseData, size }) {
+
+
+    useEffect(()=>{
+        console.log(phases);
+        if(phases.length === 2){
+            if(phases[0].formatType === "BRACKET_PHASE"){
+                deletePhase(1);
+            }
+        }
+    })
 
     return (<>
         <div className="creacion-datos-basicos-container">
@@ -35,7 +45,7 @@ function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                                                 :
                                                 <></>
                                         }
-                                        <PhaseConfiguration index={index} phase={item} deletePhase={()=>deletePhase(index)} setPhaseName={(name)=> setPhaseName(name,index)} setPhaseType={(type)=>setPhaseType(type, index)} setPhaseData={(data)=>setPhaseData(data,index)}/>
+                                        <PhaseConfiguration index={index} phase={item} phases={phases} size={size} deletePhase={() => deletePhase(index)} setPhaseName={(name) => setPhaseName(name, index)} setPhaseType={(type) => setPhaseType(type, index)} setPhaseData={(data) => setPhaseData(data, index)} />
                                         <div className="size-content">
                                             <div className='flex'>
                                                 <div className="size-1-1">
@@ -46,20 +56,24 @@ function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                                     </Fragment>
                                 )
                             }
-                            <div className="size-content">
-                                <div className="flex align-end">
-                                    <div className="size-content add">
-                                        <button onClick={(e) => {
-                                            e.preventDefault();
-                                            console.log("prueba")
-                                            addPhase();
-                                        }}>
-                                            <FontAwesomeIcon icon={faPlus} />
-                                            Añadir Fase
-                                        </button>
+                            {
+                                phases[phases.length - 1].formatType !== "BRACKET_PHASE" && phases.length < 2? <div className="size-content">
+                                    <div className="flex align-end">
+                                        <div className="size-content add">
+                                            <button onClick={(e) => {
+                                                e.preventDefault();
+                                                console.log("prueba")
+                                                addPhase();
+                                            }}>
+                                                <FontAwesomeIcon icon={faPlus} />
+                                                Añadir Fase
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                    :
+                                    <></>
+                            }
                         </div>
                     </div>
                     <div className="card-footer">
