@@ -84,6 +84,60 @@ function TournamentCreationPage() {
 
         copiaFases.forEach((item, indice) => {
             item.phaseOrder = indice + 1;
+            if (indice === 0) {
+                switch (item.formatType) {
+                    case "BRACKET_PHASE":
+                        if (baseInfo.size !== 2 && baseInfo.size !== 4 && baseInfo.size !== 8) {
+                            item.formatType = "";
+                            item.groupsData = undefined;
+                            item.leagueData = undefined;
+                            item.bracketData = undefined;
+                        } else {
+                            item.bracketData = {
+                                size: baseInfo.size,
+                                tieBreaker: item.bracketData.tieBreaker,
+                                bestOf: item.bracketData.bestOf,
+                                rounds: []
+                            }
+                        }
+                        break;
+                    case "LEAGUE_PHASE":
+                        if (baseInfo.size < 3) {
+                            item.formatType = "";
+                            item.groupsData = undefined;
+                            item.leagueData = undefined;
+                            item.bracketData = undefined;
+                        } else {
+                            item.leagueData = {
+                                size: baseInfo.size,
+                                winPoints: item.leagueData.winPoints,
+                                tiePoints: item.leagueData.tiePoints,
+                                losePoints: item.leagueData.losePoints
+                            }
+                        }
+                        break;
+                    case "GROUPS_PHASE":
+                        if (baseInfo.size !== 6 && baseInfo.size !== 8 && baseInfo.size !== 10 && baseInfo.size !== 12) {
+                            item.formatType = "";
+                            item.groupsData = undefined;
+                            item.leagueData = undefined;
+                            item.bracketData = undefined;
+                        } else {
+                            item.groupsData = {
+                                size: baseInfo.size,
+                                numberOfGroups: undefined,
+                                naming: item.groupsData.naming,
+                                matching: "Single Robin"
+                            }
+                        }
+                        break;
+                    default:
+                        item.formatType = "";
+                        item.groupsData = undefined;
+                        item.leagueData = undefined;
+                        item.bracketData = undefined;
+                }
+            }
         })
 
         setPhases(copiaFases);
@@ -113,14 +167,24 @@ function TournamentCreationPage() {
         switch (type) {
             case "League":
                 copiaFases[index].formatType = "LEAGUE_PHASE";
-                copiaFases[index].leagueData = {};
+                copiaFases[index].leagueData = {
+                    size: undefined,
+                    winPoints: 3,
+                    tiePoints: 1,
+                    losePoints: 0
+                };
                 copiaFases[index].groupsData = undefined;
                 copiaFases[index].bracketData = undefined;
                 break;
             case "Groups":
                 copiaFases[index].formatType = "GROUPS_PHASE";
                 copiaFases[index].leagueData = undefined;
-                copiaFases[index].groupsData = {};
+                copiaFases[index].groupsData = {
+                    size: baseInfo.size,
+                    numberOfGroups: undefined,
+                    naming: undefined,
+                    matching: "Single Robin"
+                };
                 copiaFases[index].bracketData = undefined;
                 break;
             case "Bracket":
@@ -262,13 +326,23 @@ function TournamentCreationPage() {
                             <Step1Form
                                 actionContinue={() => handleStep1Continue()}
                                 baseInfo={baseInfo}
-                                setBaseInfo={(baseInfo) => setBaseInfo(baseInfo)} />
+                                setBaseInfo={(baseInfo) => setBaseInfo(baseInfo)}
+                                resetPhases={() => setPhases([{
+                                    phaseOrder: 1,
+                                    formatType: "",
+                                    phaseName: "",
+                                    leagueData: undefined,
+                                    groupsData: undefined,
+                                    bracketData: undefined
+                                }])} />
                             : <></>
-                    },
+                    }
                     {
                         step === 2 ?
                             <Step2Form
                                 actionBack={() => handleStep2Back()}
+                                descriptionAndRules={descAndRules}
+                                setDescAndRules={(descAndRules) => setDescAndRules(descAndRules)}
                                 actionContinue={() => handleStep2Continue()}
                             />
                             : <></>
@@ -278,6 +352,7 @@ function TournamentCreationPage() {
                             <Step3Form
                                 actionBack={() => handleStep3Back()}
                                 actionContinue={() => handleStep3Continue()}
+                                size={baseInfo.size}
                                 phases={phases}
                                 addPhase={() => addPhase()}
                                 deletePhase={(index) => deletePhase(index)}

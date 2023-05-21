@@ -4,7 +4,7 @@ function TableItemsItem({ item }) {
     return <>
         <div className="table-items-item">
             {item !== 0 ?
-                <img src={"http://ddragon.leagueoflegends.com/cdn/13.6.1/img/item/" + item + ".png"} alt="Rune icon" />
+                <img src={"http://ddragon.leagueoflegends.com/cdn/13.10.1/img/item/" + item + ".png"} alt="Rune icon" />
                 : <></>
             }
         </div>

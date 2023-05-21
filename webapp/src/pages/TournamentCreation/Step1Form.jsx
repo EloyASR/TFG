@@ -3,9 +3,9 @@ import { useState, useRef, useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import InputRadio from "../components/InputRadio";
-import InputNumber from "../components/InputNumber";
+import Combobox from "../Tournaments/Combobox";
 
-function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
+function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
 
     const gameInput = useRef(null);
 
@@ -87,6 +87,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
         }
 
         setBaseInfo(copiaInformacionBasica);
+        resetPhases();
     }
 
     const setPlayersType = (playersType) => {
@@ -129,7 +130,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                                                 </label>
                                             </div>
                                             <div className="own-form-text">
-                                                <input id="tournament-name" type="text" name="tournament-name" maxLength="30" onChange={(e) => { setName(e.target.value) }} />
+                                                <input id="tournament-name" type="text" defaultValue={informacionBasica.name} placeholder="Nombre del torneo" name="tournament-name" maxLength="30" onChange={(e) => { setName(e.target.value) }} required/>
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +179,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                                         <div className="size-content">
                                             <div className="form-row">
                                                 <div className="form-field own-form-select own-form-search">
-                                                    <input type={showSearchInput ? "search" : "hidden"} name="tournament-game" placeholder="Seleccionar un juego" autoComplete="off" onChange={(e) => handleGameChange(e)} onFocus={() => { setShowSearchOptions(true) }} onBlur={() => { setShowSearchOptions(false) }} ref={e => { gameInput.current = e }} />
+                                                    <input type={showSearchInput ? "search" : "hidden"} name="tournament-game" placeholder="Seleccionar un juego" autoComplete="off" onChange={(e) => handleGameChange(e)} onFocus={() => { setShowSearchOptions(true) }} onBlur={() => { setShowSearchOptions(false) }} ref={e => { gameInput.current = e }} required/>
                                                     {
                                                         showSelectedGame && informacionBasica.game ?
                                                             <>
@@ -253,7 +254,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo }) {
                             <div className="size-content">
                                 <div className="flex spacing-large">
                                     <div className="size-1-4">
-                                        <InputNumber defaultValue={informacionBasica.size} label={"Tamaño"} placeholder={"Tamaño (2 - 32)"} min={"2"} max={"32"} onChange={(e) => setSize(e.target.valueAsNumber)} />
+                                        <Combobox  placeholder={"Tamaño"} label={"Tamaño del torneo"} itemsList={[2,3,4,5,6,7,8,9,10,11,12]} onChange={(value)=>setSize(value)} selection={informacionBasica.size} required={true}/>
                                     </div>
                                     <InputRadio label={"Tipo de participantes"} id={"participantes"} name={"participantes"} itemsList={["Jugadores", "Equipos"]} defaultChecked={informacionBasica.playersType} checked={informacionBasica.playersType} onChange={(value)=>setPlayersType(value)}/>
                                 </div>

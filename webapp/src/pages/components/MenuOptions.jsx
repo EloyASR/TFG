@@ -1,35 +1,20 @@
 import MenuOptionSimple from "./MenuOptionSimple";
 import MenuOptionDisplay from "./MenuOptionDisplay";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 function MenuOptions({ options }) {
 
-
-    /**
-     * Formato que debe tener options
-     * 
-     * Lista de objetos option cada item tendra los siguientes atributos
-     * 
-     * - type: simple | display
-     * - name
-     * - onClick: solo si es simple
-     * 
-     * Si es display tendra una lista de objetos option
-     * - options: lo mismo que antes (lista de objetos)
-     * 
-     */
+    const [opcionSeleccionada, setOpcionSeleccionada] = useState(0);
 
     return (
         <>
-            <div className="flex spacing-medium">
+            <div className="flex menu-options">
                 {
                     options.map((item, index) => {
                         if (item.type === "simple") {
                             return (
                                 <Fragment key={index}>
-                                    <div className={"size-1-" + options.length}>
-                                        <MenuOptionSimple option={item} />
-                                    </div>
+                                    <MenuOptionSimple option={item} length={options.length} selected={opcionSeleccionada === index} setSelected={()=>setOpcionSeleccionada(index)}/>
                                 </Fragment>
                             );
                         } else {

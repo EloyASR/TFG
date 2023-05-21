@@ -4,7 +4,7 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 
 
-function Combobox({ itemsList, label, placeholder, onChange, id, selection }) {
+function Combobox({ itemsList, label, placeholder, onChange, id, selection, required }) {
     const [expanded, setExpanded] = useState(false);
     const [selected, setSelected] = useState("");
 
@@ -34,21 +34,23 @@ function Combobox({ itemsList, label, placeholder, onChange, id, selection }) {
                 <div className="form-field own-form-select-onlyread">
                     <div className="select-widget-header">
                         <div className="flex no-wrap">
-                            <input
+                            {required ? <input
                                 id={id + "-combobox"}
-                                role="combobox"
-                                aria-busy="false"
-                                aria-owns="listbox"
-                                aria-autocomplete="list"
-                                aria-expanded="false"
-                                aria-haspopup="true" type="text"
-                                tabIndex="0"
-                                autoComplete="off"
-                                aria-disabled="false"
-                                aria-controls=""
-                                readOnly
+                                type="text"
                                 defaultValue={selected}
-                                placeholder={placeholder} />
+                                value={selected}
+                                placeholder={placeholder}
+                                required={required}
+                                onKeyDown={(e)=>e.preventDefault()} />
+                                :
+                                <input
+                                    id={id + "-combobox"}
+                                    type="text"
+                                    defaultValue={selected}
+                                    value={selected}
+                                    placeholder={placeholder}
+                                    onKeyDown={(e)=>e.preventDefault()} />
+                            }
                             <button className="widget-button" type="button" title="Nombre de tooltip" aria-label="open combobox" aria-disabled="false" onClick={() => setExpanded(!expanded)}>
                                 {expanded ?
                                     <FontAwesomeIcon icon={faCaretUp} style={{ color: "#000000" }} />

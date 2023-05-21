@@ -23,6 +23,19 @@ const UserSchema = Schema(
         icon: {
             type: String,
             required: false
+        },
+        accounts: {
+            type: [
+                {
+                    game:{
+                        type: String,
+                        required: true
+                    },
+                    ids:{
+                        type: [String]
+                    }
+                }
+            ]
         }
     },
     {

@@ -3,13 +3,27 @@ import InputNumber from "../components/InputNumber";
 import InputRadio from "../components/InputRadio";
 import Combobox from "../Tournaments/Combobox";
 
-function PhaseConfigurationGroups({phaseId, groupData, setPhaseData}) {
+function PhaseConfigurationGroups({ size, phaseId, groupData, setPhaseData }) {
 
     const [data, setData] = useState({});
 
-    useEffect(()=>{
+    useEffect(() => {
         setData(groupData);
-    },[groupData])
+    }, [groupData])
+
+    const getNumberOfGroups = () => {
+        switch (size) {
+            case 6:
+                return [2]
+            case 8:
+                return [2]
+            case 10:
+                return [2]
+            case 12:
+                return [2, 4]
+            default:
+        }
+    }
 
     const setNumberOfPlayers = (numOfPlayers) => {
         var newData = {
@@ -62,16 +76,16 @@ function PhaseConfigurationGroups({phaseId, groupData, setPhaseData}) {
             <div className="size-content">
                 <div className="flex spacing-large">
                     <div className="size-1-2">
-                        <InputNumber placeholder={"Número de jugadores"} label={"Número de jugadores"} min={"3"} onChange={(e)=>setNumberOfPlayers(e.target.valueAsNumber)} defaultValue={groupData.numberOfPlayers}/>
+                        <InputNumber placeholder={"Número de jugadores"} label={"Número de jugadores"} min={"3"} onChange={(e) => setNumberOfPlayers(e.target.valueAsNumber)} defaultValue={size} disabled={true} />
                     </div>
                     <div className="size-1-2">
-                        <InputNumber placeholder={"Número de grupos"} label={"Número de grupos"} min={"2"} onChange={(e)=>setNumberOfGroups(e.target.valueAsNumber)} defaultValue={groupData.numberOfGroups}/>
+                        <Combobox placeholder={"Número de grupos"} label={"Número de grupos"} itemsList={getNumberOfGroups()} onChange={(value) => setNumberOfGroups(value)} selection={groupData.numberOfGroups} />
                     </div>
                     <div className="size-1-2">
-                        <Combobox  placeholder={"Nomenclatura de grupos"} label={"Nomenclatura de grupos"} itemsList={["Letters (A, B, C, ...)", "Numbers (1, 2, 3, ...)"]} onChange={(value)=>setNaming(value)}selection={groupData.naming}/>
+                        <Combobox placeholder={"Nomenclatura de grupos"} label={"Nomenclatura de grupos"} itemsList={["Letters (A, B, C, ...)", "Numbers (1, 2, 3, ...)"]} onChange={(value) => setNaming(value)} selection={groupData.naming} />
                     </div>
                     <div className="size-1-2">
-                        <InputRadio label={"Método de emparejamiento"} itemsList={["Single Robin", "Double Robin"]} id={"emparejamiento-" + phaseId} name={"emparejamiento-" + phaseId} defaultChecked={groupData.matching} checked={groupData.matching} onChange={(value)=> setMatching(value)}/>
+                        <InputRadio label={"Método de emparejamiento"} itemsList={["Single Robin", "Double Robin"]} id={"emparejamiento-" + phaseId} name={"emparejamiento-" + phaseId} defaultChecked={groupData.matching} checked={groupData.matching} onChange={(value) => setMatching(value)} />
                     </div>
                 </div>
             </div>

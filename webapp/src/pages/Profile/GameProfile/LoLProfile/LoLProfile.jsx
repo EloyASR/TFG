@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./LoLProfile.css"
 import Header from "./Header/Header";
 import Match from "./Match/Match";
 import Queue from "./Ranked/Queue";
 import lolinfoService from '../../../../services/lolinfoService';
 
-const defaultName ="EloyASR";
 const defaultData = {};
 
-function LoLProfile(props) {
+function LoLProfile({profileName}) {
 
-    const [name, setName] = useState(defaultName);
-    const [data, setData] = useState(defaultData)
+    const [name, setName] = useState(profileName);
+    const [data, setData] = useState(defaultData);
+
+    useEffect(()=>{
+        setName(profileName);
+        handleClick();
+    },[profileName])
 
     const handleClick = async e => {
         const datos = await lolinfoService.lolinfo({user:name})

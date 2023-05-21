@@ -68,6 +68,7 @@ body>#root>.App>.nav {
 body>#root>.App>.main {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
   gap: 10px;
   width: 100%;
   justify-content: center;
@@ -78,7 +79,6 @@ body>#root>.App>.main {
   flex-direction: column;
   background-color: transparent;
   border-radius: 8px;
-  overflow: hidden;
 }
 
 .vertical-spliter {
@@ -169,147 +169,147 @@ button {
   min-width: 16.66667%;
 }
 
-.height-300{
+.height-300 {
   height: 300px;
 }
 
-.height-400{
+.height-400 {
   height: 400px;
 }
 
-.height-500{
+.height-500 {
   height: 500px;
 }
 
-.height-600{
+.height-600 {
   height: 600px;
 }
 
-.height-700{
+.height-700 {
   height: 700px;
 }
 
-.height-800{
+.height-800 {
   height: 800px;
 }
 
-.height-900{
+.height-900 {
   height: 900px;
 }
 
-.height-1000{
+.height-1000 {
   height: 1000px;
 }
 
-.height-1100{
+.height-1100 {
   height: 1100px;
 }
 
-.height-1200{
+.height-1200 {
   height: 1200px;
 }
 
-.height-1300{
+.height-1300 {
   height: 1300px;
 }
 
-.height-1400{
+.height-1400 {
   height: 1400px;
 }
 
-.height-1500{
+.height-1500 {
   height: 1500px;
 }
 
-.height-1600{
+.height-1600 {
   height: 1600px;
 }
 
-.height-1700{
+.height-1700 {
   height: 1700px;
 }
 
-.height-1800{
+.height-1800 {
   height: 1800px;
 }
 
-.height-1900{
+.height-1900 {
   height: 1900px;
 }
 
-.height-2000{
+.height-2000 {
   height: 2000px;
 }
 
-.width-300{
+.width-300 {
   width: 300px;
 }
 
-.width-400{
+.width-400 {
   width: 400px;
 }
 
-.width-500{
+.width-500 {
   width: 500px;
 }
 
-.width-600{
+.width-600 {
   width: 600px;
 }
 
-.width-700{
+.width-700 {
   width: 700px;
 }
 
-.width-800{
+.width-800 {
   width: 800px;
 }
 
-.width-900{
+.width-900 {
   width: 900px;
 }
 
-.width-1000{
+.width-1000 {
   width: 1000px;
 }
 
-.width-1100{
+.width-1100 {
   width: 1100px;
 }
 
-.width-1200{
+.width-1200 {
   width: 1200px;
 }
 
-.width-1300{
+.width-1300 {
   width: 1300px;
 }
 
-.width-1400{
+.width-1400 {
   width: 1400px;
 }
 
-.width-1500{
+.width-1500 {
   width: 1500px;
 }
 
-.width-1600{
+.width-1600 {
   width: 1600px;
 }
 
-.width-1700{
+.width-1700 {
   width: 1700px;
 }
 
-.width-1800{
+.width-1800 {
   width: 1800px;
 }
 
-.width-1900{
+.width-1900 {
   width: 1900px;
 }
 
-.width-2000{
+.width-2000 {
   width: 2000px;
 }
 
@@ -320,7 +320,7 @@ button {
   box-sizing: border-box;
 }
 
-.inline-block{
+.inline-block {
   display: inline-block;
 }
 
@@ -361,7 +361,7 @@ button {
   justify-content: space-between;
 }
 
-.flex.align-around{
+.flex.align-around {
   justify-content: space-around;
 }
 
@@ -393,43 +393,43 @@ button {
   gap: 0.75rem;
 }
 
-.spacing-top-large{
-  margin-top:1.5rem;
+.spacing-top-large {
+  margin-top: 1.5rem;
 }
 
-.overflow-hidden{
+.overflow-hidden {
   overflow: hidden;
 }
 
-.overflow-scroll{
+.overflow-scroll {
   overflow-y: scroll;
 }
 
-.overflow-auto{
+.overflow-auto {
   overflow-y: auto;
 }
 
-.overflow-y-hidden{
+.overflow-y-hidden {
   overflow-y: hidden;
 }
 
-.overflow-y-scroll{
+.overflow-y-scroll {
   overflow-y: scroll;
 }
 
-.overflow-y-auto{
+.overflow-y-auto {
   overflow-y: auto;
 }
 
-.overflow-x-hidden{
+.overflow-x-hidden {
   overflow-x: hidden;
 }
 
-.overflow-x-scroll{
+.overflow-x-scroll {
   overflow-x: scroll;
 }
 
-.overflow-x-auto{
+.overflow-x-auto {
   overflow-x: auto;
 }
 
@@ -662,7 +662,7 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 1.5em;
 }
 
-.form-row>.form-error{
+.form-row>.form-error {
   margin-top: 8px;
   color: var(--red100)
 }
@@ -673,7 +673,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
 }
 
-.form-row>.own-form-password>div{
+.form-row>.own-form-password>div {
   position: relative;
   clear: both;
   width: 100%;
@@ -716,20 +716,20 @@ input[type=number]::-webkit-outer-spin-button {
   width: 1.9em;
 }
 
-textarea{
+textarea {
   width: 100%;
   height: 20vh;
 
   border-radius: 5px;
-  resize:none;
+  resize: none;
 }
 
-.scrollbar::-webkit-scrollbar{
+.scrollbar::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.scrollbar::-webkit-scrollbar-track{
+.scrollbar::-webkit-scrollbar-track {
   background-color: var(--black300);
 }
 
@@ -742,6 +742,55 @@ textarea{
   background-color: var(--black300);
 }
 
-.relative{
+.relative {
   position: relative;
+}
+
+.menu-options {
+  color: white;
+  background-color: var(--blue200);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.menu-option {
+  display: flex;
+  justify-content: center;
+}
+
+.menu-option.selected>button {
+  font-weight: bold;
+  border-bottom: 4px solid white;
+}
+
+.menu-option>button:hover {
+  font-weight: bold;
+  border-bottom: 4px solid white;
+}
+
+.menu-option>button {
+  border-radius: 0;
+  width: 100%;
+  border-top: 4px solid var(--blue200);
+  border-bottom: 4px solid var(--blue200);
+  display: flex;
+  justify-content: center;
+}
+
+.menu-option>button>svg {
+  display: none;
+}
+
+.menu-option>button>div {
+  display: block;
+}
+
+@media(max-width: 650px) {
+  .menu-option>button>svg {
+    display: block;
+  }
+
+  .menu-option>button>div {
+    display: none;
+  }
 }

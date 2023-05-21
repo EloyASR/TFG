@@ -9,8 +9,9 @@ import TournamentCalendar from "./TournamentCalendar";
 import tournamentService from "../../services/tournamentService";
 
 import "./TournamentView.css";
+import { faCalendar, faFileLines, faSitemap, faUsers } from "@fortawesome/free-solid-svg-icons";
 
-function TournamentView({tournamentId}) {
+function TournamentView({ tournamentId }) {
     console.log(tournamentId);
 
     const [menuTab, setMenuTab] = useState("INFORMATION");
@@ -33,12 +34,19 @@ function TournamentView({tournamentId}) {
     return (
         <>
             <div className="main">
+                <div className="patro-lateral-izquierdo">
+                    <div className="anuncio">
+                        <div className="anuncio">
+                            <img src={images("./anuncio.png")} alt=""></img>
+                        </div>
+                    </div>
+                </div>
                 <div className="tournament-view-page">
                     <div className="flex vertical gap-medium">
                         <div className="card">
                             <div className="card-content relative">
                                 <div className="background-img">
-                                    <img src={images("./1300_350_" + game + ".png")} alt="" />
+                                    <img src={images("./"+ game + "_1300_350.png")} alt="" />
                                 </div>
                                 <div className="nombre-torneo">
                                     {tournamentData.name}
@@ -49,22 +57,27 @@ function TournamentView({tournamentId}) {
                             {
                                 type: "simple",
                                 name: "Información",
-                                onClick: () => setMenuTab("INFORMATION")
+                                onClick: () => setMenuTab("INFORMATION"),
+                                icon: faFileLines
                             },
                             {
                                 type: "simple",
                                 name: "Participantes",
-                                onClick: () => setMenuTab("PARTICIPANTS")
+                                onClick: () => setMenuTab("PARTICIPANTS"),
+                                icon: faUsers
                             },
                             {
                                 type: "simple",
                                 name: "Fases",
-                                onClick: () => setMenuTab("PHASES")
+                                onClick: () => setMenuTab("PHASES"),
+                                icon: faSitemap,
+                                iconRotation: 90
                             },
                             {
                                 type: "simple",
                                 name: "Calendario",
-                                onClick: () => setMenuTab("CALENDAR")
+                                onClick: () => setMenuTab("CALENDAR"),
+                                icon: faCalendar
                             }
                         ]} />
 
@@ -80,6 +93,11 @@ function TournamentView({tournamentId}) {
                         {
                             menuTab === "CALENDAR" ? <TournamentCalendar /> : <></>
                         }
+                    </div>
+                </div>
+                <div className="patro-lateral-derecho">
+                    <div className="anuncio">
+                        <img src={images("./anuncio02.png")} alt=""></img>
                     </div>
                 </div>
             </div>
