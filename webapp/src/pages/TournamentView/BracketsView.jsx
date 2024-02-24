@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import TournamentsService from "../../services/tournamentService";
 import UserService from "../../services/userService";
+import MatchModifier from "./MatchModifier";
 
 function BracketsView({ bracketPhase }) {
 
@@ -33,7 +34,6 @@ function BracketsView({ bracketPhase }) {
 
                 if (serie.participant1 !== undefined) {
                     newSerie.participant1Name = await getName(serie.participant1);
-                    console.log("funciona");
                 }
 
                 if (serie.participant2) {
@@ -109,9 +109,10 @@ function BracketsView({ bracketPhase }) {
                                                                             0
                                                                         </div>
                                                                     </div>
-                                                                    <button className="brackets-rounds-match-modify">
+                                                                    <button className="brackets-rounds-match-modify" onClick={()=>{}}>
                                                                         <FontAwesomeIcon icon={faPenToSquare} size="xl" />
                                                                     </button>
+                                                                    <MatchModifier />
                                                                 </div>
                                                             </Fragment>
                                                         );
