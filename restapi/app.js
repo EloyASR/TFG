@@ -4,6 +4,39 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 
+//SWAGGER DOCUMENTATION
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+const options = {
+    definition: {
+        openapi: "3.1.0",
+        info: {
+            title: "TFG-RestAPI",
+            version: "0.1.0",
+            description:
+                "This a simple CRUD API made with Express and documented with Swagger",
+            contact: {
+                name: "Eloy Alfredo Schmidt Rodríguez",
+                email: "uo271588@uniovi.es",
+            },
+        },
+        servers: [
+            {
+                url: "http://localhost:5000",
+            },
+        ],
+    },
+    apis: ["./routes/*.js", "./newroutes/*.js"],
+};
+
+const specs = swaggerJsdoc(options);
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(specs, {explorer:true})
+);
+
 const cors = require('cors');
 
 app.options('*', cors());
@@ -24,12 +57,26 @@ app.use(express.static('public'));
 let log4js = require('log4js');
 const { dbConnection } = require("./database/config.js");
 log4js.configure({
-    appenders: { actividad: { type: "file", filename: "actividad.log" } },
-    categories: { default: { appenders: ["actividad"], level: "info" } }
+    appenders: {
+        info: { type: "file", filename: "info.log" },
+        error: { type: "file", filename: "error.log"}
+    },
+    categories: {
+        error: {
+            appenders: ["error"],
+            level: "error"
+        },
+        default: {
+            appenders: ["info"],
+            level: "info"
+        }
+    }
 });
 
-let logger = log4js.getLogger("actividad");
-app.set('logger', logger);
+let loggerInfo = log4js.getLogger("default");
+let loggerError = log4js.getLogger("error");
+app.set('loggerInfo', loggerInfo);
+app.set('loggerError', loggerError);
 
 dbConnection()
 
@@ -37,10 +84,10 @@ app.use('/api/login', require('./routes/auth.js'))
 app.use('/api/signup', require('./routes/signup.js'))
 app.use('/api/info', require('./routes/info.js'))
 app.use('/api/search',require('./routes/search.js'))
-app.use('/api/tournament',require('./routes/tournament.js'))
-app.use('/api/match',require('./routes/match.js'))
-app.use('/api/serie',require('./routes/serie.js'))
-app.use('/api/user',require('./routes/user.js'))
+app.use('/api/tournaments',require('./routes/tournament.js'))
+app.use('/api/matches',require('./newroutes/match.js'))
+app.use('/api/series',require('./routes/serie.js'))
+app.use('/api/users',require('./routes/user.js'))
 
 //Puerto del servidor
 app.set('port', process.env.PORT || 5000);
@@ -48,5 +95,5 @@ app.set('port', process.env.PORT || 5000);
 //Lanzar el servidor
 app.listen(app.get('port'), function () {
     console.log("Servidor activo en puerto:" + app.get('port'));
-    logger.info("Servidor activo en puerto:" + app.get('port'));
+    loggerInfo.info("Servidor activo en puerto:" + app.get('port'));
 });

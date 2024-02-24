@@ -21,7 +21,9 @@
     "log4js": "^6.7.0",
     "mongoose": "^7.1.0",
     "node-fetch": "^2.6.9",
-    "prom-client": "^13.0.0"
+    "prom-client": "^13.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "mongodb-memory-server": "^6.9.3"
