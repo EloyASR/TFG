@@ -17,11 +17,13 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "fetch": "^1.1.0",
+    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.0",
     "log4js": "^6.7.0",
     "mongoose": "^7.1.0",
     "node-fetch": "^2.6.9",
     "prom-client": "^13.0.0",
+    "supertest": "^6.3.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   },
