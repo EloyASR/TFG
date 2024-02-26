@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+require('dotenv').config();
+
+const mongoose = require('mongoose');
 
 const { MONGODB_ATLAS, MONGODB_ATLAS_TEST, NODE_ENV } = process.env
 
@@ -9,6 +11,7 @@ const connectionString = MONGODB_ATLAS
 if (!connectionString) {
     console.error('Yoy must define your connection string')
 }
+
 
 const dbConnection = async () => {
     try {
@@ -30,4 +33,5 @@ const dbConnection = async () => {
         mongoose.disconnect()
     })
 }
+
 module.exports = { dbConnection }
