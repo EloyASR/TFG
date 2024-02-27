@@ -2,11 +2,18 @@ const request  =  require('supertest');
 const express = require('express');
 const cors = require ('cors');
 const bodyParser = require('body-parser');
-const http = require('http');
 const {dbConnection} = require("../database/config");
+const mongoose = require('mongoose');
+const Match = require('../models/match');
+const User = require('../models/user');
+const Game = require('../models/game');
+const Team = require('../models/team');
+const Serie = require('../models/serie');
+const Tournament = require('../models/tournament');
 
 let app;
 let server;
+let matchIds = [];
 
 beforeAll(done => {
     app = express();
@@ -72,6 +79,42 @@ afterAll(done => {
     done();
 })
 
+beforeEach(done => {
+
+    let match = new Match();
+    match._id= new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3b9e");
+    match.type = "5VS5";
+    match.mode = "Tournament";
+    match.game = new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3b9f");
+    match.participant1 = new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3ba0");
+    match.participant2 = new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3ba1");
+    match.date = new Date("2024-04-10T18:00:00.000+00:00");
+    match.status = "SCHEDULED_WITH_PARTICIPANTS";
+
+    console.log(match._id.toHexString());
+
+    Match.create(match)
+        .catch((err) => {
+            console.log(err);
+        })
+
+    matchIds.push({$oid: match._id.toHexString()});
+
+    done();
+})
+
+afterEach( done =>{
+
+    console.log(matchIds);
+
+    matchIds.map(async id => {
+        await Match.remove({ _id:id });
+    });
+
+    done();
+
+})
+
 //PRUEBAS FIND DE MATCHES CON FILTRO
 
 describe('GET /api/matches', () => {
@@ -98,7 +141,7 @@ describe('GET /api/matches', () => {
 describe('GET /api/matches/{id}', () => {
 
     it('Passed an existing id should return a match', async () => {
-        const res = await request(app).get('/api/matches/65d804c41c1127813e516f6b');
+        const res = await request(app).get('/api/matches/65dcde4efc13ae110bcd3b9e');
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('uid');
         expect(res.body).toHaveProperty('date');

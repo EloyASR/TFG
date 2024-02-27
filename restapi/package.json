@@ -4,7 +4,8 @@
   "description": "Api supporting the tfg webapp",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest --coverage --detectOpenHandles"
   },
   "keywords": [],
   "author": "Eloy Alfredo Schmidt Rodríguez",
