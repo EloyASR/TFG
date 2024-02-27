@@ -22,6 +22,7 @@ const find = async (req, res) => {
     let match = await Match.findById(req.params.id);
 
     if(match){
+        console.log(match);
         console.log("CODE 200: Match with Id:{" + req.params.id + "} found successfully");
         loggerInfo.info("CODE 200: Match with Id:{" + req.params.id + "} found successfully");
         res.status(200);
