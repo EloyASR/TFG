@@ -15,7 +15,7 @@ let app;
 let server;
 let matchIds = [];
 
-beforeAll(done => {
+beforeAll(async () => {
     app = express();
 
     app.options('*', cors());
@@ -57,7 +57,7 @@ beforeAll(done => {
     app.set('loggerInfo', loggerInfo);
     app.set('loggerError', loggerError);
 
-    dbConnection()
+    await dbConnection()
 
     app.use('/api/matches',require('../newroutes/match.js'))
 
@@ -69,18 +69,22 @@ beforeAll(done => {
         console.log("Servidor activo en puerto:" + app.get('port'));
         loggerInfo.info("Servidor activo en puerto:" + app.get('port'));
     });
-
-    done();
 })
 
-afterAll(done => {
+afterAll(() => {
     //BORRAR TODOS LOS DATOS
     server.close();
-    done();
 })
 
-beforeEach(done => {
+beforeEach(async () => {
 
+
+    matchIds = ["65dcde4efc13ae110bcd3b9e"];
+    let matches = [
+        {_id: new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3b9e"), type: "5VS5", mode: "Tournament", game: new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3b9f"), participant1: new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3ba0"), participant2: new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3ba1"), date: new Date("2024-04-10T18:00:00.000+00:00"), status:"SCHEDULED_WITH_PARTICIPANTS"}
+    ]
+
+    /**
     let match = new Match();
     match._id= new mongoose.mongo.ObjectId("65dcde4efc13ae110bcd3b9e");
     match.type = "5VS5";
@@ -91,28 +95,23 @@ beforeEach(done => {
     match.date = new Date("2024-04-10T18:00:00.000+00:00");
     match.status = "SCHEDULED_WITH_PARTICIPANTS";
 
-    console.log(match._id.toHexString());
-
-    Match.create(match)
+    await Match.create(match)
         .catch((err) => {
             console.log(err);
         })
+        */
 
-    matchIds.push({$oid: match._id.toHexString()});
-
-    done();
+    await Match.insertMany(matches)
+        .catch(function (err) {
+            console.log(err);
+        });
 })
 
-afterEach( done =>{
-
-    console.log(matchIds);
-
-    matchIds.map(async id => {
-        await Match.remove({ _id:id });
-    });
-
-    done();
-
+afterEach( async () =>{
+    await Match.deleteMany({_id: { $in: matchIds}})
+        .catch(function(err){
+            console.log(err);
+        })
 })
 
 //PRUEBAS FIND DE MATCHES CON FILTRO

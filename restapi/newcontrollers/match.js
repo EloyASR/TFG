@@ -13,7 +13,6 @@ const find = async (req, res) => {
     let loggerError = req.app.get("loggerError");
 
     if(!mongoose.mongo.ObjectId.isValid(req.params.id)){
-        console.log("CODE 400: Invalid Match Id: {" + req.params.id + "}");
         loggerError.error("CODE 400: Invalid Match Id: {" + req.params.id + "}");
         res.status(400);
         return res.send({msg:"Invalid Match Id: {" + req.params.id + "}"});
@@ -22,13 +21,10 @@ const find = async (req, res) => {
     let match = await Match.findById(req.params.id);
 
     if(match){
-        console.log(match);
-        console.log("CODE 200: Match with Id:{" + req.params.id + "} found successfully");
         loggerInfo.info("CODE 200: Match with Id:{" + req.params.id + "} found successfully");
         res.status(200);
         res.json(match);
     }else{
-        console.log("ERROR 404: Match with Id:{" + req.params.id + "} not found");
         loggerError.error("ERROR 404: Match with Id:{" + req.params.id + "} not found");
         res.status(404);
         res.send({msg:"Match with Id:{" + req.params.id + "} not found"});
@@ -40,8 +36,7 @@ const findAll = async (req, res) => {
     let matches = await Match.find({_id:{$in: req.body.ids}})
 
     if(matches){
-        logger.info("CODE 200: Matches with Ids:{" + req.params.ids + "} found successfully")
-        console.log("CODE 200: Matches with Ids:{" + req.params.ids + "} found successfully")
+        logger.info("CODE 200: Matches with Ids:{" + req.params.ids + "} found successfully");
         res.status(200);
         res.json(matches);
     }else{
@@ -78,7 +73,6 @@ const add = async (req, res) => {
             }
 
             await Match.create(match).then(result => {
-                    console.log("CODE 201: Match {" + result._id + "} created successfully");
                     loggerInfo.info("CODE 201: Match {" + result._id+ "} created successfully");
                     res.status(201);
                     return res.send({
@@ -87,7 +81,6 @@ const add = async (req, res) => {
                 }
             );
         } catch (e) {
-            console.log("CODE 400: There was a problem creating the match", e);
             loggerError.error("CODE 400: There was a problem creating the match", e);
             res.status(400);
             return res.send({msg:"There was a problem creating the match: " + e.errors.status});
@@ -98,7 +91,6 @@ const add = async (req, res) => {
     //COMPROBAMOS QUE EXISTE EL JUEGO AL QUE SE VA A JUGAR EN ESTE PARTIDO
 
     if(!mongoose.mongo.ObjectId.isValid(game)){
-        console.log("CODE 400: Invalid Game Id: {" + game + "}");
         loggerError.error("CODE 400: Invalid Game Id: {" + game + "}");
         res.status(400);
         return res.send({msg:"Invalid Game Id: {" + game + "}"});
@@ -107,7 +99,6 @@ const add = async (req, res) => {
     let found_game = await Game.findOne({"_id": new mongoose.mongo.ObjectId(game)});
 
     if (found_game === null) {
-        console.log("CODE 404: Game with Id:{" + game + "} not found");
         loggerError.error("CODE 404: Game with Id:{" + game + "} not found");
         res.status(404);
         return res.send({msg:"Game with Id:{" + game + "} not found"});
@@ -118,7 +109,6 @@ const add = async (req, res) => {
     let modo = found_game.modes.find(m => m.name === mode);
 
     if (modo == null) {
-        console.log("CODE 404: Mode with Name:{" + mode + "} not found");
         loggerError.error("CODE 404: Mode with Name:{" + mode + "} not found");
         res.status(404);
         return res.send({msg:"Mode with Name:{" + mode + "} not found"});
@@ -128,7 +118,6 @@ const add = async (req, res) => {
 
     if(serie) {
         if(!mongoose.mongo.ObjectId.isValid(serie)){
-            console.log("CODE 400: Invalid Serie Id: {" + serie + "}");
             loggerError.error("CODE 400: Invalid Serie Id: {" + serie + "}");
             res.status(400);
             return res.send({msg:"Invalid Serie Id: {" + serie + "}"});
@@ -137,7 +126,6 @@ const add = async (req, res) => {
         let found_serie = await Serie.findOne({"_id": new mongoose.mongo.ObjectId(serie)});
 
         if (found_serie === null) {
-            console.log("CODE 404: Serie with Id:{" + serie + "} not found");
             loggerError.error("CODE 404: Serie with Id:{" + serie + "} not found");
             res.status(404);
             return res.send({msg:"Serie with Id:{" + serie + "} not found"});
@@ -148,7 +136,6 @@ const add = async (req, res) => {
 
     if(tournament) {
         if(!mongoose.mongo.ObjectId.isValid(tournament)){
-            console.log("CODE 400: Invalid Tournament Id: {" + tournament + "}");
             loggerError.error("CODE 400: Invalid Tournament Id: {" + tournament + "}");
             res.status(400);
             return res.send({msg:"Invalid Tournament Id: {" + tournament + "}"});
@@ -157,7 +144,6 @@ const add = async (req, res) => {
         let found_tournament = await Tournament.findOne({"_id": new mongoose.mongo.ObjectId(tournament)});
 
         if (found_tournament === null) {
-            console.log("CODE 404: Tournament with Id:{" + tournament + "} not found");
             loggerError.error("CODE 404: Tournament with Id:{" + tournament + "} not found");
             res.status(404);
             return res.send({msg:"Tournament with Id:{" + tournament + "} not found"});
@@ -167,7 +153,6 @@ const add = async (req, res) => {
     //COMPROBAMOS SI SOLO SE HA MANDADO UN PARTICIPANTE
 
     if((participant1 && !participant2) || (!participant1 && participant2)){
-        console.log("CODE 400: Both participants should be assigned");
         loggerError.error("CODE 400: Both participants should be assigned");
         res.status(400);
         return res.send({msg:"Both participants should be assigned"});
@@ -177,14 +162,12 @@ const add = async (req, res) => {
 
     if (participant1 && participant2) {
         if(!mongoose.mongo.ObjectId.isValid(participant1)) {
-            console.log("CODE 400: Invalid Game Id: {" + participant1 + "}");
             loggerError.error("CODE 400: Invalid Game Id: {" + participant1 + "}");
             res.status(400);
             return res.send({msg:"Invalid Participant Id: {" + participant1 + "}"});
         }
 
         if(!mongoose.mongo.ObjectId.isValid(participant2)) {
-            console.log("CODE 400: Invalid Participant Id: {" + participant2 + "}");
             loggerError.error("CODE 400: Invalid Game Id: {" + participant2 + "}");
             res.status(400);
             return res.send({msg:"Invalid Participant Id: {" + participant2 + "}"});
@@ -209,7 +192,6 @@ const add = async (req, res) => {
         }
 
         if (!participante1 || !participante2) {
-            console.log("CODE 404: User with Id:{" + participant1 + "} or Id:{" + participant2 + "} not found");
             loggerError.error("CODE 404: User with Id:{" + participant1 + "} or Id:{" + participant2 + "} not found");
             res.status(404);
             return res.send({msg:"User with Id:{" + participant1 + "} or Id:{" + participant2 + "} not found"});
@@ -217,7 +199,6 @@ const add = async (req, res) => {
 
         if (win && lose) {
             if(!(participant1 == win || participant1 == lose) || !(participant2 == win || participant2 == lose)) {
-                console.log("CODE 400: User with Id:{" + win + "} or Id:{" + lose + "} dont match with Id:{" + participant1 + "} or Id:{" + participant2 + "}");
                 loggerError.error("CODE 400: User with Id:{" + win + "} or Id:{" + lose + "} dont match with Id:{" + participant1 + "} or Id:{" + participant2 + "}");
                 res.status(400);
                 return res.send({msg: "User with Id:{" + win + "} or Id:{" + lose + "} don't match with Id:{" + participant1 + "} or Id:{" + participant2 + "}"});
@@ -225,7 +206,6 @@ const add = async (req, res) => {
         }
     }else{
         if (win && lose) {
-            console.log("CODE 400: Both participants should be assigned befare u assign the winner or loser of the match");
             loggerError.error("CODE 400: Both participants should be assigned befare u assign the winner or loser of the match");
             res.status(400);
             return res.send({msg: "Both participants should be assigned befare u assign the winner or loser of the match"});
