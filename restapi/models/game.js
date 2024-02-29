@@ -2,21 +2,29 @@ const mongoose = require("mongoose");
 
 
 const ModeSchema = mongoose.Schema({
+    _name: {
+        type:String,
+        required: true,
+    },
     name: {
         type:String,
         required: true,
     },
     type: {
         type:String,
-        enum: ['1vs1', '2vs2', '3vs3', '4vs4', '5vs5'],
+        enum: ['1VS1', '2VS2', '3VS3', '4VS4', '5VS5'],
         required: true,
     }
 });
 
 const GameSchema = mongoose.Schema({
+    _name: {
+        type: String,
+        required: true,
+    },
     name: {
         type: String,
-        required: true
+        required: true,
     },
     modes: {
         type: [ModeSchema]

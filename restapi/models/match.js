@@ -55,7 +55,7 @@ const MatchSchema = mongoose.Schema(
             type: String,
             required: [true, "Status is required"],
             enum: {
-                values: ['SCHEDULED_NO_PARTICIPANTS','SCHEDULED_WITH_PARTICIPANTS','IN_GAME','FINISHED','CANCELED'],
+                values: ['SCHEDULED_NO_PARTICIPANTS','SCHEDULED_WITH_PARTICIPANTS','IN_GAME','FINISHED','CANCELED','MATCH_NOT_PLAYED'],
                 message: "{VALUE} is not supported. Status must be SCHEDULED_NO_PARTICIPANTS, SCHEDULED_WITH_PARTICIPANTS, IN_GAME, FINISHED or CANCELED.",
             },
             default: 'SCHEDULED_NO_PARTICIPANTS',

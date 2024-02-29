@@ -33,17 +33,79 @@ const find = async (req, res) => {
 
 //TODO: findAll with filters
 const findAll = async (req, res) => {
-    let matches = await Match.find({_id:{$in: req.body.ids}})
 
-    if(matches){
-        logger.info("CODE 200: Matches with Ids:{" + req.params.ids + "} found successfully");
-        res.status(200);
-        res.json(matches);
-    }else{
-        logger.error("ERROR 404: There was a problem finding the matches")
-        console.log("ERROR 404: There was a problem finding the matches");
-        res.status(404);
-        res.send("There was a problem finding the matches");
+    let loggerInfo = req.app.get("loggerInfo");
+    let loggerError = req.app.get("loggerError");
+    let filteredMatches;
+
+
+
+    try {
+        if((req.query.game && req.query.user) || (req.query.user && req.query.team) || (req.query.game && req.query.team)){
+            loggerError.error("ERROR 400: There cannot be two filters together with exception of game and mode")
+            res.status(400);
+            return res.send({msg:"There cannot be two filters together with exception of game and mode"});
+        }
+
+        //FIND BY GAME AND MODE
+
+        //TODO: Comprobar que el id del game sea un id válido de mongoDB y que ademas exista en la BBDD
+        if (req.query.game) {
+            if (req.query.mode) {
+                filteredMatches = await Match.find({
+                    game: req.query.game,
+                    mode: req.query.mode
+                })
+            } else {
+                filteredMatches = await Match.find({
+                    game: req.query.game
+                })
+            }
+        }
+
+        //FIND BY USER
+
+        //TODO: Comprobar que el usuario existe y que es un id valido de mongodb
+        //TODO: Mejora: Buscar los equipos a los que pertenece el usuario
+        if(req.query.user){
+            let filteredMatchesParticipant1 = await Match.find({
+                type: "1VS1",
+                participant1: req.query.user
+            })
+            let filteredMatchesParticipant2 = await Match.find({
+                type: "1VS1",
+                participant2: req.query.user
+            })
+
+
+            filteredMatches = filteredMatchesParticipant1.concat(filteredMatchesParticipant2);
+            console.log(filteredMatches);
+        }
+
+        //FIND BY TEAM
+
+        //TODO: Comprobar que el equipo existe dentro y que el id es valido de mongodb
+        if(req.query.team){
+            let filteredMatchesParticipant1 = await Match.find({
+                type: { $in: ["2VS2", "3VS3", "4VS4", "5VS5"]},
+                participant1: req.query.user
+            })
+            let filteredMatchesParticipant2 = await Match.find({
+                type: { $in: ["2VS2", "3VS3", "4VS4", "5VS5"]},
+                participant2: req.query.user
+            })
+            filteredMatches = filteredMatchesParticipant1.concat(filteredMatchesParticipant2);
+        }
+
+        if (filteredMatches) {
+            loggerInfo.info("CODE 200: Matches with Ids:{" + req.params.ids + "} found successfully");
+            res.status(200);
+            return res.send(filteredMatches);
+        }
+    }catch (e) {
+        loggerError.error("ERROR 400: There was a problem finding the matches")
+        res.status(400);
+        return res.send({msg:"There was a problem finding the matches"});
     }
 }
 
@@ -162,13 +224,13 @@ const add = async (req, res) => {
 
     if (participant1 && participant2) {
         if(!mongoose.mongo.ObjectId.isValid(participant1)) {
-            loggerError.error("CODE 400: Invalid Game Id: {" + participant1 + "}");
+            loggerError.error("CODE 400: Invalid Participant Id: {" + participant1 + "}");
             res.status(400);
             return res.send({msg:"Invalid Participant Id: {" + participant1 + "}"});
         }
 
         if(!mongoose.mongo.ObjectId.isValid(participant2)) {
-            loggerError.error("CODE 400: Invalid Game Id: {" + participant2 + "}");
+            loggerError.error("CODE 400: Invalid Participant Id: {" + participant2 + "}");
             res.status(400);
             return res.send({msg:"Invalid Participant Id: {" + participant2 + "}"});
         }
@@ -206,9 +268,9 @@ const add = async (req, res) => {
         }
     }else{
         if (win && lose) {
-            loggerError.error("CODE 400: Both participants should be assigned befare u assign the winner or loser of the match");
+            loggerError.error("CODE 400: Both participants should be assigned before u assign the winner or loser of the match");
             res.status(400);
-            return res.send({msg: "Both participants should be assigned befare u assign the winner or loser of the match"});
+            return res.send({msg: "Both participants should be assigned before u assign the winner or loser of the match"});
         }
     }
     await createMatch(modo.type);
@@ -322,7 +384,7 @@ const upd = async (req, res) => {
                     }
                 } else {
                     res.status(412);
-                    res.send("User with Id:{" + participant1 + "} or Id:{" + participant2 + "} doesnt exist");
+                    res.send({msg:"User with Id:{" + participant1 + "} or Id:{" + participant2 + "} doesnt exist"});
                 }
             }
         } else {
@@ -380,10 +442,9 @@ const del = async (req, res) => {
     let loggerError = req.app.get("loggerError");
 
     if(!mongoose.mongo.ObjectId.isValid(req.params.id)){
-        console.log("CODE 400: Invalid Match Id: {" + req.params.id + "}");
         loggerError.error("CODE 400: Invalid Match Id: {" + req.params.id + "}");
         res.status(400);
-        return res.send("Invalid Match Id: {" + req.params.id + "}");
+        return res.send({msg:"Invalid Match Id:{" + req.params.id + "}"});
     }
 
     let match_found = await Match.findById(req.params.id);
@@ -394,14 +455,12 @@ const del = async (req, res) => {
         console.log(result);
         if(result.deletedCount === 1){
             loggerInfo.info("CODE 200: Match {" + req.params.id + "} deleted successfully")
-            console.log("CODE 200: Match {" + req.params.id + "} deleted successfully")
             res.status(200)
             res.send({
-                msg: "Match {" + req.params.id + "} deleted successfully",
+                msg: "Match Id:{" + req.params.id + "} deleted successfully",
                 match: match_found
             })
         }else{
-            console.log("CODE 400: The match with Id:{" + req.params.id + "} could not be removed");
             loggerError.error("CODE 400: The match with Id:{" + req.params.id + "} could not be removed");
             res.status(400);
             res.send({
@@ -410,10 +469,9 @@ const del = async (req, res) => {
         }
 
     }else {
-        console.log("ERROR 404: Match with Id:{" + req.params.id + "} not found");
         loggerError.error("ERROR 404: Match with Id:{" + req.params.id + "} not found");
         res.status(404);
-        res.send("Match with Id:{" + req.params.id + "} not found");
+        res.send({msg:"Match with Id:{" + req.params.id + "} not found"});
     }
 }
 
