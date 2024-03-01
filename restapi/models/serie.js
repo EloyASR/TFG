@@ -2,25 +2,35 @@ const mongoose = require("mongoose");
 
 const SerieSchema = mongoose.Schema(
     {
+        type: {
+            type: String,
+            required: true
+        },
+        mode: {
+            type: String,
+            required: true
+        },
         bestOf:{
             type: Number,
             required: true
         },
-        participant1:{
+        game: {
             type: mongoose.Types.ObjectId,
-            required: false,
+            required: true
         },
-        participant2: {
+        home_participant:{
             type: mongoose.Types.ObjectId,
             required: false
         },
-        participant1Result: {
-            type: Number,
+        away_participant: {
+            type: mongoose.Types.ObjectId,
             required: false
         },
-        participant2Result: {
-            type: Number,
-            required: false
+        date: {
+            type: Date,
+        },
+        result:{
+            type: mongoose.Schema.Types.Mixed, //TODO: Modificar con un Schema de result
         },
         matches: {
             type: [mongoose.Types.ObjectId],

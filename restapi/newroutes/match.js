@@ -138,7 +138,7 @@ router.post('/', add);
  *           schema:
  *             $ref: '#/components/schemas/Match'
  */
-router.put('/', upd);
+router.put('/:id', upd);
 
 /**
  * @swagger
