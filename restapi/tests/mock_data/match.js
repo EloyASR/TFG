@@ -15,8 +15,8 @@ const matches = [
         type:"1VS1",
         mode:"ARAM_1VS1",
         game:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c60"), //LEAGUE OF LEGENDS
-        participant1:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c61"), //USER 1
-        participant2:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c62"), //USER 2
+        home_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c61"), //USER 1
+    away_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c62"), //USER 2
         date:new Date("2024-03-26T10:00:00.000+00:00"),
         status:"SCHEDULED_WITH_PARTICIPANTS"
     },
@@ -25,8 +25,8 @@ const matches = [
         type:"5VS5",
         mode:"TOURNAMENT",
         game:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c60"), //LEAGUE OF LEGENDS
-        participant1:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c65"), //TEAM 1
-        participant2:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
+        home_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c65"), //TEAM 1
+        away_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
         win: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
         lose: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c65"), //TEAM 1
         date:new Date("2024-02-01T20:00:00.000+00:00"),
@@ -45,8 +45,8 @@ const matches = [
         type:"5VS5",
         mode:"TOURNAMENT",
         game:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c60"), //LEAGUE OF LEGENDS
-        participant1:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c6d"), //TEAM 3
-        participant2:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c6e"), //TEAM 4
+        home_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c6d"), //TEAM 3
+        away_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c6e"), //TEAM 4
         date:new Date("2024-03-28T17:00:00.000+00:00"),
         status:"IN_GAME"
     },
@@ -63,8 +63,8 @@ const matches = [
         type:"5VS5",
         mode:"TOURNAMENT",
         game:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c60"), //LEAGUE OF LEGENDS
-        participant1:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
-        participant2:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c6e"), //TEAM 4
+        home_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
+        away_participant:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c6e"), //TEAM 4
         date:new Date("2024-04-15T23:00:00.000+00:00"),
         status:"MATCH_NOT_PLAYED"
     }

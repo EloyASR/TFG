@@ -19,11 +19,11 @@ const MatchSchema = mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: [true, "Game is required"]
         },
-        participant1: {
+        home_participant: {
             type: mongoose.Types.ObjectId,
             required: false
         },
-        participant2: {
+        away_participant: {
             type: mongoose.Types.ObjectId,
             required: false
         },
@@ -35,11 +35,11 @@ const MatchSchema = mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: false
         },
-        win: {
+        winner: {
             type: mongoose.Types.ObjectId,
             required: false
         },
-        lose: {
+        loser: {
             type: mongoose.Types.ObjectId,
             required: false
         },
