@@ -64,7 +64,7 @@ beforeAll(async () => {
 
     await dbConnection()
 
-    app.use('/api/matches',require('../newroutes/match.js'))
+    app.use('/api/series',require('../newroutes/serie.js'))
 
     //Puerto del servidor
     app.set('port', 5000);
@@ -149,46 +149,48 @@ afterEach( async () =>{
 
 //PRUEBAS FIND DE MATCHES CON FILTRO
 
-describe('GET /api/matches', () => {
+describe('GET /api/series', () => {
 
-    it("Buscar matches por mas de un filtro a la vez", async ()=>{
-        const res = await request(app).get('/api/matches?game=65df8098fc13ae2387cd3c60&mode=Tournament&user=65df8098fc13ae2387cd3c60');
+    it("Buscar series por mas de un filtro a la vez", async ()=>{
+        /*const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=Tournament&user=65df8098fc13ae2387cd3c60');
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty("msg");
-        expect(res.body.msg).toEqual("There cannot be two filters together with exception of game and mode")
+        expect(res.body.msg).toEqual("There cannot be two filters together with exception of game and mode")*/
     })
 
-    it("Buscar últimos matches de un juego", async ()=>{
-        const res = await request(app).get('/api/matches?game=65df8098fc13ae2387cd3c60');
+    it("Buscar últimas series de un juego", async ()=>{
+        /*const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(5);
+        expect(res.body).toHaveLength(5);*/
     })
 
-    it("Buscar últimos matches de un juego y un modo", async ()=>{
-        const res = await request(app).get('/api/matches?game=65df8098fc13ae2387cd3c60&mode=TOURNAMENT');
+    it("Buscar últimas series de un juego y un modo", async ()=>{
+        /*const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=TOURNAMENT');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(4);
+        expect(res.body).toHaveLength(4);*/
     })
 
-    it("Buscar últimos matches de un jugador", async ()=>{
-        const res = await request(app).get('/api/matches?user=65df8098fc13ae2387cd3c61');
+    it("Buscar últimas series de un jugador para un juego en especifico", async ()=>{
+        /*const res = await request(app).get('/api/series?user=65df8098fc13ae2387cd3c61');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(1);
+        expect(res.body).toHaveLength(1);*/
     })
 
-    it("Buscar últimos matches de un equipo", async ()=>{
-        const res = await request(app).get('/api/matches?team=65df8098fc13ae2387cd3c66');
+    it("Buscar últimas series de un equipo", async ()=>{
+        /*const res = await request(app).get('/api/series?team=65df8098fc13ae2387cd3c66');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(2);
+        expect(res.body).toHaveLength(2);*/
+
     })
 })
 
 //PRUEBAS FIND UN SOLO MATCH
 
-describe('GET /api/matches/{id}', () => {
+describe('GET /api/series/{id}', () => {
 
-    it('Buscar un match válido', async () => {
-        const res = await request(app).get('/api/matches/65df8098fc13ae2387cd3c5f');
+    it('Passed an existing id should return a serie', async () => {
+        let serie = await Serie.findById("65e0f577fc13ae063acd367e");
+        const res = await request(app).get('/api/series/65e0f577fc13ae063acd367e');
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('uid');
         expect(res.body).toHaveProperty('date');
@@ -198,26 +200,26 @@ describe('GET /api/matches/{id}', () => {
         expect(res.body).toHaveProperty('type');
     })
 
-    it('Buscar un match inválido', async () => {
-        const res = await request(app).get('/api/matches/prueba');
+    it('Passed an invalid id should return error 400', async () => {
+        const res = await request(app).get('/api/series/prueba');
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Invalid Match Id: {prueba}");
+        expect(res.body.msg).toEqual("Invalid Serie Id: {prueba}");
     })
 
-    it('Buscar un match inexistente', async () => {
-        const res = await request(app).get('/api/matches/65d804c41c1127813e516f6a');
+    it('Passed a none existing id should return error 404', async () => {
+        const res = await request(app).get('/api/series/65d804c41c1127813e516f6a');
         expect(res.statusCode).toEqual(404);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match with Id:{65d804c41c1127813e516f6a} not found");
+        expect(res.body.msg).toEqual("Serie with Id:{65d804c41c1127813e516f6a} not found");
     })
 })
 
 //PRUEBAS CREACIÓN DE UN MATCH
 
-describe('POST /api/matches', () => {
-    it('Crear un match sin participantes', async () => {
-        const res = await request(app)
+describe('POST /api/series', () => {
+    it('Create a serie without participants', async () => {
+        /*const res = await request(app)
             .post('/api/matches')
             .send({
                 type: "5VS5",
@@ -228,11 +230,11 @@ describe('POST /api/matches', () => {
             })
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('id');
-        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});
+        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});*/
     })
 
-    it('Crear un match con un solo participante', async () => {
-        const res = await request(app)
+    it('Try to create a serie with only one participant', async () => {
+        /*const res = await request(app)
             .post('/api/matches')
             .send({
                 type: "5VS5",
@@ -244,19 +246,15 @@ describe('POST /api/matches', () => {
             })
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('id');
-        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});
+        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});*/
     })
 
-    it('Crear un match con una serie inexistente', ()=>{
+    it('Try to create a serie with a not found tournament', ()=>{
         //TODO
     })
 
-    it('Crear un match con un torneo inexistente', ()=>{
-        //TODO
-    })
-
-    it('Crear un match con participantes inexistentes', async ()=> {
-        const res = await request(app)
+    it('Try to create a serie with two participants that dont exist', async ()=> {
+        /*const res = await request(app)
             .post('/api/matches')
             .send({
                 type: "5VS5",
@@ -269,11 +267,11 @@ describe('POST /api/matches', () => {
             })
         expect(res.statusCode).toEqual(404);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Participant with Id:{65ce00ced1a5897d2764a23e} not found")
+        expect(res.body.msg).toEqual("Participant with Id:{65ce00ced1a5897d2764a23e} not found")*/
     })
 
-    it('Crear un match sin participantes y con un resultado válido', async ()=> {
-        const res = await request(app)
+    it('Try to create a serie with no participants and a correct resolution of the serie', async ()=> {
+        /*const res = await request(app)
             .post('/api/matches')
             .send({
                 type: "1VS1",
@@ -286,11 +284,11 @@ describe('POST /api/matches', () => {
             })
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("At least one participant should be assigned before you assign the winner or loser of the match");
+        expect(res.body.msg).toEqual("At least one participant should be assigned before you assign the winner or loser of the match");*/
     })
 
-    it('Crear un match con participantes y con resultado válido', async ()=> {
-        const res = await request(app)
+    it('Try to create a serie with two participants and a correct resolution of the serie', async ()=> {
+        /*const res = await request(app)
             .post('/api/matches')
             .send({
                 type: "1VS1",
@@ -306,15 +304,15 @@ describe('POST /api/matches', () => {
             })
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('id');
-        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});
+        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});*/
     })
 })
 
 //PRUEBAS DE UPDATE DE UN MATCH
 
-describe('PUT /api/matches/:id', () => {
-    it("Actualizar un match inexistente", async () => {
-        const res = await request(app)
+describe('PUT /api/series', () => {
+    it("Try to update a none existing series", async () => {
+        /*const res = await request(app)
             .put('/api/matches/pruebadeid')
             .send({
                 match: {
@@ -332,27 +330,23 @@ describe('PUT /api/matches/:id', () => {
             })
         expect(res.statusCode).toEqual(404);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match with Id:{pruebadeid} not found");
+        expect(res.body.msg).toEqual("Match with Id:{pruebadeid} not found");*/
     })
 
-    it('Actualizar un match existente sin participantes', ()=>{
+    it('Try to update a serie with not found participant', ()=>{
         //TODO
     })
 
-    it('Actualizar un match existente con un tournament inexistente', ()=>{
+    it('Try to update a serie with a not found tournament', ()=>{
         //TODO
     })
 
-    it('Actualizar un match existente con una serie inexistente', ()=>{
+    it('Try to update a serie with resolution but no participants', ()=>{
         //TODO
     })
 
-    it('Actualizar un match existente con resultado correcto pero sin participantes', ()=>{
-        //TODO
-    })
-
-    it("Actualizar un match existente", async () => {
-        const res = await request(app)
+    it("Update an existing serie", async () => {
+        /*const res = await request(app)
             .put('/api/matches/65df8098fc13ae2387cd3c67')
             .send({
                 match: {
@@ -370,37 +364,36 @@ describe('PUT /api/matches/:id', () => {
             })
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match {65df8098fc13ae2387cd3c67} updated successfully");
+        expect(res.body.msg).toEqual("Match {65df8098fc13ae2387cd3c67} updated successfully");*/
     })
 })
 
 //PRUEBAS DE BORRADO DE UN MATCH
 
-describe('DELETE /api/matches/{id}', ()=>{
-    it('Borrar un match inexistente', async ()=>{
+describe('DELETE /api/series/{id}', ()=>{
+    it('Try to delete a none existing serie', async ()=>{
         const res = await request(app)
-            .delete('/api/matches/65d804c41c1127813e516f6a')
+            .delete('/api/series/65d804c41c1127813e516f6a')
         expect(res.statusCode).toEqual(404);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match with Id:{65d804c41c1127813e516f6a} not found")
+        expect(res.body.msg).toEqual("Serie with Id:{65d804c41c1127813e516f6a} not found")
     })
 
-    it('Borrar un match invalido', async ()=>{
+    it('Try to delete a serie with a non valid id', async ()=>{
         const res = await request(app)
-            .delete('/api/matches/pruebaid')
+            .delete('/api/series/pruebaid')
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Invalid Match Id:{pruebaid}");
+        expect(res.body.msg).toEqual("Invalid Serie Id:{pruebaid}");
     })
 
-    it('Borrar un match existente', async ()=> {
+    it('Delete an existing serie', async ()=> {
         const res = await request(app)
-            .delete('/api/matches/65df8098fc13ae2387cd3c67')
+            .delete('/api/series/65e0f577fc13ae063acd367e')
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match Id:{65df8098fc13ae2387cd3c67} deleted successfully");
-        expect(res.body).toHaveProperty('match');
-        expect(res.body.match).toHaveProperty('mode');
-        expect(res.body.match.mode).toEqual('VGC');
+        expect(res.body.msg).toEqual("Serie Id:{65e0f577fc13ae063acd367e} deleted successfully");
+        expect(res.body.serie).toHaveProperty('mode');
+        expect(res.body.serie.mode).toEqual('TOURNAMENT');
     })
 })

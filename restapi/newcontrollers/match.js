@@ -6,7 +6,6 @@ const Serie = require('../models/serie');
 const Tournament = require('../models/tournament');
 
 const mongoose = require("mongoose");
-const {findById} = require("./user");
 
 const find = async (req, res) => {
 
