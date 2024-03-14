@@ -15,14 +15,15 @@ const series = [
         away_participant: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
         date: new Date("2024-02-01T20:00:00.000+00:00"),
         result: {
-            winner: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c65"), //TEAM 1
-            loser:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 2
+            winner: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 1
+            loser:new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c65"), //TEAM 2
             winner_result:1,
             loser_result:0,
             matches: [
                 new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c63") //MATCH 2
             ]
-        }
+        },
+        status: "FINISHED"
     }
 ]
 
