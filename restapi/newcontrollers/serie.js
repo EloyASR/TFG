@@ -12,8 +12,6 @@ const find = async (req, res) => {
     let loggerInfo = req.app.get("loggerInfo");
     let loggerError = req.app.get("loggerError");
 
-
-
     if(!mongoose.mongo.ObjectId.isValid(req.params.id)){
         loggerError.error("CODE 400: Invalid Serie Id: {" + req.params.id + "}");
         res.status(400);
@@ -109,7 +107,7 @@ const findAll = async (req, res) => {
 
 //TODO Actualizar correctamente el add SERIE
 const add = async (req, res) => {
-
+    let errors = [];
     let loggerInfo = req.app.get("loggerInfo");
     let loggerError = req.app.get("loggerError");
 
@@ -129,7 +127,7 @@ const add = async (req, res) => {
             serie.status = s_status;
 
             await Serie.create(serie).then(result => {
-                    loggerInfo.info("CODE 201: Serie {" + result._id+ "} created successfully");
+                    loggerInfo.info("Serie {" + result._id+ "} created successfully");
                     res.status(201);
                     return res.send({
                         id: result._id
@@ -137,7 +135,7 @@ const add = async (req, res) => {
                 }
             );
         } catch (e) {
-            loggerError.error("CODE 400: There was a problem creating the match", e);
+            loggerError.error("There was a problem creating the match", e);
             res.status(400);
             return res.send({msg:"There was a problem creating the match: " + e.errors.status});
         }
@@ -147,17 +145,15 @@ const add = async (req, res) => {
     //COMPROBAMOS QUE EXISTE EL JUEGO AL QUE SE VA A JUGAR EN ESTA SERIE
 
     if(!mongoose.mongo.ObjectId.isValid(game)){
-        loggerError.error("CODE 400: Invalid Game Id: {" + game + "}");
-        res.status(400);
-        return res.send({msg:"Invalid Game Id: {" + game + "}"});
+        loggerError.error("Invalid Game Id: {" + game + "}");
+        errors.push("Invalid Game Id: {" + game + "}");
     }
 
     let found_game = await Game.findOne({"_id": new mongoose.mongo.ObjectId(game)});
 
     if (found_game === null) {
-        loggerError.error("CODE 404: Game with Id:{" + game + "} not found");
-        res.status(404);
-        return res.send({msg:"Game with Id:{" + game + "} not found"});
+        loggerError.error("Game with Id:{" + game + "} not found");
+        errors.push("Game with Id:{" + game + "} not found");
     }
 
     //UNA VEZ QUE SABEMOS QUE EL JUEGO EXISTE COMPROBAMOS QUE EL MODO DE JUEGO EXISTE DENTRO DE ESTE JUEGO
@@ -165,26 +161,23 @@ const add = async (req, res) => {
     let modo = found_game.modes.find(m => m._name === mode);
 
     if (modo == null) {
-        loggerError.error("CODE 404: Mode with Name:{" + mode + "} not found");
-        res.status(404);
-        return res.send({msg:"Mode with Name:{" + mode + "} not found"});
+        loggerError.error("Mode with Name:{" + mode + "} not found");
+        errors.push("Mode with Name:{" + mode + "} not found");
     }
 
     //COMPROBAMOS SI SE HA PASADO UN TORNEO AL QUE PERTENEZCA EL PARTIDO Y SI EXISTE ESE TORNEO
 
     if(tournament) {
         if(!mongoose.mongo.ObjectId.isValid(tournament)){
-            loggerError.error("CODE 400: Invalid Tournament Id: {" + tournament + "}");
-            res.status(400);
-            return res.send({msg:"Invalid Tournament Id: {" + tournament + "}"});
+            loggerError.error("Invalid Tournament Id: {" + tournament + "}");
+            errors.push("Invalid Tournament Id: {" + tournament + "}");
         }
 
         let found_tournament = await Tournament.findOne({"_id": new mongoose.mongo.ObjectId(tournament)});
 
         if (found_tournament === null) {
-            loggerError.error("CODE 404: Tournament with Id:{" + tournament + "} not found");
-            res.status(404);
-            return res.send({msg:"Tournament with Id:{" + tournament + "} not found"});
+            loggerError.error("Tournament with Id:{" + tournament + "} not found");
+            errors.push("Tournament with Id:{" + tournament + "} not found");
         }
     }
 
@@ -192,8 +185,8 @@ const add = async (req, res) => {
 
     async function findParticipant(participant, modoType) {
         if (!mongoose.mongo.ObjectId.isValid(participant)) {
-            loggerError.error("CODE 400: Invalid Participant Id:{" + participant + "}");
-            throw { status: 400, msg: "Invalid Participant Id:{" + participant + "}" };
+            loggerError.error("Invalid Participant Id:{" + participant + "}");
+            errors.push("Invalid Participant Id:{" + participant + "}" );
         }
 
         if (modoType === "1VS1") {
@@ -209,8 +202,8 @@ const add = async (req, res) => {
         if (participant) {
             let foundParticipant = await findParticipant(participant, modoType);
             if (!foundParticipant) {
-                loggerError.error("CODE 404: Participant with Id:{" + participant + "} not found");
-                throw { status: 404, msg: "Participant with Id:{" + participant + "} not found" };
+                loggerError.error("Participant with Id:{" + participant + "} not found");
+                errors.push("Participant with Id:{" + participant + "} not found" );
             }
         }
     }
@@ -218,34 +211,48 @@ const add = async (req, res) => {
     //FUNCIÓN QUE COMPRUEBA SI SE HAN ASIGNADO ALGUNO DE LOS DOS IDS (WINNER OR LOSER)
     function validateParticipantsAssigned(home, away) {
         if (!home && !away) {
-            loggerError.error("CODE 400: At least one participant should be assigned before you assign the winner or loser of the match");
-            throw { status: 400, msg: "At least one participant should be assigned before you assign the winner or loser of the match" };
+            loggerError.error("At least one participant should be assigned before you assign the winner or loser of the match");
+            errors.push("At least one participant should be assigned before you assign the winner or loser of the match");
         }
     }
 
+    await validateParticipants(home_participant, modo.type);
+    await validateParticipants(away_participant, modo.type);
 
-    try {
-        await validateParticipants(home_participant, modo.type);
-        await validateParticipants(away_participant, modo.type);
+    if (result.winner){
+        validateParticipantsAssigned(home_participant, away_participant);
+        if(result.winner !== home_participant && result.winner !== away_participant) {
+            loggerError.error("Participant with Id:{" + result.winner + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}");
+            errors.push("Participant with Id:{" + result.winner + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}");
+        }
+    }
 
-        if (result.winner){
-            validateParticipantsAssigned(home_participant, away_participant);
-            if(result.winner !== home_participant && result.winner !== away_participant) {
-                loggerError.error("CODE 400: Participant with Id:{" + result.winner + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}");
-                throw { status: 400, msg: "Participant with Id:{" + result.winner + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}"};
-            }
+    if (result.loser){
+        validateParticipantsAssigned(home_participant, away_participant);
+        if(result.loser !== home_participant && result.loser !== away_participant) {
+            loggerError.error("Participant with Id:{" + result.loser + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}");
+            errors.push("Participant with Id:{" + result.loser + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}");
+        }
+    }
+
+    async function findMatch(match){
+        if (!mongoose.mongo.ObjectId.isValid(match)) {
+            loggerError.error("Invalid Match Id:{" + match + "}");
+            errors.push("Invalid Match Id:{" + match + "}" );
         }
 
-        if (result.loser){
-            validateParticipantsAssigned(home_participant, away_participant);
-            if(result.loser !== home_participant && result.loser !== away_participant) {
-                loggerError.error("CODE 400: Participant with Id:{" + result.loser + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}");
-                throw { status: 400, msg: "Participant with Id:{" + result.loser + "} doesn't match with Id:{" + home_participant + "} or Id:{" + away_participant + "}"};
-            }
-        }
-    } catch (error) {
-        res.status(error.status || 500);
-        return res.send({ msg: error.msg || "Internal Server Error" });
+        return await Match.findOne({ _id: new mongoose.mongo.ObjectId(match) });
+    }
+
+    //COMPROBAMOS QUE LOS PARTIDOS DEL RESULT SEAN VÁLIDOS Y EXISTAN EN LA BBDD
+    result.matches.forEach(async (m)=>{
+        //PARA REDUCIR TIEMPOS SE PODRÍAN LANZAR TODAS LAS CONSULTAS ASINCRONAMENTE Y AÑADIRLAS A UN ARRAY Y QUE CUANDO TERMINE LA ÚLTIMA CONTINUE EL PROGRAMA
+        let foundMatch = await findMatch(m);
+    })
+
+    if(errors.length > 0) {
+        res.status(400);
+        return res.send(errors);
     }
 
     await createSerie(mode,game,modo.type,home_participant,away_participant,tournament,date,result,status);
@@ -253,7 +260,151 @@ const add = async (req, res) => {
 
 //TODO: update
 const upd = async (req, res) => {
+    let errors = [];
+    let loggerInfo = req.app.get("loggerInfo");
+    let loggerError = req.app.get("loggerError");
 
+    let { serie } = req.body;
+
+
+    //COMPROBAMOS QUE EXISTE EL JUEGO AL QUE SE VA A JUGAR EN ESTA SERIE
+
+    if(!mongoose.mongo.ObjectId.isValid(serie.game)){
+        loggerError.error("Invalid Game Id: {" + serie.game + "}");
+        errors.push("Invalid Game Id: {" + serie.game + "}");
+    }
+
+    let found_game = await Game.findOne({"_id": new mongoose.mongo.ObjectId(serie.game)});
+
+    if (found_game === null) {
+        loggerError.error("Game with Id:{" + serie.game + "} not found");
+        errors.push("Game with Id:{" + serie.game + "} not found");
+    }
+
+    //UNA VEZ QUE SABEMOS QUE EL JUEGO EXISTE COMPROBAMOS QUE EL MODO DE JUEGO EXISTE DENTRO DE ESTE JUEGO
+
+    let modo = found_game.modes.find(m => m._name === serie.mode);
+
+    if (modo == null) {
+        loggerError.error("Mode with Name:{" + serie.mode + "} not found");
+        errors.push("Mode with Name:{" + serie.mode + "} not found");
+    }
+
+    //COMPROBAMOS SI SE HA PASADO UN TORNEO AL QUE PERTENEZCA EL PARTIDO Y SI EXISTE ESE TORNEO
+
+    if(serie.tournament) {
+        if(!mongoose.mongo.ObjectId.isValid(serie.tournament)){
+            loggerError.error("Invalid Tournament Id: {" + serie.tournament + "}");
+            errors.push("Invalid Tournament Id: {" + serie.tournament + "}");
+        }
+
+        let found_tournament = await Tournament.findOne({"_id": new mongoose.mongo.ObjectId(serie.tournament)});
+
+        if (found_tournament === null) {
+            loggerError.error("Tournament with Id:{" + serie.tournament + "} not found");
+            errors.push("Tournament with Id:{" + serie.tournament + "} not found");
+        }
+    }
+
+    //FUNCIÓN QUE COMPRUEBA SI UN PARTICIPANTE ES VÁLIDO
+
+    async function findParticipant(participant, modoType, errors) {
+        if (!mongoose.mongo.ObjectId.isValid(participant)) {
+            loggerError.error("Invalid Participant Id:{" + participant + "}");
+            errors.push("Invalid Participant Id:{" + participant + "}" );
+        }
+
+        if (modoType === "1VS1") {
+            return await User.findOne({ _id: new mongoose.mongo.ObjectId(participant) });
+        } else {
+            return await Team.findOne({ _id: new mongoose.mongo.ObjectId(participant) });
+        }
+    }
+
+    //FUNCIÓN QUE COMPRUEBA SI UN PARTICIPANTE EXISTE
+
+    async function validateParticipants(participant, modoType, errors) {
+        if (participant) {
+            let foundParticipant = await findParticipant(participant, modoType, errors);
+            if (!foundParticipant) {
+                loggerError.error("Participant with Id:{" + participant + "} not found");
+                errors.push("Participant with Id:{" + participant + "} not found" );
+            }
+        }
+    }
+
+    //FUNCIÓN QUE COMPRUEBA SI SE HAN ASIGNADO ALGUNO DE LOS DOS IDS (WINNER OR LOSER)
+    function validateParticipantsAssigned(home, away, errors) {
+        if (!home && !away) {
+            loggerError.error("At least one participant should be assigned before you assign the winner or loser of the match");
+            errors.push("At least one participant should be assigned before you assign the winner or loser of the match");
+        }
+    }
+
+    await validateParticipants(serie.home_participant, modo.type, errors);
+    await validateParticipants(serie.away_participant, modo.type, errors);
+
+    if (serie.result.winner){
+        validateParticipantsAssigned(serie.home_participant, serie.away_participant, errors);
+        if(serie.result.winner !== serie.home_participant && serie.result.winner !== serie.away_participant) {
+            loggerError.error("Participant with Id:{" + serie.result.winner + "} doesn't match with Id:{" + serie.home_participant + "} or Id:{" + serie.away_participant + "}");
+            errors.push("Participant with Id:{" + serie.result.winner + "} doesn't match with Id:{" + serie.home_participant + "} or Id:{" + serie.away_participant + "}");
+        }
+    }
+
+    if (serie.result.loser){
+        validateParticipantsAssigned(serie.home_participant, serie.away_participant, errors);
+        if(serie.result.loser !== serie.home_participant && serie.result.loser !== serie.away_participant) {
+            loggerError.error("Participant with Id:{" + serie.result.loser + "} doesn't match with Id:{" + serie.home_participant + "} or Id:{" + serie.away_participant + "}");
+            errors.push("Participant with Id:{" + serie.result.loser + "} doesn't match with Id:{" + serie.home_participant + "} or Id:{" + serie.away_participant + "}");
+        }
+    }
+
+    async function findMatch(match, errors){
+        if (!mongoose.mongo.ObjectId.isValid(match)) {
+            loggerError.error("Invalid Match Id:{" + match + "}");
+            errors.push("Invalid Match Id:{" + match + "}" );
+        }
+
+        return await Match.findOne({ _id: new mongoose.mongo.ObjectId(match) });
+    }
+
+    //COMPROBAMOS QUE LOS PARTIDOS DEL RESULT SEAN VÁLIDOS Y EXISTAN EN LA BBDD
+    serie.result.matches.forEach(async (m)=>{
+        //PARA REDUCIR TIEMPOS SE PODRÍAN LANZAR TODAS LAS CONSULTAS ASINCRONAMENTE Y AÑADIRLAS A UN ARRAY Y QUE CUANDO TERMINE LA ÚLTIMA CONTINUE EL PROGRAMA
+        let foundMatch = await findMatch(m, errors);
+    })
+
+    if(errors.length > 0) {
+        res.status(400);
+        return res.send(errors);
+    }
+
+    try {
+        await Serie.updateOne(
+            {
+                _id: new mongoose.mongo.ObjectId(req.params.id)
+            },
+            {
+                $set: {
+                    home_participant: serie.home_participant,
+                    away_participant: serie.away_participant,
+                    tournament: serie.tournament,
+                    result: serie.result,
+                    date: new Date(serie.date),
+                    status: serie.status
+                }
+            }).then(result => {
+                loggerInfo.info("Match {" + req.params.id + "} updated successfully");
+                res.status(200);
+                return res.send({msg: "Match {" + req.params.id + "} updated successfully"});
+            }
+        );
+    }catch(e){
+        loggerError.error("There was a problem updating the serie", e);
+        res.status(400);
+        return res.send({msg:"There was a problem updating the serie: " + e.errors.status});
+    }
 }
 
 const del = async (req, res) => {
