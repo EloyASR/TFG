@@ -32,6 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Debug Secrets
+          run: |
+            echo "MONGODB_ATLAS=${{ secrets.MONGODB_ATLAS }}"
+            echo "SECRETORPRIVATEKEY=${{ secrets.SECRET_OR_PRIVATE_KEY }}"
+            echo "RIOT_APIKEY=${{ secrets.RIOT_APIKEY }}"
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
         env:
