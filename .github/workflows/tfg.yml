@@ -14,13 +14,18 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@v5
       env:
         API_URI: http://${{ secrets.DEPLOY_HOST }}:5000/api
+        CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
+        CLOUDINARY_API_KEY: ${{secrets.CLOUDINARY_API_KEY}}
+        CLOUDINARY_UPLOAD_PRESET: ${{secrets.CLOUDINARY_UPLOAD_PRESET}}
+        CLOUDINARY_UPLOAD_URL: ${{secrets.CLOUDINARY_UPLOAD_URL}}
+        CLOUDINARY_DELETE_URL: ${{secrets.CLOUDINARY_DELETE_URL}}
       with:
           name: eloyasr/tfg/webapp
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: webapp
-          buildargs: API_URI
+          buildargs: API_URI CLOUDINARY_API_SECRET CLOUDINARY_API_KEY CLOUDINARY_UPLOAD_PRESET CLOUDINARY_UPLOAD_URL CLOUDINARY_DELETE_URL
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
     runs-on: ubuntu-latest
@@ -28,12 +33,24 @@ jobs:
     - uses: actions/checkout@v3
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
+      env:
+        MONGODB_ATLAS: ${{secrets.MONGODB_ATLAS}}
+        SECRETORPRIVATEKEY: ${{secrets.SECRET_OR_PRIVATE_KEY}}
+        RIOT_APIKEY: ${{secrets.RIOT_APIKEY}}
+        RIOT_ACCOUNT_QUERY: https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/
+        SUMMONER_ACCOUNT_QUERY: https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/
+        MASTERY_QUERY: https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/
+        RANKEDS_QUERY: https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/
+        CHAMPIONS_QUERY: http://ddragon.leagueoflegends.com/cdn/14.10.1/data/en_US/champion.json
+        GAMES_QUERY: https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/
+        GAME_QUERY: https://europe.api.riotgames.com/lol/match/v5/matches/
       with:
           name: eloyasr/tfg/restapi
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: restapi
+          buildargs: MONGODB_ATLAS SECRETORPRIVATEKEY RIOT_APIKEY SUMMONER_ACCOUNT_QUERY MASTERY_QUERY RANKEDS_QUERY CHAMPIONS_QUERY GAMES_QUERY GAME_QUERY
   deploy:
     name: Deploy over SSH
     runs-on: ubuntu-latest

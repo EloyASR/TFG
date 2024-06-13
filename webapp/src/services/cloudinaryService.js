@@ -1,6 +1,10 @@
 import CryptoJS from 'crypto-js';
-const uploadUrl = 'https://api.cloudinary.com/v1_1/dyn0vsdqn/image/upload';
-const deleteUrl = 'https://api.cloudinary.com/v1_1/dyn0vsdqn/image/destroy';
+
+const {REACT_APP_CLOUDINARY_API_SECRET,
+    REACT_APP_CLOUDINARY_API_KEY,
+    REACT_APP_CLOUDINARY_UPLOAD_PRESET,
+    REACT_APP_CLOUDINARY_UPLOAD_URL,
+    REACT_APP_CLOUDINARY_DELETE_URL} = process.env;
 
 const sha1 = (input) => {
     return CryptoJS.SHA1(input).toString(CryptoJS.enc.Hex);
@@ -10,14 +14,14 @@ const cloudinaryService = {
     uploadFile: async (file, fileName) => {
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('upload_preset', 'jqahs7kz');
+        formData.append('upload_preset', REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
         if (fileName) {
             formData.append('public_id', fileName);
         }
 
         try {
-            const response = await fetch(uploadUrl, {
+            const response = await fetch(REACT_APP_CLOUDINARY_UPLOAD_URL, {
                 method: 'POST',
                 body: formData,
             });
@@ -37,8 +41,8 @@ const cloudinaryService = {
 
     deleteFile: async (publicId) => {
         const timestamp = Math.floor(Date.now() / 1000);
-        const apiSecret = 'OhpngbiPqMZ8j94zPxjXvOcHqic'; // Reemplaza con tu API Secret
-        const apiKey = '526622113586487'; // Reemplaza con tu API Key
+        const apiSecret = REACT_APP_CLOUDINARY_API_SECRET; // Reemplaza con tu API Secret
+        const apiKey = REACT_APP_CLOUDINARY_API_KEY; // Reemplaza con tu API Key
 
         // Genera una firma utilizando SHA-1
         const signature = sha1(`public_id=${publicId}&timestamp=${timestamp}${apiSecret}`);
@@ -50,7 +54,7 @@ const cloudinaryService = {
         formData.append('signature', signature);
 
         try {
-            const response = await fetch(deleteUrl, {
+            const response = await fetch(REACT_APP_CLOUDINARY_DELETE_URL, {
                 method: 'POST',
                 body: formData,
             });
