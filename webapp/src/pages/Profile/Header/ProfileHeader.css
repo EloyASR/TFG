@@ -13,9 +13,10 @@
     align-items: center;
     align-content: center;
     padding: 0px 12px;
-    line-height: 35px;
-    font-size: 14px;
-    color: var(--grey100);
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
 }
 
 .profile > .header > .body{
@@ -59,8 +60,8 @@
 }
 
 .profile > .header > .body > .info > .data > .nickname{
-    line-height: 30px;
-    font-size: 24px;
+    line-height: 40px;
+    font-size: 30px;
     font-weight: bold;
     text-transform: capitalize;
     color: var(--grey100);
@@ -73,11 +74,13 @@
     color: var(--grey200);
 }
 
-.profile > .header > .body > .info > .data > .button{
-    margin-top: 8px;
+.profile > .header > .body > .info > .data .button{
+    line-height: 24px;
+    font-width:14px;
+    margin-top:.75rem;
 }
 
-.profile > .header > .body > .info > .data > .button > .update{
+.profile > .header > .body > .info > .data .button > .update{
     padding: 0px 14px;
     border-radius: 4px;
     font-size: 14px;
@@ -86,7 +89,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: 1px solid var(--blue100);
     background-color: var(--blue100);
     color: var(--grey100);

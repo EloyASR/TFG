@@ -1,11 +1,11 @@
 import Action from "./Action";
 import Data from "./Data";
 
-function MatchHeader({data,playerId,action}) {
+function MatchHeader({data,playerId,action,runesData}) {
     return (
         <>
             <div className={getWinOrLose(data,playerId)?"win":"lose"}>
-                <Data data={data} win={getWinOrLose(data,playerId)} summonerData={data.info.participants.find(participant => participant.summonerId === playerId)}/>
+                <Data data={data} runesData={runesData} win={getWinOrLose(data,playerId)} summonerData={data.info.participants.find(participant => participant.summonerId === playerId)}/>
                 <Action onClick={()=>action()}/>
             </div>
         </>
@@ -13,7 +13,7 @@ function MatchHeader({data,playerId,action}) {
 }
 
 function getWinOrLose(data,id){
-    var participante = data.info.participants.find(participant => participant.summonerId === id)
+    let participante = data.info.participants.find(participant => participant.summonerId === id)
     return participante.win;
 }
 

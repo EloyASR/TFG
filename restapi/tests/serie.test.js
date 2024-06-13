@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const {dbConnection} = require("../database/config");
 const mongoose = require('mongoose');
 const Match = require('../models/match');
-const User = require('../models/user');
+const {User} = require('../models/user');
 const Game = require('../models/game');
 const Team = require('../models/team');
 const Serie = require('../models/serie');
@@ -64,7 +64,7 @@ beforeAll(async () => {
 
     await dbConnection()
 
-    app.use('/api/series',require('../newroutes/serie.js'))
+    app.use('/api/series',require('../routes/serie.js'))
 
     //Puerto del servidor
     app.set('port', 5000);

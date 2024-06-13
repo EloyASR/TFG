@@ -1,7 +1,7 @@
-function HorizontalSpliter() {
+function HorizontalSpliter({color}) {
     return (
         <>
-            <div className="horizontal-spliter"></div>
+            <div className="horizontal-spliter" style={{backgroundColor: color}}></div>
         </>
     );
 }

@@ -3,47 +3,71 @@ import "./LoLProfile.css"
 import Header from "./Header/Header";
 import Match from "./Match/Match";
 import Queue from "./Ranked/Queue";
-import lolinfoService from '../../../../services/lolinfoService';
+import leagueOfLegendsService from "../../../../services/leagueOfLegendsService";
 
 const defaultData = {};
 
-function LoLProfile({profileName}) {
+function LoLProfile({name, tag, puuid, summonerId}) {
 
-    const [name, setName] = useState(profileName);
-    const [data, setData] = useState(defaultData);
+    const [profileData, setProfileData] = useState(defaultData);
+    const [gamesData, setGamesData] = useState(defaultData);
+    const [runesData, setRunesData] = useState(undefined);
 
     useEffect(()=>{
-        setName(profileName);
-        handleClick();
-    },[profileName])
+        getData()
+    },[puuid])
 
-    const handleClick = async e => {
-        const datos = await lolinfoService.lolinfo({user:name})
+    const getData = async e => {
+        await getProfileData();
+        await getGamesData();
+        await getRunesData();
+    }
+
+    const getProfileData = async e => {
+        const datos = await leagueOfLegendsService.getProfileData(puuid, summonerId)
         if(!datos){
             console.log("datos no encontrados")
         }else{
             console.log("datos encontrados")
-            setData(datos)
-            console.log(data)
+            setProfileData(datos)
         }
     }
 
-    console.log(data);
+    const getGamesData = async e => {
+        const datos = await leagueOfLegendsService.getGamesData(puuid)
+        if(!datos){
+            console.log("datos no encontrados")
+        }else{
+            console.log("datos encontrados")
+            datos.summonerId = summonerId;
+            setGamesData(datos)
+        }
+    }
+
+    const getRunesData = async e => {
+        const datos = await leagueOfLegendsService.getRunesData()
+        if(!datos){
+            console.log("datos no encontrados")
+        }else{
+            console.log("datos encontrados")
+            setRunesData(datos)
+        }
+    }
 
     return <>
-        <div className="lol-profile">
-            <div className="header">
-                <Header handleClick={handleClick} data={data}/>
+        <div className="flex lol-profile gap-medium">
+            <div className="size-1-1 header">
+                <Header handleClick={getProfileData} data={profileData} name={name} tag={tag}/>
             </div>
-            <div className="body">
-                <div className="left">
+            <div className="flex vertical gap-medium size-all">
+                <div className="flex horizontal spacing-medium">
                     {
-                        data.rankeds ? data.rankeds.map((ranked)=><Queue data={ranked}/>) : <Queue data={{}}/>
+                        profileData.rankeds ? profileData.rankeds.map((ranked)=><div className={"size-1-2"}><Queue data={ranked}/></div>) : <div className={"size-1-2"}><Queue data={{}}/></div>
                     }                    
                 </div>
-                <div className="center">
+                <div className="flex vertical gap-medium size-1-1">
                     {
-                        data.games ? data.games.map((game)=><Match data={game} playerId={data.id}/>):<></>
+                        gamesData.games ? gamesData.games.map((game) => <Match data={game} playerId={gamesData.summonerId} runesData={runesData}/>) : <></>
                     }
                 </div>
             </div>

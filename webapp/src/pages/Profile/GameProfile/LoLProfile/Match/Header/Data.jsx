@@ -3,7 +3,7 @@ import PlayersInfo from "./PlayersInfo";
 import SummonerInfo from "./SummonerInfo";
 import { useState, useEffect } from "react";
 
-function Data({data, win, summonerData}) {
+function Data({data, win, summonerData, runesData}) {
 
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -19,9 +19,9 @@ function Data({data, win, summonerData}) {
         <>
             <div className="data">
                 <GameInfo queueId={data.info.queueId} gameDuration={data.info.gameDuration} win={win}/>
-                <SummonerInfo data={summonerData}/>
+                <SummonerInfo data={summonerData} runesData={runesData}/>
                 {
-                    width >= 600?<PlayersInfo />:<></>
+                    width >= 600?<PlayersInfo participants={data.info.participants} />:<></>
                 }
             </div>
         </>

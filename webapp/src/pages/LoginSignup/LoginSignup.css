@@ -1,7 +1,6 @@
 .loginsignup {
     display: flex;
     flex-direction: column;
-    margin-top: 5vh;
     width: min(425px, 100% - 10px);
 }
 

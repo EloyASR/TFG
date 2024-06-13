@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.0",
     "log4js": "^6.7.0",
     "mongoose": "^7.1.0",
+    "node-cron": "^3.0.3",
     "node-fetch": "^2.6.9",
     "prom-client": "^13.0.0",
     "supertest": "^6.3.4",

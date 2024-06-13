@@ -11,7 +11,7 @@ function MenuOptionSimple({ option, length, selected, setSelected }) {
                     <div>
                         {option.name}
                     </div>
-                    <FontAwesomeIcon icon={option.icon} size="md" rotation={option.iconRotation}/>
+                    <FontAwesomeIcon icon={option.icon} size="sm" rotation={option.iconRotation}/>
                 </button>
             </div>
         </>

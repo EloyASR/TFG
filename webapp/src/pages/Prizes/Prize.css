@@ -1,0 +1,70 @@
+.prize-create {
+    max-width: 700px;
+    min-width: 700px;
+}
+
+.prizes-page {
+    width: min(100% - 20px, 1100px);
+    gap: 8px;
+}
+
+.prize-item {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--black300);
+    border-left: 8px solid var(--blue100);
+    border-right: 8px solid var(--blue100);
+    transition: all 200ms;
+    transform: scale(1);
+}
+
+.prize-item:hover {
+    transform: scale(1.03);
+}
+
+.prize-item > .prize-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.prize-item > .prize-img > img{
+    width: 100%;
+    height: 100%;
+}
+
+.prize-item > .prize-info > .prize-name {
+    color: var(--grey100);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.prize-item > .prize-info > .prize-desc {
+    display: flex;
+    flex-direction: row;
+    line-height: 24px;
+    font-size: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    color: var(--grey200);
+}
+
+.prize-item > .prize-buttons {
+    margin-left: auto;
+    margin-right: 16px;
+}
+
+.prize-item button {
+    display: flex;
+    align-items: center;
+}
+
+.prize-item button svg{
+    margin-right: 10px;
+}

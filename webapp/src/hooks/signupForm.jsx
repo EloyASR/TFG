@@ -34,7 +34,7 @@ export const Form = (props) => {
     const { children, ...other } = props
 
     return (
-        <form className={"login-form"} autoComplete="off" {...other}>
+        <form className={"signup-form"} autoComplete="off" {...other}>
             {children}
         </form>
     )

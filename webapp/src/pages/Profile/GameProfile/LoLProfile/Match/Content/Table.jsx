@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Row from "./Row"
 
-function Table({ data, gameDuration }) {
+function Table({ data, gameDuration, runesData}) {
     const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -69,11 +69,11 @@ function Table({ data, gameDuration }) {
                     </>
                     :
                     <>
-                        <Row data={data.find(participant => participant.teamPosition === "TOP")} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "JUNGLE")} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "MIDDLE")} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "BOTTOM")} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "UTILITY")} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data.find(participant => participant.teamPosition === "TOP")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data.find(participant => participant.teamPosition === "JUNGLE")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data.find(participant => participant.teamPosition === "MIDDLE")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data.find(participant => participant.teamPosition === "BOTTOM")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data.find(participant => participant.teamPosition === "UTILITY")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
                     </>
                 }
             </tbody>

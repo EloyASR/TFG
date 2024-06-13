@@ -6,15 +6,11 @@ const ResultSchema = mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: false
         },
-        loser: {
-            type: mongoose.Types.ObjectId,
-            required: false
-        },
-        winner_result: {
+        home_result: {
             type: Number,
             required: false,
         },
-        loser_result: {
+        away_result: {
             type: Number,
             required: false,
         },
@@ -28,6 +24,7 @@ const SerieSchema = mongoose.Schema(
     {
         type: {
             type: String,
+            enum: ['SINGLE','TEAM'],
             required: true
         },
         mode: {
@@ -50,9 +47,6 @@ const SerieSchema = mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: false
         },
-        date: {
-            type: Date,
-        },
         result:{
             type: ResultSchema,
             required: true
@@ -61,10 +55,10 @@ const SerieSchema = mongoose.Schema(
             type: String,
             required: [true, "Status is required"],
             enum: {
-                values: ['SCHEDULED_NO_PARTICIPANTS','SCHEDULED_WITH_PARTICIPANTS','IN_GAME','FINISHED','CANCELED','MATCH_NOT_PLAYED'],
-                message: "{VALUE} is not supported. Status must be SCHEDULED_NO_PARTICIPANTS, SCHEDULED_WITH_PARTICIPANTS, IN_GAME, FINISHED, CANCELED or MATCH_NOT_PLAYED",
+                values: ['SCHEDULED','IN_GAME','FINISHED'],
+                message: "{VALUE} is not supported. Status must be SCHEDULED, IN_GAME, FINISHED",
             },
-            default: 'SCHEDULED_NO_PARTICIPANTS',
+            default: 'SCHEDULED',
             trim: true
         }
     }

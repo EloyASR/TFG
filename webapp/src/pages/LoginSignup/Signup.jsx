@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useForm } from '../../hooks/signupForm'
+import { Form, useForm } from '../../hooks/signupForm'
 import signupService from '../../services/signupService';
 import InputText from "../components/InputText";
 import InputPassword from "../components/InputPassword";
 import { images } from "../../helpers/images";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import { icon } from "@fortawesome/fontawesome-svg-core";
+import { useNavigate } from "react-router";
+import {useAlert} from "../../context/AlertContext";
 
 const defaultData = {
     name: "",
@@ -23,6 +23,8 @@ const Signup = (props) => {
 
     const [imgModal, setImgModal] = useState(false);
     const [iconSelected, setIconSelected] = useState("icon_default.jpg");
+
+    const { showAlert } = useAlert();
 
     const navigate = useNavigate();
 
@@ -81,7 +83,7 @@ const Signup = (props) => {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        var checkErrors = { ...errors }
+        let checkErrors = { ...errors }
 
         if (!values.name) {
             checkErrors.name = "This field is required"
@@ -106,19 +108,21 @@ const Signup = (props) => {
         if (checkErrors.name || checkErrors.email || checkErrors.password || checkErrors.repeatpassword) {
             //SE HACE ALGUNA LIMPIEZA DE CAMPOS SI SE QUIERE
         } else {
-            try {
-                var data = {
-                    name: values.name,
-                    password: values.password,
-                    icon: iconSelected,
-                    email: values.email,
-                }
+            var data = {
+                name: values.name,
+                password: values.password,
+                icon: iconSelected,
+                email: values.email,
+            }
+
+            try{
                 await signupService.signup(data);
+                showAlert("User sign up succesfully", "success")
                 navigate("/login");
-            } catch (error) {
-                if (error.response.data.code === 10) {
+            }catch (error){
+                if (error.response.status === 400 && error.response.data.msg === "User with name:{" + values.name + "} already exists"){
                     checkErrors.name = "This name already exists";
-                    setErrors({ ...checkErrors })
+                    setErrors({ ...checkErrors });
                 }
             }
         }
@@ -126,7 +130,7 @@ const Signup = (props) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <div className="flex vertical spacing-medium">
                     <div className="size-content">
                         <div className="signup-img">
@@ -254,7 +258,7 @@ const Signup = (props) => {
                         </div>
                     </div>
                 </div>
-            </form>
+            </Form>
         </>
     )
 }

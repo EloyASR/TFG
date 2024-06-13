@@ -4,10 +4,22 @@
     flex-direction: row;
     justify-content: center;
     gap: 8px;
-    margin-top: 8px;
 }
 
-.nav-menu > button{
+.nav-menu > button:hover {
+    padding: 0px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--blue200);
+    background-color: var(--blue200);
+    color: var(--grey100);
+}
+
+.nav-menu > button {
     padding: 0px 14px;
     border-radius: 4px;
     font-size: 14px;
@@ -16,7 +28,15 @@
     align-items: center;
     justify-content: center;
 
+    border: 1px solid var(--blue300);
+    background-color: var(--blue300);
+    color: var(--grey100);
+}
+
+.nav-menu > button.selected {
     border: 1px solid var(--blue200);
     background-color: var(--blue200);
     color: var(--grey100);
+    font-weight: bold;
 }
+

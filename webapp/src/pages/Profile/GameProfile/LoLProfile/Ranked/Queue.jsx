@@ -1,4 +1,3 @@
-import defaultIcon from '../../../../../assets/multimedia/icon_01.png';
 import iron from '../../../../../assets/multimedia/ranked/Iron.png';
 import bronze from '../../../../../assets/multimedia/ranked/Bronze.png';
 import silver from '../../../../../assets/multimedia/ranked/Silver.png';
@@ -11,7 +10,7 @@ import challenger from '../../../../../assets/multimedia/ranked/Challenger.png';
 
 function Queue({ data }) {
 
-    var ranked_icons = {
+    let ranked_icons = {
         "IRON": iron,
         "BRONZE": bronze,
         "SILVER": silver,
@@ -30,7 +29,7 @@ function Queue({ data }) {
 
         return <>
             <div className="lol-queue">
-                <div className="header">{data.queueType === "RANKED_SOLO_5x5" ? "Solo Queue" : data.queueType === "RANKED_FLEX_SR" ? "Flex Queue" : "Test Queue"}</div>
+                <div className="header">{data.queueType === "RANKED_SOLO_5x5" ? "Clasificatoria en Solitario" : data.queueType === "RANKED_FLEX_SR" ? "Clasificatoria Flexible" : ""}</div>
                 <div className="body">
                     <div className="icon">
                         <img src={ranked_icons[data.tier]} alt="" />
@@ -41,9 +40,9 @@ function Queue({ data }) {
                     </div>
                     <div className="rate">
                         <div className="w-l">
-                            {data.wins}W - {data.losses}L
+                            {data.wins}V - {data.losses}D
                         </div>
-                        <div className="winrate">WinRate {data.rate} %</div>
+                        <div className="winrate">Ratio de Victoria {data.rate} %</div>
                     </div>
                 </div>
             </div>
@@ -52,8 +51,8 @@ function Queue({ data }) {
         return <>
             <div className="lol-queue">
                 <div className="header">
-                    {data.queueType === "RANKED_SOLO_5x5" ? "Solo Queue" : data.queueType === "RANKED_FLEX_SR" ? "Flex Queue" : "Test Queue"}
-                    <span className="unranked">Unranked</span>
+                    {data.queueType === "RANKED_SOLO_5x5" ? "Clasificatoria en Solitario" : data.queueType === "RANKED_FLEX_SR" ? "Clasificatoria Flexible" : ""}
+                    <span className="unranked">Sin clasificar</span>
                 </div>
             </div>
         </>;

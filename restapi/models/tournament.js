@@ -3,16 +3,93 @@
 const mongoose = require("mongoose");
 
 
-const ParticipantSchema = mongoose.Schema(
+const SponsorSchema = mongoose.Schema(
     {
-        identifier: {
+        id:  {
             type: mongoose.Types.ObjectId,
             required: true
         },
-        type: {
+        prize: {
+            type: mongoose.Types.ObjectId,
+            required: false
+        },
+        banners300x600:{
+            type: [String]
+        },
+        banners1100x300:{
+            type: [String]
+        },
+        status:{
+            type: String,
+            enum:["ACCEPTED", "DENIED", "PENDING"],
+            default: "PENDING",
+            required: true
+        }
+    }
+)
+
+const ParticipantSchema = mongoose.Schema(
+    {
+        id: {
+            type: mongoose.Types.ObjectId,
+            required: true
+        },
+        participantType: {
             type: String,
             enum: ["SINGLE","TEAM"],
             required: true
+        },
+        status: {
+            type: String,
+            enum: ["DISQUALIFIED", "SELECTED", "NOT_SELECTED", "ELIMINATED", "WINNER"],
+        }
+    }
+)
+
+const ParticipantPhaseBracketSchema = mongoose.Schema(
+    {
+        id: {
+            type: mongoose.Types.ObjectId,
+            required: false,
+        },
+        participantType: {
+            type: String,
+            enum: ["SINGLE","TEAM"],
+            required: false
+        },
+        status: {
+            type: String,
+            enum: ["DISQUALIFIED", "SELECTED", "NOT_SELECTED", "ELIMINATED", "WINNER"],
+            required: false
+        }
+    }
+)
+
+const LeagueSerieSchema = mongoose.Schema(
+    {
+        roundNumber: {
+            type: Number,
+            required: true,
+        },
+        serieNumber: {
+            type: Number,
+            required: true,
+        },
+        identifier:{
+            type: mongoose.Types.ObjectId,
+            required:false,
+        }
+    }
+)
+
+const LeagueRoundSchema = mongoose.Schema(
+    {
+        roundNumber: {
+            type: Number,
+            required: true
+        },
+        series: {
+            type: [LeagueSerieSchema]
         }
     }
 )
@@ -21,16 +98,72 @@ const LeagueSchema = mongoose.Schema(
     {
         size: {
             type: Number,
+            enum: [4, 6, 8, 10, 12, 14, 16],
             required: true
+        },
+        bestOf: {
+            type: Number,
+            enum: [1, 3, 5],
+            required: true
+        },
+        winPoints: {
+            type: Number,
+        },
+        tiePoints: {
+            type: Number,
+        },
+        losePoints: {
+            type: Number,
+        },
+        rounds: {
+            type: [LeagueRoundSchema]
+        },
+        topParticipants: {
+            type: [mongoose.Types.ObjectId]
         }
     }
 )
 
-const GroupsSchema = mongoose.Schema({
-
-})
-
-
+const BracketSerieSchema = mongoose.Schema(
+    {
+        serieNumber: {
+            type: Number,
+            required: true,
+        },
+        roundNumber: {
+            type: Number,
+            required: true,
+        },
+        home_participant_parent_round: {
+            type: Number,
+            required: true,
+        },
+        home_participant_parent_serie: {
+            type: Number,
+            required: true
+        },
+        away_participant_parent_round: {
+            type: Number,
+            required: true,
+        },
+        away_participant_parent_serie: {
+            type: Number,
+            required: true
+        },
+        next_round: {
+            type: Number,
+            required: true,
+        },
+        next_serie: {
+            type: Number,
+            required: true,
+        },
+        identifier:{
+            type: mongoose.Types.ObjectId,
+            required:false,
+        }
+    }
+)
 
 const BracketRoundSchema = mongoose.Schema(
     {
@@ -39,7 +172,7 @@ const BracketRoundSchema = mongoose.Schema(
             required: true
         },
         series: {
-            type: [mongoose.Types.ObjectId]
+            type: [BracketSerieSchema]
         }
     }
 )
@@ -48,7 +181,7 @@ const BracketsSchema = mongoose.Schema(
     {
         size: {
             type: Number,
-            enum: [2, 4, 8, 16, 32],
+            enum: [2, 4, 8, 16],
             required: true
         },
         tieBreaker: {
@@ -60,6 +193,9 @@ const BracketsSchema = mongoose.Schema(
             enum: [1, 3, 5],
             required: true
         },
+        phaseParticipants: {
+            type: [ParticipantPhaseBracketSchema]
+        },
         rounds: {
             type: [BracketRoundSchema]
         }
@@ -68,6 +204,7 @@ const BracketsSchema = mongoose.Schema(
 
 const PhaseSchema = mongoose.Schema(
     {
+
         phaseOrder: {
             type: Number,
             min: 0,
@@ -75,7 +212,7 @@ const PhaseSchema = mongoose.Schema(
         },
         formatType: {
             type: String,
-            enum: ['LEAGUE_PHASE', 'GROUPS_PHASE', 'BRACKET_PHASE'],
+            enum: ['LEAGUE_PHASE', 'BRACKET_PHASE'],
             required: true
         },
         phaseName: {
@@ -86,14 +223,14 @@ const PhaseSchema = mongoose.Schema(
             type: LeagueSchema,
             required: false
         },
-        groupsData: {
-            type: GroupsSchema,
-            required: false
-        },
         bracketData: {
             type: BracketsSchema,
             required: false
         },
+        phaseStatus: {
+            type: String,
+            enum: ["EDITABLE", "CLOSED", "ON_COURSE", "FINISHED"]
+        }
     }
 )
 
@@ -104,8 +241,12 @@ const TournamentSchema = mongoose.Schema(
             required: true
         },
         game: {
+            type: mongoose.Types.ObjectId,
+            required: true,
+        },
+        mode: {
             type: String,
-            required: true
+            required: true,
         },
         size: {
             type: Number,
@@ -114,7 +255,7 @@ const TournamentSchema = mongoose.Schema(
             max: 32
         },
         participants: {
-            type: [ParticipantSchema]                                        //HAY QUE CAMBIAR ESTE CAMPO PARA QUE SEA UN ARRAY
+            type: [ParticipantSchema]
         },
         description: {
             type: String,
@@ -124,16 +265,18 @@ const TournamentSchema = mongoose.Schema(
             type: String,
             required: false
         },
-        playersType: {
+        participantsType: {
             type: String,
-            enum: ["Jugadores", "Equipos"]
+            enum: ["SINGLE", "TEAM"],
+            default: ["SINGLE"],
+            required: true,
         },
         phases: {
             type: [PhaseSchema]
         },
         online: {
             type: Boolean,
-            required: false
+            required: true
         },
         location: {
             type: String,
@@ -143,12 +286,12 @@ const TournamentSchema = mongoose.Schema(
             type: Boolean,
             required: true
         },
-        inscriptionDateInit: {
+        inscriptionInitDate: {
             type: Date,
             min: '2000-01-01',
             required: false
         },
-        inscriptionDateEnd: {
+        inscriptionEndDate: {
             type: Date,
             min: '2000-01-01',
             required: false
@@ -156,20 +299,33 @@ const TournamentSchema = mongoose.Schema(
         initDate: {
             type: Date,
             min: '2000-01-01',
-            required: false
+            required: true
         },
         endDate: {
             type: Date,
             min: '2000-01-01',
-            required: false
+            required: true
         },
-        img256x256: {
-            type: String,
-            required: false
+        sponsoredBy: {
+            type: [SponsorSchema],
         },
-        img1300x150: {
+        prize: {
+            type: mongoose.Types.ObjectId,
+        },
+        creator: {
+            type: mongoose.Types.ObjectId,
+            required: true
+        },
+        currentPhase: {
+            type: Number,
+            required: true,
+            min: 0,
+            default: 0
+        },
+        status: {
             type: String,
-            required: false
+            enum: ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "ON_COURSE", "FINISHED"],
+            default: "CLOSED"
         }
     },
     {

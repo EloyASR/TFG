@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
     max-width: none;
     width: 100%;
 }
@@ -20,7 +19,6 @@
     flex-wrap: nowrap;
     gap: 10px;
     width: 100%;
-
 }
 
 .lol-profile>.body>.left {
@@ -66,8 +64,9 @@
     align-items: center;
     align-content: center;
     padding: 0px 12px;
-    line-height: 35px;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: bold;
     color: var(--grey100);
 }
 
@@ -127,22 +126,11 @@
 }
 
 .lol-header>.body>.info>.data>.button {
-    margin-top: 8px;
+    margin-top: 0.75rem;
 }
 
 .lol-header>.body>.info>.data>.button>.update {
-    padding: 0px 14px;
-    border-radius: 4px;
-    font-size: 14px;
-    margin-right: 8px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    border: 1px solid var(--blue100);
-    background-color: var(--blue100);
-    color: var(--grey100);
 }
 
 .lol-header>.body>.masteries {
@@ -240,9 +228,8 @@
     flex-direction: column;
     justify-content: center;
     min-width: 300px;
-    background-color: var(--blue200);
-    gap: 1px;
     border-radius: 8px;
+    overflow: hidden;
 }
 
 .lol-queue>.header {
@@ -253,13 +240,17 @@
     align-content: center;
     padding: 0px 12px;
     line-height: 35px;
-    font-size: 14px;
+    border-radius: 8px 8px 0 0;
+    background-color: var(--blue200);
     color: var(--grey100);
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 40px;
 }
 
 .lol-queue>.header>.unranked {
     margin-left: auto;
-    color: var(--blue300);
+    color: var(--grey200);
     font-weight: bold;
 }
 
@@ -792,7 +783,7 @@
 }
 
 .partida-lol-detalle>.match-header>div>.action:hover {
-    background-color: var(--black200);
+    background-color: var(--blue100);
 }
 
 .partida-lol-detalle>.match-header>div>.action>svg {
@@ -802,7 +793,7 @@
 }
 
 .partida-lol-detalle>.match-header>div>.action>svg>path {
-    fill: var(--black300);
+    fill: black;
 }
 
 .partida-lol-detalle>.match-header>.win>.action {
@@ -814,7 +805,7 @@
 }
 
 .partida-lol-detalle>.match-header>.win>.action>svg>path {
-    fill: var(--blue300);
+    fill: black;
 }
 
 .partida-lol-detalle>.match-header>.lose>.action {
@@ -826,7 +817,7 @@
 }
 
 .partida-lol-detalle>.match-header>.lose>.action>svg>path {
-    fill: var(--red300);
+    fill: black;
 }
 
 

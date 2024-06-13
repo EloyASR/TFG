@@ -1,7 +1,13 @@
-import { Fragment } from "react";
+import {Fragment, useEffect, useState} from "react";
 
-function InputRadio({ label, itemsList, id, name, checked, onChange }) {
+function InputRadio({ label, itemsList, id, name, checked, onChange, disabled}) {
 
+    const [checkedRadio, setCheckedRadio] = useState("");
+
+    useEffect(() => {
+        setCheckedRadio(checked)
+        console.log(checked);
+    },[checked])
 
     return (
         <>
@@ -17,10 +23,10 @@ function InputRadio({ label, itemsList, id, name, checked, onChange }) {
                                     <div className="form-row">
                                         <div className="form-field own-form-radio">
                                             {
-                                                checked === item ?
-                                                    <input id={id + "-" + index} name={name} type="radio" value={item} defaultChecked onChange={(e) => onChange(e.target.value)} />
+                                                checkedRadio === item ?
+                                                    <input id={id + "-" + index} name={name} type="radio" value={item} defaultChecked={true} onChange={(e) => onChange(e.target.value)} disabled={disabled} />
                                                     :
-                                                    <input id={id + "-" + index} name={name} type="radio" value={item} onChange={(e) => onChange(e.target.value)} />
+                                                    <input id={id + "-" + index} name={name} type="radio" value={item} onChange={(e) => onChange(e.target.value)} disabled={disabled}/>
                                             }
                                             <label>{item}</label>
                                         </div>

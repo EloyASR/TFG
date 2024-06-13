@@ -3,10 +3,14 @@
     flex-direction: column;
     justify-content: center;
     width:min(100% - 20px, 1100px);
-    margin-top: 8px;
 }
 
 .profile > .nav{
     display: flex;
     width: 100%;
+}
+
+.edit-profile {
+    max-width: 700px;
+    min-width: 700px;
 }

@@ -1,11 +1,12 @@
 import React from "react";
-import { useForm } from '../../hooks/loginForm';
+import { Form, useForm } from '../../hooks/loginForm';
 import loginService from '../../services/loginService';
 import InputPassword from "../components/InputPassword";
 import InputText from "../components/InputText";
 import { images } from "../../helpers/images";
-import { Navigate } from "react-router-dom";
 import { isExpired, decodeToken } from "react-jwt";
+import { applyTheme } from '../../context/theme';
+import {useNavigate} from "react-router";
 
 const defaultData = {
     name: "",
@@ -13,6 +14,8 @@ const defaultData = {
 }
 
 const Login = (props) => {
+
+    const navigate = useNavigate();
 
     const validate = (fieldValues = values) => {
         const temp = { ...errors }
@@ -47,6 +50,7 @@ const Login = (props) => {
             console.log("usuario valido")
             localStorage.setItem("session", token);
             localStorage.setItem("user", JSON.stringify(user));
+            applyTheme();
         }
         resetForm()
     }
@@ -54,14 +58,14 @@ const Login = (props) => {
     if (localStorage.getItem("session") !== null) {
         if (decodeToken(localStorage.getItem("session")) !== null) {
             if (!isExpired(localStorage.getItem("session"))) {
-                return <Navigate to="/" />
+                navigate("/profile");
             };
         }
     }
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <div className="flex vertical spacing-large">
                     <div className="size-content">
                         <div className="login-img">
@@ -82,7 +86,7 @@ const Login = (props) => {
                         </div>
                     </div>
                 </div>
-            </form>
+            </Form>
         </>
     )
 }

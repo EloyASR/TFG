@@ -1,11 +1,11 @@
 import Summoner from "./Summoner";
 import Items from "./Items";
 
-function SummonerInfo({data}) {
+function SummonerInfo({data, runesData}) {
     return (
         <>
             <div className="summoner_info">
-                <Summoner data={data}/>
+                <Summoner data={data} runesData={runesData}/>
                 <Items data={data}/>
             </div>
         </>

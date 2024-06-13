@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const {dbConnection} = require("../database/config");
 const mongoose = require('mongoose');
 const Match = require('../models/match');
-const User = require('../models/user');
+const {User} = require('../models/user');
 const Game = require('../models/game');
 const Team = require('../models/team');
 const Serie = require('../models/serie');
@@ -64,7 +64,7 @@ beforeAll(async () => {
 
     await dbConnection()
 
-    app.use('/api/matches',require('../newroutes/match.js'))
+    app.use('/api/matches',require('../routes/match.js'))
 
     //Puerto del servidor
     app.set('port', 5000);
@@ -185,7 +185,7 @@ describe('GET /api/matches', () => {
 
 //PRUEBAS FIND UN SOLO MATCH
 
-describe('GET /api/matches/{id}', () => {
+describe('GET /api/matches/:id', () => {
 
     it('Buscar un match válido', async () => {
         const res = await request(app).get('/api/matches/65df8098fc13ae2387cd3c5f');
@@ -376,7 +376,7 @@ describe('PUT /api/matches/:id', () => {
 
 //PRUEBAS DE BORRADO DE UN MATCH
 
-describe('DELETE /api/matches/{id}', ()=>{
+describe('DELETE /api/matches/:id', ()=>{
     it('Borrar un match inexistente', async ()=>{
         const res = await request(app)
             .delete('/api/matches/65d804c41c1127813e516f6a')

@@ -1,24 +1,29 @@
 import defaultIcon from '../../../../../assets/multimedia/icon_01.png';
 import Mastery from './Mastery';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faRefresh} from "@fortawesome/free-solid-svg-icons";
 
 
-function Header({handleClick,data}) {
+function Header({handleClick,data,name,tag}) {
     return <>
         <div className="lol-header">
             <div className="header">
-                LoL - Profile
+                Perfil - League of Legends
             </div>
             <div className="body content">
                 <div className="info">
                     <div className="icon">
-                        {data.profileIconId ? <img src={"http://ddragon.leagueoflegends.com/cdn/13.9.1/img/profileicon/" + data.profileIconId + ".png"} alt="icono" />
+                        {data.profileIconId ? <img src={"http://ddragon.leagueoflegends.com/cdn/14.11.1/img/profileicon/" + data.profileIconId + ".png"} alt="icono" />
                         : <img src={defaultIcon} alt="icono por defecto" />}
                     </div>
                     <div className="data">
-                        <div className="nickname">{data.name ? data.name: "Nickname"}</div>
+                        <div className="nickname">{name && tag ? name + "#" + tag : "Nickname"}</div>
                         <div className="lvl">{data.summonerLevel ? "Lvl " + data.summonerLevel: "Lvl 0"}</div>
-                        <div className="button">
-                            <button onClick={handleClick} className="update">Update</button>
+                        <div className="button accept add">
+                            <button onClick={handleClick} className="update">
+                                <FontAwesomeIcon icon={faRefresh}/>
+                                Recargar
+                            </button>
                         </div>
                     </div>
                 </div>

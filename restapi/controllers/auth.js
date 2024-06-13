@@ -1,8 +1,7 @@
-const { response, request } = require('express')
-const { generateJWT } = require('../helpers/jwt')
-const { checkPassword } = require('../helpers/password')
+const {checkPassword} = require("../helpers/password");
+const {generateJWT} = require("../helpers/jwt");
 
-const User = require('../models/user')
+const {User} = require('../models/user')
 
 const login = async (req, res) => {
 
@@ -12,8 +11,8 @@ const login = async (req, res) => {
 
     const user = await User.findOne(queryStatements)
 
-    const isPasswordCorrect = user === null ? false : checkPassword(password, user.password)
-    
+    const isPasswordCorrect = user === null ? false : await checkPassword(password, user.password)
+
     console.log(isPasswordCorrect)
 
     if (!(user && isPasswordCorrect)) {
@@ -22,8 +21,6 @@ const login = async (req, res) => {
         const token = await generateJWT(user.id)
         res.json({ user, token })
     }
-
-    
 }
 
 module.exports = {login}

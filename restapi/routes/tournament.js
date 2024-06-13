@@ -1,14 +1,12 @@
-const { Router } = require('express')
-const { getTournament, createTournament } = require('../controllers/tournament')
+const { Router } = require('express');
+const { find, findAll, add, upd, del } = require('../controllers/tournament');
 
-const router = Router()
+const router = Router();
 
-router.post('/create', createTournament);
+router.get('/:id', find);
+router.get('/', findAll);
+router.post('/', add);
+router.put('/:id', upd);
+router.delete('/:id', del);
 
-router.get('/:tournamentId', getTournament);
-
-router.get('/:tournamentId/info')
-
-
-
-module.exports = router
+module.exports = router;

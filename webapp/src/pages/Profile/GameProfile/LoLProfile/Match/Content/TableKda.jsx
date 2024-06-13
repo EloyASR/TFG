@@ -12,8 +12,15 @@ function TableKda({ data, teamTotalKills}) {
         };
     }, []);
 
-    var kdarate= Math.trunc((data.kills+data.assists)/data.deaths*100);
-    var killparticipation = Math.trunc((data.kills+data.assists)/teamTotalKills*100);
+    let kdarate = 0;
+
+    if(data.deaths === 0){
+        kdarate = "Prefect(" + (data.kills+data.assists) + ")";
+    }else{
+        kdarate = Math.trunc((data.kills+data.assists)/data.deaths*100);
+    }
+
+    let killparticipation = Math.trunc((data.kills+data.assists)/teamTotalKills*100);
     
     return <>
         <td className="table-kda">

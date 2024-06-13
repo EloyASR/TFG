@@ -8,7 +8,7 @@ const LoginSignup = ({ selected }) => {
     return (
         <>
             <div className="main">
-                <div className="loginsignup">
+                <div className="loginsignup mt-4">
                     <div className="card">
                         <div className="card-header">
                             {

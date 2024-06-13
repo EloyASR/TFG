@@ -75,23 +75,8 @@
     margin-inline: 10px;
 }
 
-.navsuperior > .account > .button{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 35px;
-    margin-inline: 10px;
-}
-
-.navsuperior > .account > .button > button{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 35px;
+.navsuperior > .account > .log-sign button {
     border:none;
-    width: 80px;
-    font-size: 14px;
 }
 
 .navinferior{

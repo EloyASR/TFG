@@ -12,7 +12,7 @@ const ModeSchema = mongoose.Schema({
     },
     type: {
         type:String,
-        enum: ['1VS1', '2VS2', '3VS3', '4VS4', '5VS5'],
+        enum: ["SINGLE","TEAM"],
         required: true,
     }
 });
@@ -32,7 +32,7 @@ const GameSchema = mongoose.Schema({
 });
 
 GameSchema.methods.toJSON = function () {
-    const { __v, _id, ...match} = this.toObject()
+    const { __v, _id, ...game} = this.toObject()
     game.uid = _id
     return game;
 }

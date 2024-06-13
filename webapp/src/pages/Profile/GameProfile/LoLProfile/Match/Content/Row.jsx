@@ -6,7 +6,7 @@ import TableKda from "./TableKda";
 import TableWards from "./TableWards";
 import { useState, useEffect } from "react";
 
-function Row({data, teamTopDmg, teamTotalKills, gameDuration}){
+function Row({data, teamTopDmg, teamTotalKills, gameDuration, runesData}){
 
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -22,7 +22,7 @@ function Row({data, teamTopDmg, teamTotalKills, gameDuration}){
 
     return <>
         <tr>
-            <TableChampion data={data}/>
+            <TableChampion data={data} runesData={runesData}/>
             <TableKda data={data} teamTotalKills={teamTotalKills}/>
             {
                 width >= 550?<TableDamage data={data} teamTopDmg={teamTopDmg}/>:<></>
