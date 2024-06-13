@@ -41,7 +41,7 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@v5
         env:
           MONGODB_ATLAS: ${{secrets.MONGODB_ATLAS}}
-          SECRETORPRIVATEKEY: ${{secrets.SECRET_OR_PRIVATE_KEY}}
+          SECRETORPRIVATEKEY: ${{secrets.SECRETORPRIVATEKEY}}
           RIOT_APIKEY: ${{secrets.RIOT_APIKEY}}
           RIOT_ACCOUNT_QUERY: https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/
           SUMMONER_ACCOUNT_QUERY: https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/
