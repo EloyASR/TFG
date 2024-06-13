@@ -9,7 +9,7 @@ jobs:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
         env:
@@ -31,7 +31,7 @@ jobs:
     name: Push restapi Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
         env:
@@ -65,7 +65,7 @@ jobs:
           user: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           command: |
-            echo ${{secrets.DOCKER_PUSH_TOKEN}} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            echo ${{secrets.DOCKER_PUSH_TOKEN}} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
             wget https://raw.githubusercontent.com/eloyasr/tfg/master/docker-compose-deploy.yml -O docker-compose.yml
             sudo docker-compose stop
             sudo docker-compose rm -f
