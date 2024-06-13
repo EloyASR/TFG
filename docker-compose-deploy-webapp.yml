@@ -1,0 +1,6 @@
+version: '3.5'
+services:
+  webapp:
+    image: ghcr.io/eloyasr/tfg/webapp:latest
+    ports:
+      - "3000:3000"

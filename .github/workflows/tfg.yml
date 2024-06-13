@@ -13,7 +13,7 @@ jobs:
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
         env:
-          API_URI: http://${{ secrets.DEPLOY_HOST }}:5000/api
+          API_URI: http://${{ secrets.DEPLOY_HOST_RESTAPI }}:5000/api
           CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
           CLOUDINARY_API_KEY: ${{secrets.CLOUDINARY_API_KEY}}
           CLOUDINARY_UPLOAD_PRESET: ${{secrets.CLOUDINARY_UPLOAD_PRESET}}
@@ -53,21 +53,39 @@ jobs:
           workdir: restapi
           buildargs: MONGODB_ATLAS SECRETORPRIVATEKEY RIOT_APIKEY SUMMONER_ACCOUNT_QUERY MASTERY_QUERY RANKEDS_QUERY CHAMPIONS_QUERY GAMES_QUERY GAME_QUERY
 
-  deploy:
-    name: Deploy over SSH
+  deploy_rest_api:
+    name: Deploy over SSH RESTAPI
     runs-on: ubuntu-latest
-    needs: [docker-push-restapi, docker-push-webapp]
+    needs: [docker-push-restapi]
     steps:
       - name: Deploy over SSH
         uses: fifsky/ssh-action@master
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
+          host: ${{ secrets.DEPLOY_HOST_RESTAPI }}
           user: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           command: |
             echo ${{secrets.DOCKER_PUSH_TOKEN}} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            wget https://raw.githubusercontent.com/eloyasr/tfg/master/docker-compose-deploy.yml -O docker-compose.yml
+            wget https://raw.githubusercontent.com/eloyasr/tfg/master/docker-compose-deploy-restapi.yml -O docker-compose.yml
             sudo docker-compose stop
             sudo docker-compose rm -f
             sudo docker-compose pull   
             sudo docker-compose up -d
+  deploy_web_app:
+    name: Deploy over SSH WEBAPP
+      runs-on: ubuntu-latest
+      needs: [docker-push-webapp ]
+      steps:
+        - name: Deploy over SSH
+          uses: fifsky/ssh-action@master
+          with:
+            host: ${{ secrets.DEPLOY_HOST_WEBAPP }}
+            user: ${{ secrets.DEPLOY_USER }}
+            key: ${{ secrets.DEPLOY_KEY }}
+            command: |
+              echo ${{secrets.DOCKER_PUSH_TOKEN}} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
+              wget https://raw.githubusercontent.com/eloyasr/tfg/master/docker-compose-deploy-webapp.yml -O docker-compose.yml
+              sudo docker-compose stop
+              sudo docker-compose rm -f
+              sudo docker-compose pull   
+              sudo docker-compose up -d
