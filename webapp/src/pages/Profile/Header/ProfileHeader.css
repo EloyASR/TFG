@@ -67,11 +67,11 @@
     color: var(--grey100);
 }
 
-.profile > .header > .body > .info > .data > .lvl{
+.profile > .header > .body > .info > .data > .email{
     line-height: 16px;
     margin-top: 2px;
-    font-size: 12px;
-    color: var(--grey200);
+    font-size: 14px;
+    color: var(--grey100);
 }
 
 .profile > .header > .body > .info > .data .button{

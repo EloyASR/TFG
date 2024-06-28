@@ -11,7 +11,7 @@ const ValorantAccountInfoSchema = Schema(
             type:String,
             required: true
         },
-        encryptedSummonerId:{
+        summonerId:{
             type:String,
             required: true
         },
@@ -94,7 +94,8 @@ const UserSchema = Schema(
         },
         role: {
             type: String,
-            enum: ["USER", "ADMIN", "COMPANY"]
+            enum: ["USER", "ADMIN", "COMPANY"],
+            required: true
         },
         icon: {
             type: String,

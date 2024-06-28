@@ -124,17 +124,23 @@ function Nav({ tab, setTab }) {
                 <div className="icon">
                     <img src={appIcon} alt="" />
                 </div>
-                <div className="buscador">
-                    <input type="text" placeholder="&#128269; Search..."></input>
+                <div className="name">
+                    <span>ToorEII</span>
                 </div>
                 <div className="account">
                     <div className="log-sign">
                         {
                             localStorage.getItem("session") === null ?
                                 <>
-                                    <Link to="/login">
-                                        <img src={defaultIcon} alt="" />
-                                    </Link>
+                                    <form onSubmit={(e) => {
+                                        navigate("/login");
+                                    }}>
+                                        <div className={""}>
+                                            <button id="login" type="submit">
+                                            LOG IN
+                                            </button>
+                                        </div>
+                                    </form>
                                 </>
                                 :
                                 <>
@@ -146,8 +152,8 @@ function Nav({ tab, setTab }) {
                                         navigate("/login");
                                     }}>
                                         <div className={""}>
-                                            <button type="submit">
-                                                Logout
+                                            <button id="logout" type="submit">
+                                                LOG OUT
                                             </button>
                                         </div>
                                     </form>

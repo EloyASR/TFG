@@ -1,7 +1,6 @@
 const Tournament = require("../models/tournament");
 const mongoose = require("mongoose");
 const Prize = require("../models/prize");
-const Team = require("../models/team");
 const Game = require("../models/game");
 const {User} = require("../models/user");
 
@@ -41,7 +40,7 @@ const findAll = async (req,res) => {
     let tournaments = [];
     let count = 0;
 
-    const {page = 1, limit = 5, creator, sponsor, status, game} = req.query;
+    const {page = 1, limit = 5, creator, sponsor, status, game, sponsorStatus} = req.query;
 
     let query = {}
 
@@ -69,12 +68,13 @@ const findAll = async (req,res) => {
         if (mongoose.mongo.ObjectId.isValid(sponsor)) {
             query["sponsoredBy.id"] = sponsor;
         }
+        if (sponsorStatus && sponsorStatus !== "ALL"){
+            query["sponsoredBy.status"] = sponsorStatus;
+        }
     }
 
-    console.log(query);
-
     try {
-        tournaments = await Tournament.find(query)
+        tournaments = await Tournament.find(query).sort({createdAt: -1})
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
@@ -181,29 +181,10 @@ const add = async (req,res) => {
                     }
                 }
             }
-            if (participantsType === "TEAM") {
-                tournamentToAdd.participantsType = "TEAM";
-                if (participants) {
-                    let teamsIds = participants.map((team) => new mongoose.Types.ObjectId(team.id));
-                    let teams = await Team.find({'_id': {$in: teamsIds}})
-                    if (participants.length !== teams.length) {
-                        loggerError.error("ERROR 404: Team not found");
-                        res.status(404);
-                        return res.send({msg: "Team not found"});
-                    }
-                }
-            }
         } else {
-            tournamentToAdd.participantsType = "SINGLE";
-            if (participants) {
-                let usersIds = participants.map((user) => new mongoose.Types.ObjectId(user.id));
-                let users = await User.find({'_id': {$in: usersIds}})
-                if (participants.length !== users.length) {
-                    loggerError.error("ERROR 404: User not found");
-                    res.status(404);
-                    return res.send({msg: "User not found"});
-                }
-            }
+            loggerError.error("ERROR 400: Participants type must be settled");
+            res.status(400);
+            return res.send({msg: 'Participants type must be settled'});
         }
 
         tournamentToAdd.participants = participants;
@@ -338,8 +319,6 @@ const upd = async (req,res) => {
 
     let {tournament} = req.body;
 
-    console.log(tournament);
-
     //COMPROBAMOS SI EL ID DEL TORNEO EXISTE
 
     if(!mongoose.mongo.ObjectId.isValid(req.params.id)){
@@ -436,19 +415,6 @@ const upd = async (req,res) => {
                     dataToUpdate.participants = tournament.participants;
                 }
             }
-        } else if (participantsType === "TEAM") {
-            dataToUpdate.participantsType = "TEAM";
-            if (tournament.participants) {
-                let teamsIds = tournament.participants.map((team) => new mongoose.Types.ObjectId(team.id));
-                let teams = await Team.find({'_id': {$in: teamsIds}})
-                if (tournament.participants.length !== teams.length) {
-                    loggerError.error("ERROR 404: Team not found");
-                    res.status(404);
-                    return res.send({msg: "Team not found"});
-                } else {
-                    dataToUpdate.participants = tournament.participants;
-                }
-            }
         } else {
             loggerError.error("ERROR 400: ParticipantsType {" + tournament.participantsType + "} not valid");
             res.status(400);
@@ -464,17 +430,12 @@ const upd = async (req,res) => {
             dataToUpdate.location = tournament.location;
         }
 
+        let now = new Date();
+        let start = new Date(tournamentFound.initDate);
+        let end = new Date(tournamentFound.endDate);
+
         //COMPROBAR FECHAS
-
-        console.log(tournament.endDate)
-        console.log(tournament.startDate)
         if(tournament.endDate || tournament.startDate) {
-
-            console.log("Actualizando fechas")
-            let now = new Date();
-
-            let start = new Date(tournamentFound.initDate);
-            let end = new Date(tournamentFound.endDate);
 
             if (tournament.initDate) {
                 start = new Date(tournament.initDate);
@@ -512,16 +473,15 @@ const upd = async (req,res) => {
         dataToUpdate.inscription = tournament.inscription;
 
         let inscription = tournamentFound.inscription;
+        let insStart = new Date(tournamentFound.inscriptionInitDate);
+        let insEnd = new Date(tournamentFound.inscriptionEndDate);
 
         if(tournament.inscription !== undefined){
             inscription = tournament.inscription;
         }
 
         if (inscription === true) {
-            if(tournamentFound.inscriptionInitDate && tournamentFound.inscriptionEndDate) {
-
-                let insStart = new Date(tournamentFound.inscriptionInitDate);
-                let insEnd = new Date(tournamentFound.inscriptionEndDate);
+            if(tournament.inscriptionInitDate && tournament.inscriptionEndDate) {
 
                 if (tournament.inscriptionInitDate) {
                     insStart = new Date(tournament.inscriptionInitDate);
@@ -554,7 +514,6 @@ const upd = async (req,res) => {
                     res.status(400)
                     return res.send({msg: 'Inscription start date must be before inscription end date'});
                 }
-
                 dataToUpdate.inscriptionInitDate = insStart;
                 dataToUpdate.inscriptionEndDate = insEnd;
             }else {
@@ -596,7 +555,6 @@ const upd = async (req,res) => {
                 }
 
                 if(sponsor.prize && sponsor.prize !== "") {
-                    console.log("Sponsor entra")
                     if (!mongoose.mongo.ObjectId.isValid(sponsor.prize)) {
                         loggerError.error("ERROR 404: Prize with Id:{" + sponsor.prize + "} not found");
                         res.status(404);
@@ -671,11 +629,11 @@ const del = async (req,res) => {
         return res.send({msg:"Invalid tournament Id:{" + req.params.id + "}"});
     }
 
-    let tournamentFound = await Team.findById(req.params.id);
+    let tournamentFound = await Tournament.findById(req.params.id);
 
     //Comprobamos si el torneo que se quiere borrar existe o no
     if(tournamentFound){
-        let result = await Team.deleteOne({"_id": new mongoose.mongo.ObjectId(req.params.id)});
+        let result = await Tournament.deleteOne({"_id": new mongoose.mongo.ObjectId(req.params.id)});
         if(result.deletedCount === 1){
             loggerInfo.info("CODE 200: Tournament with {" + req.params.id + "} deleted successfully")
             res.status(200)

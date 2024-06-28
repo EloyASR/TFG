@@ -23,8 +23,6 @@ function Pagination({numPages, onClick}) {
             const rightEdge = selectedPage >= numPages - 3;
             const middle = !leftEdge && !rightEdge;
 
-            console.log(leftEdge,rightEdge,middle);
-
             if (leftEdge) {
                 for (let i = 1; i <= 5; i++) {
                     newButtons.push(i);
@@ -47,8 +45,6 @@ function Pagination({numPages, onClick}) {
                 newButtons.push(numPages);
             }
         }
-
-        console.log(buttons);
         setButtons(newButtons);
     }
 

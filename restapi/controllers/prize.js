@@ -2,7 +2,6 @@ const Prize = require("../models/prize")
 const {User} = require("../models/user");
 
 const mongoose = require("mongoose");
-const Tournament = require("../models/tournament");
 
 const find = async (req,res) => {
 
@@ -43,15 +42,13 @@ const findAll = async (req,res) => {
 
     const {page = 1, limit = 5, creator} = req.query;
 
-    console.log(req.query.page);
-
     try {
 
         //FIND BY CREATOR
         if (creator) {
             prizes = await Prize.find({
                 creator: creator
-            })
+            }).sort({"createdAt": -1})
                 .limit(limit*1)
                 .skip((page-1) * limit)
                 .exec();
@@ -59,7 +56,7 @@ const findAll = async (req,res) => {
                 creator: creator
             });
         }else{
-            prizes = await Prize.find({})
+            prizes = await Prize.find({}).sort({"createdAt": -1})
                 .limit(limit*1)
                 .skip((page-1) * limit)
                 .exec();

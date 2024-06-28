@@ -25,8 +25,6 @@ function Queue({ data }) {
 
     if (data.ranked) {
 
-        console.log(iron);
-
         return <>
             <div className="lol-queue">
                 <div className="header">{data.queueType === "RANKED_SOLO_5x5" ? "Clasificatoria en Solitario" : data.queueType === "RANKED_FLEX_SR" ? "Clasificatoria Flexible" : ""}</div>

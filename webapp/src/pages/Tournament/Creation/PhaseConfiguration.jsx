@@ -30,18 +30,16 @@ function PhaseConfiguration({ index, phase, phases, size, setPhaseName, setPhase
         }
     }
 
-    console.log(phases);
-
     return (
         <>
             <div className="size-content">
                 <div className="flex spacing-large align-spread">
                     <div className="flex spacing-large">
                         <div className="size-1-2">
-                            <InputText id={"phasename-" + index} label={"Nombre de fase"} placeholder={"Nombre de fase"} defaultValue={phase.phaseName} value={phase.phaseName} onChange={(e) => setPhaseName(e.target.value)} required={true} />
+                            <InputText id={"phasename-" + index} name={"phasename-" + index} label={"Nombre de fase *"} placeholder={"Nombre de fase"} defaultValue={phase.phaseName} onChange={(e) => setPhaseName(e.target.value)} required={true} />
                         </div>
                         <div className="size-1-2">
-                            <Combobox id={"phasetype-" + index} itemsList={returnOptions()} label={"Tipo de fase"} placeholder={"Tipo de fase"} onChange={(type) => setPhaseType(type)} selection={() => {
+                            <Combobox id={"phasetype-" + index} name={"phasetype-" + index} itemsList={returnOptions()} label={"Tipo de fase *"} placeholder={"Tipo de fase"} onChange={(type) => setPhaseType(type)} selection={() => {
                                 switch (phase.formatType) {
                                     case "LEAGUE_PHASE":
                                         return "League";

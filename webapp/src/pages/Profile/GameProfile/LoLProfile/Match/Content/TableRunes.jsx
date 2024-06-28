@@ -14,14 +14,17 @@ function TableRunes({data, runesData}) {
         <div className="table-runes">
             {
                 runesData ?
-                    <img src={"http://ddragon.leagueoflegends.com/cdn/img/"+searchPrincipalRuneImage().icon } alt="Rune icon" />
+                    <img src={"http://ddragon.leagueoflegends.com/cdn/img/" + searchPrincipalRuneImage().icon}
+                         alt="Rune icon"/>
                     :
-                    <img src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png" alt="Rune icon" />
+                    <img
+                        src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png"
+                        alt="Rune icon"/>
             }
             {
                 runesData ?
                     <img
-                        src={"http://ddragon.leagueoflegends.com/cdn/img/" + runesData.find((rune) => rune.id === data.perks.styles[1].style).icon}
+                        src={"http://ddragon.leagueoflegends.com/cdn/img/" + runesData.find((rune) => rune.id === data.perks.styles[1].style)?.icon}
                         alt="Rune icon"/>
                     :
                     <img

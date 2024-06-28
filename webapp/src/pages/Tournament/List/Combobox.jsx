@@ -17,7 +17,6 @@ function Combobox({ itemsList, label, name, placeholder, onChange, id, selection
         setSelected(item)
         setExpanded(false);
         onChange(item);
-        console.log(item);
     }
 
     return (
@@ -51,7 +50,7 @@ function Combobox({ itemsList, label, name, placeholder, onChange, id, selection
                                     placeholder={placeholder}
                                     onKeyDown={(e)=>e.preventDefault()} />
                             }
-                            <button className="widget-button" type="button" title="Nombre de tooltip" aria-label="open combobox" aria-disabled="false" onClick={() => setExpanded(!expanded)}>
+                            <button className="widget-button" id={name + "-combobox-button"} type="button" title="size" aria-label="open combobox" aria-disabled="false" onClick={() => setExpanded(!expanded)}>
                                 {expanded ?
                                     <FontAwesomeIcon icon={faCaretUp} style={{ color: "#000000" }} />
                                     :
@@ -68,6 +67,7 @@ function Combobox({ itemsList, label, name, placeholder, onChange, id, selection
                                             {itemsList.map((item, index) =>
                                                 <div key={index}
                                                     role="option"
+                                                    id={id + "-combobox-option-" + index}
                                                     data-rw-option=""
                                                     data-rw-focusable=""
                                                     tabIndex="-1"

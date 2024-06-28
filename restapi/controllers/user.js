@@ -61,7 +61,6 @@ const findAll = async (req, res) => {
 
 //SIGNUP
 const add = async (req, res) => {
-    console.log("/signup");
 
     let loggerInfo = req.app.get("loggerInfo");
     let loggerError = req.app.get("loggerError");

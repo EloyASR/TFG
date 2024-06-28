@@ -8,10 +8,13 @@ import StepBar from "./StepBar";
 import tournamentService from "../../../services/tournamentService";
 import {getDatePlusOneDay, getDateTomorrow} from "../../../helpers/dates";
 import {useAlert} from "../../../context/AlertContext";
+import {useNavigate} from "react-router";
 
 function TournamentCreationPage() {
 
     const { showAlert } = useAlert();
+
+    const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
 
@@ -187,8 +190,6 @@ function TournamentCreationPage() {
 
     const setPhaseData = (data, index) => {
 
-        console.log(data);
-
         let copiaFases = [];
 
         phases.forEach((item) => {
@@ -217,7 +218,6 @@ function TournamentCreationPage() {
 
     const handleStep1Continue = function () {
         setStep(2);
-        console.log("Pasamos al paso 2");
     }
 
     const handleStep2Continue = function () {
@@ -230,12 +230,10 @@ function TournamentCreationPage() {
 
     const handleStep3Continue = function () {
         setStep(4);
-        console.log("Pasamos al paso 4");
     }
 
     const handleStep3Back = function () {
         setStep(2);
-        console.log("Volvemos al paso 2");
     }
 
     const handleStep4Continue = async () => {
@@ -250,7 +248,7 @@ function TournamentCreationPage() {
             participants: [],
             description: descAndRules.description,
             rules: descAndRules.rules,
-            playersType: "SINGLE",
+            participantsType: "SINGLE",
             phases: phases,
             online: true,
             location: undefined,
@@ -289,16 +287,14 @@ function TournamentCreationPage() {
         }else if(result.code === 200){
             showAlert(result.msg, "success");
         }
+
+        navigate("/my-tournaments");
+
     }
 
     const handleStep4Back = function () {
         setStep(3);
-        console.log("Volvemos al paso 3");
     }
-
-    console.log(baseInfo);
-    console.log(phases);
-    console.log(register);
 
     return (
         <>

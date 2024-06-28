@@ -10,6 +10,8 @@ import InputText from "../../components/InputText";
 import InputRadio from "../../components/InputRadio";
 import {useAlert} from "../../../context/AlertContext";
 import EditStatusModal from "./EditStatusModal";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 function TournamentEdit({tournamentId}) {
 
@@ -284,14 +286,12 @@ function TournamentEdit({tournamentId}) {
     };
 
     const handleRadioChange = (e) => {
-        console.log(e);
         setTournamentHavePrize(e === "Sí");
     }
 
     const handlePrizeChange = (item) => {
         let prize = prizes.find(p=>p.name===item);
         if(prize !== undefined && tournamentHavePrize) {
-            console.log(prize);
             setPrizeSelected(prize);
             handleInputChange({target:{name: "prize", value: prize.uid}})
         }else{
@@ -305,6 +305,16 @@ function TournamentEdit({tournamentId}) {
         handleInputChange({target: {name: "status", value: getStatusValue(item)}});
     }
 
+    const handleDeleteTournament = async () => {
+        try{
+            await tournamentService.deleteTournament(tournamentId, JSON.parse(localStorage.getItem('user')).uid);
+            showAlert("Torneo eliminado con éxito", "success");
+        }catch(e){
+            showAlert("Se ha producido un error al intentar eliminar el torneo", "error");
+        }
+        navigate("/my-tournaments");
+    }
+
     return <>
         <div className="main">
             <Form onSubmit={handleSubmit}>
@@ -316,29 +326,42 @@ function TournamentEdit({tournamentId}) {
                         <div className="size-content">
                             <div className="flex vertical align-top spacing-large">
                                 <div className="inputs flex vertical gap-large size-1-1">
-                                    <div className="flex spacing-large size-1-1">
+                                    <div className="flex spacing-large align-end size-1-1">
+
+                                    </div>
+                                    <div className="flex spacing-large align-bottom size-1-1">
                                         {
                                             tournamentData !== undefined ?
                                                 <>
-                                                    <div className="size-1-2">
+                                                    <div className="size-4-6">
                                                         <div className="form-row">
                                                             <div className="own-form-text">
-                                                                <InputText id="name" type="text" label={"Nombre del torneo"} constraint={"(30 caracteres maximo)"} error={errors.name} defaultValue={tournamentData.name} placeholder="Nombre del torneo" name="name" maxLength="30" onChange={handleInputChange}/>
+                                                                <InputText id="name" type="text" label={"Nombre del torneo *"} constraint={"(30 caracteres máximo)"} error={errors.name} defaultValue={tournamentData.name} placeholder="Nombre del torneo" name="name" maxLength="30" onChange={handleInputChange}/>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {
+                                                        tournamentData && (tournamentData.status === "CLOSED" || tournamentData.status === "INSCRIPTIONS_OPEN" || tournamentData.status === "INSCRIPTIONS_CLOSED") ?
+                                                        <div className="size-2-6 delete">
+                                                            <button type="button" onClick={()=>handleDeleteTournament()}>
+                                                                <FontAwesomeIcon icon={faTrashCan}/> Eliminar Torneo
+                                                            </button>
+                                                        </div>
+                                                        :
+                                                        <></>
+                                                    }
                                                     <div className="size-1-2">
                                                         <div className="form-row">
                                                             <div className="own-form-text">
-                                                                <Combobox id={"status"} name={"status"} itemsList={getStatusNames()} label={"Estado"} placeholder={"Estado"} selection={ statusSelected ? getStatusName(statusSelected) : ""} error={errors.status} onChange={(item) => {handleStatusChange(item)}} />
+                                                                <Combobox id={"status"} name={"status"} itemsList={getStatusNames()} label={"Estado *"} placeholder={"Estado"} selection={ statusSelected ? getStatusName(statusSelected) : ""} error={errors.status} onChange={(item) => {handleStatusChange(item)}} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="size-1-1">
-                                                        <InputTextarea label={"Descripción"} name="description" id="description" defaultValue={tournamentData.description} onChange={handleInputChange}/>
+                                                        <InputTextarea label={"Descripción"} name="description" id="description" placeholder={"Descripción del torneo"} defaultValue={tournamentData.description} onChange={handleInputChange}/>
                                                     </div>
                                                     <div className="size-1-1">
-                                                        <InputTextarea label={"Reglas"} name="rules" id="rules" defaultValue={tournamentData.rules} onChange={handleInputChange}/>
+                                                        <InputTextarea label={"Reglas"} name="rules" id="rules" placeholder={"Reglas del torneo"} defaultValue={tournamentData.rules} onChange={handleInputChange}/>
                                                     </div>
                                                     {
                                                         tournamentData !== undefined ?
@@ -349,7 +372,7 @@ function TournamentEdit({tournamentId}) {
                                                                 {
                                                                     tournamentHavePrize ?
                                                                         <div className="size-2-3">
-                                                                            <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio"} placeholder={"Premio"} selection={ prizeSelected ? prizeSelected.name : ""} error={errors.prize} onChange={(item) => {handlePrizeChange(item)}} />
+                                                                            <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio *"} placeholder={"Premio"} selection={ prizeSelected ? prizeSelected.name : ""} error={errors.prize} onChange={(item) => {handlePrizeChange(item)}} />
                                                                         </div>
                                                                         :
                                                                         <></>

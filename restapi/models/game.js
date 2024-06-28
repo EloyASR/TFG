@@ -13,7 +13,7 @@ const ModeSchema = mongoose.Schema({
     type: {
         type:String,
         enum: ["SINGLE","TEAM"],
-        required: true,
+        required: false,
     }
 });
 

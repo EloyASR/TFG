@@ -76,10 +76,10 @@ function Step4Form({ actionBack, actionContinue, setRegister, register, setStart
                             <div className="flex vertical gap-large size-content">
                                 <div className="flex vertical spacing-medium">
                                     <div className="size-content">
-                                        <InputDate label={"Inicio del torneo"} onChange={(startDate)=>changeStartAndEnd(startDate,null)} dateAndTime={startAndEnd.startDateAndTime} min={register.value ? register.endInscriptionDateAndTime : getDateTomorrow()} max={startAndEnd.endDateAndTime}/>
+                                        <InputDate label={"Inicio del torneo *"} onChange={(startDate)=>changeStartAndEnd(startDate,null)} dateAndTime={startAndEnd.startDateAndTime} min={register.value ? register.endInscriptionDateAndTime : getDateTomorrow()} max={startAndEnd.endDateAndTime}/>
                                     </div>
                                     <div className="size-content">
-                                        <InputDate label={"Fin del torneo"} onChange={(endDate)=>changeStartAndEnd(null,endDate)} dateAndTime={startAndEnd.endDateAndTime} min={startAndEnd.startDateAndTime}/>
+                                        <InputDate label={"Fin del torneo *"} onChange={(endDate)=>changeStartAndEnd(null,endDate)} dateAndTime={startAndEnd.endDateAndTime} min={startAndEnd.startDateAndTime}/>
                                     </div>
                                 </div>
                                 <div className="flex vertical spacing-medium">
@@ -103,7 +103,7 @@ function Step4Form({ actionBack, actionContinue, setRegister, register, setStart
                                         actionBack();
                                     }}>
                                         <FontAwesomeIcon icon={faArrowLeft} />
-                                        Back
+                                        Atrás
                                     </button>
                                 </div>
                                 <div className="size-content add accept">

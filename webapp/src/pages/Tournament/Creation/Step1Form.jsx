@@ -149,7 +149,6 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
     }
 
     const handleGameChange = (e) => {
-        console.log(informacionBasica)
         setWrittingGame(true);
         setWrittingGameValue(e.target.value);
         setShowSearchOptions(true);
@@ -173,7 +172,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                                         <div className="form-row">
                                             <div className="form-label">
                                                 <label htmlFor="">
-                                                    Nombre de torneo
+                                                    Nombre de torneo *
                                                     <span className="constraint">{"(30 caracteres maximo)"}</span>
                                                 </label>
                                             </div>
@@ -187,7 +186,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                             <div className="size-content">
                                 <div className="form-row">
                                     <div className="form-label">
-                                        <label htmlFor="">Juego</label>
+                                        <label htmlFor="">Juego *</label>
                                     </div>
                                     <div className="flex vertical spacing-medium">
                                         <div className="size-content">
@@ -195,7 +194,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                                                 {
                                                     games.map((game, index) =>{
                                                         return <div key={index} className="size-1-6">
-                                                                <div className="img-container" onClick={() => {
+                                                                <div id={game._name + "-img" } className="img-container" onClick={() => {
                                                                     setGame(game)
                                                                     setShowSelectedGame(true);
                                                                     setShowSearchInput(false);
@@ -286,7 +285,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                             <div className="size-content">
                                 <div className="flex spacing-large">
                                     <div className="size-1-4">
-                                        <Combobox  placeholder={"Tamaño"} label={"Tamaño del torneo"} itemsList={[2,4,6,8,10,12,14,16]} onChange={(value)=>setSize(value)} selection={informacionBasica.size} required={true}/>
+                                        <Combobox  id={"size"} name={"size"} placeholder={"Tamaño"} label={"Tamaño del torneo *"} itemsList={[2,4,6,8,10,12,14,16]} onChange={(value)=>setSize(value)} selection={informacionBasica.size} required={true}/>
                                     </div>
                                     <>
                                         <div className="size-1-4">
@@ -295,7 +294,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                                         {
                                             informacionBasica.havePrize ?
                                                 <div className="size-1-2">
-                                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio"} placeholder={"Premio"} selection={getPrizeName(informacionBasica.prize)} onChange={(item) => {handlePrizeChange(item)}} required={true} />
+                                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio *"} placeholder={"Premio"} selection={getPrizeName(informacionBasica.prize)} onChange={(item) => {handlePrizeChange(item)}} required={true} />
                                                 </div>
                                                 :
                                                 <></>
@@ -309,7 +308,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                         <div className="flex align-end">
                             <div className="size-content next accept">
                                 <button type="submit">
-                                    Continue
+                                    Continuar
                                     <FontAwesomeIcon icon={faArrowRight} />
                                 </button>
                             </div>

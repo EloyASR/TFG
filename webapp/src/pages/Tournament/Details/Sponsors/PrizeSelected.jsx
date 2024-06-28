@@ -12,7 +12,6 @@ function PrizeSelected({prizeId}) {
 
     const getPrize = async () => {
         let result = await prizeService.getPrize(prizeId);
-        console.log(result);
         setPrize(result)
     }
 

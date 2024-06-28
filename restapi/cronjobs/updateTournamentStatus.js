@@ -17,10 +17,7 @@ const updateTournamentStatus = () => {
                 { endDate: { $lt: now }, status: 'open' },
                 { status: 'close' }
             );
-
-            console.log('Estado de torneos actualizado');
         } catch (error) {
-            console.error('Error actualizando el estado de los torneos:', error);
         }
     });
 };

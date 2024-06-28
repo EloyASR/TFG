@@ -14,8 +14,6 @@ const getAccountData = async (req, res) => {
     let userid = encodeURIComponent(req.body.userid);
     let tag = encodeURIComponent(req.body.tagline);
 
-    console.log(userid, tag);
-
     try{
         let result01 = await fetch(RIOT_ACCOUNT_QUERY + userid + "/" + tag + "?api_key=" + APIKEY);
         let accountData = await result01.json();
@@ -32,8 +30,6 @@ const getAccountData = async (req, res) => {
             summonerId:summonerData.id,
             accountId: summonerData.accountId
         }
-
-        console.log(dataToSend);
 
         res.status(200);
         return res.send(dataToSend);
@@ -226,7 +222,6 @@ async function getGamesIds(puuid, numeroPartidaInit, numeroPartidaEnd) {
         }
 
         let data = await res.json();
-        console.log(data);
         return data;
 
     } catch (err) {
@@ -250,4 +245,10 @@ async function getGameData(matchId) {
     }
 }
 
-module.exports = {getAccountData, getProfileData, getGamesData}
+async function getGameInfo(req,res) {
+    let matchId = encodeURIComponent(req.body.gameId);
+    res.status(200);
+    return res.send(await getGameData(matchId));
+}
+
+module.exports = {getAccountData, getProfileData, getGamesData, getGameInfo}

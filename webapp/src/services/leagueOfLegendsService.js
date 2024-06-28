@@ -15,7 +15,6 @@ const leagueOfLegendsService = {
             });
             return data;
         }catch(e){
-            console.log(e);
         }
     },
 
@@ -30,7 +29,6 @@ const leagueOfLegendsService = {
             });
             return data;
         }catch(e){
-            console.log(e);
         }
     },
 
@@ -44,7 +42,19 @@ const leagueOfLegendsService = {
             });
             return data;
         }catch(e){
-            console.log(e);
+        }
+    },
+
+    getGameData: async (gameId) => {
+        try{
+
+            let url = baseurl + 'leagueoflegends/info/game';
+
+            let {data} = await axios.post(url,{
+                gameId
+            });
+            return data;
+        }catch(e){
         }
     },
 
@@ -54,10 +64,8 @@ const leagueOfLegendsService = {
 
             let {data} = await axios.get(url);
 
-            console.log(data);
             return data;
         }catch(e){
-            console.log(e);
         }
     }
 

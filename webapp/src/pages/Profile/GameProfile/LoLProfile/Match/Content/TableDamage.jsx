@@ -1,8 +1,7 @@
 function TableDamage({data, teamTopDmg}) {
     /* IMPORTANTE: CAMBIAR PROGRESS POR UN ELEMENTO PROGRESS DE HTML */
 
-    var percentage = Math.trunc(data.totalDamageDealtToChampions/teamTopDmg*100);
-    console.log(percentage);
+    let percentage = Math.trunc(data.totalDamageDealtToChampions/teamTopDmg*100);
 
     return <>
         <td className="table-damage">

@@ -25,20 +25,14 @@ function LoLProfile({name, tag, puuid, summonerId}) {
 
     const getProfileData = async e => {
         const datos = await leagueOfLegendsService.getProfileData(puuid, summonerId)
-        if(!datos){
-            console.log("datos no encontrados")
-        }else{
-            console.log("datos encontrados")
+        if(datos){
             setProfileData(datos)
         }
     }
 
     const getGamesData = async e => {
         const datos = await leagueOfLegendsService.getGamesData(puuid)
-        if(!datos){
-            console.log("datos no encontrados")
-        }else{
-            console.log("datos encontrados")
+        if(datos){
             datos.summonerId = summonerId;
             setGamesData(datos)
         }
@@ -46,10 +40,7 @@ function LoLProfile({name, tag, puuid, summonerId}) {
 
     const getRunesData = async e => {
         const datos = await leagueOfLegendsService.getRunesData()
-        if(!datos){
-            console.log("datos no encontrados")
-        }else{
-            console.log("datos encontrados")
+        if(datos){
             setRunesData(datos)
         }
     }

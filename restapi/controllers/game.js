@@ -15,8 +15,6 @@ const find = async (req,res) => {
     try {
         let game = await Game.findById(req.params.id);
 
-        console.log(game);
-
         if (game) {
             loggerInfo.info("CODE 200: Game with Id:{" + req.params.id + "} found successfully");
             res.status(200);
@@ -62,7 +60,7 @@ const add = async (req,res) => {
     let loggerInfo = req.app.get("loggerInfo");
     let loggerError = req.app.get("loggerError");
 
-    let { private_name, name, modes} = req.body;
+    let { _name, name, modes} = req.body;
 
     const createGame = async (g_private_name, g_name, g_modes) => {
         try {
@@ -81,15 +79,15 @@ const add = async (req,res) => {
             })
 
         }catch(e){
-            loggerError.error("ERROR 400: There was a problem creating the prize", e);
+            loggerError.error("ERROR 400: There was a problem creating the game", e);
             res.status(400);
-            return res.send({msg:"There was a problem creating the prize: " + e});
+            return res.send({msg:"There was a problem creating the game: " + e});
         }
     }
 
     //Se debe comprobar la validez de los modes con el Schema
 
-    await createGame(private_name,name,modes);
+    await createGame(_name,name,modes);
 }
 
 const upd = async (req,res) => {

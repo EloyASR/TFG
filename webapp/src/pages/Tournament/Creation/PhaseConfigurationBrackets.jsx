@@ -101,10 +101,10 @@ function PhaseConfigurationBrackets({ size, phaseId, bracketsData, setPhaseData,
             <div className="size-content">
                 <div className="flex spacing-large">
                     <div className="size-1-2">
-                        <Combobox placeholder={"Número de jugadores"} label={"Número de jugadores"} itemsList={getBracketSize(size, previousPhase)} id={"numerojugadores-" + phaseId} onChange={(value) => setSize(value)} selection={bracketsData.size} required={true}/>
+                        <Combobox placeholder={"Número de jugadores"} label={"Número de jugadores *"} itemsList={getBracketSize(size, previousPhase)} id={"numerojugadores-" + phaseId} name={"numerojugadores-" + phaseId} onChange={(value) => setSize(value)} selection={bracketsData.size} required={true}/>
                     </div>
                     <div className="size-1-2">
-                        <Combobox label={"Encuentro al mejor de"} placeholder={"Numero de partidas por enfrentamiento"} itemsList={[1, 3, 5]} id={"encuentromejorde-" + phaseId} name={"encuentromejorde-" + phaseId} selection={bracketsData.bestOf} onChange={(value) => setBestOf(value)} required={true} />
+                        <Combobox label={"Encuentro al mejor de: *"} placeholder={"Numero de partidas por enfrentamiento"} itemsList={[1, 3, 5]} id={"encuentromejorde-" + phaseId} name={"encuentromejorde-" + phaseId} selection={bracketsData.bestOf} onChange={(value) => setBestOf(value)} required={true} />
                     </div>
                 </div>
             </div>

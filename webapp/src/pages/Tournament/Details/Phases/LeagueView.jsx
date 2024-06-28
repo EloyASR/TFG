@@ -23,7 +23,6 @@ function LeagueView({tournamentData,
     const [participantsWithName, setParticipantsWithName] = useState([])
 
     useEffect(() => {
-        console.log("Actualizando League View");
         establishData();
     }, [tournamentData]);
 
@@ -136,21 +135,25 @@ function LeagueView({tournamentData,
     const onOpenShowSerieInfo = (serie) => {
         setSelectedSerie(serie);
         setShowSeriesInfo(true);
+        document.body.style.overflow = "hidden";
     }
 
     const onCloseShowSerieInfo = () => {
         setSelectedSerie(undefined);
         setShowSeriesInfo(false);
+        document.body.style.overflow = "auto";
     }
 
     const onOpenModifySeries = (serie) => {
         setSelectedSerie(serie);
         setShowSeriesEdit(true);
+        document.body.style.overflow = "hidden";
     }
 
     const onCloseModifySerie = () => {
         setSelectedSerie(undefined);
         setShowSeriesEdit(false);
+        document.body.style.overflow = "auto";
     }
 
     const winnerLoser = (serieData) => {
@@ -379,8 +382,6 @@ function LeagueView({tournamentData,
             }
             currentPosition++;
         }
-
-        console.log(results);
 
         return results;
     }

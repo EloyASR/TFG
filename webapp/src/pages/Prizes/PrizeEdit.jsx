@@ -84,8 +84,6 @@ function PrizeEdit({ prizeId }) {
 
                     const public_id = lastSegment.split(".")[0];
 
-                    console.log(public_id);
-
                     //Borramos la imagen antigua
                     await cloudinaryService.deleteFile(public_id)
 
@@ -97,12 +95,10 @@ function PrizeEdit({ prizeId }) {
 
         try {
             let result = await prizeService.updatePrize(prize.uid, {prize: data});
-            console.log(result);
             resetForm();
-            showAlert('Prize updated successfully', "success");
+            showAlert('Premio actualizado correctamente', "success");
         }catch (e) {
-            showAlert('There was a problem updating the prize', "error");
-            console.log(e);
+            showAlert('Ha ocurrido un problema actualizando el premio', "error");
         }
 
         navigate('/prizes');

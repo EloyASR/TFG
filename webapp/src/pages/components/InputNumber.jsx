@@ -3,24 +3,13 @@ function InputNumber({ id, name, min, max, label, onChange, placeholder, default
 
     const onChangeInput = (e) => {
 
-        console.log(min);
-        console.log(max);
-        console.log(Number(e.target.value))
-
-        console.log(e);
-
-        console.log((min !== null && min !== undefined) && (Number(e.target.value) < min))
-        console.log((max !== null && max !== undefined) && (Number(e.target.value) > max))
-
         if((min !== null && min !== undefined) && (Number(e.target.value) < min)) {
-            console.log("Menor que el mínimo")
             e.target.value = min + "";
             onChange(e);
             return;
         }
 
         if((max !== null && max !== undefined) && (Number(e.target.value) > max)) {
-            console.log("Mayor que el máximo")
             e.target.value = max + "";
             onChange(e);
             return;

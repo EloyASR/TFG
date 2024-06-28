@@ -12,12 +12,9 @@ function Table({ data, gameDuration, runesData}) {
         };
     }, []);
 
-    var dmgs = data.map(element => element.totalDamageDealtToChampions)
-    var teamTopDmg = dmgs.reduce((accumulator,currentValue)=>accumulator <= currentValue ? currentValue : accumulator,0);
-    var teamTotalKills = data.map(element => element.kills).reduce((acumulator, currentValue) => acumulator + currentValue, 0);
-
-    console.log(dmgs);
-    console.log(teamTopDmg);
+    let dmgs = data.map(element => element.totalDamageDealtToChampions)
+    let teamTopDmg = dmgs.reduce((accumulator,currentValue)=>accumulator <= currentValue ? currentValue : accumulator,0);
+    let teamTotalKills = data.map(element => element.kills).reduce((acumulator, currentValue) => acumulator + currentValue, 0);
 
     return <>
         <table>
@@ -41,7 +38,7 @@ function Table({ data, gameDuration, runesData}) {
             <thead>
                 <tr>
                     <th colSpan="4">
-                        <span className="result">Victoria</span>(Equipo Azul)
+                        <span className="result">{data[0].win ? <>Victoria</> : <>Derrota</> } {data[0].teamId === 100 ? <>(Equipo Azul)</> : <>(Equipo Rojo)</> }</span>
                     </th>
                     <th>KDA</th>
                     {
@@ -69,11 +66,11 @@ function Table({ data, gameDuration, runesData}) {
                     </>
                     :
                     <>
-                        <Row data={data.find(participant => participant.teamPosition === "TOP")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "JUNGLE")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "MIDDLE")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "BOTTOM")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
-                        <Row data={data.find(participant => participant.teamPosition === "UTILITY")} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data[0]} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data[1]} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data[2]} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data[3]} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
+                        <Row data={data[4]} runesData={runesData} teamTopDmg={teamTopDmg} teamTotalKills={teamTotalKills} gameDuration={gameDuration} />
                     </>
                 }
             </tbody>

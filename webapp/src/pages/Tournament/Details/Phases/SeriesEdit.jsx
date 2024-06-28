@@ -8,6 +8,8 @@ import serieService from "../../../../services/serieService";
 import {useAlert} from "../../../../context/AlertContext";
 import tournamentService from "../../../../services/tournamentService";
 import matchService from "../../../../services/matchService";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 function SeriesEdit({tournamentId,
                         tournamentStatus,
@@ -258,8 +260,6 @@ function SeriesEdit({tournamentId,
         let participantsToAdd = []
 
         let participantsNotSelectedInRound = getParticipantsNotSelectedInRound();
-
-        console.log(participantsNotSelectedInRound);
 
         if(participantPosition === "away"){
             if(homeParticipantSelected) {
@@ -530,160 +530,162 @@ function SeriesEdit({tournamentId,
     return (
         <>
             <div className="modal-background">
-                <form>
-                <div className="card modal-series-modifier">
-                    <div className="card-header">
-                        Modificar Serie
-                    </div>
-                    <div className="card-content">
-                        <div className="flex vertical spacing-large">
-                            <div className="flex spacing-large">
-                                {seriesData ? <>
-                                        <div className="size-4-5">
-                                            <Combobox id={"participant-1"}
-                                                      itemsList={getParticipantsNotSelected(serie.roundNumber,"home").map((participant) => participant.name)}
-                                                      label={"Participante 1"} placeholder={"Participante 1"}
-                                                      selection={homeParticipantSelected ? homeParticipantSelected.name : "-- Sin participante --"}
-                                                      onChange={(e) => onChangeParticipantCombobox(e, null)}/>
-                                        </div>
-                                        <div className="size-1-5">
-                                            <InputNumber id={"result-participant-1"}
-                                                         min={0}
-                                                         max={getMaxScoreHomeParticipant()}
-                                                         label={"Result"}
-                                                         defaultValue = {seriesData.serieData.result.home_result}
-                                                         placeholder={0}
-                                                         disabled={homeParticipantSelected === undefined || ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "FINISHED"].includes(tournamentStatus)}
-                                                         onChange={(e) => {setScoreHome(Number(e.target.value))}}/>
-                                        </div>
-                                    </>
-                                    :
-                                    <></>
-                                }
-                            </div>
-                            <div className="flex spacing-large">
-                                {
-                                    seriesData ? <>
+                <div>
+                    <form>
+                    <div className="card modal-series-modifier">
+                        <div className="card-header">
+                            Modificar Serie
+                        </div>
+                        <div className="card-content">
+                            <div className="flex vertical spacing-large">
+                                <div className="flex spacing-large">
+                                    {seriesData ? <>
                                             <div className="size-4-5">
-                                                <Combobox id={"participant-2"}
-                                                          itemsList={getParticipantsNotSelected(serie.roundNumber, "away").map((participant) => participant.name)}
-                                                          label={"Participante 2"}
-                                                          placeholder={"Participante 2"}
-                                                          selection={awayParticipantSelected ? awayParticipantSelected.name : "-- Sin participante --"}
-                                                          onChange={(e) => onChangeParticipantCombobox(null, e)} />
+                                                <Combobox id={"participant-1"}
+                                                          itemsList={getParticipantsNotSelected(serie.roundNumber,"home").map((participant) => participant.name)}
+                                                          label={"Participante 1"} placeholder={"Participante 1"}
+                                                          selection={homeParticipantSelected ? homeParticipantSelected.name : "-- Sin participante --"}
+                                                          onChange={(e) => onChangeParticipantCombobox(e, null)}/>
                                             </div>
                                             <div className="size-1-5">
-                                                <InputNumber id={"result-participant-2"}
+                                                <InputNumber id={"result-participant-1"}
                                                              min={0}
-                                                             max={ getMaxScoreAwayParticipant() }
-                                                             defaultValue = {seriesData.serieData.result.away_result}
+                                                             max={getMaxScoreHomeParticipant()}
                                                              label={"Result"}
-                                                             disabled={awayParticipantSelected === undefined || ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "FINISHED"].includes(tournamentStatus)}
+                                                             defaultValue = {seriesData.serieData.result.home_result}
                                                              placeholder={0}
-                                                             onChange={(e)=>{setScoreAway(Number(e.target.value))}}/>
+                                                             disabled={homeParticipantSelected === undefined || ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "FINISHED"].includes(tournamentStatus)}
+                                                             onChange={(e) => {setScoreHome(Number(e.target.value))}}/>
+                                            </div>
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                </div>
+                                <div className="flex spacing-large">
+                                    {
+                                        seriesData ? <>
+                                                <div className="size-4-5">
+                                                    <Combobox id={"participant-2"}
+                                                              itemsList={getParticipantsNotSelected(serie.roundNumber, "away").map((participant) => participant.name)}
+                                                              label={"Participante 2"}
+                                                              placeholder={"Participante 2"}
+                                                              selection={awayParticipantSelected ? awayParticipantSelected.name : "-- Sin participante --"}
+                                                              onChange={(e) => onChangeParticipantCombobox(null, e)} />
+                                                </div>
+                                                <div className="size-1-5">
+                                                    <InputNumber id={"result-participant-2"}
+                                                                 min={0}
+                                                                 max={ getMaxScoreAwayParticipant() }
+                                                                 defaultValue = {seriesData.serieData.result.away_result}
+                                                                 label={"Result"}
+                                                                 disabled={awayParticipantSelected === undefined || ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "FINISHED"].includes(tournamentStatus)}
+                                                                 placeholder={0}
+                                                                 onChange={(e)=>{setScoreAway(Number(e.target.value))}}/>
+                                                </div>
+                                            </>
+                                            :
+                                            <></>
+                                    }
+                                </div>
+                                {
+                                    tournamentStatus && tournamentStatus === "ON_COURSE" ?
+                                        <>
+                                            <div className="flex align-spread spacing-large">
+                                                <div>
+                                                    Status
+                                                </div>
+                                                <div className="flex align-middle size-all">
+                                                    <HorizontalSpliter color="white" />
+                                                </div>
+                                            </div>
+                                            <div className="flex spacing-large">
+                                                <div className="size-2-5">
+                                                    <Combobox id={"status"}
+                                                              itemsList={statusList.map(status => status.name)}
+                                                              label={"Estado"} placeholder={"Status"}
+                                                              selection={status ? status : null}
+                                                              onChange={(e) => setStatus(e)} />
+                                                </div>
+                                                {
+                                                    status !== undefined && (homeParticipantSelected !== undefined || awayParticipantSelected  !== undefined) && status === "Finalizado" ?
+                                                        <div className="size-3-5">
+                                                            <Combobox id={"winner"}
+                                                                      itemsList={getParticipantsToBeWinners().map((participant) => participant.name)}
+                                                                      label={"Ganador"}
+                                                                      placeholder={"Ganador"}
+                                                                      selection={selectedWinner ? selectedWinner.name : "-- Sin ganador --"}
+                                                                      onChange={(e) => onChangeWinnerCombobox(e)} />
+                                                        </div>
+                                                        :
+                                                        <></>
+                                                }
+
+                                            </div>
+                                            <div className="flex align-spread spacing-large">
+                                                <div>
+                                                    Matches
+                                                </div>
+                                                <div className="flex align-middle size-all">
+                                                    <HorizontalSpliter color="white"/>
+                                                </div>
                                             </div>
                                         </>
                                         :
                                         <></>
                                 }
-                            </div>
-                            {
-                                tournamentStatus && tournamentStatus === "ON_COURSE" ?
-                                    <>
-                                        <div className="flex align-spread spacing-large">
-                                            <div>
-                                                Status
-                                            </div>
-                                            <div className="flex align-middle size-all">
-                                                <HorizontalSpliter color="white" />
-                                            </div>
-                                        </div>
-                                        <div className="flex spacing-large">
-                                            <div className="size-2-5">
-                                                <Combobox id={"status"}
-                                                          itemsList={statusList.map(status => status.name)}
-                                                          label={"Estado"} placeholder={"Status"}
-                                                          selection={status ? status : null}
-                                                          onChange={(e) => setStatus(e)} />
-                                            </div>
-                                            {
-                                                status !== undefined && (homeParticipantSelected !== undefined || awayParticipantSelected  !== undefined) && status === "Finalizado" ?
-                                                    <div className="size-3-5">
-                                                        <Combobox id={"winner"}
-                                                                  itemsList={getParticipantsToBeWinners().map((participant) => participant.name)}
-                                                                  label={"Ganador"}
-                                                                  placeholder={"Ganador"}
-                                                                  selection={selectedWinner ? selectedWinner.name : "-- Sin ganador --"}
-                                                                  onChange={(e) => onChangeWinnerCombobox(e)} />
+                                {
+                                    matches && tournamentStatus && tournamentStatus === "ON_COURSE" ? matches.map((match, index) => {
+                                            return <div key={"match" + index} className="flex spacing-large">
+                                                    <div className="size-3-4">
+                                                        <InputText id={"match-" + index +"-id"}
+                                                                   label={"Match ID"}
+                                                                   defaultValue={match.matchData.identifier}
+                                                                   placeholder={"Match ID"}
+                                                                   onChange={(e) => setMatchData(e.target.value, index)}/>
                                                     </div>
-                                                    :
-                                                    <></>
-                                            }
-
-                                        </div>
-                                        <div className="flex align-spread spacing-large">
-                                            <div>
-                                                Matches
-                                            </div>
-                                            <div className="flex align-middle size-all">
-                                                <HorizontalSpliter color="white"/>
-                                            </div>
-                                        </div>
-                                    </>
-                                    :
-                                    <></>
-                            }
-                            {
-                                matches && tournamentStatus && tournamentStatus === "ON_COURSE" ? matches.map((match, index) => {
-                                        return <>
-                                            <div className="flex spacing-large">
-                                                <div className="size-3-4">
-                                                    <InputText id={"match1-id"}
-                                                               label={"Match ID"}
-                                                               defaultValue={match.matchData.identifier}
-                                                               placeholder={"Match ID"}
-                                                               onChange={(e) => setMatchData(e.target.value, index)}/>
+                                                    <div className="flex size-1-4 align-bottom delete ">
+                                                        <button type="button" onClick={()=>setMatches(matches.filter(m => m.matchData.uid !== match.matchData.uid))}>
+                                                            <FontAwesomeIcon icon={faTrashCan} />
+                                                            Eliminar
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div className="flex size-1-4 align-bottom delete ">
-                                                    <button type="button" onClick={()=>{}}>
-                                                        Eliminar
-                                                    </button>
-                                                </div>
+                                        })
+                                        :
+                                        <></>
+                                }
+                                {
+                                    getButtonAddMatches() && tournamentStatus && tournamentStatus === "ON_COURSE" ?
+                                        <div className="flex align-start gap-large">
+                                            <div className="size-1-5">
+                                                <button type="button" onClick={()=>addMatch()}>
+                                                    Add Match
+                                                </button>
                                             </div>
-                                        </>
-                                    })
-                                    :
-                                    <></>
-                            }
-                            {
-                                getButtonAddMatches() && tournamentStatus && tournamentStatus === "ON_COURSE" ?
-                                    <div className="flex align-start gap-large">
-                                        <div className="size-1-5">
-                                            <button type="button" onClick={()=>addMatch()}>
-                                                Add Match
-                                            </button>
-                                        </div>
-                                    </div> : <></>
-                            }
-                        </div>
-                    </div>
-                    <div className="card-footer">
-                        <div className="flex align-end gap-large p-0">
-                            <div className="size-1-5">
-                                <button onClick={(e)=>{acceptChanges(e)}}>
-                                    Accept
-                                </button>
+                                        </div> : <></>
+                                }
                             </div>
-                            <div className="size-1-5 delete">
-                                <button onClick={()=>functionClose(false)}>
-                                    Cancel
-                                </button>
+                        </div>
+                        <div className="card-footer">
+                            <div className="flex align-end gap-large p-0">
+                                <div className="size-1-5">
+                                    <button onClick={(e)=>{acceptChanges(e)}}>
+                                        Accept
+                                    </button>
+                                </div>
+                                <div className="size-1-5 delete">
+                                    <button onClick={()=>functionClose(false)}>
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
-                </form>
             </div>
+
         </>
     );
 }

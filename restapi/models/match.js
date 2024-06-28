@@ -19,6 +19,10 @@ const MatchSchema = mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: [true, "Game is required"]
         },
+        serie:{
+            type: mongoose.Types.ObjectId,
+            required: [true, "Serie is required"]
+        },
         matchData: {
             type: mongoose.Schema.Types.Mixed,
             required: false

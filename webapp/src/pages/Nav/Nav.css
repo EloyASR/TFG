@@ -1,6 +1,7 @@
 .navsuperior{
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     background-color: var(--blue300);
     height: 50px;
@@ -12,7 +13,14 @@
     justify-content: center;
     align-items: center;
     background-color: var(--blue200);
-    width: 100px;
+    width: 120px;
+    height: 100%;
+}
+
+.navsuperior > .name {
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
 }
 
 .navsuperior > .icon > img{
@@ -56,7 +64,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100px;
+    width: 120px;
+    height: 100%;
 }
 
 .navsuperior > .account > .log-sign{

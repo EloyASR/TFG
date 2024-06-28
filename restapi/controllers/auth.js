@@ -13,8 +13,6 @@ const login = async (req, res) => {
 
     const isPasswordCorrect = user === null ? false : await checkPassword(password, user.password)
 
-    console.log(isPasswordCorrect)
-
     if (!(user && isPasswordCorrect)) {
         return res.status(400).json({ msg: 'Wrong user or password' })
     }else{

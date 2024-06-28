@@ -8,7 +8,6 @@ function PrizeItem({prize, onDelete}){
     const navigate = useNavigate();
 
     const editPrize = async () => {
-        console.log("Editing Prize");
         navigate('/prize/edit/' + prize.uid);
     }
 

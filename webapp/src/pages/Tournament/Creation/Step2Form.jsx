@@ -36,10 +36,10 @@ function Step3Form({ actionBack, actionContinue, descriptionAndRules, setDescAnd
                     <div className="card-content">
                         <div className="flex vertical gap-large">
                             <div className="size-content">
-                                <InputTextarea label={"Descripción"} onChange={(e) => setDescription(e.target.value)} defaultValue={descriptionAndRules.description}/>
+                                <InputTextarea label={"Descripción"} id={"description"} name={"description"} placeholder={"Descripción del torneo"} onChange={(e) => setDescription(e.target.value)} defaultValue={descriptionAndRules.description}/>
                             </div>
                             <div className="size-content">
-                                <InputTextarea label={"Reglas"} onChange={(e) => setRules(e.target.value)} defaultValue={descriptionAndRules.rules}/>
+                                <InputTextarea label={"Reglas"} id={"rules"} name={"rules"} placeholder={"Reglas del torneo"} onChange={(e) => setRules(e.target.value)} defaultValue={descriptionAndRules.rules}/>
                             </div>
                         </div>
                     </div>
@@ -51,12 +51,12 @@ function Step3Form({ actionBack, actionContinue, descriptionAndRules, setDescAnd
                                     actionBack();
                                 }}>
                                     <FontAwesomeIcon icon={faArrowLeft} />
-                                    Back
+                                    Atrás
                                 </button>
                             </div>
                             <div className="size-content next accept">
                                 <button type="submit">
-                                    Continue
+                                    Continuar
                                     <FontAwesomeIcon icon={faArrowRight} />
                                 </button>
                             </div>

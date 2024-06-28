@@ -68,3 +68,12 @@
 .prize-item button svg{
     margin-right: 10px;
 }
+
+.prizes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    border-radius: 8px;
+}

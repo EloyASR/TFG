@@ -83,8 +83,6 @@ const getResults = async (participants, phase) => {
         currentPosition++;
     }
 
-    console.log(results);
-
     return results;
 }
 
@@ -98,9 +96,6 @@ const tournamentService = {
 
             return data
         } catch (error) {
-            console.log("Error al recuperar los torneos")
-            console.log(error.response.status)
-            console.log(error.response.data)
         }
     },
 
@@ -112,23 +107,17 @@ const tournamentService = {
 
             return data
         } catch (error) {
-            console.log("Error al recuperar los torneos")
-            console.log(error.response.status)
-            console.log(error.response.data)
         }
     },
 
-    getAllTournamentsBySponsor: async (sponsor, status = "ALL", game = "ALL", page) => {
+    getAllTournamentsBySponsor: async (sponsor, status = "ALL", game = "ALL", page, sponsorStatus = "ALL") => {
         try {
-            let url = baseurl + '/tournaments?sponsor=' + sponsor + '&status=' + status + '&game=' + game + '&page=' + page;
+            let url = baseurl + '/tournaments?sponsor=' + sponsor + '&status=' + status + '&game=' + game + "&sponsorStatus=" + sponsorStatus + '&page=' + page ;
 
             const {data} = await axios.get(url)
 
             return data
         } catch (error) {
-            console.log("Error al recuperar los torneos")
-            console.log(error.response.status)
-            console.log(error.response.data)
         }
     },
 
@@ -140,9 +129,6 @@ const tournamentService = {
 
             return data
         } catch (error) {
-            console.log("Error no se ha podido encontrar el torneo")
-            console.log(error.response.status)
-            console.log(error.response.data)
         }
     },
 
@@ -155,6 +141,7 @@ const tournamentService = {
             return {code:200, msg:"Torneo creado con éxito"};
 
         }catch(error){
+            console.log(error);
             return {code:400, msg:"Se ha producido un error al crear el torneo"};
         }
     },
@@ -180,7 +167,6 @@ const tournamentService = {
 
             return {code:200, msg:"Torneo actualizado con éxito"};
         }catch(e) {
-            console.log(e);
             return {code:400, msg: "Error al actualizar el torneo"};
         }
     },
@@ -222,8 +208,6 @@ const tournamentService = {
                 //COMPROBAMOS QUE EXISTE EL PREMIO
 
                 sponsorToAdd.prize = sponsor.prize;
-
-                console.log(sponsorToAdd);
 
                 sponsoredBy.push(sponsorToAdd);
 
@@ -271,19 +255,12 @@ const tournamentService = {
 
     aprobarPatrocinio: async (tournamentId, sponsorId) => {
         try{
-            console.log(tournamentId);
-            console.log(sponsorId);
             let url = baseurl + '/tournaments/' + tournamentId;
             const result = await axios.get(url);
-            console.log(result);
 
             let sponsoredBy = result.data.sponsoredBy.filter((patrocinador) => patrocinador.id !== sponsorId);
 
-            console.log(sponsoredBy);
-
             let sponsor = result.data.sponsoredBy.find((patrocinador) => patrocinador.id === sponsorId)
-
-            console.log(sponsor);
 
             if (sponsor){
                 let sponsorToAdd = {
@@ -296,8 +273,6 @@ const tournamentService = {
 
                 sponsoredBy.push(sponsorToAdd);
 
-                console.log(sponsoredBy);
-
                 await axios.put(url, {tournament: {
                         prize: result.data.prize,
                         sponsoredBy:sponsoredBy
@@ -306,7 +281,7 @@ const tournamentService = {
                 return {code: 200, msg: "Patrocinio actualizado con éxito"};
 
             } else {
-                return {code:400, msg:"Error al actualizar el patrocinio"};
+                return {code:400, msg: "Error al actualizar el patrocinio"};
             }
         }catch(error) {
             return {code: 400, msg: "Error al actualizar el patrocinio"};
@@ -337,7 +312,7 @@ const tournamentService = {
 
                 return {code: 200, msg: "Inscripción correcta"};
             }else {
-                return {code: 400, msg: "Ya estás inscrito en el torneo"};
+                return {code: 400, msg: "Ya se encuentra inscrito en el torneo"};
             }
         }catch (e) {
             return {code: 400, msg: "Error al inscribirse en el torneo"};
@@ -356,7 +331,7 @@ const tournamentService = {
             if (participants.find((participant) => participant.id === userId)){
                 participants = participants.filter((participant)=> participant.id !== userId)
             } else {
-                return {code:400, msg:"No estás inscrito en el torneo"};
+                return {code:400, msg:"No está inscrito en el torneo"};
             }
 
             await axios.put(url, {tournament: {
@@ -388,13 +363,9 @@ const tournamentService = {
                 phases: phases
             }})
 
-            console.log(resultUpdate.data);
-
             return {code: 200, msg: "Serie actualizada con éxito"};
         }catch (e){
-            console.log(e);
-            console.log("Error al darse de baja del torneo");
-            return {code: 400, msg: "Error al añadir serie al torneo"};
+            return {code: 400, msg: "Error al actualizar la serie"};
         }
     },
 
@@ -415,13 +386,9 @@ const tournamentService = {
                     phases:phases
             }})
 
-            console.log(resultUpdate.data);
-
             return {code: 200, msg: "Serie actualizada con éxito"};
         }catch (e){
-            console.log(e);
-            console.log("Error al darse de baja del torneo");
-            return {code: 400, msg: "Error al añadir serie al torneo"};
+            return {code: 400, msg: "Error al actualizar la serie"};
         }
     },
 
@@ -444,8 +411,6 @@ const tournamentService = {
                     break;
             }
 
-            console.log(phases);
-
             let resultUpdate = await axios.put(url, {tournament: {
                     phases:phases,
                     currentPhase: result.data.currentPhase + 1,
@@ -453,13 +418,19 @@ const tournamentService = {
                 }
             })
 
-            console.log(resultUpdate.data);
-
             return {code: 200, msg: "Serie actualizada con éxito"};
         }catch (e){
-            console.log(e);
-            console.log("Error al darse de baja del torneo");
-            return {code: 400, msg: "Error al añadir serie al torneo"};
+            return {code: 400, msg: "Error al actualizar la serie"};
+        }
+    },
+
+    deleteTournament: async (tournamentId) => {
+        try {
+            let url = baseurl + '/tournaments/' + tournamentId;
+            const {data} = await axios.delete(url)
+            return data;
+        } catch (error) {
+            throw error;
         }
     }
 }

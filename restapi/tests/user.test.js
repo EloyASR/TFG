@@ -65,7 +65,6 @@ beforeAll(async () => {
 
     //Lanzar el servidor
     server = app.listen(app.get('port'), function () {
-        console.log("Servidor activo en puerto:" + app.get('port'));
         loggerInfo.info("Servidor activo en puerto:" + app.get('port'));
     });
 })

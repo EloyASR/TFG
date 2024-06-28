@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.0.3",
+    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
@@ -37,8 +38,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack7bin/webpack.js --no-progress --hide-modules --config=node-modules/laravel-mix/setup/webpack.config.js"
+    "test": "jest --coverage",
+    "test:e2e": "start-server-and-test 'npm --prefix ../restapi start' http://localhost:5000/api/ prod 3000 \"cd e2e && jest\"",
+    "prod": "node ./server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +61,16 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.23.1"
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "babel-jest": "^29.7.0",
+    "cross-env": "^7.0.3",
+    "jest-config": "^29.7.0",
+    "jest-cucumber": "^4.4.0",
+    "jest-puppeteer": "^10.0.1",
+    "puppeteer": "^22.11.0",
+    "react-router-dom": "^6.23.1",
+    "start-server-and-test": "^2.0.4"
   }
 }

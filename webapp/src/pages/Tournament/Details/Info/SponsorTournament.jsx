@@ -108,7 +108,7 @@ function SponsorTournament({tournamentId}) {
                             </div>
                             <div className="flex align-spread spacing-large">
                                 <div className="size-2-6">
-                                    <Combobox id={"prize"} itemsList={getPrizesNames()} label={"Prize"} placeholder={"Prize"} selection={"-- No prize selected --"} onChange={(item) => handleComboChange(item)} />
+                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Prize"} placeholder={"Prize"} selection={"-- No prize selected --"} onChange={(item) => handleComboChange(item)} />
                                 </div>
                             </div>
                             <div className="flex align-spread spacing-large">
@@ -139,12 +139,12 @@ function SponsorTournament({tournamentId}) {
                         <div className="flex align-end size-1-1 spacing-large">
                             <div className="size-1-5">
                                 <button type="submit">
-                                    Accept
+                                    Aceptar
                                 </button>
                             </div>
                             <div className="size-1-5 delete">
                                 <button type="button" onClick={()=>navigate(-1)}>
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </div>

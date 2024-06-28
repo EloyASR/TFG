@@ -1,8 +1,8 @@
 function TableSpells({ data }) {
     return <>
         <div className="table-spells">
-            <img src={"http://ddragon.leagueoflegends.com/cdn/14.10.1/img/spell/" + getSummonerId(data.summoner1Id) + ".png"} alt="Spell icon" />
-            <img src={"http://ddragon.leagueoflegends.com/cdn/14.10.1/img/spell/" + getSummonerId(data.summoner2Id) + ".png"} alt="Spell icon" />
+            <img src={"http://ddragon.leagueoflegends.com/cdn/14.10.1/img/spell/" + getSummonerId(data?.summoner1Id) + ".png"} alt="Spell icon" />
+            <img src={"http://ddragon.leagueoflegends.com/cdn/14.10.1/img/spell/" + getSummonerId(data?.summoner2Id) + ".png"} alt="Spell icon" />
         </div>
     </>;
 }

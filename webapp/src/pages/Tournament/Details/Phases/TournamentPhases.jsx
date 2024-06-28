@@ -42,6 +42,8 @@ function TournamentPhases() {
         }
     }
 
+
+
     return (
         <>
             <div className="card">
@@ -82,7 +84,9 @@ function TournamentPhases() {
                     {
                         tournamentData && selectedPhase === tournamentData.currentPhase && tournamentData.status === "ON_COURSE" ?
                             <div className={"size-1-2 delete"}>
-                                <button onClick={() => {setShowCloseModal(true)}}>Cerrar fase</button>
+                                <button onClick={() => {
+                                    setShowCloseModal(true)
+                                }}>Cerrar fase</button>
                             </div>
                             :
                             <></>

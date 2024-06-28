@@ -15,24 +15,20 @@ const serieService = {
 
     createSerie: async (values) => {
         try {
-            console.log(values);
             let url = baseurl + '/series';
             const {data} = await axios.post(url, values)
             return {code: 200, msg: "Serie creada con éxito", data:data}
         } catch (error) {
-            console.log(error);
             return {code: 400, msg: "Error al crear la serie"}
         }
     },
 
     updateSerie: async (serieId, values) => {
         try {
-            console.log(values);
             let url = baseurl + '/series/' + serieId
             await axios.put(url, values)
             return {code: 200, msg: "Serie actualizada con éxito"}
         } catch (error) {
-            console.log(error);
             return {code: 400, msg: "Error al actualizar la serie"}
         }
     }

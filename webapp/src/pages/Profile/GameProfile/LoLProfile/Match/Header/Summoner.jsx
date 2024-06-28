@@ -6,6 +6,8 @@ function Summoner({data, runesData}) {
             if(runaPadre){
                 let runaHija = runaPadre.slots[0].runes.find((rune)=>rune.id === data.perks.styles[0].selections[0].perk);
                 return runaHija;
+            }else{
+                return null;
             }
         }
     }
@@ -28,13 +30,13 @@ function Summoner({data, runesData}) {
                     </div>
                     <div className="runes">
                         {
-                            runesData ?
-                                <img src={"http://ddragon.leagueoflegends.com/cdn/img/"+searchPrincipalRuneImage().icon } alt="Rune icon" />
+                            runesData && searchPrincipalRuneImage() !== null?
+                                <img src={"http://ddragon.leagueoflegends.com/cdn/img/"+ searchPrincipalRuneImage().icon } alt="Rune icon" />
                                 :
                                 <img src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png" alt="Rune icon" />
                         }
                         {
-                            runesData ?
+                            runesData && runesData.find((rune) => rune.id === data.perks.styles[1].style)?
                                 <img
                                     src={"http://ddragon.leagueoflegends.com/cdn/img/" + runesData.find((rune) => rune.id === data.perks.styles[1].style).icon}
                                     alt="Rune icon"/>

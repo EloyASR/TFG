@@ -5,6 +5,7 @@ const userIds = [
     "65df8098fc13ae2387cd3c62", //USER 2
     "65f25284fc13ae2dcb316ea7", //USER 3
     "664f5a92fc13ae6981c6417e", //USER 4
+    "666edb0dfc13ae6b27234525", //USER 5
 ]
 
 const users = [
@@ -40,7 +41,14 @@ const users = [
         password: "password4",
         email: "user4@gmail.com",
         role: "COMPANY"
-    }
+    },
+    {
+        _id:new mongoose.mongo.ObjectId("666edb0dfc13ae6b27234525"), //USER 5
+        name: "USER 5",
+        password: "password5",
+        email: "user5@gmail.com",
+        role: "ADMIN"
+    },
 
 ]
 

@@ -1,6 +1,6 @@
 import {images} from "../../../helpers/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPen} from "@fortawesome/free-solid-svg-icons";
+import {faPen, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import React, {useState,useEffect} from "react";
 import InputText from "../../components/InputText";
 import InputPassword from "../../components/InputPassword";
@@ -14,6 +14,8 @@ import leagueOfLegendsService from "../../../services/leagueOfLegendsService";
 import valorantService from "../../../services/valorantService";
 import "../Profile.css";
 import {useNavigate} from "react-router";
+import DeleteUserModal from "./DeleteUserModal";
+import {applyTheme} from "../../../context/theme";
 
 function EditProfile (props) {
 
@@ -22,6 +24,7 @@ function EditProfile (props) {
     const [profileInfo, setProfileInfo] = useState(JSON.parse(localStorage.getItem("user")));
     const [games, setGames] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [accounts, setAccounts] = useState([]);
     const { showAlert } = useAlert();
     const navigate = useNavigate();
@@ -41,7 +44,6 @@ function EditProfile (props) {
             setAccounts(response.accounts);
             setIconSelected(response.icon);
         }catch(error){
-            console.log(error);
         }
     }
 
@@ -50,7 +52,6 @@ function EditProfile (props) {
             let response = await gameService.getGames();
             setGames(response.games);
         }catch(error){
-            console.log(error);
         }
     }
 
@@ -78,22 +79,48 @@ function EditProfile (props) {
 
         const temp = { ...errors }
 
+        temp.password = '';
+
         if ('name' in fieldValues) {
-            temp.name = fieldValues.name ? '' : 'This field is required'
+            temp.name = fieldValues.name ? '' : 'Campo obligatorio'
         }
         if ('email' in fieldValues) {
-            temp.email = fieldValues.email ? '' : 'This field is required'
+            if(!fieldValues.email) {
+                temp.email = "Campo obligatorio";
+            }else{
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if(emailRegex.test(values.email)){
+                    temp.email = "";
+                }else{
+                    temp.email = "Formato de email invalido"
+                }
+            }
         }
         if ('password' in fieldValues) {
+            if(fieldValues.password === ''){
+                temp.password = ''
+            }else{
+                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/;
+                if(regex.test(fieldValues.password)){
+                    if(fieldValues.password.length<8){
+                        temp.password = 'La contraseña debe tener una longitud mínima de 8 caracteres'
+                    }else{
+                        temp.password = '';
+                    }
+                }else{
+                    temp.password = 'La contraseña debe tener al menos una minúscula, una mayúscula y un número'
+                }
+            }
+
             if (fieldValues.password !== values.repeatpassword) {
-                temp.repeatpassword = "Passwords should match";
+                temp.repeatpassword = "Las contraseñas deben coincidir";
             } else {
                 temp.repeatpassword = '';
             }
         }
         if ('repeatpassword' in fieldValues) {
             if (values.password !== fieldValues.repeatpassword) {
-                temp.repeatpassword = "Passwords should match";
+                temp.repeatpassword = "Las contraseñas deben coincidir";
             } else {
                 temp.repeatpassword = '';
             }
@@ -179,7 +206,7 @@ function EditProfile (props) {
                     let result = await leagueOfLegendsService.getAccountData(data.userid, data.tag);
 
                     if(result.puuid === undefined){
-                        showAlert("That account doesnt exist", "error");
+                        showAlert("La cuenta no existe", "error");
                         break;
                     }
 
@@ -192,12 +219,12 @@ function EditProfile (props) {
                         let newAccounts = [...accounts, newAccount]
 
                         setAccounts(newAccounts);
-                        showAlert("Account added succesfully", "success");
+                        showAlert("Cuenta añadida correctamente", "success");
                     }else{
-                        showAlert("Account already exists", "error");
+                        showAlert("La cuenta ya existe", "error");
                     }
                 } catch (e) {
-                    showAlert("There was a problem adding the Account", "error");
+                    showAlert("Ha ocurrido un problema al añadir la cuenta", "error");
                 }
                 break;
             case "Valorant":
@@ -205,7 +232,7 @@ function EditProfile (props) {
                     let result = await valorantService.getAccountData(data.userid, data.tag);
 
                     if(result.puuid === undefined){
-                        showAlert("That account doesnt exist", "error");
+                        showAlert("La cuenta no existe", "error");
                         break;
                     }
 
@@ -218,12 +245,12 @@ function EditProfile (props) {
                         let newAccounts = [...accounts, newAccount]
 
                         setAccounts(newAccounts);
-                        showAlert("Account added succesfully", "success");
+                        showAlert("Cuenta añadida correctamente", "success");
                     }else{
-                        showAlert("Account already exists", "error");
+                        showAlert("La cuenta ya existe", "error");
                     }
                 } catch (e) {
-                    showAlert("There was a problem adding the Account", "error");
+                    showAlert("Ha ocurrido un problema al añadir la cuenta", "error");
                 }
                 break;
             case "Pokemon VGC":
@@ -238,9 +265,9 @@ function EditProfile (props) {
                     let newAccounts = [...accounts, newAccount]
 
                     setAccounts(newAccounts);
-                    showAlert("Account added succesfully", "success");
+                    showAlert("Cuenta añadida correctamente", "success");
                 }else{
-                    showAlert("Account already exists", "error");
+                    showAlert("La cuenta ya existe", "error");
                 }
                 break;
             default:
@@ -275,14 +302,33 @@ function EditProfile (props) {
         let checkErrors = { ...errors }
 
         if (!values.name) {
-            checkErrors.name = "This field is required"
+            checkErrors.name = "Campo obligatorio"
         }
         if (!values.email) {
-            checkErrors.email = "This field is required"
+            checkErrors.email = "Campo obligatorio"
+        }else{
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(emailRegex.test(values.email)){
+                checkErrors.email = "";
+            }else{
+                checkErrors.email = "Formato de email invalido"
+            }
+        }
+        if(values.password) {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/;
+            if(regex.test(values.password)){
+                if(values.password.length<8){
+                    checkErrors.password = 'La contraseña debe tener una longitud mínima de 8 caracteres'
+                }else{
+                    checkErrors.password = '';
+                }
+            }else{
+                checkErrors.password = 'La contraseña debe tener al menos una minúscula, una mayúscula y un número'
+            }
         }
         if (values.repeatpassword && values.password) {
             if (values.repeatpassword !== values.password) {
-                checkErrors.repeatpassword = "Passwords should match";
+                checkErrors.repeatpassword = "Las contraseñas deben coincidir";
             }
         }
 
@@ -306,15 +352,38 @@ function EditProfile (props) {
                 await userService.updateUser(userId, {user:newValues});
                 let user = await userService.getUser(userId);
                 localStorage.setItem("user", JSON.stringify(user));
-                showAlert("User updated succesfully", "success")
+                showAlert("Cuenta actualizada correctamente", "success")
                 navigate("/profile");
             }catch (error){
                 if (error.response.status === 400 && error.response.data.msg === "User with name:{" + values.name + "} already exists"){
-                    checkErrors.name = "This name already exists";
+                    checkErrors.name = "Nombre de usuario ya existente";
                     setErrors({ ...checkErrors });
                 }
             }
         }
+    }
+
+    const handleDeleteUser = () => {
+        setShowDeleteModal(true);
+    }
+
+    const handleDeleteUserConfirm = async () => {
+        try {
+            await userService.deleteUser(profileInfo.uid)
+            showAlert("Se ha borrado correctamente la cuenta", "success");
+            localStorage.removeItem("session")
+            localStorage.removeItem("user")
+            applyTheme();
+            navigate("/login");
+        }catch(e) {
+            showAlert("Se ha producido un error al eliminar la cuenta", "error");
+        }
+
+        handleDeleteUserCancel();
+    }
+
+    const handleDeleteUserCancel = () => {
+        setShowDeleteModal(false);
     }
 
     return <>
@@ -322,7 +391,7 @@ function EditProfile (props) {
             <Form onSubmit={handleSubmit}>
                 <div className="edit-profile card">
                     <div className="card-header">
-                        Edit Profile
+                        Editar Cuenta
                     </div>
                     <div className="card-content">
                         <div className="size-content">
@@ -433,23 +502,30 @@ function EditProfile (props) {
                                 <div className="inputs flex vertical gap-large size-1-1">
                                     <div className="flex spacing-large size-1-1">
                                         <div className="size-1-2">
-                                            <InputText label={"Username"} id={"name"} name={"name"} placeholder={"Username"} defaultValue={values.name} error={errors.name} onChange={handleInputChange} />
+                                            <InputText label={"Nombre de Usuario *"} id={"name"} name={"name"} placeholder={"Nombre de Usuario"} defaultValue={values.name} error={errors.name} onChange={handleInputChange} />
                                         </div>
                                         <div className="size-1-2">
-                                            <InputText label={"Email"} id={"email"} name={"email"} placeholder={"Email"} defaultValue={values.email} error={errors.email} onChange={handleInputChange} />
+                                            <InputText label={"Email *"} id={"email"} name={"email"} placeholder={"Email"} defaultValue={values.email} error={errors.email} onChange={handleInputChange} />
                                         </div>
                                     </div>
                                     <div className="flex spacing-large size-1-1">
                                         <div className="size-1-2">
-                                            <InputPassword label={"New Password"} id={"password"} name={"password"} placeholder={"New Password"} defaultValue={values.password} error={errors.password} onChange={handleInputChange} />
+                                            <InputPassword label={"Nueva Contraseña"} id={"password"} name={"password"} placeholder={"Nueva Contraseña"} defaultValue={values.password} error={errors.password} onChange={handleInputChange} />
                                         </div>
                                         <div className="size-1-2">
-                                            <InputPassword label={"Repeat Password"} id={"repeatpassword"} name={"repeatpassword"} placeholder={"Password"} defaultValue={values.repeatpassword} error={errors.repeatpassword} onChange={handleInputChange} />
+                                            <InputPassword label={"Repita la Contraseña"} id={"repeatpassword"} name={"repeatpassword"} placeholder={"Nueva Contraseña"} defaultValue={values.repeatpassword} error={errors.repeatpassword} onChange={handleInputChange} />
                                         </div>
                                     </div>
                                     {
                                         profileInfo.role === "USER" ?
                                             <>
+                                                <div className="flex spacing-large align-end size-1-1">
+                                                    <div className="size-2-6 delete">
+                                                        <button type="button" onClick={()=>handleDeleteUser()}>
+                                                            <FontAwesomeIcon icon={faTrashCan}/> Eliminar Cuenta
+                                                        </button>
+                                                    </div>
+                                                </div>
                                                 <div className="flex vertical spacing-large size-1-1">
                                                     <div className="flex align-spread spacing-large">
                                                         <div>
@@ -466,7 +542,7 @@ function EditProfile (props) {
                                                                     <div className="size-2-6">
                                                                         <InputText disabled={true} id={"game-" + index}
                                                                                    name={"game-" + index} label={"Game"}
-                                                                                   placeholder={"Game"}
+                                                                                   placeholder={"Juego"}
                                                                                    defaultValue={getGameName(account.game)}/>
                                                                     </div>
                                                                     {
@@ -500,14 +576,14 @@ function EditProfile (props) {
                     </div>
                     <div className="card-footer">
                         <div className="flex align-end size-1-1 spacing-large">
-                            <div className="size-1-5">
+                            <div className="size-1-5 accept">
                                 <button type="submit">
-                                    Accept
+                                    Aceptar
                                 </button>
                             </div>
                             <div className="size-1-5 delete">
                                 <button type="button" onClick={()=>navigate(-1)}>
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </div>
@@ -517,6 +593,9 @@ function EditProfile (props) {
         </div>
         {
             showModal ? <AccountCreation getGamesNames={getGamesNames} getGameName={getGameName} getGameId={getGameId} functionClose={setShowModal} functionSuccess={addAccount}/> : <></>
+        }
+        {
+            showDeleteModal ? <DeleteUserModal onConfirm={handleDeleteUserConfirm} onCancel={handleDeleteUserCancel}/>: <></>
         }
 
     </>

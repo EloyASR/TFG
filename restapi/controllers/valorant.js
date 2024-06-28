@@ -8,8 +8,6 @@ const findAccountData = async (req, res) => {
     let userid = encodeURIComponent(req.body.userid);
     let tag = encodeURIComponent(req.body.tagline);
 
-    console.log(userid, tag);
-
     try{
         let result01 = await fetch(RIOT_ACCOUNT_QUERY + userid + "/" + tag + "?api_key=" + APIKEY);
         let accountData = await result01.json();
@@ -19,8 +17,6 @@ const findAccountData = async (req, res) => {
             gameName: accountData.gameName,
             tagLine: accountData.tagLine,
         }
-
-        console.log(dataToSend);
 
         res.status(200);
         return res.send(dataToSend);

@@ -26,18 +26,15 @@ function Profile({userId}) {
                 }
                 setProfileInfo(response);
             }catch(error){
-                console.log(error);
             }
         }else{
             try {
-                console.log(JSON.parse(localStorage.getItem("user")).uid);
                 let response = await userService.getUser(JSON.parse(localStorage.getItem("user")).uid)
                 if(selectedAccount === undefined){
                     setSelectedAccount(response.accounts[0])
                 }
                 setProfileInfo(response);
             }catch(error){
-                console.log(error);
             }
         }
     }
@@ -47,7 +44,6 @@ function Profile({userId}) {
             let response = await gameService.getGames();
             setGames(response.games);
         }catch(error){
-            console.log(error);
         }
     }
 
@@ -60,7 +56,6 @@ function Profile({userId}) {
     }
 
     const onClickTab = (account) => {
-        console.log(account);
         setSelectedAccount(account);
     }
 
@@ -82,7 +77,7 @@ function Profile({userId}) {
         <div className="main">
             <div className="flex vertical align-start gap-medium profile mt-4">
                 <div className="header">
-                    <ProfileHeader profileInfo={profileInfo} />
+                    <ProfileHeader profileInfo={profileInfo} profileEdit={!userId} />
                 </div>
                 {
                     profileInfo.role === "USER" ?

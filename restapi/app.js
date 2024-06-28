@@ -23,7 +23,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:5000",
+                url: "http://localhost:5000/api/",
             },
         ],
     },
@@ -78,13 +78,13 @@ app.set('loggerError', loggerError);
 dbConnection()
 
 //NEW ROUTES
+app.use('/api/', require('./routes/app.js'))
 app.use('/api/login', require('./routes/auth.js'))
 app.use('/api/matches',require('./routes/match.js'))
 app.use('/api/series',require('./routes/serie.js'))
 app.use('/api/prizes',require('./routes/prize.js'))
 app.use('/api/users',require('./routes/user.js'))
 app.use('/api/games',require('./routes/game.js'))
-app.use('/api/teams',require('./routes/team.js'))
 app.use('/api/tournaments',require('./routes/tournament.js'))
 
 app.use('/leagueoflegends', require('./routes/leagueOfLegends.js'))

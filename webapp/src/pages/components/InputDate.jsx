@@ -83,19 +83,16 @@ function InputDate({ min, max, label, onChange, disabled, dateAndTime}) {
         let fechaConvertida = new Date(date + `T${horas}:00`);
 
         if(fechaConvertida < min){
-            console.log("HoraMenor")
             let horasMin = min.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).split(':')[0];
             hora.target.value = `${horasMin}:00`;
             setTime(`${horasMin}:00`);
             onChange(min)
         }else if (fechaConvertida > max){
-            console.log("HoraMayor")
             let [horasMax] = max.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).split(':')[0];
             hora.target.value = `${horasMax}:00`;
             setTime(`${horasMax}:00`);
             onChange(max)
         } else {
-            console.log("HoraIgual")
             hora.target.value = `${horas}:00`;
             setTime(`${horas}:00`);
             onChange(fechaConvertida)
@@ -104,7 +101,6 @@ function InputDate({ min, max, label, onChange, disabled, dateAndTime}) {
 
     const onDateChange = (fecha) => {
         const nuevaFecha = fecha.target.value;
-        console.log(nuevaFecha);
         let fechaConvertida = new Date(nuevaFecha + "T" + time);
         fecha.target.value = nuevaFecha;
         setDate(nuevaFecha);

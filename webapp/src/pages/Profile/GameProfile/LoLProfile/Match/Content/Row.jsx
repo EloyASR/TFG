@@ -10,8 +10,6 @@ function Row({data, teamTopDmg, teamTotalKills, gameDuration, runesData}){
 
     const [width, setWidth] = useState(window.innerWidth);
 
-    console.log(teamTopDmg);
-
     useEffect(() => {
         const handleResizeWindow = () => setWidth(window.innerWidth);
         window.addEventListener("resize", handleResizeWindow);

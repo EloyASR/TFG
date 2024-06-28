@@ -24,7 +24,6 @@ function BracketsView({tournamentData,
     const [participantsWithName, setParticipantsWithName] = useState([])
 
     useEffect(() => {
-        console.log("Actualizando Bracket View");
         establishData();
     }, [tournamentData]);
 
@@ -168,8 +167,6 @@ function BracketsView({tournamentData,
                 listOfParticipantsNotYetSelected.push(participant);
             }
         }
-
-        console.log(listOfParticipantsNotYetSelected)
         return listOfParticipantsNotYetSelected;
     }
 
@@ -199,21 +196,25 @@ function BracketsView({tournamentData,
     const onOpenShowSerieInfo = (serie) => {
         setSelectedSerie(serie);
         setShowSeriesInfo(true);
+        document.body.style.overflow = "hidden";
     }
 
     const onCloseShowSerieInfo = () => {
         setSelectedSerie(undefined);
         setShowSeriesInfo(false);
+        document.body.style.overflow = "auto";
     }
 
     const onOpenModifySeries = (serie) => {
         setSelectedSerie(serie);
         setShowSeriesEdit(true);
+        document.body.style.overflow = "hidden";
     }
 
     const onCloseModifySerie = () => {
         setSelectedSerie(undefined);
         setShowSeriesEdit(false);
+        document.body.style.overflow = "auto";
     }
 
     return (

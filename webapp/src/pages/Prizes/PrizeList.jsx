@@ -6,7 +6,7 @@ import prizesService from "../../services/prizeService";
 import prizeService from "../../services/prizeService";
 import Pagination from "../components/Pagination";
 import {useNavigate} from "react-router";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCircleInfo, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function PrizeList() {
@@ -25,12 +25,9 @@ function PrizeList() {
 
     useEffect(() => {
         getPrizes();
-        console.log(totalPages);
-        console.log(actualPage);
     }, [actualPage]);
 
     const handleDelete = async (prizeId) => {
-        console.log("Deleting Prize");
         await prizeService.deletePrize(prizeId);
         getPrizes();
     };
@@ -50,9 +47,17 @@ function PrizeList() {
                 <div className="prizes">
                     <div className="flex vertical gap-medium body">
                         {
+                            prizes && prizes.length > 0 ?
                             prizes.map((prize, key)=>{
                                 return <PrizeItem key={key} prize={prize} onDelete={handleDelete}/>
                             })
+                            :
+                            <>
+                                <div className={"no-data-found flex vertical align-center align-middle gap-large"}>
+                                    <FontAwesomeIcon icon={faCircleInfo} size={"2xl"} color={"#626363"}/>
+                                    <p>No se han encontrado premios</p>
+                                </div>
+                            </>
                         }
                     </div>
                 </div>
@@ -63,7 +68,6 @@ function PrizeList() {
                         </div>
                         :
                         <></>
-
                 }
             </div>
         </div>

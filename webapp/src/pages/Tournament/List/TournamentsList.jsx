@@ -1,4 +1,4 @@
-import "./TournamentsPage.css"
+import "./TournamentsList.css"
 import "../Creation/TournamentCreationPage.css";
 import Combobox from "./Combobox";
 import TournamentItem from "./TournamentItem";
@@ -11,11 +11,12 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleInfo, faPlus} from "@fortawesome/free-solid-svg-icons";
 
-function TournamentsPage({ownTournaments, sponsoredTournaments}) {
+function TournamentsList({ownTournaments, sponsoredTournaments}) {
 
     const [tournaments, setTournaments] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState("ALL");
     const [selectedGame, setSelectedGame] = useState("ALL");
+    const [selectedSponsorStatus, setSelectedSponsorStatus] = useState("ALL");
     const [games, setGames] = useState([]);
     const navigate = useNavigate();
     const [actualPage, setActualPage] = useState(1);
@@ -27,7 +28,7 @@ function TournamentsPage({ownTournaments, sponsoredTournaments}) {
             setTournaments(result.tournaments);
             setTotalsPages(result.totalPages);
         }else if(sponsoredTournaments){
-            let result = await tournamentService.getAllTournamentsBySponsor(JSON.parse(localStorage.getItem("user")).uid, selectedStatus, selectedGame, actualPage)
+            let result = await tournamentService.getAllTournamentsBySponsor(JSON.parse(localStorage.getItem("user")).uid, selectedStatus, selectedGame, actualPage, selectedSponsorStatus);
             setTournaments(result.tournaments);
             setTotalsPages(result.totalPages);
         }else {
@@ -52,7 +53,7 @@ function TournamentsPage({ownTournaments, sponsoredTournaments}) {
     useEffect(() => {
         getGames();
         getTournaments();
-    }, [actualPage,selectedGame, selectedStatus]);
+    }, [actualPage,selectedGame, selectedStatus, selectedSponsorStatus]);
 
     const status = [
         {
@@ -81,6 +82,21 @@ function TournamentsPage({ownTournaments, sponsoredTournaments}) {
         }
     ]
 
+    const sponsorStatus = [
+        {
+            name: "Todos",
+            _name: "ALL"
+        },
+        {
+            name: "Pendiente",
+            _name: "PENDING"
+        },
+        {
+            name: "Aceptado",
+            _name: "ACCEPTED"
+        },
+    ]
+
     return (
         <>
             <div className="main">
@@ -94,6 +110,15 @@ function TournamentsPage({ownTournaments, sponsoredTournaments}) {
                             let gameChange = games.find((g)=>g.name === item)
                             setSelectedGame(gameChange.uid);
                         }}/>
+                        {
+                            JSON.parse(localStorage.getItem("user")).role === "COMPANY" && sponsoredTournaments ?
+                                <Combobox itemsList={sponsorStatus.map((s) =>  s.name)} selection={"Todos"} label={"Estado Patrocinio"} onChange={(item)=>{
+                                    let sponsorStatusChange = sponsorStatus.find((s)=>s.name === item)
+                                    setSelectedSponsorStatus(sponsorStatusChange._name);
+                                }}/>
+                                :
+                                <></>
+                        }
                         {
                             JSON.parse(localStorage.getItem("user")).role === "ADMIN" ?
                                 <>
@@ -139,4 +164,4 @@ function TournamentsPage({ownTournaments, sponsoredTournaments}) {
     );
 }
 
-export default TournamentsPage;
+export default TournamentsList;

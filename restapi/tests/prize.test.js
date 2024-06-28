@@ -8,17 +8,6 @@ const {User} = require('../models/user');
 const Prize = require('../models/prize');
 const {userIds, users} = require('./mock_data/user');
 const {prizeIds, prizes} = require('./mock_data/prize');
-const log4js = require("log4js");
-const Match = require("../models/match");
-const {matchIds} = require("./mock_data/match");
-const Tournament = require("../models/tournament");
-const {tournamentIds} = require("./mock_data/tournament");
-const Serie = require("../models/serie");
-const {serieIds} = require("./mock_data/serie");
-const Team = require("../models/team");
-const {teamIds} = require("./mock_data/team");
-const Game = require("../models/game");
-const {gameIds} = require("./mock_data/game");
 
 let app;
 let server;
@@ -75,7 +64,6 @@ beforeAll(async () => {
 
     //Lanzar el servidor
     server = app.listen(app.get('port'), function () {
-        console.log("Servidor activo en puerto:" + app.get('port'));
         loggerInfo.info("Servidor activo en puerto:" + app.get('port'));
     });
 })

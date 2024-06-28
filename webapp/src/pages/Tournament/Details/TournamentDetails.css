@@ -62,6 +62,7 @@
 
 .participant:hover {
     transform: scale(1.03);
+    background-color: var(--blue100);
 }
 
 .participant .icon{
@@ -73,6 +74,11 @@
 
 .participant .icon img{
     width: 100%;
+}
+
+.tournament-view-page a {
+    text-decoration: unset;
+    color: white;
 }
 
 .participant .name {
@@ -223,23 +229,38 @@
 }
 
 .modal-background {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.8);
     position: fixed;
     z-index: 6000;
     width: 100vw;
     height: 100vh;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: 50vw;
+    top: 50vh;
+    padding: 1em;
+    transform: translate(-50vw, -50vh);
     display: flex;
-    flex-direction: column;
-    align-content: center;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    overflow: auto;
 }
 
-.modal-series-modifier {
+.modal-series-modifier{
     width: 700px;
+}
+
+.modal-background > div {
+    min-height: calc(100vh - 2em);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-series-info {
+    max-width: 900px;
+    padding:1em;
 }
 
 .serie-visualizer {
@@ -651,4 +672,213 @@ table.league-overview-table > thead > tr.league-overview-secondary-header > th {
     height: 44px;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.match-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.match-info>.match-info-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.match-info>.match-info-header>div>.action {
+    background-color: var(--black100);
+    border-radius: 0px 8px 8px 0px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border: none;
+}
+
+.match-info>.match-info-header>div.blue>.action {
+    background-color: var(--blue200);
+}
+
+.match-info>.match-info-header>div.blue>.action:hover {
+    background-color: var(--blue100);
+}
+
+.match-info>.match-info-header>div.red>.action {
+    background-color: var(--red200);
+}
+
+.match-info>.match-info-header>div.red>.action:hover {
+    background-color: var(--red100);
+}
+
+.match-info>.match-info-header>div>.action>svg {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+.match-info>.match-info-header>div>.action>svg>path {
+    fill: black;
+}
+
+.match-info>.match-info-header>.win>.action {
+    background-color: var(--blue200);
+}
+
+.match-info>.match-info-header>.win>.action:hover {
+    background-color: var(--blue100);
+}
+
+.match-info>.match-info-header>.win>.action>svg>path {
+    fill: black;
+}
+
+.match-info>.match-info-header>.lose>.action {
+    background-color: var(--red200);
+}
+
+.match-info>.match-info-header>.lose>.action:hover {
+    background-color: var(--red100);
+}
+
+.match-info>.match-info-header>.lose>.action>svg>path {
+    fill: black;
+}
+
+.match-info>.match-info-header>div {
+    max-width: 100%;
+    /*MODIFICABLE*/
+    height: 110px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    border-left: 8px solid var(--black100);
+}
+
+.match-info>.match-info-header>div.blue {
+    border-left: 8px solid var(--blue200);
+}
+
+.match-info>.match-info-header>div.red {
+    border-left: 8px solid var(--red200);
+}
+
+.match-info>.match-info-header>div>.match-info-header-data {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+}
+
+.match-info-header >div>.match-info-header-data {
+    display: flex;
+}
+
+.match-info-header >div>.match-info-header-data.blue{
+    background-color: var(--blue400);
+}
+
+.match-info-header >div>.match-info-header-data.red{
+    background-color: var(--red400);
+}
+
+.match-info-header > div > .match-info-header-data > .team {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 1em;
+}
+
+.match-info-header > div > .match-info-header-data > .team.reverse {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 1em;
+}
+
+.match-info-header > div > .match-info-header-data > .team > .player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    gap: 0.5em;
+}
+
+.match-info-header > div > .match-info-header-data > .team.reverse > .player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    gap: 0.5em;
+}
+
+.match-info-header > div > .match-info-header-data > .team >.player>img.icon {
+    width: 40px;
+    height: 40px;
+}
+
+.match-info-header > div > .match-info-header-data > .team >.player>img.role {
+    width: 30px;
+    height: 30px;
+}
+
+
+.match-info-header > div > .match-info-header-data > .team >.player>p {
+    margin: 0px 5px 0px 5px;
+    font-size: 0.75rem;
+    color: var(--grey200);
+}
+
+.match-info-header > div > .match-info-header-data > .result {
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.match-info-header > div > .match-info-header-data > .result > .loser{
+    color: var(--red100);
+}
+
+.match-info-header > div > .match-info-header-data > .result > .winner{
+    color: var(--blue100);
+}
+
+.match-info > .match-extended {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.match-info > .match-extended>.win {
+    border-bottom-color: var(--black200);
+}
+
+.match-info > .match-extended>.lose {
+    border-bottom-color: var(--black200);
+}
+
+.match-info > .match-extended>.win>table {
+    background-color: var(--blue200);
+}
+
+.match-info > .match-extended>.lose>table {
+    background-color: var(--red200);
+}
+
+.match-info > .match-extended > .win tbody tr>td {
+    background-color: var(--blue400);
+}
+
+.match-info > .match-extended> .lose tbody tr>td {
+    background-color: var(--red400);
 }

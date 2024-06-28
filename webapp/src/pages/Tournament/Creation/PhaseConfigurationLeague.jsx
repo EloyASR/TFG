@@ -133,22 +133,22 @@ function PhaseConfigurationLeague({ phaseId, leagueData, setPhaseData, size, pre
                 <div className="size-content">
                     <div className="flex spacing-large">
                         <div className="size-1-2">
-                            <Combobox placeholder={"Número de jugadores"} label={"Número de jugadores"} itemsList={getLeagueSize(size, previousPhase)} id={"numerojugadores-" + phaseId} onChange={(value) => setSize(value)} selection={leagueData.size} required={true} />
+                            <Combobox placeholder={"Número de jugadores"} label={"Número de jugadores *"} itemsList={getLeagueSize(size, previousPhase)} id={"numerojugadores-" + phaseId} onChange={(value) => setSize(value)} selection={leagueData.size} required={true} />
                         </div>
                         <div className="size-1-2">
                             <div className="size-content">
                                 <div className="flex spacing-large">
                                     <div className="size-1-2">
-                                        <InputNumber id={"puntosvictoria-" + phaseId} label={"Puntos por Victoria"} placeholder={"Puntos"} min={"0"} onChange={(e) => setWinPoints(e.target.valueAsNumber)} defaultValue={leagueData.winPoints} required={true}/>
+                                        <InputNumber id={"puntosvictoria-" + phaseId} label={"Puntos por Victoria *"} placeholder={"Puntos"} min={"0"} onChange={(e) => setWinPoints(e.target.valueAsNumber)} defaultValue={leagueData.winPoints} required={true}/>
                                     </div>
                                     <div className="size-1-2">
-                                        <InputNumber id={"puntosderrota-" + phaseId} label={"Puntos por Derrota"} placeholder={"Puntos"} onChange={(e) => setLosePoints(e.target.valueAsNumber)} defaultValue={leagueData.losePoints} required={true}/>
+                                        <InputNumber id={"puntosderrota-" + phaseId} label={"Puntos por Derrota *"} placeholder={"Puntos"} onChange={(e) => setLosePoints(e.target.valueAsNumber)} defaultValue={leagueData.losePoints} required={true}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="size-1-2">
-                            <Combobox label={"Encuentro al mejor de"} placeholder={"Numero de partidas por enfrentamiento"} itemsList={[1, 3, 5]} id={"encuentromejorde-" + phaseId} name={"encuentromejorde-" + phaseId} selection={leagueData.bestOf} onChange={(value) => setBestOf(value)} required={true} />
+                            <Combobox label={"Encuentro al mejor de: *"} placeholder={"Numero de partidas por enfrentamiento"} itemsList={[1, 3, 5]} id={"encuentromejorde-" + phaseId} name={"encuentromejorde-" + phaseId} selection={leagueData.bestOf} onChange={(value) => setBestOf(value)} required={true} />
                         </div>
                     </div>
                 </div>

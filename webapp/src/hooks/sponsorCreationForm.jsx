@@ -5,8 +5,6 @@ export const useForm = (defaultData, validateOnChange = false, validate) => {
     const [errors, setErrors] = useState({})
 
     const handleInputChange = (e, inputType) => {
-        console.log(e);
-        console.log(inputType);
 
         const { name, value } = e.target
 

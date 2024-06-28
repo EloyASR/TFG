@@ -1,9 +1,6 @@
 const Match = require('../models/match');
-const {User} = require('../models/user');
 const Game = require('../models/game');
-const Team = require('../models/team');
 const Serie = require('../models/serie');
-const Tournament = require('../models/tournament');
 
 const mongoose = require("mongoose");
 
@@ -38,7 +35,7 @@ const findAll = async (req, res) => {
     let filteredMatches;
 
     try {
-        if((req.query.game && req.query.user) || (req.query.user && req.query.team) || (req.query.game && req.query.team)){
+        if((req.query.game && req.query.user) || (req.query.game && req.query.user)){
             loggerError.error("ERROR 400: There cannot be two filters together with exception of game and mode")
             res.status(400);
             return res.send({msg:"There cannot be two filters together with exception of game and mode"});
@@ -59,34 +56,12 @@ const findAll = async (req, res) => {
             }
         }
 
-        //FIND BY USER
+        //FIND BY SERIE
 
-        if(req.query.user){
-            let filteredMatchesHome = await Match.find({
-                type: "1VS1",
-                home_participant: req.query.user
+        if(req.query.serie){
+            filteredMatches = await Match.find({
+                serie: req.query.serie
             })
-            let filteredMatchesAway = await Match.find({
-                type: "1VS1",
-                away_participant: req.query.user
-            })
-
-            filteredMatches = filteredMatchesHome.concat(filteredMatchesAway);
-
-        }
-
-        //FIND BY TEAM
-
-        if(req.query.team){
-            let filteredMatchesHome = await Match.find({
-                type: { $in: ["2VS2", "3VS3", "4VS4", "5VS5"]},
-                home_participant: req.query.user
-            })
-            let filteredMatchesAway = await Match.find({
-                type: { $in: ["2VS2", "3VS3", "4VS4", "5VS5"]},
-                away_participant: req.query.user
-            })
-            filteredMatches = filteredMatchesHome.concat(filteredMatchesAway);
         }
 
         if (filteredMatches) {
@@ -105,14 +80,15 @@ const add = async (req, res) => {
     let loggerInfo = req.app.get("loggerInfo");
     let loggerError = req.app.get("loggerError");
 
-    let { mode, game, type, matchData } = req.body;
+    let { mode, game, type, serie, matchData } = req.body;
 
-    const createMatch = async (m_mode, m_game, m_type, m_data) => {
+    const createMatch = async (m_mode, m_game, m_type, m_serie, m_data) => {
         try {
             let match = new Match;
             match.mode = m_mode;
             match.game = m_game;
             match.type = m_type;
+            match.serie = m_serie;
             match.matchData = m_data;
 
             await Match.create(match).then(result => {
@@ -133,14 +109,14 @@ const add = async (req, res) => {
     //COMPROBAMOS QUE EXISTE EL JUEGO AL QUE SE VA A JUGAR EN ESTE PARTIDO
 
     if(!mongoose.mongo.ObjectId.isValid(game)){
-        loggerError.error("CODE 400: Invalid Game Id: {" + game + "}");
-        res.status(400);
-        return res.send({msg:"Invalid Game Id: {" + game + "}"});
+        loggerError.error("CODE 404: Game with Id:{" + game + "} not found");
+        res.status(404);
+        return res.send({msg:"Game with Id:{" + game + "} not found"});
     }
 
     let found_game = await Game.findOne({"_id": new mongoose.mongo.ObjectId(game)});
 
-    if (found_game === null) {
+    if (!found_game) {
         loggerError.error("CODE 404: Game with Id:{" + game + "} not found");
         res.status(404);
         return res.send({msg:"Game with Id:{" + game + "} not found"});
@@ -150,13 +126,30 @@ const add = async (req, res) => {
 
     let modo = found_game.modes.find(m => m._name === mode);
 
-    if (modo == null) {
+    if (!modo) {
         loggerError.error("CODE 404: Mode with Name:{" + mode + "} not found");
         res.status(404);
         return res.send({msg:"Mode with Name:{" + mode + "} not found"});
     }
 
-    await createMatch(mode,game, type, matchData);
+    //COMPROBAMOS QUE EXISTE LA SERIE
+
+    if(!mongoose.mongo.ObjectId.isValid(serie)){
+        loggerError.error("CODE 404: Serie with Id:{" + serie + "} not found");
+        res.status(404);
+        return res.send({msg:"Serie with Id:{" + serie + "} not found"});
+    }
+
+    let found_serie = await Serie.findOne({"_id": new mongoose.mongo.ObjectId(serie)});
+
+    if (!found_serie) {
+        loggerError.error("CODE 404: Serie with Id:{" + serie + "} not found");
+        res.status(404);
+        return res.send({msg:"Serie with Id:{" + serie + "} not found"});
+    }
+
+
+    await createMatch(mode,game, type, serie, matchData);
 }
 
 
@@ -182,6 +175,56 @@ const upd = async (req, res) => {
         return res.send({msg:"Match with Id:{" + req.params.id + "} not found"});
     }
 
+    //COMPROBAMOS QUE EXISTE EL JUEGO AL QUE SE VA A JUGAR EN ESTE PARTIDO
+
+    let found_game = await Game.findOne({"_id": new mongoose.mongo.ObjectId(matchInDatabase.game)});
+
+    if(match.game) {
+        if (!mongoose.mongo.ObjectId.isValid(match.game)) {
+            loggerError.error("CODE 404: Game with Id:{" + match.game + "} not found");
+            res.status(404);
+            return res.send({msg: "Game with Id:{" + match.game + "} not found"});
+        }
+
+        found_game = await Game.findOne({"_id": new mongoose.mongo.ObjectId(match.game)});
+
+        if (!found_game) {
+            loggerError.error("CODE 404: Game with Id:{" + match.game + "} not found");
+            res.status(404);
+            return res.send({msg: "Game with Id:{" + match.game + "} not found"});
+        }
+    }
+
+    //UNA VEZ QUE SABEMOS QUE EL JUEGO EXISTE COMPROBAMOS QUE EL MODO DE JUEGO EXISTE DENTRO DE ESTE JUEGO
+
+    if(match.mode) {
+        let modo = found_game.modes.find(m => m._name === match.mode);
+
+        if (!modo) {
+            loggerError.error("CODE 404: Mode with Name:{" + match.mode + "} not found");
+            res.status(404);
+            return res.send({msg:"Mode with Name:{" + match.mode + "} not found"});
+        }
+    }
+
+    //COMPROBAMOS QUE EXISTE LA SERIE
+
+    if(match.serie) {
+        if(!mongoose.mongo.ObjectId.isValid(match.serie)){
+            loggerError.error("CODE 404: Serie with Id:{" + match.serie + "} not found");
+            res.status(404);
+            return res.send({msg:"Serie with Id:{" + match.serie + "} not found"});
+        }
+
+        let found_serie = await Serie.findOne({"_id": new mongoose.mongo.ObjectId(match.serie)});
+
+        if (!found_serie) {
+            loggerError.error("CODE 404: Serie with Id:{" + match.serie + "} not found");
+            res.status(404);
+            return res.send({msg:"Serie with Id:{" + match.serie + "} not found"});
+        }
+    }
+
     try {
         await Match.updateOne(
             {
@@ -192,7 +235,7 @@ const upd = async (req, res) => {
                     matchData: match.matchData,
                 }
             }).then(result => {
-                loggerInfo.info("CODE 201: Match {" + req.params.id + "} updated successfully");
+                loggerInfo.info("CODE 200: Match {" + req.params.id + "} updated successfully");
                 res.status(200);
                 return res.send({msg: "Match {" + req.params.id + "} updated successfully"});
             }

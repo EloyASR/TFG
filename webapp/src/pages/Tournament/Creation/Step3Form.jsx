@@ -61,7 +61,6 @@ function Step3Form({ actionBack, actionContinue, phases, addPhase, deletePhase, 
                                         <div className="size-content add accept">
                                             <button onClick={(e) => {
                                                 e.preventDefault();
-                                                console.log("prueba")
                                                 addPhase();
                                             }}>
                                                 <FontAwesomeIcon icon={faPlus} />

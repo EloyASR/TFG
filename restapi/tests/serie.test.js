@@ -7,15 +7,11 @@ const mongoose = require('mongoose');
 const Match = require('../models/match');
 const {User} = require('../models/user');
 const Game = require('../models/game');
-const Team = require('../models/team');
 const Serie = require('../models/serie');
-const Tournament = require('../models/tournament');
 const {matchIds, matches} = require('./mock_data/match');
 const {userIds, users} = require('./mock_data/user');
 const {gameIds, games} = require('./mock_data/game');
-const {teamIds, teams} = require('./mock_data/team');
 const {serieIds, series} = require('./mock_data/serie');
-const {tournamentIds, tournaments} = require('./mock_data/tournament');
 
 let app;
 let server;
@@ -71,7 +67,6 @@ beforeAll(async () => {
 
     //Lanzar el servidor
     server = app.listen(app.get('port'), function () {
-        console.log("Servidor activo en puerto:" + app.get('port'));
         loggerInfo.info("Servidor activo en puerto:" + app.get('port'));
     });
 })
@@ -88,17 +83,7 @@ beforeEach(async () => {
             console.log(err);
         });
 
-    await Tournament.insertMany(tournaments)
-        .catch(function (err) {
-            console.log(err);
-        });
-
     await Serie.insertMany(series)
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    await Team.insertMany(teams)
         .catch(function (err) {
             console.log(err);
         });
@@ -121,17 +106,7 @@ afterEach( async () =>{
             console.log(err);
         })
 
-    await Tournament.deleteMany({_id: { $in: tournamentIds}})
-        .catch(function(err){
-            console.log(err);
-        })
-
     await Serie.deleteMany({_id: { $in: serieIds}})
-        .catch(function(err){
-            console.log(err);
-        })
-
-    await Team.deleteMany({_id: { $in: teamIds}})
         .catch(function(err){
             console.log(err);
         })
@@ -147,45 +122,37 @@ afterEach( async () =>{
         })
 })
 
-//PRUEBAS FIND DE MATCHES CON FILTRO
+//PRUEBAS FIND DE SERIES CON FILTRO
 
 describe('GET /api/series', () => {
 
     it("Buscar series por mas de un filtro a la vez", async ()=>{
-        /*const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=Tournament&user=65df8098fc13ae2387cd3c60');
+        const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=Tournament&user=65df8098fc13ae2387cd3c60');
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty("msg");
-        expect(res.body.msg).toEqual("There cannot be two filters together with exception of game and mode")*/
+        expect(res.body.msg).toEqual("There cannot be two filters together with exception of game and mode")
     })
 
     it("Buscar últimas series de un juego", async ()=>{
-        /*const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60');
+        const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(5);*/
+        expect(res.body).toHaveLength(3);
     })
 
     it("Buscar últimas series de un juego y un modo", async ()=>{
-        /*const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=TOURNAMENT');
+        const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=ARAM_1VS1');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(4);*/
+        expect(res.body).toHaveLength(3);
     })
 
-    it("Buscar últimas series de un jugador para un juego en especifico", async ()=>{
-        /*const res = await request(app).get('/api/series?user=65df8098fc13ae2387cd3c61');
+    it("Buscar últimas series de un jugador", async ()=>{
+        const res = await request(app).get('/api/series?user=65df8098fc13ae2387cd3c61');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(1);*/
-    })
-
-    it("Buscar últimas series de un equipo", async ()=>{
-        /*const res = await request(app).get('/api/series?team=65df8098fc13ae2387cd3c66');
-        expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveLength(2);*/
-
+        expect(res.body).toHaveLength(4);
     })
 })
 
-//PRUEBAS FIND UN SOLO MATCH
-
+//PRUEBAS FIND UNA SOLA SERIE
 describe('GET /api/series/{id}', () => {
 
     it('Passed an existing id should return a serie', async () => {
@@ -193,7 +160,6 @@ describe('GET /api/series/{id}', () => {
         const res = await request(app).get('/api/series/65e0f577fc13ae063acd367e');
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('uid');
-        expect(res.body).toHaveProperty('date');
         expect(res.body).toHaveProperty('game');
         expect(res.body).toHaveProperty('mode');
         expect(res.body).toHaveProperty('status');
@@ -215,160 +181,508 @@ describe('GET /api/series/{id}', () => {
     })
 })
 
-//PRUEBAS CREACIÓN DE UN MATCH
+//PRUEBAS CREACIÓN DE UNA SERIE
 
 describe('POST /api/series', () => {
-    it('Create a serie without participants', async () => {
-        /*const res = await request(app)
-            .post('/api/matches')
+    it('Crear una serie sin participantes', async () => {
+        const res = await request(app)
+            .post('/api/series')
             .send({
-                type: "5VS5",
-                mode: "TOURNAMENT",
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
                 game: "65df8098fc13ae2387cd3c60",
-                date: "2024-04-10T18:00:00.000+00:00",
-                status: "SCHEDULED_NO_PARTICIPANTS"
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
             })
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('id');
-        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});*/
+        await Serie.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});
     })
 
-    it('Try to create a serie with only one participant', async () => {
-        /*const res = await request(app)
-            .post('/api/matches')
+    it('Crear una serie con un solo participante', async () => {
+        const res = await request(app)
+            .post('/api/series')
             .send({
-                type: "5VS5",
-                mode: "TOURNAMENT",
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
                 game: "65df8098fc13ae2387cd3c60",
-                home_participant: "65df8098fc13ae2387cd3c65",
-                date: "2024-04-10T18:00:00.000+00:00",
-                status: "SCHEDULED_WITH_PARTICIPANTS"
+                home_participant: "65df8098fc13ae2387cd3c62",
+                status: "SCHEDULED",
+                result: {
+                    matches:["65df8098fc13ae2387cd3c63"],
+                },
             })
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('id');
-        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});*/
+        await Serie.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});
     })
 
-    it('Try to create a serie with a not found tournament', ()=>{
-        //TODO
-    })
-
-    it('Try to create a serie with two participants that dont exist', async ()=> {
-        /*const res = await request(app)
-            .post('/api/matches')
+    it('Crear una serie con dos participantes', async () => {
+        const res = await request(app)
+            .post('/api/series')
             .send({
-                type: "5VS5",
-                mode: "TOURNAMENT",
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
                 game: "65df8098fc13ae2387cd3c60",
-                home_participant: "65ce00ced1a5897d2764a23e",
-                away_participant: "65ce00ced1a5897d2764a23e",
-                date: "2024-04-10T18:00:00.000+00:00",
-                status: "SCHEDULED_WITH_PARTICIPANTS"
+                home_participant: "65df8098fc13ae2387cd3c62",
+                away_participant: "65df8098fc13ae2387cd3c61",
+                status: "SCHEDULED",
+                result: {
+                    winner: "65df8098fc13ae2387cd3c62",
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(201);
+        expect(res.body).toHaveProperty('id');
+        await Serie.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});
+    })
+
+    it('Crear una serie con game invalido', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "pruebaid",
+                home_participant: "65df8098fc13ae2387cd3c62",
+                away_participant: "65df8098fc13ae2387cd3c61",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
             })
         expect(res.statusCode).toEqual(404);
-        expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Participant with Id:{65ce00ced1a5897d2764a23e} not found")*/
     })
 
-    it('Try to create a serie with no participants and a correct resolution of the serie', async ()=> {
-        /*const res = await request(app)
-            .post('/api/matches')
+    it('Crear una serie con game inexistente', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
             .send({
-                type: "1VS1",
+                type: "SINGLE",
                 mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c62",
+                home_participant: "65df8098fc13ae2387cd3c62",
+                away_participant: "65df8098fc13ae2387cd3c61",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con modo inexistente', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "PRUEBA_MODO",
+                bestOf: 1,
                 game: "65df8098fc13ae2387cd3c60",
-                winner: "65df8098fc13ae2387cd3c61",
-                loser: "65df8098fc13ae2387cd3c62",
-                date: "2024-04-10T18:00:00.000+00:00",
-                status: "SCHEDULED_NO_PARTICIPANTS"
+                home_participant: "65df8098fc13ae2387cd3c62",
+                away_participant: "65df8098fc13ae2387cd3c61",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con away_participant inexistente', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                away_participant: "65df8098fc13ae2387cd3c43",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con away_participant invalido', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                away_participant: "pruebaid",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con home_participant inexistente', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                home_participant: "65df8098fc13ae2387cd3c43",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con home_participant invalido', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                home_participant: "pruebaid",
+                status: "SCHEDULED",
+                result: {
+                    matches:[],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con winner y participantes no establecidos', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                status: "SCHEDULED",
+                result: {
+                    winner: "65df8098fc13ae2387cd3c62",
+                    matches:[],
+                },
             })
         expect(res.statusCode).toEqual(400);
-        expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("At least one participant should be assigned before you assign the winner or loser of the match");*/
     })
 
-    it('Try to create a serie with two participants and a correct resolution of the serie', async ()=> {
-        /*const res = await request(app)
-            .post('/api/matches')
+    it('Crear una serie con winner no existente entre los participantes', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
             .send({
-                type: "1VS1",
-                mode: "VGC",
-                serie: "65e0f577fc13ae063acd367e",
-                game: "65df8098fc13ae2387cd3c68",
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
                 home_participant: "65df8098fc13ae2387cd3c61",
-                away_participant: "65df8098fc13ae2387cd3c62",
-                winner: "65df8098fc13ae2387cd3c62",
-                loser: "65df8098fc13ae2387cd3c61",
-                date: "2024-04-10T18:00:00.000+00:00",
-                status: "FINISHED"
+                status: "SCHEDULED",
+                result: {
+                    winner: "65df8098fc13ae2387cd3c62",
+                    matches:[],
+                },
             })
-        expect(res.statusCode).toEqual(201);
-        expect(res.body).toHaveProperty('id');
-        await Match.deleteOne({_id: new mongoose.mongo.ObjectId(res.body.id)});*/
+        expect(res.statusCode).toEqual(400);
+    })
+
+    it('Crear una serie con match invalido', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                status: "SCHEDULED",
+                result: {
+                    matches:["pruebaid"],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Crear una serie con match inexistente', async ()=> {
+        const res = await request(app)
+            .post('/api/series')
+            .send({
+                type: "SINGLE",
+                mode: "ARAM_1VS1",
+                bestOf: 1,
+                game: "65df8098fc13ae2387cd3c60",
+                status: "SCHEDULED",
+                result: {
+                    matches:["65df8098fc13ae2387cd3c34"],
+                },
+            })
+        expect(res.statusCode).toEqual(404);
     })
 })
 
-//PRUEBAS DE UPDATE DE UN MATCH
+//PRUEBAS DE UPDATE DE UNA SERIE
 
 describe('PUT /api/series', () => {
-    it("Try to update a none existing series", async () => {
-        /*const res = await request(app)
-            .put('/api/matches/pruebadeid')
+
+    it("Actualizar una serie valida", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
             .send({
-                match: {
-                    type: "1VS1",
+                serie: {
+                    type: "SINGLE",
                     mode: "VGC",
-                    serie: "65e0f577fc13ae063acd367e",
+                    bestOf: 2,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c61",
-                    away_participant: "65df8098fc13ae2387cd3c62",
-                    winner: "65df8098fc13ae2387cd3c62",
-                    loser: "65df8098fc13ae2387cd3c61",
-                    date: "2024-04-10T18:00:00.000+00:00",
-                    status: "FINISHED"
-                }
-            })
-        expect(res.statusCode).toEqual(404);
-        expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match with Id:{pruebadeid} not found");*/
-    })
-
-    it('Try to update a serie with not found participant', ()=>{
-        //TODO
-    })
-
-    it('Try to update a serie with a not found tournament', ()=>{
-        //TODO
-    })
-
-    it('Try to update a serie with resolution but no participants', ()=>{
-        //TODO
-    })
-
-    it("Update an existing serie", async () => {
-        /*const res = await request(app)
-            .put('/api/matches/65df8098fc13ae2387cd3c67')
-            .send({
-                match: {
-                    type: "1VS1",
-                    mode: "VGC",
-                    serie: "65e0f577fc13ae063acd367e",
-                    game: "65df8098fc13ae2387cd3c68",
-                    home_participant: "65df8098fc13ae2387cd3c61",
-                    away_participant: "65df8098fc13ae2387cd3c62",
-                    winner: "65df8098fc13ae2387cd3c62",
-                    loser: "65df8098fc13ae2387cd3c61",
-                    date: "2024-04-10T18:00:00.000+00:00",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
                     status: "FINISHED"
                 }
             })
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('msg');
-        expect(res.body.msg).toEqual("Match {65df8098fc13ae2387cd3c67} updated successfully");*/
+        expect(res.body.msg).toEqual("Serie {65e0f577fc13ae063acd367e} updated successfully");
+    })
+
+    it("Actualizar una serie con game invalido", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "pruebaid",
+                    home_participant: "65df8098fc13ae2387cd3c62",
+                    away_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con game inexistente", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c62",
+                    home_participant: "65df8098fc13ae2387cd3c62",
+                    away_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con modo no existente", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "PRUEBA_MODO",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "65df8098fc13ae2387cd3c62",
+                    away_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con home_participant invalido", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "pruebaid",
+                    away_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con home_participant inexistente", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "65df8098fc13ae2387cd3c32",
+                    away_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con away_participant invalido", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    away_participant: "pruebaid",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c61",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con away_participant inexistente", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "65df8098fc13ae2387cd3c62",
+                    away_participant: "65df8098fc13ae2387cd3c32",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c62",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it("Actualizar una serie con winner y participantes no establecidos ", async () => {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c62",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(400);
+    })
+
+    it('Actualizar una serie con winner no existente entre los participantes', async ()=> {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        winner: "65df8098fc13ae2387cd3c62",
+                        matches: []
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(400);
+    })
+
+    it('Actualizar una serie con match inexistente', async ()=> {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        matches: ["65df8098fc13ae2387cd3c62"]
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+    it('Actualizar una serie con match invalido', async ()=> {
+        const res = await request(app)
+            .put('/api/series/65e0f577fc13ae063acd367e')
+            .send({
+                serie: {
+                    type: "SINGLE",
+                    mode: "VGC",
+                    bestOf: 2,
+                    game: "65df8098fc13ae2387cd3c68",
+                    home_participant: "65df8098fc13ae2387cd3c61",
+                    result:{
+                        matches: ["pruebaid"]
+                    },
+                    status: "FINISHED"
+                }
+            })
+        expect(res.statusCode).toEqual(404);
     })
 })
 
-//PRUEBAS DE BORRADO DE UN MATCH
+//PRUEBAS DE BORRADO DE UNA SERIE
 
 describe('DELETE /api/series/{id}', ()=>{
     it('Try to delete a none existing serie', async ()=>{
@@ -393,7 +707,5 @@ describe('DELETE /api/series/{id}', ()=>{
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('msg');
         expect(res.body.msg).toEqual("Serie Id:{65e0f577fc13ae063acd367e} deleted successfully");
-        expect(res.body.serie).toHaveProperty('mode');
-        expect(res.body.serie.mode).toEqual('TOURNAMENT');
     })
 })

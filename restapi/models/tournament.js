@@ -21,7 +21,7 @@ const SponsorSchema = mongoose.Schema(
         },
         status:{
             type: String,
-            enum:["ACCEPTED", "DENIED", "PENDING"],
+            enum:["ACCEPTED", "PENDING"],
             default: "PENDING",
             required: true
         }
@@ -42,25 +42,6 @@ const ParticipantSchema = mongoose.Schema(
         status: {
             type: String,
             enum: ["DISQUALIFIED", "SELECTED", "NOT_SELECTED", "ELIMINATED", "WINNER"],
-        }
-    }
-)
-
-const ParticipantPhaseBracketSchema = mongoose.Schema(
-    {
-        id: {
-            type: mongoose.Types.ObjectId,
-            required: false,
-        },
-        participantType: {
-            type: String,
-            enum: ["SINGLE","TEAM"],
-            required: false
-        },
-        status: {
-            type: String,
-            enum: ["DISQUALIFIED", "SELECTED", "NOT_SELECTED", "ELIMINATED", "WINNER"],
-            required: false
         }
     }
 )
@@ -192,9 +173,6 @@ const BracketsSchema = mongoose.Schema(
             type: Number,
             enum: [1, 3, 5],
             required: true
-        },
-        phaseParticipants: {
-            type: [ParticipantPhaseBracketSchema]
         },
         rounds: {
             type: [BracketRoundSchema]

@@ -14,17 +14,17 @@ const games = [
             {
                 _name: "TOURNAMENT",
                 name: "Tournament",
-                type: "5VS5"
+                type: "TEAM"
             },
             {
                 _name: "ARAM_1VS1",
                 name: "Aram 1vs1",
-                type: "1VS1"
+                type: "SINGLE"
             },
             {
                 _name: "ARAM_5VS5",
                 name: "Aram 5vs5",
-                type: "5VS5"
+                type: "TEAM"
             }
         ]
     },
@@ -36,7 +36,7 @@ const games = [
             {
                 _name: "VGC",
                 name: "VGC",
-                type: "1VS1"
+                type: "SINGLE"
             }
         ]
     }

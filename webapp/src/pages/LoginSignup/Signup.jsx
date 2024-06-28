@@ -33,33 +33,48 @@ const Signup = (props) => {
         const temp = { ...errors }
 
         if ('name' in fieldValues) {
-            temp.name = fieldValues.name ? '' : 'This field is required'
+            temp.name = fieldValues.name ? '' : 'Campo obligatorio'
         }
         if ('email' in fieldValues) {
-            temp.email = fieldValues.email ? '' : 'This field is required'
+            if(!fieldValues.email) {
+                temp.email = "Campo obligatorio";
+            }else{
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if(emailRegex.test(values.email)){
+                    temp.email = "";
+                }else{
+                    temp.email = "Formato de email invalido"
+                }
+            }
         }
         if ('password' in fieldValues) {
             if (!fieldValues.password) {
-                temp.password = 'This field is required';
+                temp.password = 'Campo obligatorio';
             } else {
-                temp.password = "";
-                if (!values.repeatpassword) {
-                    temp.repeatpassword = errors.repeatpassword;
-                } else {
-                    if (fieldValues.password !== values.repeatpassword) {
-                        temp.repeatpassword = "Passwords should match";
-                    } else {
-                        temp.repeatpassword = '';
+                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/;
+                if(regex.test(fieldValues.password)){
+                    if(fieldValues.password.length<8){
+                        temp.password = 'La contraseña debe tener una longitud mínima de 8 caracteres'
+                    }else{
+                        temp.password = '';
                     }
+                }else{
+                    temp.password = 'La contraseña debe tener al menos una minúscula, una mayúscula y un número'
+                }
+
+                if (fieldValues.password !== values.repeatpassword) {
+                    temp.repeatpassword = "La contraseñas deben coincidir";
+                } else {
+                    temp.repeatpassword = '';
                 }
             }
         }
         if ('repeatpassword' in fieldValues) {
             if (!fieldValues.repeatpassword) {
-                temp.repeatpassword = 'This field is required';
+                temp.repeatpassword = 'Campo obligatorio';
             } else {
                 if (values.password !== fieldValues.repeatpassword) {
-                    temp.repeatpassword = "Passwords should match";
+                    temp.repeatpassword = "Las contraseñas deben coincidir";
                 } else {
                     temp.repeatpassword = '';
                 }
@@ -86,20 +101,39 @@ const Signup = (props) => {
         let checkErrors = { ...errors }
 
         if (!values.name) {
-            checkErrors.name = "This field is required"
+            checkErrors.name = "Campo obligatorio"
         }
         if (!values.email) {
-            checkErrors.email = "This field is required"
+            checkErrors.email = "Campo obligatorio"
+        }else{
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(emailRegex.test(values.email)){
+                checkErrors.email = "";
+            }else{
+                checkErrors.email = "Formato de email invalido"
+            }
         }
         if (!values.password) {
-            checkErrors.password = "This field is required"
+            checkErrors.password = "Campo obligatorio"
+        }else{
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/;
+            if(regex.test(values.password)){
+                if(values.password.length<8){
+                    checkErrors.password = 'La contraseña debe tener una longitud mínima de 8 caracteres'
+                }else{
+                    checkErrors.password = '';
+                }
+            }else{
+                checkErrors.password = 'La contraseña debe tener al menos una minúscula, una mayúscula y un número'
+            }
         }
+
         if (!values.repeatpassword) {
-            checkErrors.repeatpassword = "This field is required"
+            checkErrors.repeatpassword = "Campo obligatorio"
         }
         if (values.repeatpassword && values.password) {
             if (values.repeatpassword !== values.password) {
-                checkErrors.repeatpassword = "Passwords should match";
+                checkErrors.repeatpassword = "La contraseñas deben coincidir";
             }
         }
 
@@ -108,7 +142,7 @@ const Signup = (props) => {
         if (checkErrors.name || checkErrors.email || checkErrors.password || checkErrors.repeatpassword) {
             //SE HACE ALGUNA LIMPIEZA DE CAMPOS SI SE QUIERE
         } else {
-            var data = {
+            let data = {
                 name: values.name,
                 password: values.password,
                 icon: iconSelected,
@@ -117,11 +151,11 @@ const Signup = (props) => {
 
             try{
                 await signupService.signup(data);
-                showAlert("User sign up succesfully", "success")
+                showAlert("Usuario registrado correctamente", "success")
                 navigate("/login");
             }catch (error){
                 if (error.response.status === 400 && error.response.data.msg === "User with name:{" + values.name + "} already exists"){
-                    checkErrors.name = "This name already exists";
+                    checkErrors.name = "Nombre de usuario ya existente";
                     setErrors({ ...checkErrors });
                 }
             }
@@ -241,16 +275,16 @@ const Signup = (props) => {
                     <div className="inputs">
                         <div className="flex vertical spacing-medium">
                             <div className="size-content">
-                                <InputText label={"Username"} id={"name"} name={"name"} placeholder={"Username"} defaultValue={values.name} error={errors.name} onChange={handleInputChange} />
+                                <InputText label={"Nombre de Usuario"} id={"name"} name={"name"} placeholder={"Nombre de Usuario"} defaultValue={values.name} error={errors.name} onChange={handleInputChange} />
                             </div>
                             <div className="size-content">
                                 <InputText label={"Email"} id={"email"} name={"email"} placeholder={"Email"} defaultValue={values.email} error={errors.email} onChange={handleInputChange} />
                             </div>
                             <div className="size-content">
-                                <InputPassword label={"Password"} id={"password"} name={"password"} placeholder={"Password"} defaultValue={values.password} error={errors.password} onChange={handleInputChange} />
+                                <InputPassword label={"Contraseña"} id={"password"} name={"password"} placeholder={"Contraseña"} defaultValue={values.password} error={errors.password} onChange={handleInputChange} />
                             </div>
                             <div className="size-content">
-                                <InputPassword label={"Repeat Password"} id={"repeatpassword"} name={"repeatpassword"} placeholder={"Password"} defaultValue={values.repeatpassword} error={errors.repeatpassword} onChange={handleInputChange} />
+                                <InputPassword label={"Repita la Contraseña"} id={"repeatpassword"} name={"repeatpassword"} placeholder={"Contraseña"} defaultValue={values.repeatpassword} error={errors.repeatpassword} onChange={handleInputChange} />
                             </div>
                             <div className="size-content flex spacing-top-large">
                                 <button type="submit">Sign Up</button>

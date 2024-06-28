@@ -7,7 +7,7 @@ import LoginSignup from './pages/LoginSignup/LoginSignup';
 import Profile from './pages/Profile/Profile';
 import Nav from './pages/Nav/Nav';
 import {useState } from 'react';
-import TournamentsPage from './pages/Tournament/List/TournamentsPage';
+import TournamentsList from './pages/Tournament/List/TournamentsList';
 import TournamentCreationPage from './pages/Tournament/Creation/TournamentCreationPage';
 import TournamentDetails from './pages/Tournament/Details/TournamentDetails';
 import EditProfile from './pages/Profile/EditProfile/EditProfile';
@@ -35,7 +35,6 @@ function App() {
       return <Navigate to="/login" replace />;
     }
 
-    console.log(props);
     if(props){
       return React.cloneElement(children, props);
     }else{
@@ -118,6 +117,11 @@ function App() {
               <EditProfile/>
             </ProtectedRoute>
           } />
+          <Route path="/user/:userId" element={
+            <ProtectedRoute>
+              <Profile/>
+            </ProtectedRoute>
+          }/>
           <Route path="/prizes" element={
             <ProtectedRoute>
               <CompanyAndAdminRoute>
@@ -170,20 +174,20 @@ function App() {
           </Route>
           <Route path="/tournaments" element={
             <ProtectedRoute>
-              <TournamentsPage/>
+              <TournamentsList/>
             </ProtectedRoute>
           } />
           <Route path="/my-tournaments" element={
             <ProtectedRoute>
               <AdminRoute>
-                <TournamentsPage ownTournaments={true}/>
+                <TournamentsList ownTournaments={true}/>
               </AdminRoute>
             </ProtectedRoute>
           } />
           <Route path="/sponsored-tournaments" element={
             <ProtectedRoute>
               <CompanyRoute>
-                <TournamentsPage sponsoredTournaments={true}/>
+                <TournamentsList sponsoredTournaments={true}/>
               </CompanyRoute>
             </ProtectedRoute>
           } />

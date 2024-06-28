@@ -100,9 +100,6 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
 
         setErrors({ ...checkErrors })
 
-        console.log(values);
-        console.log(errors);
-
         if (checkErrors.game || checkErrors.userid || (checkErrors.tag && (gameSelected ==="Valorant" || gameSelected==="League of Legends"))) {
             //SE HACE ALGUNA LIMPIEZA DE CAMPOS SI SE QUIERE
         } else {
@@ -112,8 +109,6 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
                 tag: values.tag,
             }
 
-            console.log(data);
-
             await functionSuccess(data);
 
             functionClose(false);
@@ -121,7 +116,6 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
     }
 
     const handleComboChange = (item) => {
-        console.log(getGameId(item));
         handleInputChange({target: {name: "game", value: getGameId(item)}})
         setGameSelected(item);
     }
@@ -129,35 +123,37 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
     return <>
         <Form onSubmit={handleSubmit}>
             <div className="modal-background">
-                <div className="card modal-series-modifier">
-                    <div className="card-header">
-                        Crear Cuenta
-                    </div>
-                    <div className="card-content">
-                        <div className="flex vertical spacing-medium">
-                            <div className="flex spacing-large">
-                                <div className="flex spacing-large size-all">
-                                    <div className="size-2-6">
-                                        <Combobox id={"game"} itemsList={getGamesNames()} label={"Game"} placeholder={"Game"} error={errors.game} onChange={(item) => handleComboChange(item)} />
+                <div>
+                    <div className="card modal-series-modifier">
+                        <div className="card-header">
+                            Crear Cuenta
+                        </div>
+                        <div className="card-content">
+                            <div className="flex vertical spacing-medium">
+                                <div className="flex spacing-large">
+                                    <div className="flex spacing-large size-all">
+                                        <div className="size-2-6">
+                                            <Combobox id={"game"} itemsList={getGamesNames()} label={"Game"} placeholder={"Game"} error={errors.game} onChange={(item) => handleComboChange(item)} />
+                                        </div>
+                                        {
+                                            getAccountInputs()
+                                        }
                                     </div>
-                                    {
-                                        getAccountInputs()
-                                    }
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="card-footer">
-                        <div className="flex align-end gap-large p-0">
-                            <div className="size-1-5">
-                                <button type="submit">
-                                    Accept
-                                </button>
-                            </div>
-                            <div className="size-1-5 delete">
-                                <button onClick={()=>functionClose(false)}>
-                                    Cancel
-                                </button>
+                        <div className="card-footer">
+                            <div className="flex align-end gap-large p-0">
+                                <div className="size-1-5">
+                                    <button type="submit">
+                                        Accept
+                                    </button>
+                                </div>
+                                <div className="size-1-5 delete">
+                                    <button onClick={()=>functionClose(false)}>
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

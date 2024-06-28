@@ -37,7 +37,6 @@ function ImageSelector({ name, id, label, onChange, maxImages }) {
     }, [imageFiles]);
 
     const changeHandler = (e) => {
-        console.log(e);
         const { files } = e.target;
         const { name } = e.target;
         const validImageFiles = [];

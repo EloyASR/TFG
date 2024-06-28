@@ -7,11 +7,11 @@ let url = baseurl + '/login'
 const loginService = {
 
     login: async (values) => {
+
         try {
             const {data} = await axios.post(url, values);
             return data
         } catch (error) {
-            console.log("Error");
         }
     }
 }

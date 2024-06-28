@@ -12,12 +12,13 @@ const router = Router()
  *       type: object
  *       required:
  *         - name
+ *         - description
  *         - creator
  *       properties:
  *         _id:
  *           type: string
  *           format: ObjectId
- *           description: The auto-generated id of the Prize
+ *           description: The auto-generated id of the prize
  *         name:
  *           type: string
  *           description: The name of the prize
@@ -26,7 +27,7 @@ const router = Router()
  *           description: The description of the prize
  *         image:
  *           type: string
- *           description: The name of the image of the prize
+ *           description: The url of the image of the prize
  *         creator:
  *           type: string
  *           format: ObjectId
@@ -40,39 +41,157 @@ const router = Router()
  *   description: The series managing API
  */
 
-/**
- * @swagger
- * /prizes:
- *   get:
- *     summary: Find all series that match the query
- *     tags: [Prizes]
- */
-router.get('/', findAll);
 
 /**
  * @swagger
  * /prizes/{id}:
  *   get:
- *     summary: Find an existing serie by id
+ *     summary: Find an existing prize by id
  *     tags: [Prizes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: ObjectId
+ *         required: true
+ *         description: The prize id
+ *     responses:
+ *       200:
+ *         description: Prize found correctly
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 uid:
+ *                   type: string
+ *                   format: ObjectId
+ *                   description: The id of the game
+ *                 name:
+ *                   type: string
+ *                   description: The name of the prize
+ *                 description:
+ *                   type: string
+ *                   description: The description of the prize
+ *                 image:
+ *                   type: string
+ *                   description: The url of the image of the prize
+ *                 creator:
+ *                   type: string
+ *                   format: ObjectId
+ *                   description: The id identifying the creator of the prize
+ *       400:
+ *         description: Some error with the request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message explaining the error
+ *       404:
+ *         description: Not found resource
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message that indicate the missing resource
  */
 router.get('/:id', find);
 
 /**
  * @swagger
  * /prizes:
+ *   get:
+ *     summary: Find all prizes that match the query
+ *     tags: [Prizes]
+ *     responses:
+ *       200:
+ *         description: Prizes found successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 prizes:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       uid:
+ *                         type: string
+ *                         format: ObjectId
+ *                         description: The id of the game
+ *                       name:
+ *                         type: string
+ *                         description: The name of the prize
+ *                       description:
+ *                         type: string
+ *                         description: The description of the prize
+ *                       image:
+ *                         type: string
+ *                         description: The url of the image of the prize
+ *                       creator:
+ *                         type: string
+ *                         format: ObjectId
+ *                         description: The id identifying the creator of the prize
+ *       400:
+ *         description: Some error with the request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message explaining the error
+ *       404:
+ *         description: Not found resource
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message that indicate the missing resource
+ */
+router.get('/', findAll);
+
+/**
+ * @swagger
+ * /prizes:
  *   post:
- *     summary: Create a new serie
+ *     summary: Create a new prize
  *     tags: [Prizes]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Serie'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the prize
+ *               description:
+ *                 type: string
+ *                 description: The description of the prize
+ *               image:
+ *                 type: string
+ *                 description: The url of the image of the prize
+ *               creator:
+ *                 type: string
+ *                 format: ObjectId
+ *                 description: The id identifying the creator of the prize
  *     responses:
  *       201:
- *         description: Serie created correctly
+ *         description: Prize created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -80,7 +199,8 @@ router.get('/:id', find);
  *               properties:
  *                 id:
  *                   type: string
- *                   description: The auto-generated id of the Match
+ *                   format: ObjectId
+ *                   description: The id of the prize
  *       400:
  *         description: Some error with the request
  *         content:
@@ -106,16 +226,69 @@ router.post('/', add);
 
 /**
  * @swagger
- * /prizes:
+ * /prizes/{id}:
  *   put:
  *     summary: Update an existing serie
  *     tags: [Prizes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: ObjectId
+ *         required: true
+ *         description: The prize id
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Serie'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the prize
+ *               description:
+ *                 type: string
+ *                 description: The description of the prize
+ *               image:
+ *                 type: string
+ *                 description: The url of the image of the prize
+ *               creator:
+ *                 type: string
+ *                 format: ObjectId
+ *                 description: The id identifying the creator of the prize
+ *     responses:
+ *       200:
+ *         description: Prize updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Prize updated successfully message
+ *       400:
+ *         description: Some error with the request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message explaining the error
+ *       404:
+ *         description: Not found resource
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message that indicate the missing resource
  */
 router.put('/:id', upd);
 
@@ -123,7 +296,7 @@ router.put('/:id', upd);
  * @swagger
  * /prizes/{id}:
  *   delete:
- *     summary: Remove the serie by id
+ *     summary: Delete a prize by id
  *     tags: [Prizes]
  *     parameters:
  *       - in: path
@@ -131,7 +304,58 @@ router.put('/:id', upd);
  *         schema:
  *           type: string
  *         required: true
- *         description: The match id
+ *         description: The prize id
+ *     responses:
+ *       200:
+ *         description: Prize deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Prize deleted successfully message
+ *                 prize:
+ *                   type: object
+ *                   properties:
+ *                     uid:
+ *                       type: string
+ *                       format: ObjectId
+ *                       description: The id of the game
+ *                     name:
+ *                       type: string
+ *                       description: The name of the prize
+ *                     description:
+ *                       type: string
+ *                       description: The description of the prize
+ *                     image:
+ *                       type: string
+ *                       description: The url of the image of the prize
+ *                     creator:
+ *                       type: string
+ *                       format: ObjectId
+ *                       description: The id identifying the creator of the prize
+ *       400:
+ *         description: Some error with the request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message explaining the error
+ *       404:
+ *         description: Not found resource
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: Message that indicate the missing resource
  */
 router.delete('/:id', del);
 

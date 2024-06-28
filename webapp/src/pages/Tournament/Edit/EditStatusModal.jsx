@@ -19,6 +19,7 @@ function EditStatusModal({newStatus, onConfirm, onCancel}) {
                     <p>Nuevas funcionalidades desbloqueadas: </p>
                     <p>- Modificación de los partidos del torneo</p>
                     <p>Funcionalidades eliminadas:</p>
+                    <p>- Eliminación del torneo</p>
                     <p>- Registro por parte de los jugadores en el torneo</p>
                 </>
             case "ON_COURSE":
@@ -41,27 +42,29 @@ function EditStatusModal({newStatus, onConfirm, onCancel}) {
     }
 
     return <div className="modal-background">
-        <div className="card modal-sponsor-details">
-            <div className="card-header">
-                Cierre de fase
-            </div>
-            <div className="card-content">
-                <div className={"flex vertical align-middle"}>
-                    <FontAwesomeIcon icon={faCircleInfo} size={"2xl"}/>
-                    <MessageOfAdvise/>
+        <div>
+            <div className="card modal-sponsor-details">
+                <div className="card-header">
+                    Cierre de fase
                 </div>
-            </div>
-            <div className="card-footer">
-                <div className={"flex spacing-medium size-1-1"}>
-                    <div className={"size-1-2 accept"}>
-                        <button onClick={() => {onConfirm()}}>
-                            Aceptar
-                        </button>
+                <div className="card-content">
+                    <div className={"flex vertical align-middle"}>
+                        <FontAwesomeIcon icon={faCircleInfo} size={"2xl"}/>
+                        <MessageOfAdvise/>
                     </div>
-                    <div className={"size-1-2 delete"}>
-                        <button onClick={() => {onCancel()}}>
-                            Cancelar
-                        </button>
+                </div>
+                <div className="card-footer">
+                    <div className={"flex spacing-medium size-1-1"}>
+                        <div className={"size-1-2 accept"}>
+                            <button onClick={() => {onConfirm()}}>
+                                Aceptar
+                            </button>
+                        </div>
+                        <div className={"size-1-2 delete"}>
+                            <button onClick={() => {onCancel()}}>
+                                Cancelar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

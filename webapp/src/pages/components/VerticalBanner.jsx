@@ -13,8 +13,6 @@ function VerticalBanner({images, interval = 5000}) {
             );
         }, interval);
 
-        console.log(imagesToShow);
-
         // Limpia el temporizador cuando el componente se desmonta
         return () => clearInterval(timer);
     }, [images, interval]);

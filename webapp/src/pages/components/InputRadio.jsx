@@ -6,7 +6,6 @@ function InputRadio({ label, itemsList, id, name, checked, onChange, disabled}) 
 
     useEffect(() => {
         setCheckedRadio(checked)
-        console.log(checked);
     },[checked])
 
     return (

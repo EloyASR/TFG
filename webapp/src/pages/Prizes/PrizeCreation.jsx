@@ -65,12 +65,10 @@ function PrizeCreation() {
         }
         try {
             let result = await prizeService.createPrize(data);
-            console.log(result);
             resetForm();
-            showAlert('Prize created successfully', "success");
+            showAlert('Premio creado correctamente', "success");
         }catch (e) {
-            showAlert('There was a problem creating the prize', "error");
-            console.log(e);
+            showAlert('Ha ocurrido un problema creando el premio', "error");
         }
 
         navigate('/prizes');
@@ -81,18 +79,18 @@ function PrizeCreation() {
             <Form onSubmit={createPrize} >
                 <div className="prize-create card">
                     <div className="card-header">
-                        Prize Creation
+                        Creación de Premio
                     </div>
                     <div className="card-content">
                         <div className="flex spacing-large size-content">
                             <div className="size-1-1">
-                                <InputText label={"Name"} id={"name"} name={"name"} placeholder={"Name"} defaultValue={values.name} error={errors.name} onChange={(e) => handleInputChange(e)} />
+                                <InputText label={"Nombre *"} id={"name"} name={"name"} placeholder={"Nombre"} defaultValue={values.name} error={errors.name} onChange={(e) => handleInputChange(e)} />
                             </div>
                             <div className="size-1-1">
-                                <InputTextarea label={"Descripción"} id={"description"} name={"description"} placeholder={"Description"} defaultValue={values.description} error={errors.description} onChange={(e) => handleInputChange(e)}/>
+                                <InputTextarea label={"Descripción *"} id={"description"} name={"description"} placeholder={"Descripción"} defaultValue={values.description} error={errors.description} onChange={(e) => handleInputChange(e)}/>
                             </div>
                             <div className="size-all">
-                                <ImageSelector label={"Image"} maxImages={1} id={"image"} name={"image"} onChange={(e) => handleInputChange(e)}/>
+                                <ImageSelector label={"Imagen"} maxImages={1} id={"image"} name={"image"} onChange={(e) => handleInputChange(e)}/>
                             </div>
                         </div>
                     </div>
@@ -100,12 +98,12 @@ function PrizeCreation() {
                         <div className="flex align-end size-1-1 spacing-large">
                             <div className="size-1-5">
                                 <button type="submit">
-                                    Accept
+                                    Aceptar
                                 </button>
                             </div>
                             <div className="size-1-5 delete">
                                 <button type="button" onClick={() => navigate(-1)}>
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </div>
