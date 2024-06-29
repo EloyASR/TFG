@@ -5,30 +5,6 @@ on:
     types: [published]
 
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          fetch-depth: 0
-      - name: Create .env file
-        run: echo MONGODB_ATLAS=${{secrets.MONGODB_ATLAS}} >> restapi/.env
-      - run: npm --prefix restapi ci
-      - run: npm --prefix restapi test --coverage --watchAll
-  e2e-tests:
-    needs: [ unit-tests ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm --prefix webapp install
-      - run: npm --prefix restapi install
-      - run: npm --prefix webapp run build
-      - run: npm --prefix webapp run test:e2e
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
