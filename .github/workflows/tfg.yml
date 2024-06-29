@@ -19,12 +19,12 @@ jobs:
           registry: ghcr.io
           workdir: webapp
           buildargs: |
-            REACT_APP_API_URI=http://${{ secrets.DEPLOY_HOST_RESTAPI }}:5000
-            REACT_APP_CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
-            REACT_APP_CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
-            REACT_APP_CLOUDINARY_UPLOAD_PRESET=${{ secrets.CLOUDINARY_UPLOAD_PRESET }}
-            REACT_APP_CLOUDINARY_UPLOAD_URL=${{ secrets.CLOUDINARY_UPLOAD_URL }}
-            REACT_APP_CLOUDINARY_DELETE_URL=${{ secrets.CLOUDINARY_DELETE_URL }}
+            API_URI=http://${{ secrets.DEPLOY_HOST_RESTAPI }}:5000
+            CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
+            CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
+            CLOUDINARY_UPLOAD_PRESET=${{ secrets.CLOUDINARY_UPLOAD_PRESET }}
+            CLOUDINARY_UPLOAD_URL=${{ secrets.CLOUDINARY_UPLOAD_URL }}
+            CLOUDINARY_DELETE_URL=${{ secrets.CLOUDINARY_DELETE_URL }}
 
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
