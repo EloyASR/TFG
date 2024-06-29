@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-        env:
-          MONGODB_ATLAS: ${{secrets.MONGODB_ATLAS}}
         with:
           node-version: 18
           fetch-depth: 0
+      - name: Create .env file
+        run: echo MONGODB_ATLAS=${{secrets.MONGODB_ATLAS}} >> restapi/.env
       - run: npm --prefix restapi ci
       - run: npm --prefix restapi test --coverage --watchAll
   e2e-tests:
