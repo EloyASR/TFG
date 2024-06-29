@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest --coverage --detectOpenHandles"
+    "test": "jest --coverage --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "Eloy Alfredo Schmidt Rodríguez",
