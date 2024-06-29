@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000'
 
-let url = baseurl + '/login'
+let url = baseurl + '/api/login'
 
 const loginService = {
 

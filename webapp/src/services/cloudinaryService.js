@@ -16,6 +16,9 @@ const cloudinaryService = {
         formData.append('file', file);
         formData.append('upload_preset', REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
+        console.log(REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+        console.log(REACT_APP_CLOUDINARY_UPLOAD_URL);
+
         if (fileName) {
             formData.append('public_id', fileName);
         }

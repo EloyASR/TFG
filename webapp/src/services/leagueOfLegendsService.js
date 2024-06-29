@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000'
 
 const leagueOfLegendsService = {
 
     getAccountData: async (userid, tagline) => {
         try{
 
-            let url = baseurl + 'leagueoflegends/info/account';
+            let url = baseurl + '/leagueoflegends/info/account';
 
             let {data} = await axios.post(url,{
                 userid,
@@ -21,7 +21,7 @@ const leagueOfLegendsService = {
     getProfileData: async (puuid, summonerId) => {
         try{
 
-            let url = baseurl + 'leagueoflegends/info/profile';
+            let url = baseurl + '/leagueoflegends/info/profile';
 
             let {data} = await axios.post(url,{
                 puuid,
@@ -35,7 +35,7 @@ const leagueOfLegendsService = {
     getGamesData: async (puuid) => {
         try{
 
-            let url = baseurl + 'leagueoflegends/info/games';
+            let url = baseurl + '/leagueoflegends/info/games';
 
             let {data} = await axios.post(url,{
                 puuid
@@ -48,7 +48,7 @@ const leagueOfLegendsService = {
     getGameData: async (gameId) => {
         try{
 
-            let url = baseurl + 'leagueoflegends/info/game';
+            let url = baseurl + '/leagueoflegends/info/game';
 
             let {data} = await axios.post(url,{
                 gameId

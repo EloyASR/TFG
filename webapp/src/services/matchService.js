@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000'
 
 const matchService = {
     getMatch: async (matchId) => {
         try {
-            let url = baseurl + '/matches/' + matchId
+            let url = baseurl + '/api/matches/' + matchId
             const { data } = await axios.get(url)
             return data
         } catch (error) {
@@ -15,7 +15,7 @@ const matchService = {
 
     createMatch: async (values) => {
         try {
-            let url = baseurl + '/matches';
+            let url = baseurl + '/api/matches';
             const {data} = await axios.post(url, values)
             return {code: 200, msg: "Partido creado con éxito", data:data}
         } catch (error) {
@@ -25,7 +25,7 @@ const matchService = {
 
     updateMatch: async (matchId, values) => {
         try {
-            let url = baseurl + '/matches/' + matchId
+            let url = baseurl + '/api/matches/' + matchId
             await axios.put(url, values);
             return {code: 200, msg: "Serie actualizada con éxito"}
         } catch (error) {

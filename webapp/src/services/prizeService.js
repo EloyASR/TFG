@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000'
 
 const prizeService = {
 
     getPrizesByCreator: async (creator,page) => {
         try {
-            let url = baseurl + '/prizes?creator=' + creator + '&page=' + page;
+            let url = baseurl + '/api/prizes?creator=' + creator + '&page=' + page;
             const {data} = await axios.get(url);
             return data;
 
@@ -16,7 +16,7 @@ const prizeService = {
 
     getPrize: async (id) => {
         try {
-            let url = baseurl + '/prizes/' + id;
+            let url = baseurl + '/api/prizes/' + id;
             const {data} = await axios.get(url);
             return data;
         } catch (error) {
@@ -25,7 +25,7 @@ const prizeService = {
 
     createPrize: async (values) => {
         try {
-            let url = baseurl + '/prizes';
+            let url = baseurl + '/api/prizes';
             const {data} = await axios.post(url, values)
             return data
         } catch (error) {
@@ -35,7 +35,7 @@ const prizeService = {
 
     updatePrize: async (id, values) => {
         try {
-            let url = baseurl + '/prizes/' + id;
+            let url = baseurl + '/api/prizes/' + id;
             const {data} = await axios.put(url, values)
             return data;
         } catch (error) {
@@ -45,7 +45,7 @@ const prizeService = {
 
     deletePrize: async (id) => {
         try {
-            let url = baseurl + '/prizes/' + id;
+            let url = baseurl + '/api/prizes/' + id;
             const {data} = await axios.delete(url)
             return data;
         } catch (error) {

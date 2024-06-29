@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000'
 
 const gameService = {
 
     getGames: async () => {
         try {
-            let url = baseurl + '/games'
+            let url = baseurl + '/api/games'
 
             const {data} = await axios.get(url);
             return data;
@@ -17,7 +17,7 @@ const gameService = {
 
     getGame: async (id) => {
         try {
-            let url = baseurl + '/games/' + id;
+            let url = baseurl + '/api/games/' + id;
             const {data} = await axios.get(url);
             return data;
         } catch (error) {

@@ -2,7 +2,7 @@ import axios from 'axios'
 import cloudinaryService from "./cloudinaryService";
 import serieService from "./serieService";
 
-const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+const baseurl = process.env.REACT_APP_API_URI || 'http://localhost:5000'
 
 const getResults = async (participants, phase) => {
 
@@ -90,7 +90,7 @@ const tournamentService = {
 
     getAllTournaments: async (status = "ALL", game = "ALL", page) => {
         try {
-            let url = baseurl + '/tournaments?status=' + status + '&game=' + game + '&page=' + page;
+            let url = baseurl + '/api/tournaments?status=' + status + '&game=' + game + '&page=' + page;
             
             const {data} = await axios.get(url)
 
@@ -101,7 +101,7 @@ const tournamentService = {
 
     getAllTournamentsByCreator: async (creator, status = "ALL", game = "ALL", page) => {
         try {
-            let url = baseurl + '/tournaments?creator=' + creator + '&status=' + status + '&game=' + game + '&page=' + page;
+            let url = baseurl + '/api/tournaments?creator=' + creator + '&status=' + status + '&game=' + game + '&page=' + page;
 
             const {data} = await axios.get(url)
 
@@ -112,7 +112,7 @@ const tournamentService = {
 
     getAllTournamentsBySponsor: async (sponsor, status = "ALL", game = "ALL", page, sponsorStatus = "ALL") => {
         try {
-            let url = baseurl + '/tournaments?sponsor=' + sponsor + '&status=' + status + '&game=' + game + "&sponsorStatus=" + sponsorStatus + '&page=' + page ;
+            let url = baseurl + '/api/tournaments?sponsor=' + sponsor + '&status=' + status + '&game=' + game + "&sponsorStatus=" + sponsorStatus + '&page=' + page ;
 
             const {data} = await axios.get(url)
 
@@ -123,7 +123,7 @@ const tournamentService = {
 
     getTournament: async (tournamentId) => {
         try {
-            let url = baseurl + '/tournaments/' + tournamentId
+            let url = baseurl + '/api/tournaments/' + tournamentId
             
             const {data} = await axios.get(url)
 
@@ -134,7 +134,7 @@ const tournamentService = {
 
     createTournament: async (tournamentData) => {
         try{
-            let url = baseurl + '/tournaments/'
+            let url = baseurl + '/api/tournaments/'
             
             await axios.post(url, tournamentData)
 
@@ -148,7 +148,7 @@ const tournamentService = {
 
     updateTournament: async (tournamentId, values) => {
         try {
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
 
             const baseData = {};
 
@@ -174,7 +174,7 @@ const tournamentService = {
     patrocinarTorneo: async (tournamentId, sponsor) => {
         try {
 
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
             const result = await axios.get(url);
 
             let sponsoredBy = result.data.sponsoredBy;
@@ -229,7 +229,7 @@ const tournamentService = {
     dejarDePatrocinarTorneo: async (tournamentId, sponsorId) => {
         try {
 
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
             let {data} = await axios.get(url);
 
             let sponsoredBy = data.sponsoredBy;
@@ -255,7 +255,7 @@ const tournamentService = {
 
     aprobarPatrocinio: async (tournamentId, sponsorId) => {
         try{
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
             const result = await axios.get(url);
 
             let sponsoredBy = result.data.sponsoredBy.filter((patrocinador) => patrocinador.id !== sponsorId);
@@ -290,7 +290,7 @@ const tournamentService = {
 
     inscribirUsuario: async (tournamentId, userId) => {
         try{
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
             let result = await axios.get(url);
 
             let participants = result.data.participants;
@@ -322,7 +322,7 @@ const tournamentService = {
     darBajaUsuario: async (tournamentId, userId) => {
         try{
 
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
             let result = await axios.get(url);
 
             let participants = result.data.participants;
@@ -348,7 +348,7 @@ const tournamentService = {
 
     addBracketSerieToTournament: async (tournamentId, phaseNumber, round, serie, serieIdentifier) =>{
         try {
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
 
             let result = await axios.get(url);
 
@@ -371,7 +371,7 @@ const tournamentService = {
 
     addLeagueSerieToTournament: async (tournamentId, phaseNumber, round, serie, serieIdentifier) =>{
         try {
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
 
             let result = await axios.get(url);
 
@@ -394,7 +394,7 @@ const tournamentService = {
 
     closeActualPhase: async (tournamentId) => {
         try {
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
 
             let result = await axios.get(url);
 
@@ -426,7 +426,7 @@ const tournamentService = {
 
     deleteTournament: async (tournamentId) => {
         try {
-            let url = baseurl + '/tournaments/' + tournamentId;
+            let url = baseurl + '/api/tournaments/' + tournamentId;
             const {data} = await axios.delete(url)
             return data;
         } catch (error) {
