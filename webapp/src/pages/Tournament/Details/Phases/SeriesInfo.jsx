@@ -66,7 +66,7 @@ function SeriesInfo({serie, onClose}) {
             <div>
                 <article className="card modal-series-info">
                     <div className="card-header">
-                        Round {serie.roundNumber + 1} - Serie {serie.serieNumber + 1}
+                        Ronda {serie.roundNumber + 1} - Serie {serie.serieNumber + 1}
                     </div>
                     <div className="card-content">
                         <div className="flex vertical spacing-large">
@@ -136,7 +136,7 @@ function SeriesInfo({serie, onClose}) {
                                     <HorizontalSpliter color="white" />
                                 </div>
                                 <div>
-                                    Matches
+                                    Partidas
                                 </div>
                                 <div className="flex align-middle size-all">
                                     <HorizontalSpliter color="white" />
@@ -149,7 +149,7 @@ function SeriesInfo({serie, onClose}) {
                                         :
                                         <>
                                             <p>
-                                                No se han encontrado partidos para esta serie
+                                                No se han encontrado partidas para esta serie
                                             </p>
                                         </>
                                 }
@@ -159,7 +159,7 @@ function SeriesInfo({serie, onClose}) {
                     <div className="card-footer flex align-center">
                         <div className={"size-1-2 delete"}>
                             <button onClick={onClose}>
-                                Close
+                                Cerrar
                             </button>
                         </div>
                     </div>

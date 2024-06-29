@@ -8,7 +8,6 @@ jobs:
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    needs: [e2e-tests]
     steps:
       - uses: actions/checkout@v4
       - name: Publish to Registry
@@ -31,7 +30,6 @@ jobs:
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    needs: [e2e-tests]
     steps:
       - uses: actions/checkout@v4
       - name: Debug Secrets

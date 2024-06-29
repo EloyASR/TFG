@@ -96,7 +96,7 @@ function PrizeCreation() {
                     </div>
                     <div className="card-footer">
                         <div className="flex align-end size-1-1 spacing-large">
-                            <div className="size-1-5">
+                            <div className="size-1-5 accept">
                                 <button type="submit">
                                     Aceptar
                                 </button>

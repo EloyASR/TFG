@@ -9,7 +9,7 @@ import {useAlert} from "../../../../context/AlertContext";
 import tournamentService from "../../../../services/tournamentService";
 import matchService from "../../../../services/matchService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 function SeriesEdit({tournamentId,
                         tournamentStatus,
@@ -551,7 +551,7 @@ function SeriesEdit({tournamentId,
                                                 <InputNumber id={"result-participant-1"}
                                                              min={0}
                                                              max={getMaxScoreHomeParticipant()}
-                                                             label={"Result"}
+                                                             label={"Resultado"}
                                                              defaultValue = {seriesData.serieData.result.home_result}
                                                              placeholder={0}
                                                              disabled={homeParticipantSelected === undefined || ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "FINISHED"].includes(tournamentStatus)}
@@ -578,7 +578,7 @@ function SeriesEdit({tournamentId,
                                                                  min={0}
                                                                  max={ getMaxScoreAwayParticipant() }
                                                                  defaultValue = {seriesData.serieData.result.away_result}
-                                                                 label={"Result"}
+                                                                 label={"Resultado"}
                                                                  disabled={awayParticipantSelected === undefined || ["CLOSED", "INSCRIPTIONS_OPEN", "INSCRIPTIONS_CLOSED", "FINISHED"].includes(tournamentStatus)}
                                                                  placeholder={0}
                                                                  onChange={(e)=>{setScoreAway(Number(e.target.value))}}/>
@@ -593,7 +593,7 @@ function SeriesEdit({tournamentId,
                                         <>
                                             <div className="flex align-spread spacing-large">
                                                 <div>
-                                                    Status
+                                                    Estado
                                                 </div>
                                                 <div className="flex align-middle size-all">
                                                     <HorizontalSpliter color="white" />
@@ -624,7 +624,7 @@ function SeriesEdit({tournamentId,
                                             </div>
                                             <div className="flex align-spread spacing-large">
                                                 <div>
-                                                    Matches
+                                                    Partidas
                                                 </div>
                                                 <div className="flex align-middle size-all">
                                                     <HorizontalSpliter color="white"/>
@@ -639,9 +639,9 @@ function SeriesEdit({tournamentId,
                                             return <div key={"match" + index} className="flex spacing-large">
                                                     <div className="size-3-4">
                                                         <InputText id={"match-" + index +"-id"}
-                                                                   label={"Match ID"}
+                                                                   label={"ID Partida"}
                                                                    defaultValue={match.matchData.identifier}
-                                                                   placeholder={"Match ID"}
+                                                                   placeholder={"ID Partida"}
                                                                    onChange={(e) => setMatchData(e.target.value, index)}/>
                                                     </div>
                                                     <div className="flex size-1-4 align-bottom delete ">
@@ -658,9 +658,10 @@ function SeriesEdit({tournamentId,
                                 {
                                     getButtonAddMatches() && tournamentStatus && tournamentStatus === "ON_COURSE" ?
                                         <div className="flex align-start gap-large">
-                                            <div className="size-1-5">
+                                            <div className="add size-1-3">
                                                 <button type="button" onClick={()=>addMatch()}>
-                                                    Add Match
+                                                    <FontAwesomeIcon icon={faPlus} />
+                                                    Añadir partida
                                                 </button>
                                             </div>
                                         </div> : <></>

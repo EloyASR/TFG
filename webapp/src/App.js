@@ -203,20 +203,16 @@ function App() {
           <div className="contenidos flex horizontal">
             <div className="bloque flex vertical gap-large">
               <h5>SOBRE NOSOTROS</h5>
-              <a>About</a>
-              <a>Privacy Policy</a>
-              <a>Cookie Policy</a>
-              <a>Contact Us</a>
+              <a>Política de Privacidad</a>
+              <a>Política de Cookies</a>
             </div>
             <div className="bloque flex vertical gap-large">
               <h5>OTRA INFORMACIÓN</h5>
-              <a>Questions</a>
-              <a>Help</a>
+              <a>Ayuda</a>
             </div>
             <div className="bloque flex vertical gap-large">
               <h5>REDES SOCIALES</h5>
               <div className="flex horizontal spacing-large">
-                <a><FontAwesomeIcon icon={faInstagram} size={'xl'}/></a>
                 <a><FontAwesomeIcon icon={faGithub} size={'xl'}/></a>
                 <a><FontAwesomeIcon icon={faLinkedin} size={'xl'}/></a>
               </div>

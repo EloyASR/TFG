@@ -16,7 +16,7 @@ function ProfileHeader({profileInfo, profileEdit}){
 
     return <>
         <div className="header">
-            Profile
+            Perfil
         </div>
         <div className="body">
             <div className="info">
