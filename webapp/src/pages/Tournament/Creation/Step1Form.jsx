@@ -177,7 +177,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                                                 </label>
                                             </div>
                                             <div className="own-form-text">
-                                                <input id="tournament-name" type="text" defaultValue={informacionBasica.name} placeholder="Nombre del torneo" name="tournament-name" maxLength="30" onChange={(e) => { setName(e.target.value) }} required/>
+                                                <input id="tournament-name" type="text" defaultValue={informacionBasica.name} placeholder="Nombre del torneo" name="tournament-name" maxLength="30" onChange={(e) => { setName(e.target.value) }} required autoComplete={"off"}/>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                                         <div className="size-content">
                                             <div className="form-row">
                                                 <div className="form-field own-form-select own-form-search">
-                                                    <input type={showSearchInput ? "search" : "hidden"} name="tournament-game" placeholder="Seleccionar un juego" autoComplete="off" onChange={(e) => handleGameChange(e)} onFocus={() => { setShowSearchOptions(true) }} onBlur={() => { setShowSearchOptions(false) }} ref={e => { gameInput.current = e }} required/>
+                                                    <input type={showSearchInput ? "search" : "hidden"} name="tournament-game" placeholder="Seleccionar un juego" autoComplete="off" onChange={(e) => handleGameChange(e)} onFocus={() => { setShowSearchOptions(true) }} onBlur={() => { setShowSearchOptions(false) }} ref={e => { gameInput.current = e }} required autoComplete={"off"}/>
                                                     {
                                                         showSelectedGame && informacionBasica.game ?
                                                             <>
@@ -285,16 +285,16 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                             <div className="size-content">
                                 <div className="flex spacing-large">
                                     <div className="size-1-4">
-                                        <Combobox  id={"size"} name={"size"} placeholder={"Tamaño"} label={"Tamaño del torneo *"} itemsList={[2,4,6,8,10,12,14,16]} onChange={(value)=>setSize(value)} selection={informacionBasica.size} required={true}/>
+                                        <Combobox id={"size"} name={"size"} placeholder={"Tamaño"} label={"Tamaño del torneo *"} itemsList={[2,4,6,8,10,12,14,16]} onChange={(value)=>setSize(value)} selection={informacionBasica.size} required={true}/>
                                     </div>
                                     <>
                                         <div className="size-1-4">
-                                            <InputRadio label={"¿Torneo con premio?"} itemsList={["Sí", "No"]} checked={informacionBasica.havePrize ? "Sí" : "No"} id={"have-prize"} name={"have-prize"} onChange={(e) => handleRadioChange(e)}/>
+                                            <InputRadio label={"¿Torneo con premio?"} itemsList={["Sí", "No"]} checked={informacionBasica.havePrize ? "Sí" : "No"} id={"have-prize"} name={"have-prize"} onChange={(e) => handleRadioChange(e)} autoComplete={"off"}/>
                                         </div>
                                         {
                                             informacionBasica.havePrize ?
                                                 <div className="size-1-2">
-                                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio *"} placeholder={"Premio"} selection={getPrizeName(informacionBasica.prize)} onChange={(item) => {handlePrizeChange(item)}} required={true} />
+                                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio *"} placeholder={"Premio"} selection={getPrizeName(informacionBasica.prize)} onChange={(item) => {handlePrizeChange(item)}} required={true} autoComplete={"off"}/>
                                                 </div>
                                                 :
                                                 <></>

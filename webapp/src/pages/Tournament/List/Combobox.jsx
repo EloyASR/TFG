@@ -40,7 +40,8 @@ function Combobox({ itemsList, label, name, placeholder, onChange, id, selection
                                 defaultValue={selected}
                                 placeholder={placeholder}
                                 required={required}
-                                onKeyDown={(e)=>e.preventDefault()} />
+                                onKeyDown={(e)=>e.preventDefault()}
+                                autoComplete={"off"}/>
                                 :
                                 <input
                                     id={id + "-combobox"}
@@ -48,7 +49,8 @@ function Combobox({ itemsList, label, name, placeholder, onChange, id, selection
                                     name={name}
                                     defaultValue={selected}
                                     placeholder={placeholder}
-                                    onKeyDown={(e)=>e.preventDefault()} />
+                                    onKeyDown={(e)=>e.preventDefault()}
+                                    autoComplete={"off"}/>
                             }
                             <button className="widget-button" id={name + "-combobox-button"} type="button" title="size" aria-label="open combobox" aria-disabled="false" onClick={() => setExpanded(!expanded)}>
                                 {expanded ?

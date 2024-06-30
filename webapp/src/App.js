@@ -1,7 +1,7 @@
 import './App.css';
 
 import React from 'react';
-import {useParams } from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import { Routes, Route,Navigate } from "react-router"
 import LoginSignup from './pages/LoginSignup/LoginSignup';
 import Profile from './pages/Profile/Profile';
@@ -22,6 +22,8 @@ import TournamentEdit from "./pages/Tournament/Edit/TournamentEdit";
 import {faGithub, faInstagram, faLinkedin} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import TournamentSponsors from "./pages/Tournament/Details/Sponsors/TournamentSponsors";
+import Help from "./pages/Help";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
 
@@ -198,23 +200,33 @@ function App() {
               </CompanyRoute>
             </ProtectedRoute>
           } />
+          <Route path="/help" element={
+            <Help/>
+          } />
+          <Route path="/privacy-policy" element={
+            <PrivacyPolicy/>
+          } />
         </Routes>
         <div className="footer flex align-center">
           <div className="contenidos flex horizontal">
             <div className="bloque flex vertical gap-large">
               <h5>SOBRE NOSOTROS</h5>
-              <a>Política de Privacidad</a>
+              <Link to={"/privacy-policy"}>Política de Privacidad</Link>
               <a>Política de Cookies</a>
             </div>
             <div className="bloque flex vertical gap-large">
               <h5>OTRA INFORMACIÓN</h5>
-              <a>Ayuda</a>
+              <Link to={"/help"}>Ayuda</Link>
             </div>
             <div className="bloque flex vertical gap-large">
               <h5>REDES SOCIALES</h5>
               <div className="flex horizontal spacing-large">
-                <a><FontAwesomeIcon icon={faGithub} size={'xl'}/></a>
-                <a><FontAwesomeIcon icon={faLinkedin} size={'xl'}/></a>
+                <a href={"https://github.com/EloyASR/TFG" } target="_blank" rel='noopener noreferrer'>
+                  <FontAwesomeIcon icon={faGithub} size={'xl'}/>
+                </a>
+                <a href={"https://www.linkedin.com/in/eloyalfredoschmidtr/" } target="_blank" rel='noopener noreferrer'>
+                  <FontAwesomeIcon icon={faLinkedin} size={'xl'}/>
+                </a>
               </div>
             </div>
           </div>

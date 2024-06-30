@@ -19,31 +19,31 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
             case "League of Legends":
                 return <>
                     <div className="size-3-6">
-                        <InputText label={"User ID"} id={"userid"} name={"userid"} placeholder={"User ID"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
+                        <InputText label={"ID Usuario *"} id={"userid"} name={"userid"} placeholder={"ID Usuario"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
                     </div>
                     <div className="size-1-6">
-                        <InputText label={"Tag"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={values.tag} error={errors.tag} onChange={handleInputChange} />
+                        <InputText label={"TAG *"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={values.tag} error={errors.tag} onChange={handleInputChange} />
                     </div>
                 </>
             case "Valorant":
                 return <>
                     <div className="size-3-6">
-                        <InputText label={"User ID"} id={"userid"} name={"userid"} placeholder={"User ID"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
+                        <InputText label={"ID Usuario *"} id={"userid"} name={"userid"} placeholder={"ID Usuario"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
                     </div>
                     <div className="size-1-6">
-                        <InputText label={"Tag"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={values.tag} error={errors.tag} onChange={handleInputChange} />
+                        <InputText label={"TAG *"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={values.tag} error={errors.tag} onChange={handleInputChange} />
                     </div>
                 </>
             case "Pokemon VGC":
                 return <>
                     <div className="size-4-6">
-                        <InputText label={"Pokemon ID"} id={"userid"} name={"userid"} placeholder={"ID"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
+                        <InputText label={"Pokemon ID *"} id={"userid"} name={"userid"} placeholder={"ID"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
                     </div>
                 </>
             default:
                 return <>
                     <div className="size-4-6">
-                        <InputText label={"User ID"} id={"userid"} name={"userid"} placeholder={"ID"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
+                        <InputText label={"ID Usuario *"} id={"userid"} name={"userid"} placeholder={"ID Usuario"} defaultValue={values.userid} error={errors.userid} onChange={handleInputChange} />
                     </div>
                 </>
         }
@@ -126,14 +126,14 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
                 <div>
                     <div className="card modal-series-modifier">
                         <div className="card-header">
-                            Crear Cuenta
+                            Añadir Cuenta
                         </div>
                         <div className="card-content">
                             <div className="flex vertical spacing-medium">
                                 <div className="flex spacing-large">
                                     <div className="flex spacing-large size-all">
                                         <div className="size-2-6">
-                                            <Combobox id={"game"} itemsList={getGamesNames()} label={"Game"} placeholder={"Game"} error={errors.game} onChange={(item) => handleComboChange(item)} />
+                                            <Combobox id={"game"} itemsList={getGamesNames()} label={"Juego *"} placeholder={"Juego"} error={errors.game} onChange={(item) => handleComboChange(item)} />
                                         </div>
                                         {
                                             getAccountInputs()
@@ -144,14 +144,14 @@ function AccountCreation({getGamesNames, getGameName, getGameId, functionClose, 
                         </div>
                         <div className="card-footer">
                             <div className="flex align-end gap-large p-0">
-                                <div className="size-1-5">
+                                <div className="size-1-5 accept">
                                     <button type="submit">
-                                        Accept
+                                        Aceptar
                                     </button>
                                 </div>
                                 <div className="size-1-5 delete">
                                     <button onClick={()=>functionClose(false)}>
-                                        Cancel
+                                        Cancelar
                                     </button>
                                 </div>
                             </div>

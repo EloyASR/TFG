@@ -71,13 +71,13 @@ function SponsorTournament({tournamentId}) {
 
     const getPrizesNames = () => {
         let prizesNames = []
-        prizesNames.push("-- No prize selected --");
+        prizesNames.push("-- Sin premio --");
         prizes.map((prize)=>prizesNames.push(prize.name));
         return prizesNames;
     }
 
     const handleComboChange = (item) => {
-        if(item === "-- No prize selected --"){
+        if(item === "-- Sin premio --"){
             handleInputChange({target: {name: "prize", value: ""}})
         }else{
             let prizeFound = prizes.find((prize)=>prize.name === item)
@@ -94,7 +94,7 @@ function SponsorTournament({tournamentId}) {
             <Form onSubmit={patrocinarTorneo}>
                 <div className="prize-create card">
                     <div className="card-header">
-                        Sponsor Tournament
+                        Patrocinar Torneo
                     </div>
                     <div className="card-content">
                         <div className="flex vertical spacing-large size-content">
@@ -108,7 +108,7 @@ function SponsorTournament({tournamentId}) {
                             </div>
                             <div className="flex align-spread spacing-large">
                                 <div className="size-2-6">
-                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Prize"} placeholder={"Prize"} selection={"-- No prize selected --"} onChange={(item) => handleComboChange(item)} />
+                                    <Combobox id={"prize"} name={"prize"} itemsList={getPrizesNames()} label={"Premio"} placeholder={"Premio"} selection={"-- Sin premio --"} onChange={(item) => handleComboChange(item)} />
                                 </div>
                             </div>
                             <div className="flex align-spread spacing-large">
@@ -120,7 +120,7 @@ function SponsorTournament({tournamentId}) {
                                 </div>
                             </div>
                             <div className="size-all">
-                                <ImageSelector label={"Image"} maxImages={2} id={"bannersLaterales"} name={"bannersLaterales"} onChange={(e) => handleInputChange(e)}/>
+                                <ImageSelector label={"Imágenes"} maxImages={2} id={"bannersLaterales"} name={"bannersLaterales"} onChange={(e) => handleInputChange(e)}/>
                             </div>
                             <div className="flex align-spread spacing-large">
                                 <div>
@@ -131,7 +131,7 @@ function SponsorTournament({tournamentId}) {
                                 </div>
                             </div>
                             <div className="size-all">
-                                <ImageSelector label={"Image"} maxImages={1} id={"bannersHorizontales"} name={"bannersHorizontales"} onChange={(e) => handleInputChange(e)}/>
+                                <ImageSelector label={"Imagen"} maxImages={1} id={"bannersHorizontales"} name={"bannersHorizontales"} onChange={(e) => handleInputChange(e)}/>
                             </div>
                         </div>
                     </div>

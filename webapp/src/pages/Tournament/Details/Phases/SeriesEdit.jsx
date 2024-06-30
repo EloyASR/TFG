@@ -104,7 +104,8 @@ function SeriesEdit({tournamentId,
                     type: result.type,
                     mode: result.mode,
                     game: result.game,
-                    matchData: result.matchData
+                    matchData: result.matchData,
+                    timeCreation: new Date().getTime()
                 })
             }else{
                 matchesModified.push({
@@ -112,7 +113,8 @@ function SeriesEdit({tournamentId,
                     type: serie.serieData.type,
                     mode: serie.serieData.mode,
                     game: serie.serieData.game,
-                    matchData: {}
+                    matchData: {},
+                    timeCreation: new Date().getTime()
                 })
             }
         }
@@ -390,6 +392,7 @@ function SeriesEdit({tournamentId,
             mode: seriesData.serieData.mode,
             game: seriesData.serieData.game,
             serie: seriesData.serieData.uid,
+            timeCreation: new Date().getTime(),
             matchData: {}
         })
         setMatches(newMatches);
@@ -636,16 +639,20 @@ function SeriesEdit({tournamentId,
                                 }
                                 {
                                     matches && tournamentStatus && tournamentStatus === "ON_COURSE" ? matches.map((match, index) => {
-                                            return <div key={"match" + index} className="flex spacing-large">
+                                            return <div key={match.timeCreation} className="flex spacing-large">
                                                     <div className="size-3-4">
-                                                        <InputText id={"match-" + index +"-id"}
+                                                        <InputText id={"match-" + index}
                                                                    label={"ID Partida"}
                                                                    defaultValue={match.matchData.identifier}
                                                                    placeholder={"ID Partida"}
                                                                    onChange={(e) => setMatchData(e.target.value, index)}/>
                                                     </div>
                                                     <div className="flex size-1-4 align-bottom delete ">
-                                                        <button type="button" onClick={()=>setMatches(matches.filter(m => m.matchData.uid !== match.matchData.uid))}>
+                                                        <button type="button" onClick={()=>
+                                                        {
+                                                            let matchesCopy = [...matches];
+                                                            setMatches(matchesCopy.filter(m => m !== match));
+                                                        }}>
                                                             <FontAwesomeIcon icon={faTrashCan} />
                                                             Eliminar
                                                         </button>
@@ -672,12 +679,12 @@ function SeriesEdit({tournamentId,
                             <div className="flex align-end gap-large p-0">
                                 <div className="size-1-5">
                                     <button onClick={(e)=>{acceptChanges(e)}}>
-                                        Accept
+                                        Aceptar
                                     </button>
                                 </div>
                                 <div className="size-1-5 delete">
                                     <button onClick={()=>functionClose(false)}>
-                                        Cancel
+                                        Cancelar
                                     </button>
                                 </div>
                             </div>

@@ -145,19 +145,19 @@ function EditProfile (props) {
             case "League of Legends":
                 return <>
                     <div className="size-2-6">
-                        <InputText disabled={true} label={"User ID"} id={"userid"} name={"userid"} placeholder={"User ID"} defaultValue={account.leagueOfLegendsAccountInfo.gameName}  />
+                        <InputText disabled={true} label={"ID Usuario"} id={"userid"} name={"userid"} placeholder={"ID Usuario"} defaultValue={account.leagueOfLegendsAccountInfo.gameName}  />
                     </div>
                     <div className="size-1-6">
-                        <InputText disabled={true} label={"Tag"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={account.leagueOfLegendsAccountInfo.tagLine}  />
+                        <InputText disabled={true} label={"TAG"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={account.leagueOfLegendsAccountInfo.tagLine}  />
                     </div>
                 </>
             case "Valorant":
                 return <>
                     <div className="size-2-6">
-                        <InputText disabled={true} label={"User ID"} id={"userid"} name={"userid"} placeholder={"User ID"} defaultValue={account.valorantAccountInfo.gameName}  />
+                        <InputText disabled={true} label={"ID Usuario"} id={"userid"} name={"userid"} placeholder={"ID Usuario"} defaultValue={account.valorantAccountInfo.gameName}  />
                     </div>
                     <div className="size-1-6">
-                        <InputText disabled={true} label={"Tag"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={account.valorantAccountInfo.tagLine}  />
+                        <InputText disabled={true} label={"TAG"} id={"tag"} name={"tag"} placeholder={"TAG"} defaultValue={account.valorantAccountInfo.tagLine}  />
                     </div>
                 </>
             case "Pokemon VGC":
@@ -169,7 +169,7 @@ function EditProfile (props) {
             default:
                 return <>
                     <div className="size-3-6">
-                        <InputText disabled={true} label={"User ID"} id={"userid"} name={"userid"} placeholder={"ID"} defaultValue={""} />
+                        <InputText disabled={true} label={"ID Usuario"} id={"userid"} name={"userid"} placeholder={"ID"} defaultValue={""} />
                     </div>
                 </>
         }
@@ -529,7 +529,7 @@ function EditProfile (props) {
                                                 <div className="flex vertical spacing-large size-1-1">
                                                     <div className="flex align-spread spacing-large">
                                                         <div>
-                                                            Accounts
+                                                            Cuentas
                                                         </div>
                                                         <div className="flex align-middle size-all">
                                                             <HorizontalSpliter color="white"/>
@@ -541,7 +541,7 @@ function EditProfile (props) {
                                                                 <div className="flex spacing-large size-all">
                                                                     <div className="size-2-6">
                                                                         <InputText disabled={true} id={"game-" + index}
-                                                                                   name={"game-" + index} label={"Game"}
+                                                                                   name={"game-" + index} label={"Juego"}
                                                                                    placeholder={"Juego"}
                                                                                    defaultValue={getGameName(account.game)}/>
                                                                     </div>
@@ -551,7 +551,7 @@ function EditProfile (props) {
                                                                     <div className="flex align-bottom size-1-6 delete">
                                                                         <button type={"button"}
                                                                                 onClick={() => deleteAccount(account)}>
-                                                                            Delete
+                                                                            Eliminar
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -559,9 +559,9 @@ function EditProfile (props) {
                                                         })
                                                     }
                                                     <div className="flex size-1-1">
-                                                        <div className="size-1-5">
+                                                        <div className="size-1-5 accept">
                                                             <button type={"button"} onClick={() => setShowModal(true)}>
-                                                                Add +
+                                                                Añadir +
                                                             </button>
                                                         </div>
                                                     </div>

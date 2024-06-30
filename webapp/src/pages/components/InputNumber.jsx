@@ -27,9 +27,9 @@ function InputNumber({ id, name, min, max, label, onChange, placeholder, default
                 </div>
                 <div className="form-field form-number">
                     {disabled ?
-                        <input id={id + "-input"} name={name} type="number" onChange={(e) => onChangeInput(e)} placeholder={placeholder} min={min ?? null} max={max ?? null} defaultValue={defaultValue ?? null} disabled={true} />
+                        <input id={id + "-input"} name={name} type="number" onChange={(e) => onChangeInput(e)} placeholder={placeholder} min={min ?? null} max={max ?? null} defaultValue={defaultValue ?? null} disabled={true} autoComplete={"off"} />
                         :
-                        <input id={id + "-input"} name={name} type="number" onChange={(e) => onChangeInput(e)} placeholder={placeholder} min={min ?? null} max={max ?? null} defaultValue={defaultValue ?? null} />
+                        <input id={id + "-input"} name={name} type="number" onChange={(e) => onChangeInput(e)} placeholder={placeholder} min={min ?? null} max={max ?? null} defaultValue={defaultValue ?? null} autoComplete={"off"} />
                     }
                 </div>
             </div>

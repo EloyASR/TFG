@@ -1,9 +1,17 @@
+import {images} from "../../../../helpers/images";
+
 function TournamentPrize({prize}){
 
     return <>
         <div className="tournament-prize">
             <div className="prize-img">
-                <img src={prize.image} alt="" />
+                {
+                    prize.image ?
+                        <img src={prize.image} alt={"Imagen premio" + prize.image} />
+                        :
+                        <img src={images("./default_prize.png")} alt="Imagen por defecto premio"/>
+                }
+
             </div>
             <div className="prize-info">
                 <div className="prize-name">

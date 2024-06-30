@@ -10,9 +10,9 @@ function InputText({ label, onChange, placeholder, id, name, defaultValue, error
                 </div>
                 <div className="form-field form-text">
                     {required ?
-                        <input id={id + "-input"} name={name} type="text" onChange={(e) => onChange(e)} placeholder={placeholder} defaultValue={defaultValue} value={value} required={true} disabled={disabled}/>
+                        <input id={id + "-input"} name={name} type="text" onChange={(e) => onChange(e)} placeholder={placeholder} defaultValue={defaultValue} value={value} required={true} disabled={disabled} autoComplete={"off"}/>
                         :
-                        <input id={id + "-input"} name={name} type="text" onChange={(e) => onChange(e)} placeholder={placeholder} defaultValue={defaultValue} disabled={disabled}/>
+                        <input id={id + "-input"} name={name} type="text" onChange={(e) => onChange(e)} placeholder={placeholder} defaultValue={defaultValue} disabled={disabled} autoComplete={"off"}/>
                     }
                 </div>
                 {

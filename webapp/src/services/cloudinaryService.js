@@ -1,10 +1,10 @@
 import CryptoJS from 'crypto-js';
 
-const {REACT_APP_CLOUDINARY_API_SECRET,
-    REACT_APP_CLOUDINARY_API_KEY,
-    REACT_APP_CLOUDINARY_UPLOAD_PRESET,
-    REACT_APP_CLOUDINARY_UPLOAD_URL,
-    REACT_APP_CLOUDINARY_DELETE_URL} = process.env;
+const REACT_APP_CLOUDINARY_API_SECRET = process.env.REACT_APP_CLOUDINARY_API_SECRET || 'OhpngbiPqMZ8j94zPxjXvOcHqic';
+const REACT_APP_CLOUDINARY_API_KEY = process.env.REACT_APP_CLOUDINARY_API_KEY || '526622113586487';
+const REACT_APP_CLOUDINARY_DELETE_URL = process.env.REACT_APP_CLOUDINARY_DELETE_URL || 'https://api.cloudinary.com/v1_1/dyn0vsdqn/image/destroy0';
+const REACT_APP_CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || 'jqahs7kz';
+const REACT_APP_CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL || 'https://api.cloudinary.com/v1_1/dyn0vsdqn/image/upload';
 
 const sha1 = (input) => {
     return CryptoJS.SHA1(input).toString(CryptoJS.enc.Hex);

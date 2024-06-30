@@ -1142,5 +1142,34 @@ textarea {
   color: var(--black200);
 }
 
+.help-page {
+  color: white;
+  width: min(100% - 20px, 1100px);
+
+}
+
+.help-page article {
+  display: flex;
+  flex-direction: column;
+}
+
+.help-page .horizontal-spliter {
+  background-color: white;
+}
+
+.help-page article .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.help-page img{
+  align-self: center;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
 
 
