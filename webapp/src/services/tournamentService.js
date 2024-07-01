@@ -211,10 +211,15 @@ const tournamentService = {
 
                 sponsoredBy.push(sponsorToAdd);
 
-                await axios.put(url, {tournament: {
-                        prize: result.data.prize,
-                        sponsoredBy: sponsoredBy
-                }})
+                try{
+                    await axios.put(url, {tournament: {
+                            prize: result.data.prize,
+                            sponsoredBy: sponsoredBy
+                        }})
+                }catch (error){
+                    console.log(error);
+                }
+
 
                 return {code: 200, msg: "Torneo patrocinado con éxito"};
 

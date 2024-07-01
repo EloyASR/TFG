@@ -476,20 +476,20 @@ const upd = async (req,res) => {
         let insStart = new Date(tournamentFound.inscriptionInitDate);
         let insEnd = new Date(tournamentFound.inscriptionEndDate);
 
+        if (tournament.inscriptionInitDate) {
+            insStart = new Date(tournament.inscriptionInitDate);
+        }
+
+        if (tournament.inscriptionInitDate) {
+            insEnd = new Date(tournament.inscriptionEndDate);
+        }
+
         if(tournament.inscription !== undefined){
             inscription = tournament.inscription;
         }
 
         if (inscription === true) {
-            if(tournament.inscriptionInitDate && tournament.inscriptionEndDate) {
-
-                if (tournament.inscriptionInitDate) {
-                    insStart = new Date(tournament.inscriptionInitDate);
-                }
-
-                if (tournament.inscriptionInitDate) {
-                    insEnd = new Date(tournament.inscriptionEndDate);
-                }
+            if(insStart && insEnd) {
 
                 if (isNaN(insStart.getTime()) || isNaN(insEnd.getTime())) {
                     loggerError.error("ERROR 400: Invalid date format");
