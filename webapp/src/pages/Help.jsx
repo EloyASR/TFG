@@ -12,11 +12,11 @@ function Help(props) {
                         </h2>
                         <HorizontalSpliter/>
                         <div className={"content flex gap-medium"}>
-                            <p>Para acceder al Registro o al Inicio de Sesión en la aplicación se debe acceder mediante el botón que pone "LOG IN" y que se encuentra en la esquina superior derecha de la pantalla en el menú de navegación como se muestra en la siguiente captura:</p>
+                            <p>Para acceder al Registro o al Inicio de Sesión en la aplicación se debe acceder mediante el botón "LOG IN", que se encuentra en la esquina superior derecha de la pantalla en el menú de navegación, como se muestra en la siguiente captura:</p>
                             <img src={images("./help/login-link.png")} alt={"Imagen del Link de Login"}/>
-                            <p>Una vez que nos encontremos en la pestaña podemos o bien iniciar directamente sesión si ya disponemos de una cuenta registrada o registrar una cuenta nueva accediendo desde el botón de signup que se encuentra encima del formulario de inicio de sesión</p>
+                            <p>Una vez que nos encontremos en la pestaña podemos o bien iniciar directamente sesión si ya disponemos de una cuenta registrada o registrar una cuenta nueva accediendo desde el botón "SIGN UP" que se encuentra encima del formulario de inicio de sesión.</p>
                             <img src={images("./help/signup-link.png")} alt={"Imagen del Link de Signup"}/>
-                            <p>Hay que rellenar todos los campos obligatorios. La contraseña debe de tener una longitud de al menos 8 caracteres y contener al menos una minúscula, una mayúscula y un dígito. El correo debe el formato de correo siguiente nombreusuario@proveedor.tdl</p>
+                            <p>Hay que rellenar todos los campos obligatorios. La contraseña debe de tener una longitud de al menos 8 caracteres y contener al menos una minúscula, una mayúscula y un dígito. El correo debe el formato de correo siguiente "nombreusuario@proveedor.tdl".</p>
                         </div>
                     </article>
                     <article className={"flex gap-medium"}>
@@ -25,11 +25,11 @@ function Help(props) {
                         </h2>
                         <HorizontalSpliter/>
                         <div className={"content flex gap-medium"}>
-                            <p>Para navegar por la aplicación se dispone de un menú de navegación que nos proporciona acceso a las diferentes funcionalidades de la misma. Este menu de navegación variará de un tipo de usuario a otro.</p>
+                            <p>Para navegar por la aplicación se dispone de un menú de navegación que nos proporciona acceso a las diferentes funcionalidades de la misma. Este menú de navegación variará de un tipo de usuario a otro.</p>
 
                             <p>Para los usuarios normales el menú de navegación contendrá las siguientes opciones:</p>
                             <ul>
-                                <li> Perfil: Nos redireccionará a nuestro perfil personal. Ademas una vez en nuestro perfil podremos acceder al resto de opciones como la edición del mismo o la eliminación de la cuenta. </li>
+                                <li> Perfil: Nos redireccionará a nuestro perfil personal. Además, una vez en nuestro perfil podremos acceder al resto de opciones como la edición del mismo o la eliminación de la cuenta. </li>
                                 <li> Torneos: Esta opción redireccionará a página donde se mostrará la lista de todos los torneos del sistema. Desde esta opción también se puede acceder a la visualización detallada de torneos y registro dentro de estos.</li>
                             </ul>
                             <img src={images("./help/nav-user.png")} alt={"Imagen del Menú de Navegación para usuarios normales"}/>

@@ -59,16 +59,6 @@ const tournaments = [
                                     away_participant_parent_serie:1,
                                     next_round: 1,
                                     next_serie: 0,
-                                },
-                                {
-                                    serieNumber: 1,
-                                    roundNumber: 0,
-                                    home_participant_parent_round:-1,
-                                    home_participant_parent_serie:2,
-                                    away_participant_parent_round:-1,
-                                    away_participant_parent_serie:3,
-                                    next_round: 1,
-                                    next_serie: 0,
                                 }
                             ]
                         }

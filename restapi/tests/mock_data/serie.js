@@ -57,7 +57,7 @@ const series = [
         away_participant: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c62"), //USER 2
         date: new Date("2024-02-01T20:00:00.000+00:00"),
         result: {
-            winner: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c66"), //TEAM 1
+            winner: new mongoose.mongo.ObjectId("65df8098fc13ae2387cd3c61"), //USER 1
             home_result:2,
             away_result:1,
             matches: [
