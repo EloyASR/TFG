@@ -133,7 +133,7 @@ describe('GET /api/tournaments', () => {
         expect(res.body.tournaments.length).toBeGreaterThan(2);
     })
 
-    it("Buscar todos los torneos con status closed", async ()=>{
+    it("Buscar todos los torneos con status CLOSED", async ()=>{
         const res = await request(app)
             .get('/api/tournaments?status=CLOSED');
         expect(res.statusCode).toEqual(200);

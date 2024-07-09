@@ -287,22 +287,25 @@ describe('PUT /api/matches/:id', () => {
             .put('/api/matches/65df8098fc13ae2387cd3c67')
             .send({
                 match: {
+                    serie: "666edb0dfc13ae6b27234539",
+                }
+            })
+        expect(res.statusCode).toEqual(404);
+    })
+
+
+    it('Actualizar un match con serie inválida', async () => {
+        const res = await request(app)
+            .put('/api/matches/65df8098fc13ae2387cd3c67')
+            .send({
+                match: {
                     serie: "pruebaid",
                 }
             })
         expect(res.statusCode).toEqual(404);
     })
 
-    it('Actualizar un match con serie invalida', async () => {
-        const res = await request(app)
-            .put('/api/matches/65df8098fc13ae2387cd3c67')
-            .send({
-                match: {
-                    serie: "666edb0dfc13ae6b27234539",
-                }
-            })
-        expect(res.statusCode).toEqual(404);
-    })
+
 
     it('Actualizar un match con game inexistente', async () => {
         const res = await request(app)

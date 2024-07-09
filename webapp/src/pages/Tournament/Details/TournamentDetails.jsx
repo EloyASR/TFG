@@ -265,7 +265,7 @@ function TournamentDetails({ tournamentId }) {
                         <div className="card">
                             <div className="card-content relative">
                                 <div className="background-img">
-                                    <img src={images("./"+ game._name + "_1300_350.png")} alt="" />
+                                    <img src={images("./"+ game._name + "_1300_350.png")} alt={"Icono " + game.name} />
                                 </div>
                                 <div className="nombre-torneo">
                                     {tournamentData.name}

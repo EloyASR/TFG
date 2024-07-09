@@ -21,7 +21,7 @@ function ProfileHeader({profileInfo, profileEdit}){
         <div className="body">
             <div className="info">
                 <div className="icon">
-                    <img src={profileInfo.icon?images("./profile_icons/" + profileInfo.icon): images("./profile_icons/icon_default.jpg")} alt="" />
+                    <img src={profileInfo.icon?images("./profile_icons/" + profileInfo.icon): images("./profile_icons/icon_default.jpg")} alt={"Icono " + profileInfo.icon} />
                 </div>
                 <div className="data">
                     <div className="nickname">{profileInfo.name}</div>

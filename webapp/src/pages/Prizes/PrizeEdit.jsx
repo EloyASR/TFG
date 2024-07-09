@@ -124,7 +124,7 @@ function PrizeEdit({ prizeId }) {
                                     <label className="form-label" htmlFor="file">Actual Image</label>
                                     <div className="flex spacing-small">
                                         <div className="size-1-4 image-selected  mt-3">
-                                            <img src={prize.image} alt="" />
+                                            <img src={prize.image} alt={"Premio "+prize.name} />
                                         </div>
                                     </div>
                                 </div>

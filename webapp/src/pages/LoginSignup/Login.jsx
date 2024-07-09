@@ -80,7 +80,7 @@ const Login = (props) => {
                 <div className="flex vertical spacing-large">
                     <div className="size-content">
                         <div className="login-img">
-                            <img src={images("./profile-default.jpg")} alt="" />
+                            <img src={images("./profile-default.jpg")} alt={"Imagen por defecto del perfil"} />
                         </div>
                     </div>
                     <div className="inputs">

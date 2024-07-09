@@ -212,7 +212,6 @@ function App() {
             <div className="bloque flex vertical gap-large">
               <h5>SOBRE NOSOTROS</h5>
               <Link to={"/privacy-policy"}>Política de Privacidad</Link>
-              <a>Política de Cookies</a>
             </div>
             <div className="bloque flex vertical gap-large">
               <h5>OTRA INFORMACIÓN</h5>

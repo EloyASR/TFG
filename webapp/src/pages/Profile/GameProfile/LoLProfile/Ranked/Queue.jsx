@@ -30,7 +30,7 @@ function Queue({ data }) {
                 <div className="header">{data.queueType === "RANKED_SOLO_5x5" ? "Clasificatoria en Solitario" : data.queueType === "RANKED_FLEX_SR" ? "Clasificatoria Flexible" : ""}</div>
                 <div className="body">
                     <div className="icon">
-                        <img src={ranked_icons[data.tier]} alt="" />
+                        <img src={ranked_icons[data.tier]} alt={"Icono " + data.tier} />
                     </div>
                     <div className="info">
                         <div className="tier">{data.tier.toLowerCase()} {data.rank}</div>

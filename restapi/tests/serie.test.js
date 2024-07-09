@@ -127,7 +127,7 @@ afterEach( async () =>{
 describe('GET /api/series', () => {
 
     it("Buscar series por mas de un filtro a la vez", async ()=>{
-        const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=Tournament&user=65df8098fc13ae2387cd3c60');
+        const res = await request(app).get('/api/series?game=65df8098fc13ae2387cd3c60&mode=TOURNAMENT&user=65df8098fc13ae2387cd3c60');
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty("msg");
         expect(res.body.msg).toEqual("There cannot be two filters together with exception of game and mode")
@@ -155,7 +155,7 @@ describe('GET /api/series', () => {
 //PRUEBAS FIND UNA SOLA SERIE
 describe('GET /api/series/{id}', () => {
 
-    it('Passed an existing id should return a serie', async () => {
+    it('Buscar una serie válida', async () => {
         let serie = await Serie.findById("65e0f577fc13ae063acd367e");
         const res = await request(app).get('/api/series/65e0f577fc13ae063acd367e');
         expect(res.statusCode).toEqual(200);
@@ -166,14 +166,14 @@ describe('GET /api/series/{id}', () => {
         expect(res.body).toHaveProperty('type');
     })
 
-    it('Passed an invalid id should return error 400', async () => {
+    it('Buscar una serie inválida', async () => {
         const res = await request(app).get('/api/series/prueba');
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty('msg');
         expect(res.body.msg).toEqual("Invalid Serie Id: {prueba}");
     })
 
-    it('Passed a none existing id should return error 404', async () => {
+    it('Buscar una serie inexistente', async () => {
         const res = await request(app).get('/api/series/65d804c41c1127813e516f6a');
         expect(res.statusCode).toEqual(404);
         expect(res.body).toHaveProperty('msg');
@@ -434,7 +434,7 @@ describe('POST /api/series', () => {
 
 //PRUEBAS DE UPDATE DE UNA SERIE
 
-describe('PUT /api/series', () => {
+describe('PUT /api/series/{id}', () => {
 
     it("Actualizar una serie valida", async () => {
         const res = await request(app)
@@ -443,7 +443,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c61",
                     result:{
@@ -465,7 +465,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "pruebaid",
                     home_participant: "65df8098fc13ae2387cd3c62",
                     away_participant: "65df8098fc13ae2387cd3c61",
@@ -486,7 +486,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c62",
                     home_participant: "65df8098fc13ae2387cd3c62",
                     away_participant: "65df8098fc13ae2387cd3c61",
@@ -507,7 +507,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "PRUEBA_MODO",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c62",
                     away_participant: "65df8098fc13ae2387cd3c61",
@@ -528,7 +528,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "pruebaid",
                     away_participant: "65df8098fc13ae2387cd3c61",
@@ -549,7 +549,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c32",
                     away_participant: "65df8098fc13ae2387cd3c61",
@@ -570,7 +570,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     away_participant: "pruebaid",
                     result:{
@@ -590,7 +590,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c62",
                     away_participant: "65df8098fc13ae2387cd3c32",
@@ -611,7 +611,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     result:{
                         winner: "65df8098fc13ae2387cd3c62",
@@ -630,7 +630,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c61",
                     result:{
@@ -650,7 +650,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c61",
                     result:{
@@ -669,7 +669,7 @@ describe('PUT /api/series', () => {
                 serie: {
                     type: "SINGLE",
                     mode: "VGC",
-                    bestOf: 2,
+                    bestOf: 3,
                     game: "65df8098fc13ae2387cd3c68",
                     home_participant: "65df8098fc13ae2387cd3c61",
                     result:{
@@ -685,7 +685,7 @@ describe('PUT /api/series', () => {
 //PRUEBAS DE BORRADO DE UNA SERIE
 
 describe('DELETE /api/series/{id}', ()=>{
-    it('Try to delete a none existing serie', async ()=>{
+    it('Borrar una serie inexistente', async ()=>{
         const res = await request(app)
             .delete('/api/series/65d804c41c1127813e516f6a')
         expect(res.statusCode).toEqual(404);
@@ -693,7 +693,7 @@ describe('DELETE /api/series/{id}', ()=>{
         expect(res.body.msg).toEqual("Serie with Id:{65d804c41c1127813e516f6a} not found")
     })
 
-    it('Try to delete a serie with a non valid id', async ()=>{
+    it('Borrar una serie inválida', async ()=>{
         const res = await request(app)
             .delete('/api/series/pruebaid')
         expect(res.statusCode).toEqual(400);
@@ -701,7 +701,7 @@ describe('DELETE /api/series/{id}', ()=>{
         expect(res.body.msg).toEqual("Invalid Serie Id:{pruebaid}");
     })
 
-    it('Delete an existing serie', async ()=> {
+    it('Borrar una serie existente', async ()=> {
         const res = await request(app)
             .delete('/api/series/65e0f577fc13ae063acd367e')
         expect(res.statusCode).toEqual(200);

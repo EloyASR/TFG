@@ -122,7 +122,7 @@ function Nav({ tab, setTab }) {
         <>
             <div className="navsuperior">
                 <div className="icon">
-                    <img src={appIcon} alt="" />
+                    <img src={appIcon} alt="Icono de la aplicación" />
                 </div>
                 <div className="name">
                     <span>ToorEII</span>

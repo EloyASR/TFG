@@ -20,7 +20,7 @@ function PrizeSelected({prizeId}) {
             <div className="prize-img">
                 {
                     prize && prize.image !== "" ?
-                        <img src={prize.image} alt="" />
+                        <img src={prize.image} alt={"Imagen premio " + prize.name} />
                         :
                         <img src={images("./default_prize.png")} alt="Imagen por defecto premio"/>
                 }

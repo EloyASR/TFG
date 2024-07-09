@@ -13,9 +13,9 @@ function StepBar({ step }) {
                         <div className="flex align-start">
                             {
                                 step >= 1 ?
-                                    <img alt="" src={images("./form1step.png")} />
+                                    <img alt="Icono Step1 sin visitar" src={images("./form1step.png")} />
                                     :
-                                    <img alt="" src={images("./form1step-dark.png")} />
+                                    <img alt="Icono Step1 visitado" src={images("./form1step-dark.png")} />
                             }
                         </div>
                     </div>
@@ -23,9 +23,9 @@ function StepBar({ step }) {
                         <div className="flex align-center">
                             {
                                 step >= 2 ?
-                                    <img alt="" src={images("./form2step.png")} />
+                                    <img alt="Icono Step2 sin visitar" src={images("./form2step.png")} />
                                     :
-                                    <img alt="" src={images("./form2step-dark.png")} />
+                                    <img alt="Icono Step2 visitado" src={images("./form2step-dark.png")} />
                             }
                         </div>
                     </div>
@@ -33,9 +33,9 @@ function StepBar({ step }) {
                         <div className="flex align-end">
                             {
                                 step >= 3 ?
-                                    <img alt="" src={images("./form3step.png")} />
+                                    <img alt="Icono Step3 sin visitar" src={images("./form3step.png")} />
                                     :
-                                    <img alt="" src={images("./form3step-dark.png")} />
+                                    <img alt="Icono Step3 visitado" src={images("./form3step-dark.png")} />
                             }
                         </div>
                     </div>
@@ -43,9 +43,9 @@ function StepBar({ step }) {
                         <div className="flex align-end">
                             {
                                 step >= 4 ?
-                                    <img alt="" src={images("./form4step.png")} />
+                                    <img alt="Icono Step4 sin visitar" src={images("./form4step.png")} />
                                     :
-                                    <img alt="" src={images("./form4step-dark.png")} />
+                                    <img alt="Icono Step4 visitado" src={images("./form4step-dark.png")} />
                             }
                         </div>
                     </div>

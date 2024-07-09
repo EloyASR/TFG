@@ -16,7 +16,7 @@ function PrizeItem({prize, onDelete}){
             <div className="prize-img">
                 {
                     prize.image !== "" ?
-                        <img src={prize.image} alt="" />
+                        <img src={prize.image} alt={"Premio " + prize.name}/>
                         :
                         <img src={images("./default_prize.png")} alt="Imagen por defecto premio"/>
                 }

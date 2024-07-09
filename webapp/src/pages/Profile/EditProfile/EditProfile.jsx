@@ -398,7 +398,7 @@ function EditProfile (props) {
                             <div className="flex vertical align-top spacing-large">
                                 <div className="signup-img">
                                     <div className="image-container">
-                                        <img src={images("./profile_icons/" + iconSelected)} alt="" />
+                                        <img src={images("./profile_icons/" + iconSelected)} alt={"Icono " + iconSelected} />
                                         <div className="signup-icon-selector">
                                             <button type="button" onClick={(e) => {
                                                 e.preventDefault();
@@ -427,7 +427,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_male_02.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_male_02.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_male_02.png")} alt="Icon Male 2" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -436,7 +436,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_male_03.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_male_03.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_male_03.png")} alt="Icon Male 3" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -445,7 +445,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_male_04.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_male_04.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_male_04.png")} alt="Icon Male 4" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -454,7 +454,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_female_01.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_female_01.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_female_01.png")} alt="Icon Female 1" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -463,7 +463,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_female_02.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_female_02.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_female_02.png")} alt="Icon Female 2" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -472,7 +472,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_female_03.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_female_03.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_female_03.png")} alt="Icon Female 3" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -481,7 +481,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_female_04.png");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_female_04.png")} alt="" />
+                                                                <img src={images("./profile_icons/icon_female_04.png")} alt="Icon Female 4" />
                                                             </button>
                                                         </div>
                                                         <div className="img-picker-item size-1-4">
@@ -490,7 +490,7 @@ function EditProfile (props) {
                                                                 setIconSelected("icon_default.jpg");
                                                                 setImgModal(false);
                                                             }}>
-                                                                <img src={images("./profile_icons/icon_default.jpg")} alt="" />
+                                                                <img src={images("./profile_icons/icon_default.jpg")} alt="Icono por defecto" />
                                                             </button>
                                                         </div>
                                                     </div>

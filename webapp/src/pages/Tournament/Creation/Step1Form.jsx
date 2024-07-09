@@ -225,7 +225,7 @@ function Step1Form({ actionContinue, setBaseInfo, baseInfo, resetPhases }) {
                                                                     <div className="flex align-middle spacing-small selectedGame">
                                                                         <div className="size-content">
                                                                             <div className="discipline format-icon size-tiny">
-                                                                                <img src={images("./" + informacionBasica.game._name + "_icon.png")} alt="" />
+                                                                                <img src={images("./" + informacionBasica.game._name + "_icon.png")} alt={"Icono " + informacionBasica.game.name} />
                                                                             </div>
                                                                         </div>
                                                                         <div className="size-content">
