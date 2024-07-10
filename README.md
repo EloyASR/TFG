@@ -1,19 +1,13 @@
 <img src="docs/images/icon.png" width="300" />
 
-# TFG - University Tournaments
+# TFG - ToorEII
 
 ## Author
 Eloy Alfredo Schmidt Rodríguez
 
 ## Description
-This app borns as a final degree project. The basic objective is to provide an enviroment where the different Universities and not only Universities, everyone who wants to create a tournament for a competition could do it whith only a few steps.
+The objective of this Final Degree Project is to develop a web application that allows for the centralized administration of tournaments for different eSports games, providing a system for reporting matches and tournaments as well as player performance.
 
-This Web App provides the posibility to create tounaments for a lot of games such as League of Legends, Valorant, Pokemon,etc. The frontend of the WebAPP was build in React.js. This frontend obtain the information from the API REST that is under it. The API REST has different end points for different aspects such as the players statistics, its competitions and other relevant data. The API also provides an end point for the reporting data.
+To achieve this goal, the application will include three user profiles. First, the administrator, responsible for the comprehensive management of the tournaments, including the creation, configuration, sponsorship administration, and distribution of prizes. Second, the players, who are the tournament participants, should be able to manage their registration in the tournaments and view their performance statistics on their personal profile. Finally, companies, which will have the ability to manage the prizes and sponsorships associated with the tournaments.
 
-All the information, statistics is storage in a MongoDB database in the cloud, but this DB is not the only one providing the App with data. Some of the games have their own API end points, the APP obtain the data, select the most relevant, process it, and store it in the MongoDB database for an easiest and faster access without having to resend a petition to another API every time you search for a match or a player information.  
-
-## Documentation
-The documentation of the whole App its writen like documentation as code:  
-- [Web APP Documentation](docs/webapp/README.md)
-- [API REST Documentation](docs/api-rest/README.md)
-- Reporting Documentation
+The tournaments will consist of various phases or stages, each composed of different series or sets of matches. These phases will be structured in two formats. First, the League phase, where participants will compete against each other in a round-robin system, accumulating points based on the results obtained. Second, the Elimination phase, where contestants will compete in direct matches, with the loser of each match being eliminated from the tournament.
