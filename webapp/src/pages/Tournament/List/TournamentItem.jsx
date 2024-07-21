@@ -62,7 +62,7 @@ function TournamentItem({ tournamentData }) {
             <Link to={"/tournament/" + tournamentData.uid}>
                 <div className="tournament" >
                     <div className="tournament-img">
-                        <img src={game !== undefined ? images("./" + game._name + "_logo.png") : images("./default_prize.png")} alt={"Icono juego " + game.name } />
+                        <img src={game !== undefined ? images("./" + game._name + "_logo.png") : images("./default_prize.png")} alt={"Icono juego " + game } />
                     </div>
                     <div className="tournament-info">
                         <div className="tournament-name">
